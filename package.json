@@ -1,0 +1,19 @@
+{
+  "name": "atelier",
+  "version": "1.0.0",
+  "description": "FEC",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rpp33-fec-orange/atelier.git"
+  },
+  "author": "Muizz Matemilola, Tan Ha, Dennis Wang, Bhrigu Joshi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rpp33-fec-orange/atelier/issues"
+  },
+  "homepage": "https://github.com/rpp33-fec-orange/atelier#readme"
+}
