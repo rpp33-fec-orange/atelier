@@ -3,9 +3,7 @@
 ## Git Feature Workflow
   * ### Start by switching to the main branch, fetch the latest commit, merge the changes into the local branch
       Run
-      `git checkout main`,
-      `git fetch origin`,
-      `git reset --hard origin/main` OR USE `git pull`
+      `git checkout main` then run \n A) `git fetch origin` and `git reset --hard origin/main` \n OR B) `git pull`
   * ### Create a new-branch new-feature from origin/main for each feature or issue you work on
       Run `git checkout -b new-feature`. Including the -b flag tells Git to create the branch if it doesn’t already exist.
   * ### Update, add, and commit changes, as necessary
@@ -19,7 +17,3 @@
   * ### Team mate performs code review asynchronously
   * ### Resolve feedback from code review
   * ### Merge your pull request
-
- * ### btest comment
-
- * ### ctest comment
