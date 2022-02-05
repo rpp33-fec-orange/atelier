@@ -1,25 +1,31 @@
 import React from 'react';
-import ReactDom from 'react-dom';
-// import $ from 'jquery';
+import ReactDOM from 'react-dom';
+import Overview from './components/Overview.jsx';
+import RatingsReviews from './components/RatingsReviews.jsx';
+import QuestionsAnswers from './components/QuestionsAnswers.jsx';
+import RelatedItemsComparison from './components/RelatedItemsComparison.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hello: ''
+      product: {}
     }
   }
 
+  // server aja
+
   render() {
     return (
-      <div>
+      <div id="container">
         <h1>Atelier</h1>
+        <Overview />
+        <RatingsReviews />
+        <QuestionsAnswers />
+        <RelatedItemsComparison />
       </div>
     )
   }
 }
 
-ReactDom.render(<App />, document.getElementById('app'));
-// ReactDom.render(<App2 />, document.getElementById('app2'));
-// ReactDom.render(<App3 />, document.getElementById('app3'));
-// ReactDom.render(<App4 />, document.getElementById('app4'));
+ReactDOM.render(<App />, document.getElementById('app'));
