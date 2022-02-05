@@ -5,7 +5,7 @@
       Run
       `git checkout main`,
       `git fetch origin`,
-      `git reset --hard origin/main`
+      `git reset --hard origin/main` OR USE `git pull`
   * ### Create a new-branch new-feature from origin/main for each feature or issue you work on
       Run `git checkout -b new-feature`. Including the -b flag tells Git to create the branch if it doesn’t already exist.
   * ### Update, add, and commit changes, as necessary
