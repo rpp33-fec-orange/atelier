@@ -20,6 +20,7 @@
   "homepage": "https://github.com/rpp33-fec-orange/atelier#readme",
   "devDependencies": {
     "@babel/core": "^7.17.0",
+    "@babel/plugin-syntax-jsx": "^7.16.7",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "babel-jest": "^27.5.1",
