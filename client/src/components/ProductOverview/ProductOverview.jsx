@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Overview = (props) => (
+const ProductOverview = (props) => (
   <div>
     <h4> Overview </h4>
   </div>
 )
 
-export default Overview;
+export default ProductOverview;
