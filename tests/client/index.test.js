@@ -6,7 +6,6 @@ import QuestionsAnswers from '../../client/src/components/QuestionsAnswers/Quest
 import RatingsReviews from '../../client/src/components/RatingsReviews/RatingsReviews.jsx';
 import RelatedItems from '../../client/src/components/RelatedItems/RelatedItems.jsx';
 
-
 describe.only('Main component test', () => {
   const testRenderer = TestRenderer.create(<App />);
   const testInstance = testRenderer.root;
@@ -18,9 +17,9 @@ describe.only('Main component test', () => {
     expect(testInstance.findByType(RelatedItems)).toBeDefined();
   });
 
-  it('it should teach us math', function() {
+  it('it should teach us math', function () {
     const received = 4;
     const expected = 2 + 2;
-     expect(received).toEqual(expected);
+    expect(received).toEqual(expected);
   });
 });
