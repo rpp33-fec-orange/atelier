@@ -11,8 +11,11 @@ class QuestionsAnswers extends React.Component {
   render() {
     return (
       <div>
-      <h4 id="questionsAndAnswers">Questions and Answers</h4>
-    </div>
+        <h4 id="questionsAndAnswers">Questions and Answers</h4>
+        <QuestionSearch />
+        <QuestionList />
+        <QuestionAddons />
+      </div>
     );
   }
 }
