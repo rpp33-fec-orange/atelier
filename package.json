@@ -6,7 +6,7 @@
   "scripts": {
     "frontend-dev": "npx webpack watch --mode development",
     "backend-dev": "npx nodemon server/index.js",
-    "test": "jest"
+    "test": "jest --verbose"
   },
   "repository": {
     "type": "git",
