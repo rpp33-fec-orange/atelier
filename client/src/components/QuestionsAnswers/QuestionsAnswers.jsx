@@ -1,10 +1,14 @@
 import React from 'react';
+import QuestionSearch from './subcomponents/QuestionSearch.jsx';
+import QuestionList from './subcomponents/QuestionList.jsx';
+import QuestionAddons from './subcomponents/QuestionAddons.jsx';
 
 class QuestionsAnswers extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: ''
+      productId: '',
+      showMoreQuestions: true
     };
   }
 
@@ -14,7 +18,7 @@ class QuestionsAnswers extends React.Component {
         <h4 id="questionsAndAnswers">Questions and Answers</h4>
         <QuestionSearch />
         <QuestionList />
-        <QuestionAddons />
+        <QuestionAddons showMoreQuestions={this.state.showMoreQuestions} />
       </div>
     );
   }
