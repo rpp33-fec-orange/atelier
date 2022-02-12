@@ -18,3 +18,9 @@
   * ### Team mate performs code review asynchronously
   * ### Resolve feedback from code review
   * ### Merge your pull request
+
+## Code Reviews
+  * ### Run the changes you are reviewing on your local server
+    Run `git switch <feature-branch-to-review>`. This creates and switches to a local version of the remote branch you are attempting to run and tracks its remote. Then run `git pull` to pull in the changes to that branch to your local branch.
+  * ### Provide feedback
+    Provide feedback on the code you reviewed and merge or leave the pull request open, as necessary.
