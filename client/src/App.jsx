@@ -1,8 +1,7 @@
 import React from 'react';
-// import ReactDOM from 'react-dom';
 import ProductOverview from './components/ProductOverview/ProductOverview.jsx';
 import RatingsReviews from './components/RatingsReviews/RatingsReviews.jsx';
-import QuestionsAnswers from './components/QuestionsAnswers/QuestionsAnswers.jsx';
+import QuestionsAnswers from './components/QuestionsAnswers/index.jsx';
 import RelatedProducts from './components/RelatedProducts/RelatedProducts.jsx';
 
 class App extends React.Component {

@@ -1,7 +1,7 @@
 import React from 'react';
-import QuestionSearch from './subcomponents/QuestionSearch.jsx';
-import QuestionList from './subcomponents/QuestionList.jsx';
-import QuestionAddons from './subcomponents/QuestionAddons.jsx';
+import QuestionSearch from './QuestionSearch.jsx';
+import QuestionList from './QuestionList.jsx';
+import QuestionAddons from './QuestionAddons.jsx';
 
 class QuestionsAnswers extends React.Component {
   constructor(props) {
