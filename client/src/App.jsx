@@ -3,7 +3,7 @@ import React from 'react';
 import ProductOverview from './components/ProductOverview/ProductOverview.jsx';
 import RatingsReviews from './components/RatingsReviews/RatingsReviews.jsx';
 import QuestionsAnswers from './components/QuestionsAnswers/QuestionsAnswers.jsx';
-import RelatedItems from './components/RelatedItems/RelatedItems.jsx';
+import RelatedProducts from './components/RelatedProducts/RelatedProducts.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -19,8 +19,8 @@ class App extends React.Component {
         <h1>Atelier</h1>
         <ProductOverview foo="bar" />
         <RatingsReviews foo="bar" />
+        <RelatedProducts foo="bar" />
         <QuestionsAnswers foo="bar" />
-        <RelatedItems foo="bar" />
       </div>
     )
   }
