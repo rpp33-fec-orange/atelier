@@ -2,7 +2,7 @@ import React from 'react';
 
 const ProductOverview = (props) => (
   <div>
-    <h4> Overview </h4>
+    <h4 id="productOverview">Product Overview</h4>
   </div>
 )
 
