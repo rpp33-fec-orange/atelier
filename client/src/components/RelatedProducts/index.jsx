@@ -1,6 +1,6 @@
 import React from 'react';
-import RelatedProductsRow from './/relatedProdcutsRow.jsx'
-import YourOutfitRow from './/yourOutfitRow.jsx'
+import RelatedProductsRow from './/RelatedProdcutsRow.jsx'
+import YourOutfitRow from './/YourOutfitRow.jsx'
 
 const RelatedProducts = (props) => (
   <div>

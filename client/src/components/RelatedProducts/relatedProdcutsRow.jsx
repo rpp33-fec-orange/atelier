@@ -11,10 +11,6 @@ const columnStyle = {
   border: '1px solid #555'
 };
 
-
-
-console.log(images.relatedProductImages)
-
 const RelatedProductsRow = () => {
   return (
     <div className = " related-products-row" style = {rowStyle}>
