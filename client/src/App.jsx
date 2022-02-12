@@ -3,7 +3,7 @@ import React from 'react';
 import ProductOverview from './components/ProductOverview/ProductOverview.jsx';
 import RatingsReviews from './components/RatingsReviews/RatingsReviews.jsx';
 import QuestionsAnswers from './components/QuestionsAnswers/QuestionsAnswers.jsx';
-import RelatedProducts from './components/RelatedProducts/RelatedProducts.jsx';
+import RelatedProducts from './components/RelatedProducts/index.jsx';
 
 class App extends React.Component {
   constructor(props) {
