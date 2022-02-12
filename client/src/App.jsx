@@ -18,9 +18,9 @@ class App extends React.Component {
       <div id="container">
         <h1>Atelier</h1>
         <ProductOverview foo="bar" />
-        <RatingsReviews foo="bar" />
         <RelatedProducts foo="bar" />
         <QuestionsAnswers foo="bar" />
+        <RatingsReviews foo="bar" />
       </div>
     )
   }
