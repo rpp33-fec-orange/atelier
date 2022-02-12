@@ -3,9 +3,9 @@
 ## Git Feature Workflow
   * ### Start by switching to the main branch, fetch the latest commit, merge the changes into the local branch
     Run `git checkout main` then run <br>A) `git fetch origin` and `git reset --hard origin/main` OR<br> B) `git pull`
-  * #### When starting work on a new widget
+  * #### 1) starting work on a new widget
     Run `git checkout -b new-feature`.<br>Including the `-b` flag tells Git to create the branch if it doesn’t already exist.
-  * #### After pulling changes from origin/main
+  * #### 2) After pulling changes from origin/main
     Run `git checkout new-feature` and then `git merge main`. This merges the changes pulled from main into the feature branch (and preserves the full commit history in the log).
   * ### Update, add, and commit changes, as necessary
     Run `git status`,<br>
