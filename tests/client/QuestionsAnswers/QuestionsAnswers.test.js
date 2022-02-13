@@ -1,6 +1,6 @@
 import TestRenderer from 'react-test-renderer';
 import React from 'react';
-import QuestionsAnswers from '../../../client/src/components/QuestionsAnswers/QuestionsAnswers.jsx';
+import QuestionsAnswers from '../../../client/src/components/QuestionsAnswers/index.jsx';
 
 
 describe('Question and Answer component test', () => {
