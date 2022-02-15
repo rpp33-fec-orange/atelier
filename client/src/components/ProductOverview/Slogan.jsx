@@ -10,13 +10,10 @@ class Slogan extends React.Component {
 
   render() {
     return (
-      <div>
-        <div id="slogan">
-          Esconced yourself in the finest wool in all of Middle Earth, crafted with Elven Everlast threads with flax fiber from the Shire with a dash of gunpowder of Modor.<br></br>
-          ✔ Range Free Unicorn Hair <br></br>
-          ✔ Twice Reborn Phoenix Feather <br></br>
-          ✔ Earth Core Crystalized Lava
-        </div>
+      <div id="slogan">
+        ✔ Range Free Unicorn Hair <br></br>
+        ✔ Twice Reborn Phoenix Feather <br></br>
+        ✔ Earth Core Crystalized Lava
       </div >
     )
   }

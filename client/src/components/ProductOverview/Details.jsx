@@ -10,7 +10,7 @@ class Details extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id="details">
         <div id="name">Men's Knitted Button-Up</div>
         <div id="category">Sweater & Outwear</div>
         <div id="rating">★★★★☆</div>

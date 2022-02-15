@@ -2,6 +2,7 @@ import React from 'react';
 import Search from './Search.jsx';
 import Photos from './Photos.jsx';
 import Details from './Details.jsx';
+import Descriptions from './Descriptions.jsx';
 import Slogan from './Slogan.jsx';
 
 class ProductOverview extends React.Component {
@@ -14,11 +15,11 @@ class ProductOverview extends React.Component {
 
   render() {
     return (
-      <div>
-        <h4 id="productOverview">Product Overview</h4>
+      <div id="overview">
         <Search />
         <Photos />
         <Details />
+        <Descriptions />
         <Slogan />
       </div>
     )
