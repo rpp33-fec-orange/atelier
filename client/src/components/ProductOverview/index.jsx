@@ -20,7 +20,7 @@ class ProductOverview extends React.Component {
     $.ajax({
       context: this,
       type: 'GET',
-      url: '/product',
+      url: '/products',
       success: function (success) {
         console.log('product overview ajax GET success');
         this.setState({ product: success });
