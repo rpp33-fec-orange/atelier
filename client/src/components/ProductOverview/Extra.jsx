@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Slogan extends React.Component {
+class Extra extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -10,7 +10,7 @@ class Slogan extends React.Component {
 
   render() {
     return (
-      <div id="slogan">
+      <div id="extra">
         ✔ Range Free Unicorn Hair <br></br>
         ✔ Twice Reborn Phoenix Feather <br></br>
         ✔ Earth Core Crystalized Lava
@@ -19,4 +19,4 @@ class Slogan extends React.Component {
   }
 }
 
-export default Slogan;
+export default Extra;

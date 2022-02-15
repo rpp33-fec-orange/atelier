@@ -15,7 +15,7 @@ class Details extends React.Component {
         <div id="category">Sweater & Outwear</div>
         <div id="rating">★★★★☆</div>
         <div id="price">$64.99</div>
-        <div id="selector">Select Style ></div>
+        <div id="selector">Select Style/Size/Quantity</div>
         <select id="style">
           <option value="gray">Heather Gray</option>
           <option value="black">Graphite Black</option>

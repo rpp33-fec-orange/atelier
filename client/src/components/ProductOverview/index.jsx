@@ -4,7 +4,7 @@ import Search from './Search.jsx';
 import Photos from './Photos.jsx';
 import Details from './Details.jsx';
 import Descriptions from './Descriptions.jsx';
-import Slogan from './Slogan.jsx';
+import Extra from './Extra.jsx';
 
 class ProductOverview extends React.Component {
   constructor(props) {
@@ -12,18 +12,18 @@ class ProductOverview extends React.Component {
     this.state = {
       product: {}
     }
-    this.initialHandler = this.initialHandler.bind(this);
+    this.productsHandler = this.productsHandler.bind(this);
     this.searcHHandler = this.searchHandler.bind(this);
   }
 
-  initialHandler() {
+  productsHandler() {
     $.ajax({
       context: this,
       type: 'GET',
       url: '/products',
       success: function (success) {
         console.log('product overview ajax GET success');
-        this.setState({ product: success });
+        this.setState({ product: success[0] });
       },
       error: function (error) {
         console.log('product overview ajax GET error: ', error);
@@ -50,7 +50,7 @@ class ProductOverview extends React.Component {
   }
 
   componentDidMount() {
-    this.initialHandler();
+    this.productsHandler();
   }
 
   render() {
@@ -60,7 +60,7 @@ class ProductOverview extends React.Component {
         <Photos />
         <Details />
         <Descriptions />
-        <Slogan />
+        <Extra />
       </div>
     )
   }

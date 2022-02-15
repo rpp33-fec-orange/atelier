@@ -48,7 +48,7 @@
   text-align: center;
 }
 
-#slogan {
+#extra {
   grid-area: 5 / 4 / 6 / 6;
   border: 1px solid black;
   text-align: center;
