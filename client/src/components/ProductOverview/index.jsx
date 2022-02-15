@@ -22,7 +22,7 @@ class ProductOverview extends React.Component {
       type: 'GET',
       url: '/products',
       success: function (success) {
-        console.log('product overview ajax GET success');
+        console.log('product overview ajax GET success: ', success[0]);
         this.setState({ product: success[0] });
       },
       error: function (error) {
