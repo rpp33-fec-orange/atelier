@@ -11,7 +11,7 @@ class Photos extends React.Component {
   render() {
     return (
       <div id="photos">
-        <img id="mainPhoto" src="https://cdn.shopify.com/s/files/1/0286/4077/2235/products/Knit-polo-sweater-The-Korean-Fashion_61ba38bf-7198-4f52-bca3-8b7ee082e567_1800x1800.jpg?v=1639580510" width="200" height="200"></img>
+        <img id="mainPhoto" src="https://cdn.shopify.com/s/files/1/0286/4077/2235/products/Knit-polo-sweater-The-Korean-Fashion_61ba38bf-7198-4f52-bca3-8b7ee082e567_1800x1800.jpg?v=1639580510" width="300" height="300"></img>
       </div >
     )
   }

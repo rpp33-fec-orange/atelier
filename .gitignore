@@ -106,3 +106,5 @@ typings/
 # Webpack bundle file
 client/dist/bundle.js
 
+# API Token config file
+config.js

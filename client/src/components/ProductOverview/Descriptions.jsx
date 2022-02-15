@@ -11,7 +11,7 @@ class Descriptions extends React.Component {
   render() {
     return (
       <div id="descriptions">
-        Esconced yourself in the finest wool in all of Middle Earth, crafted with Elven Everlast threads with flax fiber from the Shire with a dash of gunpowder of Modor.<br></br>
+        Esconced yourself in the finest wool in all of Middle Earth, crafted with Elven Everlast threads with flax fiber from the Shire with a dash of gunpowder of Modor.
       </div >
     )
   }
