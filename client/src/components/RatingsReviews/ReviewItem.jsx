@@ -9,16 +9,16 @@ class ReviewItem extends React.Component {
 		return (
 			<div className="wrapper">
 				<div className="one" id="review-list">
-					<div>&#9734;&#9734;&#9734;&#9734;</div>
+					<p>&#9734;&#9734;&#9734;&#9734;                    User1234, January 1, 2019</p>
 					<h3>I'm enjoying wearing these shades</h3>
 					<p>Comfortable and practical.</p>
-					<sub>Helpful?  Yes | No</sub>
+					<sub>Helpful?  Yes (10)  |  Report</sub>
 					<hr></hr>
-					<div>&#9734;&#9734;&#9734;&#9734;</div>
+					<p>&#9734;&#9734;&#9734;&#9734;                     Cognito, April 2, 2019</p>
 					<h3>I am liking these glasses</h3>
 					<p>Comfortable and practical.</p>
 					<img className="photo" id="photo" src="https://cdni.llbean.net/is/image/wim/224547_1_41?hei=764&wid=665&resMode=sharp2&defaultImage=llbprod/A0211793_2" alt="photo missing!"></img>
-					<sub>Helpful?  Yes | No</sub>
+					<sub>Helpful?  Yes (10) | Report</sub>
 					<hr></hr>
 				</div>
 				<div className="two" id="buttons">
