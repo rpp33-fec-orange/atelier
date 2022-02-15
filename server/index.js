@@ -7,7 +7,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/../client/dist"));
 
-app.get('/product', function (req, res) {
+app.get('/products', function (req, res) {
   axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products', { headers: { 'Authorization': config.TOKEN } })
     .then(success => {
       console.log('api axios GET success: ', success.data);
