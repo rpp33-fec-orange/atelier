@@ -20,13 +20,13 @@ class App extends React.Component {
       type: 'GET',
       url: '/products',
       success: function (success) {
-        console.log('product overview ajax GET success: ', success);
+        console.log('app ajax GET success');
         this.setState({
           id: success[0].id
         });
       },
       error: function (error) {
-        console.log('product overview ajax GET error: ', error);
+        console.log('app ajax GET error: ', error);
       },
       contentType: "application/json",
     })
@@ -37,10 +37,9 @@ class App extends React.Component {
   }
 
   render() {
-    console.log('state id', this.state.id);
     return (
       <div id="container">
-        <ProductOverview />
+        <ProductOverview id={this.state.id} />
         <RelatedProducts />
         <QuestionsAnswers />
         <RatingsReviews />

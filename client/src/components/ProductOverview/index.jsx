@@ -8,8 +8,11 @@ import Extra from './Extra.jsx';
 
 class ProductOverview extends React.Component {
   constructor(props) {
+    // let parentState = props;
+    // console.log('parent state', parentState);
     super(props);
     this.state = {
+      // id: parentState.id
       product: {}
     }
     this.productsHandler = this.productsHandler.bind(this);
@@ -56,6 +59,7 @@ class ProductOverview extends React.Component {
   }
 
   render() {
+    console.log('child state id: ', this.state.id);
     return (
       <div id="overview">
         <Search searchHandler={this.searchHandler} />

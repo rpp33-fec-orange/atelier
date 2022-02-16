@@ -15,7 +15,7 @@ class Details extends React.Component {
       type: 'GET',
       url: '/products', //product id infor only
       success: function (success) {
-        console.log('product overview ajax GET success: ', success[0]);
+        console.log('product overview ajax GET success');
         this.setState({
           product: success[0],
         });
