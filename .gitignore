@@ -106,6 +106,5 @@ typings/
 # Webpack bundle file
 client/dist/bundle.js
 
-# API KEYS
-client/src/components/RelatedProducts/config/config.js
-
+# API Token config file
+client/dist/config.js

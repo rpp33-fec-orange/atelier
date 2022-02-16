@@ -1,6 +1,6 @@
 import TestRenderer from 'react-test-renderer';
 import React from 'react';
-import ProductOverview from '../../../client/src/components/ProductOverview/ProductOverview.jsx';
+import ProductOverview from '../../../client/src/components/ProductOverview/index.jsx';
 
 
 describe('Product Overview component test', () => {
