@@ -1,5 +1,7 @@
 import $ from 'jquery';
-import keys from './config/config.js';
+import keys from '../../../../config.js';
+
+
 
 const API_URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/';
 
