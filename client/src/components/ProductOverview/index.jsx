@@ -59,7 +59,7 @@ class ProductOverview extends React.Component {
         <Search searchHandler={this.searchHandler} />
         <Photos />
         <Details />
-        <Descriptions />
+        <Descriptions product={this.state.product} />
         <Extra />
       </div>
     )

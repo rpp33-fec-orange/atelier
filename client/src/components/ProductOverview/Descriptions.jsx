@@ -1,20 +1,11 @@
 import React from 'react';
 
-class Descriptions extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      product: {}
-    }
-  }
+const Descriptions = (props) => (
 
-  render() {
-    return (
-      <div id="descriptions">
-        Esconced yourself in the finest wool in all of Middle Earth, crafted with Elven Everlast threads with flax fiber from the Shire with a dash of gunpowder of Modor.
-      </div >
-    )
-  }
-}
+  <div id="descriptions">
+    <h4>{props.product.slogan}</h4>
+    {props.product.description}
+  </div >
+)
 
 export default Descriptions;
