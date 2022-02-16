@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 
 class Details extends React.Component {
   constructor(props) {
@@ -8,13 +9,43 @@ class Details extends React.Component {
     }
   }
 
+  productsHandler() {
+    $.ajax({
+      context: this,
+      type: 'GET',
+      url: '/products', //product id infor only
+      success: function (success) {
+        console.log('product overview ajax GET success: ', success[0]);
+        this.setState({
+          product: success[0],
+        });
+      },
+      error: function (error) {
+        console.log('product overview ajax GET error: ', error);
+      },
+      contentType: "application/json",
+    })
+  }
+
+  productHandler() {
+
+  }
+
+  stylesHandler() {
+
+  }
+
+  componentDidMount() {
+    this.productsHandler();
+  }
+
   render() {
     return (
       <div id="details">
-        <div id="name">Men's Knitted Button-Up</div>
-        <div id="category">Sweater & Outwear</div>
         <div id="rating">★★★★☆</div>
-        <div id="price">$64.99</div>
+        <div id="category">{this.state.product.category}</div>
+        <div id="name">{this.state.product.name}</div>
+        <div id="price">{this.state.product.default_price}</div>
         <div id="selector">Select Style/Size/Quantity</div>
         <select id="style">
           <option value="gray">Heather Gray</option>

@@ -22,8 +22,10 @@ class ProductOverview extends React.Component {
       type: 'GET',
       url: '/products',
       success: function (success) {
-        console.log('product overview ajax GET success: ', success[0]);
-        this.setState({ product: success[0] });
+        console.log('product overview ajax GET success');
+        this.setState({
+          product: success[0],
+        });
       },
       error: function (error) {
         console.log('product overview ajax GET error: ', error);
@@ -63,6 +65,7 @@ class ProductOverview extends React.Component {
         <Extra />
       </div>
     )
+
   }
 }
 
