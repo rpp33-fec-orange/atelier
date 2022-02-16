@@ -1,5 +1,5 @@
 import React from 'react';
-import images from './/stockImages.jsx';
+import images from './stockImages.jsx';
 
 const rowStyle = {
   display: 'flex'

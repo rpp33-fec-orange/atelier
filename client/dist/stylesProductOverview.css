@@ -1,0 +1,54 @@
+#overview {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  border: 1px solid black;
+}
+
+#search {
+  grid-area: 1 / 1 / 2 / 6;
+  border: 1px solid black;
+}
+
+#input {
+  align-self: end;
+}
+
+#inputButton {
+  align-self: end;
+}
+
+#message {
+  text-align: center;
+}
+
+#photos {
+  grid-area: 2 / 1 / 5 / 4;
+  border: 1px solid black;
+}
+
+#mainPhoto {
+  align-self: center;
+}
+
+#descriptions {
+  grid-area: 5 / 1 / 6 / 4;
+  border: 1px solid black;
+  text-align: center;
+}
+
+#details {
+  grid-area: 2 / 4 / 5 / 6;
+  border: 1px solid black;
+  text-align: center;
+}
+
+#extra {
+  grid-area: 5 / 4 / 6 / 6;
+  border: 1px solid black;
+  text-align: center;
+}
+
+#logo { background: turquoise; }
