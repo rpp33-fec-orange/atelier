@@ -107,4 +107,4 @@ typings/
 client/dist/bundle.js
 
 # API Token config file
-client/dist/config.js
+config.js
