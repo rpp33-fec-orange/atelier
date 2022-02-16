@@ -1,3 +1,3 @@
 module.exports = {
-  TOKEN: ''
+  TOKEN: 'YOUR_GITHUB_TOKEN_GOES_HERE'
 };
