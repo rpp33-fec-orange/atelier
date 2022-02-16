@@ -1,4 +1,4 @@
-import React from 'react';
+	import React from 'react';
 
 class ComfortSlider extends React.Component {
 	constructor(props) {
