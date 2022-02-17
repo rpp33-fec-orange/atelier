@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Extra extends React.Component {
+class CheckList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -10,7 +10,7 @@ class Extra extends React.Component {
 
   render() {
     return (
-      <div id="extra">
+      <div id="checklist">
         ✔ Range Free Unicorn Hair <br></br>
         ✔ Twice Reborn Phoenix Feather <br></br>
         ✔ Earth Core Crystalized Lava
@@ -19,4 +19,4 @@ class Extra extends React.Component {
   }
 }
 
-export default Extra;
+export default CheckList;
