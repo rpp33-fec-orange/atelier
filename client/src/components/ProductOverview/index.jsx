@@ -8,29 +8,50 @@ import CheckList from './CheckList.jsx';
 
 class ProductOverview extends React.Component {
   constructor(props) {
-    let parentState = props;
-    console.log('parent state', parentState);
     super(props);
     this.state = {
-      id: parentState.id
+      id: props.id,
+      productById: {},
+      productStylesById: {},
+      initialized: false
     }
-    this.productsHandler = this.productsHandler.bind(this);
+    this.productHandler = this.productHandler.bind(this);
+    this.stylesHandler = this.stylesHandler.bind(this);
     this.searcHHandler = this.searchHandler.bind(this);
   }
 
-  productsHandler() {
+  productHandler() {
     $.ajax({
       context: this,
       type: 'GET',
-      url: '/products',
+      url: `/products/${this.state.id}`,
       success: function (success) {
-        console.log('product overview ajax GET success');
+        console.log('productHandler ajax GET success:');
         this.setState({
-          product: success[0],
-        });
+          productById: success,
+        })
       },
       error: function (error) {
-        console.log('product overview ajax GET error: ', error);
+        console.log('productHandler ajax GET error: ', error);
+      },
+      contentType: "application/json",
+    })
+  }
+
+  stylesHandler() {
+    $.ajax({
+      context: this,
+      type: 'GET',
+      url: `/products/${this.state.id}/styles`,
+      success: function (success) {
+        console.log('productHandler ajax GET success:');
+        this.setState({
+          productStylesById: success,
+          initialized: true
+        })
+      },
+      error: function (error) {
+        console.log('productHandler ajax GET error: ', error);
       },
       contentType: "application/json",
     })
@@ -43,10 +64,10 @@ class ProductOverview extends React.Component {
       url: '/search',
       data: JSON.stringify({ keyword }),
       success: function (success) {
-        console.log('product overview ajax POST success');
+        console.log('searchHandler ajax POST success');
       },
       error: function (error) {
-        console.log('product overview ajax POST error: ', error);
+        console.log('searchHandler ajax POST error: ', error);
       },
       contentType: "application/json",
     })
@@ -54,21 +75,29 @@ class ProductOverview extends React.Component {
   }
 
   componentDidMount() {
-    this.productsHandler();
+    this.productHandler();
+    this.stylesHandler();
   }
 
   render() {
-    console.log('child state id: ', this.state.id);
-    return (
-      <div id="overview">
-        <Search searchHandler={this.searchHandler} />
-        <Photos />
-        <Details />
-        <Descriptions product={this.state.product} />
-        <CheckList />
-      </div>
-    )
-
+    console.log('product: ', this.state.productById);
+    if (this.state.initialized) {
+      return (
+        <div id="overview">
+          <Search searchHandler={this.searchHandler} />
+          <Photos />
+          <Details productById={this.state.productById} />
+          <Descriptions />
+          <CheckList />
+        </div>
+      )
+    } else {
+      return (
+        <div id="loading">
+          ⇆ Loading...
+        </div>
+      )
+    }
   }
 }
 
