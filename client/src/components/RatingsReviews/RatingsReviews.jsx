@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 import ReviewItem from './ReviewItem.jsx';
 import StarNumber from './StarNumber.jsx';
 import StarList from './StarList.jsx';
@@ -9,6 +10,29 @@ import SizeSlider from './SizeSlider.jsx';
 class RatingsReviews extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      reviews: []
+    }
+    this.reviewHandler = this.reviewHandler.bind(this);
+  }
+
+  reviewHandler() {
+    var url = '/'
+   $.ajax({
+     method: "GET",
+     url: url,
+     success: (reviews) => {
+      this.setState({
+        reviews: reviews
+      });
+     },
+     error: (err) => {
+      console.log('error from get request');
+     }
+   })
+   .done(function() {
+    console.log('get request is done');
+   });
   }
 
   render() {
