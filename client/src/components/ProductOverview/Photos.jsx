@@ -3,9 +3,9 @@ import React from 'react';
 const Photos = (props) => (
   <div id="photos">
     <img id="mainPhoto" src={props.productStylesById.results[0].photos[0].url} width="150" height="200"></img>
-    {props.productStylesById.results.map((singleData) =>
+    {/* {props.productStylesById.results.map((singleData) =>
         <option value={singleData.name}>{singleData.name}</option>
-      )}
+      )} */}
   </div >
 )
 

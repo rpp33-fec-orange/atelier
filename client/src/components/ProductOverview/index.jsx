@@ -80,6 +80,7 @@ class ProductOverview extends React.Component {
   }
 
   render() {
+    console.log('productStylesById: ', this.state.productStylesById);
     if (this.state.initialized) {
       return (
         <div id="overview">
