@@ -80,12 +80,11 @@ class ProductOverview extends React.Component {
   }
 
   render() {
-    console.log('product: ', this.state.productById);
     if (this.state.initialized) {
       return (
         <div id="overview">
           <Search searchHandler={this.searchHandler} />
-          <Photos />
+          <Photos productStylesById={this.productStylesById} />
           <Details productById={this.state.productById} productStylesById={this.state.productStylesById} />
           <Descriptions productById={this.state.productById} />
           <Features productById={this.state.productById} />

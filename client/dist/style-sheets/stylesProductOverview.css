@@ -13,11 +13,11 @@
 }
 
 #input {
-  align-self: end;
+  align-items: end
 }
 
 #inputButton {
-  align-self: end;
+  align-items: end
 }
 
 #message {
