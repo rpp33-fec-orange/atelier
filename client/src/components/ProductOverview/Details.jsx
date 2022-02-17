@@ -1,6 +1,8 @@
 import React from 'react';
 import $ from 'jquery';
 
+//Object.keys(props.productStylesById.results.skus).map
+
 const Details = (props) => (
   <div id="details">
     <div id="rating">★★★★☆</div>
@@ -9,21 +11,22 @@ const Details = (props) => (
     <div id="price">{props.productById.default_price}</div>
     <div id="selector">Select Style/Size/Quantity</div>
     <select id="style">
-      <option value="gray">Heather Gray</option>
-      <option value="black">Graphite Black</option>
-      <option value="white">Moonlight White</option>
+      {props.productStylesById.results.map((singleData) =>
+        <option value={singleData.name}>{singleData.name}</option>
+      )}
     </select>
     <select id="size">
-      <option value="small">Small</option>
-      <option value="medium">Medium</option>
-      <option value="large">Large</option>
-      <option value="extra-large">Extra Large</option>
+      <option value="xs">XS</option>
+      <option value="s">S</option>
+      <option value="m">M</option>
+      <option value="l">L</option>
     </select>
     <select id="quantity">
       <option value="one">1</option>
       <option value="two">2</option>
       <option value="three">3</option>
       <option value="four">4</option>
+      <option value="four">5</option>
     </select><br></br>
     <button id="add">ADD TO CART</button><button id="favorte">☆</button>
   </div >
