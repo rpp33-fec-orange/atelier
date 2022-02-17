@@ -27,10 +27,10 @@
 #photos {
   grid-area: 2 / 1 / 5 / 4;
   border: 1px solid black;
+
 }
 
 #mainPhoto {
-  align-self: center;
 }
 
 #descriptions {
