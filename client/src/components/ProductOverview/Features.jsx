@@ -1,6 +1,6 @@
 import React from 'react';
 
-class CheckList extends React.Component {
+class Features extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,4 +19,4 @@ class CheckList extends React.Component {
   }
 }
 
-export default CheckList;
+export default Features;

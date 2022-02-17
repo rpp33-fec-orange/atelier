@@ -4,7 +4,7 @@ import Search from './Search.jsx';
 import Photos from './Photos.jsx';
 import Details from './Details.jsx';
 import Descriptions from './Descriptions.jsx';
-import CheckList from './CheckList.jsx';
+import Features from './Features.jsx';
 
 class ProductOverview extends React.Component {
   constructor(props) {
@@ -88,7 +88,7 @@ class ProductOverview extends React.Component {
           <Photos />
           <Details productById={this.state.productById} />
           <Descriptions />
-          <CheckList />
+          <Features />
         </div>
       )
     } else {
