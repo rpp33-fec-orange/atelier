@@ -12,14 +12,14 @@ class App extends React.Component {
       id: '',
       initialized: false
     }
-    this.productHandler = this.productHandler.bind(this);
+    this.productsHandler = this.productsHandler.bind(this);
   }
 
-  productHandler() {
+  productsHandler() {
     $.ajax({
       context: this,
       type: 'GET',
-      url: '/products/',
+      url: '/products',
       success: function (success) {
         console.log('app ajax GET success');
         this.setState({
@@ -35,7 +35,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.productHandler();
+    this.productsHandler();
   }
 
   render() {
