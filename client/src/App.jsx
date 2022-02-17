@@ -9,20 +9,22 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: ''
+      id: '',
+      initialized: false
     }
-    this.productsHandler = this.productsHandler.bind(this);
+    this.productHandler = this.productHandler.bind(this);
   }
 
-  productsHandler() {
+  productHandler() {
     $.ajax({
       context: this,
       type: 'GET',
-      url: '/products',
+      url: '/products/',
       success: function (success) {
         console.log('app ajax GET success');
         this.setState({
-          id: success[0].id
+          id: success[0].id,
+          initialized: true
         });
       },
       error: function (error) {
@@ -33,18 +35,26 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.productsHandler();
+    this.productHandler();
   }
 
   render() {
-    return (
-      <div id="container">
-        <ProductOverview id={this.state.id} />
-        <RelatedProducts />
-        <QuestionsAnswers />
-        <RatingsReviews />
-      </div>
-    )
+    if (this.state.initialized) {
+      return (
+        <div id="container">
+          <ProductOverview id={this.state.id} />
+          <RelatedProducts />
+          <QuestionsAnswers />
+          <RatingsReviews />
+        </div>
+      )
+    } else {
+      return (
+        <div id="loading">
+          ⇆ Loading...
+        </div>
+      )
+    }
   }
 }
 

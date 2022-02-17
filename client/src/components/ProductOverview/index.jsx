@@ -8,12 +8,11 @@ import CheckList from './CheckList.jsx';
 
 class ProductOverview extends React.Component {
   constructor(props) {
-    // let parentState = props;
-    // console.log('parent state', parentState);
+    let parentState = props;
+    console.log('parent state', parentState);
     super(props);
     this.state = {
-      // id: parentState.id
-      product: {}
+      id: parentState.id
     }
     this.productsHandler = this.productsHandler.bind(this);
     this.searcHHandler = this.searchHandler.bind(this);
@@ -44,7 +43,7 @@ class ProductOverview extends React.Component {
       url: '/search',
       data: JSON.stringify({ keyword }),
       success: function (success) {
-        console.log('product overview ajax POST success: ', success);
+        console.log('product overview ajax POST success');
       },
       error: function (error) {
         console.log('product overview ajax POST error: ', error);
