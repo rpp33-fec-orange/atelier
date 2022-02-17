@@ -87,8 +87,8 @@ class ProductOverview extends React.Component {
           <Search searchHandler={this.searchHandler} />
           <Photos />
           <Details productById={this.state.productById} />
-          <Descriptions />
-          <Features />
+          <Descriptions productById={this.state.productById} />
+          <Features productById={this.state.productById} />
         </div>
       )
     } else {
