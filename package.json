@@ -33,10 +33,13 @@
     "webpack-cli": "^4.9.2"
   },
   "dependencies": {
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.6",
     "axios": "^0.26.0",
+    "enzyme": "^3.11.0",
     "express": "^4.17.2",
     "jquery": "^3.6.0",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "sinon": "^13.0.1"
   }
 }
