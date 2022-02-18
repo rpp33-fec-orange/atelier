@@ -10,15 +10,22 @@ class QuestionsAnswers extends React.Component {
       productId: '',
       showMoreQuestions: true
     };
+    this.search = this.search.bind(this);
+  }
+
+  getQuestions
+
+  search(q) {
+    // handle on client using return from GET /qa/questions
   }
 
   render() {
     return (
       <div>
         <h4 id="questionsAndAnswers">Questions and Answers</h4>
-        <QuestionSearch />
+        <QuestionSearch searchQuestion={this.search} />
         <QuestionList />
-        <QuestionAddons showMoreQuestions={this.state.showMoreQuestions} />
+        <QuestionAddons showMore={this.state.showMoreQuestions} />
       </div>
     );
   }
