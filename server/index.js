@@ -2,6 +2,7 @@ const express = require('express');
 const getProducts = require('./helpers/products.js').getProducts;
 const getProductById = require('./helpers/products.js').getProductById;
 const getProductStylesById = require('./helpers/products.js').getProductStylesById;
+const getReviews = require('./helpers/reviews.js').getReviews;
 let app = express();
 
 app.use(express.json());
@@ -47,12 +48,12 @@ app.get('/products/:product_id/styles', function (req, res) {
 app.get('/reviews/', function (req, res) {
   getReviews()
     .then((data) => {
-      console.log(‘getting reviews success!’);
-      console.log(‘reviews are: ’, data);
+      console.log('getting reviews success!');
+      console.log('reviews are: ', data);
       res.status(200).send(data);
     })
     .catch((error) => {
-      console.log(‘error getting reviews!’);
+      console.log('error getting reviews!');
     })
 });
 
