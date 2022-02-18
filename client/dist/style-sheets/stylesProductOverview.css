@@ -13,11 +13,11 @@
 }
 
 #input {
-  align-self: end;
+  align-items: end
 }
 
 #inputButton {
-  align-self: end;
+  align-items: end
 }
 
 #message {
@@ -27,10 +27,10 @@
 #photos {
   grid-area: 2 / 1 / 5 / 4;
   border: 1px solid black;
+
 }
 
 #mainPhoto {
-  align-self: center;
 }
 
 #descriptions {
@@ -45,7 +45,7 @@
   text-align: center;
 }
 
-#extra {
+#features {
   grid-area: 5 / 4 / 6 / 6;
   border: 1px solid black;
   text-align: center;

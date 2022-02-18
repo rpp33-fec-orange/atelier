@@ -9,7 +9,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: ''
+      id: '',
+      initialized: false
     }
     this.productsHandler = this.productsHandler.bind(this);
   }
@@ -22,7 +23,8 @@ class App extends React.Component {
       success: function (success) {
         console.log('app ajax GET success');
         this.setState({
-          id: success[0].id
+          id: success[0].id,
+          initialized: true
         });
       },
       error: function (error) {
@@ -37,14 +39,22 @@ class App extends React.Component {
   }
 
   render() {
-    return (
-      <div id="container">
-        <ProductOverview id={this.state.id} />
-        <RelatedProducts />
-        <QuestionsAnswers />
-        <RatingsReviews />
-      </div>
-    )
+    if (this.state.initialized) {
+      return (
+        <div id="container">
+          <ProductOverview id={this.state.id} />
+          <RelatedProducts />
+          <QuestionsAnswers />
+          <RatingsReviews />
+        </div>
+      )
+    } else {
+      return (
+        <div id="loading">
+          ⇆ Loading...
+        </div>
+      )
+    }
   }
 }
 

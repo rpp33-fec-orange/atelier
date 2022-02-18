@@ -3,8 +3,8 @@ import React from 'react';
 const Descriptions = (props) => (
 
   <div id="descriptions">
-    <h4>{props.product.slogan}</h4>
-    {props.product.description}
+    {props.productById.slogan} <br></br>
+    {props.productById.description}
   </div >
 )
 
