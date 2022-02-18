@@ -11,7 +11,8 @@ class RatingsReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviews: []
+      reviews: {},
+      id: props.id
     }
     this.reviewHandler = this.reviewHandler.bind(this);
   }
@@ -36,6 +37,7 @@ class RatingsReviews extends React.Component {
   }
 
   render() {
+    console.log('this is this.state.reviews: ', this.state.reviews);
     return (
       <div>
         <h1 id='ratings-reviews'>RATINGS AND REVIEWS</h1>
@@ -46,7 +48,7 @@ class RatingsReviews extends React.Component {
         <h3>248 reviews, sorted by relevance</h3>
         {/* <div> Review #1 </div>
       <div> Review #2 </div> */}
-        <ReviewItem />
+        <ReviewItem reviews={this.state.reviews}/>
       </div>
     );
   }

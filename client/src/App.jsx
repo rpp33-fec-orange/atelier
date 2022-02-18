@@ -42,7 +42,7 @@ class App extends React.Component {
         <ProductOverview id={this.state.id} />
         <RelatedProducts />
         <QuestionsAnswers />
-        <RatingsReviews />
+        <RatingsReviews id={this.state.id} />
       </div>
     )
   }
