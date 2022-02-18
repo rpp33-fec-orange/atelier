@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 import ReviewItem from './ReviewItem.jsx';
 import StarNumber from './StarNumber.jsx';
 import StarList from './StarList.jsx';
@@ -9,9 +10,34 @@ import SizeSlider from './SizeSlider.jsx';
 class RatingsReviews extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      reviews: {},
+      id: props.id
+    }
+    this.reviewHandler = this.reviewHandler.bind(this);
+  }
+
+  reviewHandler() {
+    var url = '/'
+   $.ajax({
+     method: "GET",
+     url: url,
+     success: (reviews) => {
+      this.setState({
+        reviews: reviews
+      });
+     },
+     error: (err) => {
+      console.log('error from get request');
+     }
+   })
+   .done(function() {
+    console.log('get request is done');
+   });
   }
 
   render() {
+    console.log('this is this.state.reviews: ', this.state.reviews);
     return (
       <div>
         <h1 id='ratings-reviews'>RATINGS AND REVIEWS</h1>
@@ -22,7 +48,7 @@ class RatingsReviews extends React.Component {
         <h3>248 reviews, sorted by relevance</h3>
         {/* <div> Review #1 </div>
       <div> Review #2 </div> */}
-        <ReviewItem />
+        <ReviewItem reviews={this.state.reviews}/>
       </div>
     );
   }
