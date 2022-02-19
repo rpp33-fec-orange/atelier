@@ -33,7 +33,8 @@ class Styles extends React.Component {
       if (this.state.styles[i].name === e.target.value) {
         let selectedStyle = this.state.styles[i];
         this.setState({
-          currentStyle: selectedStyle
+          currentStyle: selectedStyle,
+          currentStyleSkus: selectedStyle.skus
         });
       }
     }
