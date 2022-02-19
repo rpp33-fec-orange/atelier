@@ -6,49 +6,53 @@ import StarList from './StarList.jsx';
 import StarItem from './StarItem.jsx';
 import ComfortSlider from './ComfortSlider.jsx';
 import SizeSlider from './SizeSlider.jsx';
+import ReviewList from './ReviewList.jsx';
 
 class RatingsReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviews: {},
+      reviews: [],
       // id: props.id,
       id: props.id,
-      sort: 'newest'
+      sort: 'newest',
+      count: 0
     }
-    this.getReviewsHandler = this.getReviewsHandler.bind(this);
+    // this.getReviewsHandler = this.getReviewsHandler.bind(this);
     this.getReviewsByIDHandler = this.getReviewsByIDHandler.bind(this);
 
   }
 
-  getReviewsHandler() {
-    // var url = `/reviews/${this.state.id}`;
-    var url = '/reviews';
-    console.log('review product id is: ', this.state.id);
-    // var url = `/reviews/${this.state.id}`;
-    $.ajax({
-      context: this,
-      type: "GET",
-      url: url,
-      success: (reviews) => {
-        console.log('review ajax success! reviews are: ', reviews);
-        this.setState({
-          reviews: reviews
-        });
-      },
-      error: (error) => {
-        console.log('error from get reviews request: ', error);
-      }
-    })
-      .done(function () {
-        console.log('get reviews request is done');
-      });
-  }
+  // getReviewsHandler() {
+  //   // var url = `/reviews/${this.state.id}`;
+  //   var url = '/reviews';
+  //   console.log('review product id is: ', this.state.id);
+  //   // var url = `/reviews/${this.state.id}`;
+  //   $.ajax({
+  //     context: this,
+  //     type: "GET",
+  //     url: url,
+  //     success: (reviews) => {
+  //       console.log('review ajax success! reviews are: ', reviews);
+  //       this.setState({
+  //         reviews: reviews
+  //       });
+  //     },
+  //     error: (error) => {
+  //       console.log('error from get reviews request: ', error);
+  //     }
+  //   })
+  //     .done(function () {
+  //       console.log('get reviews request is done');
+  //     });
+  // }
 
   getReviewsByIDHandler(id) {
     // var url = `/reviews/${this.state.id}`;
     // product_id=64620
-    var url = `/reviews/?sort=${this.state.sort}&product_id=${this.state.id}`;
+    var sort = this.state.sort;
+    var id = this.state.id;
+    var url = `/reviews/?sort=${sort}&product_id=${id}`;
     console.log('review product id is: ', this.state.id);
     // var url = `/reviews/${this.state.id}`;
     $.ajax({
@@ -58,7 +62,8 @@ class RatingsReviews extends React.Component {
       success: (data) => {
         // console.log('review ajax success! reviews are: ', reviews);
         this.setState({
-          reviews: data.results
+          reviews: data.results,
+          count: data.count
         });
       },
       error: (error) => {
@@ -75,7 +80,9 @@ componentDidMount() {
 }
 
 render() {
-  console.log('this is this.state.reviews: ', this.state.reviews);
+  console.log('this.state.reviews: ', this.state.reviews);
+  console.log('this.state.count: ', this.state.count);
+  var list = this.state.reviews;
   return (
     <div>
       <h1 id='ratings-reviews'>RATINGS AND REVIEWS</h1>
@@ -83,8 +90,8 @@ render() {
       <StarList />
       <SizeSlider />
       <ComfortSlider />
-      <h3>248 reviews, sorted by relevance</h3>
-      <ReviewItem reviews={this.state.reviews} />
+      <h3>{this.state.count} reviews, sorted by {this.state.sort}</h3>
+      <ReviewList reviews={list} />
     </div>
   );
 }
