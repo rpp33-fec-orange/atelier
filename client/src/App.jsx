@@ -43,7 +43,7 @@ class App extends React.Component {
       return (
         <div id="container">
           <ProductOverview id={this.state.id} />
-          <RelatedProducts />
+          <RelatedProducts id={this.state.id}/>
           <QuestionsAnswers />
           <RatingsReviews id={this.state.id}/>
         </div>
