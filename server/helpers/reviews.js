@@ -51,3 +51,6 @@ module.exports.getReviewsByID = getReviewsByID;
 //       console.log('error getting reviews!');
 //     })
 // });
+
+
+//const getReviewsByID = require('./helpers/reviews.js').getReviewsByID;

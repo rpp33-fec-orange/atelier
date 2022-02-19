@@ -2,7 +2,7 @@ const express = require('express');
 const getProducts = require('./helpers/products.js').getProducts;
 const getProductById = require('./helpers/products.js').getProductById;
 const getProductStylesById = require('./helpers/products.js').getProductStylesById;
-const getReviewsByID = require('./helpers/reviews.js').getReviewsByID;
+const getReviews = require('./helpers/reviews.js').getReviews;
 let app = express();
 
 app.use(express.json());
@@ -20,7 +20,7 @@ app.get('/products', function (req, res) {
     })
 });
 
-app.get('/products/:product_id', function (req, res) { //products?product_id=insertHere
+app.get('/products/:product_id', function (req, res) {
   let id = req.params.product_id;
   getProductById(id)
     .then((data) => {
@@ -33,7 +33,6 @@ app.get('/products/:product_id', function (req, res) { //products?product_id=ins
 });
 
 app.get('/products/:product_id/styles', function (req, res) {
-  console.log('server product styles id', req.params.product_id);
   let id = req.params.product_id;
   getProductStylesById(id)
     .then((data) => {
@@ -45,17 +44,16 @@ app.get('/products/:product_id/styles', function (req, res) {
     })
 });
 
-// app.get('/reviews/', function (req, res) {
-//   getReviewsByID(req.query.product_id)
-//     .then((success) => {
-//       console.log('getting reviews success! data is: ', success.data.results);
-//       // console.log('reviews are: ', data);
-//       res.status(200).send(success.data);
-//     })
-//     .catch((error) => {
-//       console.log('error getting reviews!');
-//     })
-// });
+app.get('/reviews/', function (req, res) {
+  getReviews()
+    .then((data) => {
+      console.log('server getReviews success');
+      res.status(200).send(data);
+    })
+    .catch((error) => {
+      console.log('server getReviews reviews');
+    })
+});
 
 let port = 2000;
 app.listen(port, function () {
