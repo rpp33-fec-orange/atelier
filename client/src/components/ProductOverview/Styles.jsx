@@ -20,7 +20,8 @@ class Styles extends React.Component {
     this.photoClick = this.photoClick.bind(this);
     this.styleChange = this.styleChange.bind(this);
     this.skuChange = this.skuChange.bind(this);
-    this.cartClick = this.cartClick.bind(this);
+    this.addToCart = this.addToCart.bind(this);
+    this.getCart = this.getCart.bind(this);
     this.favoriteClick = this.favoriteClick.bind(this);
   }
 
@@ -57,13 +58,16 @@ class Styles extends React.Component {
     }
   }
 
-  cartClick() {
+  addToCart() {
     let cartItem = {
       sku: this.state.skuCode,
       quantity: this.state.currentSku.quantity
     }
     this.state.cart.push(cartItem);
-    console.log('cart item added: ', cartItem);
+  }
+
+  getCart() {
+    console.log('cart: ', this.state.cart);
     // $.ajax({
     //   context: this,
     //   type: 'POST',
@@ -93,7 +97,6 @@ class Styles extends React.Component {
     let currentSku = this.state.currentSku;
     let mainPhotoURL = this.state.mainPhotoURL;
     let subPhotos = this.state.subPhotos;
-    console.log('productStylesById: ', productStylesById);
     return (
       <div>
         <div id="photos">
@@ -124,8 +127,8 @@ class Styles extends React.Component {
             <option value="nullQuantity">Quantity</option>
             <option value={currentSku.quantity}>{currentSku.quantity}</option>
           </select><br></br>
-          {currentSku.quantity ? <button id="add" onClick={this.cartClick}>ADD TO CART</button> : <button id="outOfStock" disabled>Out of Stock</button>}
-          <button id="favorite" onClick={this.favoriteClick}>☆</button>
+          {currentSku.quantity ? <button id="addToCart" onClick={this.addToCart}>ADD TO CART</button> : <button id="outOfStock" disabled>Out of Stock</button>}
+          <button id="favorite" onClick={this.favoriteClick}>☆</button><button id="cart" onClick={this.getCart}>YOUR CART</button>
         </div >
       </div >
     )
