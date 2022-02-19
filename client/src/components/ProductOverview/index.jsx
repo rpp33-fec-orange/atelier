@@ -1,10 +1,8 @@
 import React from 'react';
 import $ from 'jquery';
 import Search from './Search.jsx';
-import Photos from './Photos.jsx';
-import Details from './Details.jsx';
+import Styles from './Styles.jsx';
 import Descriptions from './Descriptions.jsx';
-import Features from './Features.jsx';
 
 class ProductOverview extends React.Component {
   constructor(props) {
@@ -13,6 +11,7 @@ class ProductOverview extends React.Component {
       id: props.id,
       productById: {},
       productStylesById: {},
+      styles: [],
       initialized: false
     }
     this.productHandler = this.productHandler.bind(this);
@@ -47,6 +46,7 @@ class ProductOverview extends React.Component {
         console.log('productHandler ajax GET success:');
         this.setState({
           productStylesById: success,
+          styles: success.results,
           initialized: true
         })
       },
@@ -80,15 +80,15 @@ class ProductOverview extends React.Component {
   }
 
   render() {
+    console.log('productById: ', this.state.productById);
     console.log('productStylesById: ', this.state.productStylesById);
+    console.log('styles: ', this.state.styles);
     if (this.state.initialized) {
       return (
         <div id="overview">
           <Search searchHandler={this.searchHandler} />
-          <Photos productStylesById={this.state.productStylesById} />
-          <Details productById={this.state.productById} productStylesById={this.state.productStylesById} />
+          <Styles productById={this.state.productById} productStylesById={this.state.productStylesById} />
           <Descriptions productById={this.state.productById} />
-          <Features productById={this.state.productById} />
         </div>
       )
     } else {
