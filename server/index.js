@@ -2,7 +2,7 @@ const express = require('express');
 const getProducts = require('./helpers/products.js').getProducts;
 const getProductById = require('./helpers/products.js').getProductById;
 const getProductStylesById = require('./helpers/products.js').getProductStylesById;
-const getReviews = require('./helpers/reviews.js').getReviews;
+const getReviewsByID = require('./helpers/reviews.js').getReviewsByID;
 let app = express();
 
 app.use(express.json());
@@ -46,7 +46,7 @@ app.get('/products/:product_id/styles', function (req, res) {
 });
 
 app.get('/reviews/', function (req, res) {
-  getReviews()
+  getReviewsByID(req.query.product_id)
     .then((data) => {
       console.log('getting reviews success! data is: ', data);
       console.log('reviews are: ', data);

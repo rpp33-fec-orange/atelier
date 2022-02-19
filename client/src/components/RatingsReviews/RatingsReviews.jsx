@@ -12,55 +12,82 @@ class RatingsReviews extends React.Component {
     super(props);
     this.state = {
       reviews: {},
-      id: props.id,
+      // id: props.id,
+      id: 2,
       sort: 'newest'
     }
-    this.reviewHandler = this.reviewHandler.bind(this);
+    this.getReviewsHandler = this.getReviewsHandler.bind(this);
+    this.getReviewsByIDHandler = this.getReviewsByIDHandler.bind(this);
+
   }
 
-  reviewHandler() {
+  getReviewsHandler() {
     // var url = `/reviews/${this.state.id}`;
-    // var url = '/reviews/';
+    var url = '/reviews';
     console.log('review product id is: ', this.state.id);
-    var url = `/reviews/${this.state.id}`;
-   $.ajax({
-     context: this,
-     type: "GET",
-     url: url,
-     success: (reviews) => {
-      console.log('review ajax success! reviews are: ', reviews);
-      this.setState({
-        reviews: reviews
+    // var url = `/reviews/${this.state.id}`;
+    $.ajax({
+      context: this,
+      type: "GET",
+      url: url,
+      success: (reviews) => {
+        console.log('review ajax success! reviews are: ', reviews);
+        this.setState({
+          reviews: reviews
+        });
+      },
+      error: (error) => {
+        console.log('error from get reviews request: ', error);
+      }
+    })
+      .done(function () {
+        console.log('get reviews request is done');
       });
-     },
-     error: (error) => {
-      console.log('error from get request: ', error);
-     }
-   })
-   .done(function() {
-    console.log('get request is done');
-   });
   }
 
-  componentDidMount() {
-    this.reviewHandler();
+  getReviewsByIDHandler(id) {
+    // var url = `/reviews/${this.state.id}`;
+    // product_id=64620
+    var url = `/reviews/?sort=newest&product_id=${this.state.id}`;
+    console.log('review product id is: ', this.state.id);
+    // var url = `/reviews/${this.state.id}`;
+    $.ajax({
+      context: this,
+      method: "GET",
+      url: url,
+      success: (reviews) => {
+        console.log('review ajax success! reviews are: ', reviews);
+        this.setState({
+          reviews: reviews
+        });
+      },
+      error: (error) => {
+        console.log('error from get reviews request: ', error);
+      }
+    })
+      .done(function () {
+        console.log('get reviews request is done');
+      });
   }
 
-  render() {
-    console.log('id in product review is: ', this.state.id);
-    console.log('this is this.state.reviews: ', this.state.reviews);
-    return (
-      <div>
-        <h1 id='ratings-reviews'>RATINGS AND REVIEWS</h1>
-        <StarNumber />
-        <StarList />
-        <SizeSlider />
-        <ComfortSlider />
-        <h3>248 reviews, sorted by relevance</h3>
-        <ReviewItem reviews={this.state.reviews}/>
-      </div>
-    );
-  }
+componentDidMount() {
+  this.getReviewsByIDHandler(this.state.id);
+}
+
+render() {
+  console.log('this is this.state.reviews: ', this.state.reviews);
+  return (
+    <div>
+      <h1 id='ratings-reviews'>RATINGS AND REVIEWS</h1>
+      <StarNumber />
+      <StarList />
+      <SizeSlider />
+      <ComfortSlider />
+      <h3>248 reviews, sorted by relevance</h3>
+      <ReviewItem reviews={this.state.reviews} />
+    </div>
+  );
+}
 }
 
 export default RatingsReviews;
