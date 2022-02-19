@@ -12,7 +12,7 @@ class RelatedProducts extends React.Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     var options = {
       endPoint: 'products',
       page: 1,
@@ -31,11 +31,11 @@ class RelatedProducts extends React.Component {
   render() {
     return (
       <div>
-      <h4 id = 'related-products'>Related Products</h4>
-      <RelatedProductsRow/>
-      <h4 id = 'related-products'>Your Outfit</h4>
-      <YourOutfitRow/>
-    </div>
+        <h4 id='related-products'>Related Products</h4>
+        <RelatedProductsRow />
+        <h4 id='related-products'>Your Outfit</h4>
+        <YourOutfitRow />
+      </div>
     )
   }
 }

@@ -9,7 +9,9 @@ class Styles extends React.Component {
       styles: props.productStylesById.results,
       currentStyle: props.productStylesById.results[0],
       currentStyleSkus: props.productStylesById.results[0].skus,
-      currentSku: props.productStylesById.results[0].skus[Object.keys(props.productStylesById.results[0].skus)[0]]
+      currentSku: props.productStylesById.results[0].skus[Object.keys(props.productStylesById.results[0].skus)[0]],
+      mainPhoto: props.productStylesById.results[0].photos[0],
+      subPhotos: props.productStylesById.results[0].photos
     }
     // this.clickHandler = this.clickHandler.bind(this);
   }
@@ -28,16 +30,18 @@ class Styles extends React.Component {
   // }
 
   render() {
-    console.log('currents style skus: ', (this.state.currentSku));
+    console.log('id: ', this.state.productById.id, ' style: ', (this.state.currentStyle), ' current sku: ', this.state.currentSku);
     let productById = this.state.productById;
     let productStylesById = this.state.productStylesById;
     let styles = this.state.styles;
     let currentStyle = this.state.currentStyle;
+    let mainPhoto = this.state.mainPhoto;
+    let subPhotos = this.state.subPhotos;
     return (
       <div>
         <div id="photos">
-          <img id="mainPhoto" src={currentStyle.photos[0].url} width="300" height="425"></img> <br></br>
-          {currentStyle.photos.map((photo) =>
+          <img id="mainPhoto" src={mainPhoto.url} width="300" height="425"></img> <br></br>
+          {subPhotos.map((photo) =>
             <img id="subPhoto" src={photo.url} width="75" height="100"></img>
           )}
         </div>
