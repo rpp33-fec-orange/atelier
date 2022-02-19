@@ -6,52 +6,95 @@ import StarList from './StarList.jsx';
 import StarItem from './StarItem.jsx';
 import ComfortSlider from './ComfortSlider.jsx';
 import SizeSlider from './SizeSlider.jsx';
+import ReviewList from './ReviewList.jsx';
 
 class RatingsReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviews: {},
-      id: props.id
+      reviews: [],
+      id: props.id,
+      sort: 'newest',
+      count: 0
     }
-    this.reviewHandler = this.reviewHandler.bind(this);
+    // this.getReviewsHandler = this.getReviewsHandler.bind(this);
+    this.getReviewsByIDHandler = this.getReviewsByIDHandler.bind(this);
+
   }
 
-  reviewHandler() {
-    var url = '/'
-   $.ajax({
-     method: "GET",
-     url: url,
-     success: (reviews) => {
-      this.setState({
-        reviews: reviews
+  // getReviewsHandler() {
+  //   // var url = `/reviews/${this.state.id}`;
+  //   var url = '/reviews';
+  //   console.log('review product id is: ', this.state.id);
+  //   // var url = `/reviews/${this.state.id}`;
+  //   $.ajax({
+  //     context: this,
+  //     type: "GET",
+  //     url: url,
+  //     success: (reviews) => {
+  //       console.log('review ajax success! reviews are: ', reviews);
+  //       this.setState({
+  //         reviews: reviews
+  //       });
+  //     },
+  //     error: (error) => {
+  //       console.log('error from get reviews request: ', error);
+  //     }
+  //   })
+  //     .done(function () {
+  //       console.log('get reviews request is done');
+  //     });
+  // }
+
+  getReviewsByIDHandler(id) {
+    // var url = `/reviews/${this.state.id}`;
+    // product_id=64620
+    var sort = this.state.sort;
+    var id = this.state.id;
+    var url = `/reviews/?sort=${sort}&product_id=${id}`;
+    console.log('review product id is: ', this.state.id);
+    // var url = `/reviews/${this.state.id}`;
+    $.ajax({
+      context: this,
+      method: "GET",
+      url: url,
+      success: (data) => {
+        // console.log('review ajax success! reviews are: ', reviews);
+        this.setState({
+          reviews: data.results,
+          count: data.count
+        });
+      },
+      error: (error) => {
+        console.log('error from get reviews request: ', error);
+      }
+    })
+      .done(function () {
+        console.log('get reviews request is done');
       });
-     },
-     error: (err) => {
-      console.log('error from get request');
-     }
-   })
-   .done(function() {
-    console.log('get request is done');
-   });
   }
+componentDidMount() {
+  this.getReviewsByIDHandler(this.state.id);
+}
 
-  render() {
-    console.log('this is this.state.reviews: ', this.state.reviews);
-    return (
-      <div>
-        <h1 id='ratings-reviews'>RATINGS AND REVIEWS</h1>
-        <StarNumber />
-        <StarList />
-        <SizeSlider />
-        <ComfortSlider />
-        <h3>248 reviews, sorted by relevance</h3>
-        {/* <div> Review #1 </div>
-      <div> Review #2 </div> */}
-        <ReviewItem reviews={this.state.reviews}/>
-      </div>
-    );
-  }
+render() {
+  console.log('this.state.reviews: ', this.state.reviews);
+  console.log('this.state.count: ', this.state.count);
+  var list = this.state.reviews;
+  var count = this.state.count;
+  var sort = this.state.sort;
+  return (
+    <div className="wrapper" id="flex-container">
+      <h1 id='ratings-reviews' id="zero">RATINGS AND REVIEWS</h1>
+      <StarNumber />
+      <StarList />
+      <SizeSlider />
+      <ComfortSlider />
+      <h3>{count} reviews, sorted by {sort}</h3>
+      <ReviewList reviews={list} />
+    </div>
+  );
+}
 }
 
 export default RatingsReviews;
