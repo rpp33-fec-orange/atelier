@@ -10,7 +10,7 @@ class Styles extends React.Component {
       currentStyle: props.productStylesById.results[0],
       currentStyleSkus: props.productStylesById.results[0].skus,
       currentSku: props.productStylesById.results[0].skus[Object.keys(props.productStylesById.results[0].skus)[0]],
-      mainPhoto: props.productStylesById.results[0].photos[0],
+      mainPhotoURL: props.productStylesById.results[0].photos[0].url,
       subPhotos: props.productStylesById.results[0].photos
     }
     this.photoClick = this.photoClick.bind(this);
@@ -21,11 +21,10 @@ class Styles extends React.Component {
   }
 
   photoClick(e) {
-    console.log('photo clicked!');
-    // this.setState({
-    //   mainPhoto: '',    //main updated with the photo clicked
-    //   subPhotos: ''   //all photos besides the one clicked
-    // })
+    console.log('target data', e.target)
+    this.setState({
+      mainPhotoURL: e.target.src,    //main updated with the photo clicked
+    })
   }
 
   styleChange(e) {
@@ -35,7 +34,7 @@ class Styles extends React.Component {
         this.setState({
           currentStyle: selectedStyle,
           currentStyleSkus: selectedStyle.skus,
-          mainPhoto: selectedStyle.photos[0],
+          mainPhotoURL: selectedStyle.photos[0],
           subPhotos: selectedStyle.photos
         });
       }
@@ -69,15 +68,15 @@ class Styles extends React.Component {
     let currentStyle = this.state.currentStyle;
     let currentStyleSkus = this.state.currentStyleSkus;
     let currentSku = this.state.currentSku;
-    let mainPhoto = this.state.mainPhoto;
+    let mainPhotoURL = this.state.mainPhotoURL;
     let subPhotos = this.state.subPhotos;
     console.log('productStylesById: ', productStylesById);
     return (
       <div>
         <div id="photos">
-          <img id="mainPhoto" src={mainPhoto.url} width="300" height="425"></img> <br></br>
+          <img id="mainPhoto" src={mainPhotoURL} width="300" height="425"></img> <br></br>
           {subPhotos.map((photo) =>
-            <img id="subPhoto" src={photo.url} width="75" height="100" onClick={this.photoClick}></img>
+            <img id="subPhoto" src={photo.url} width="75" height="105" onClick={this.photoClick}></img>
           )}
         </div>
         <div id="details">
