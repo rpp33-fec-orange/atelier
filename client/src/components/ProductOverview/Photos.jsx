@@ -1,29 +1,38 @@
 import React from 'react';
 
-const Photos = (props) => (
-  <div id="photos">
-    <img id="mainPhoto" src={props.productStylesById.results[0].photos[0].url} width="150" height="200"></img>
-    {/* {props.productStylesById.results.map((singleData) =>
-        <option value={singleData.name}>{singleData.name}</option>
-      )} */}
-  </div >
-)
+class Photos extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      product: props.productStylesById
+    }
+    this.clickHandler = this.clickHandler.bind(this);
+  }
 
-// class Photos extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       product: {}
-//     }
-//   }
+  clickHandler(e) {
+    this.setState({
+      main: '',    //main updated with the photo clicked
+      others: ''   //all photos besides the one clicked
+    })
+  }
 
-//   render() {
-//     return (
-//       <div id="photos">
-//         <img id="mainPhoto" src="https://cdn.shopify.com/s/files/1/0286/4077/2235/products/Knit-polo-sweater-The-Korean-Fashion_61ba38bf-7198-4f52-bca3-8b7ee082e567_1800x1800.jpg?v=1639580510" width="300" height="300"></img>
-//       </div >
-//     )
-//   }
-// }
+  render() {
+    return (
+      <div id="photos">
+        <img id="mainPhoto" src={this.state.product.results[0].photos[0].url} width="175" height="250"></img> <br></br>
+        {this.state.product.results[0].photos.map((photo) =>
+          <img id="subPhoto" src={photo.url} width="75" height="100"></img>
+        )}
+      </div >
+    )
+  }
+}
 
 export default Photos;
+
+// const Photos = (props) => (
+//   <div id="photos">
+//     <img id="mainPhoto" src={props.productStylesById.results[0].photos[0].url} width="150" height="200"></img>
+
+//   </div >
+// )
