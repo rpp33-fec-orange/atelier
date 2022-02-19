@@ -34,7 +34,9 @@ class Styles extends React.Component {
         let selectedStyle = this.state.styles[i];
         this.setState({
           currentStyle: selectedStyle,
-          currentStyleSkus: selectedStyle.skus
+          currentStyleSkus: selectedStyle.skus,
+          mainPhoto: selectedStyle.photos[0],
+          subPhotos: selectedStyle.photos
         });
       }
     }
