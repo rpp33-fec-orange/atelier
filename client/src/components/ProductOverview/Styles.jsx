@@ -7,26 +7,37 @@ class Styles extends React.Component {
       productById: props.productById,
       productStylesById: props.productStylesById,
       styles: props.productStylesById.results,
-      currentStyle: props.productStylesById.results[0]
+      currentStyle: props.productStylesById.results[0],
+      currentStyleSkus: props.productStylesById.results[0].skus,
+      currentSku: props.productStylesById.results[0].skus[Object.keys(props.productStylesById.results[0].skus)[0]]
     }
     // this.clickHandler = this.clickHandler.bind(this);
   }
 
-  // clickHandler(e) {
+  // photoClickHandler(e) {
   //   this.setState({
-  //     main: '',    //main updated with the photo clicked
-  //     others: ''   //all photos besides the one clicked
+  //     mainPhoto: '',    //main updated with the photo clicked
+  //     subPhotos: ''   //all photos besides the one clicked
+  //   })
+  // }
+
+  // styleClicKHandler(e) {
+  //   this.setState({
+  //     currentStyle: ''
   //   })
   // }
 
   render() {
+    console.log('currents style skus: ', (this.state.currentSku));
     let productById = this.state.productById;
     let productStylesById = this.state.productStylesById;
+    let styles = this.state.styles;
+    let currentStyle = this.state.currentStyle;
     return (
       <div>
         <div id="photos">
-          <img id="mainPhoto" src={productStylesById.results[0].photos[0].url} width="300" height="425"></img> <br></br>
-          {productStylesById.results[0].photos.map((photo) =>
+          <img id="mainPhoto" src={currentStyle.photos[0].url} width="300" height="425"></img> <br></br>
+          {currentStyle.photos.map((photo) =>
             <img id="subPhoto" src={photo.url} width="75" height="100"></img>
           )}
         </div>
@@ -37,22 +48,17 @@ class Styles extends React.Component {
           <div id="price">{productById.default_price}</div>
           <div id="selector">Select Style/Size/Quantity</div>
           <select id="style">
-            {productStylesById.results.map((singleData) =>
-              <option value={singleData.name}>{singleData.name}</option>
+            {styles.map((style) =>
+              <option>{style.name}</option>
             )}
           </select>
           <select id="size">
-            <option value="xs">XS</option>
-            <option value="s">S</option>
-            <option value="m">M</option>
-            <option value="l">L</option>
+            {Object.keys(this.state.currentStyleSkus).map((sku) =>
+              <option>{this.state.currentStyleSkus[sku].size}</option>
+            )}
           </select>
           <select id="quantity">
-            <option value="one">1</option>
-            <option value="two">2</option>
-            <option value="three">3</option>
-            <option value="four">4</option>
-            <option value="four">5</option>
+            <option>{this.state.currentSku.quantity}</option>
           </select><br></br>
           <button id="add">ADD TO CART</button><button id="favorte">☆</button>
         </div >
