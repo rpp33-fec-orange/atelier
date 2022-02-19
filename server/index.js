@@ -48,7 +48,7 @@ app.get('/products/:product_id/styles', function (req, res) {
 app.get('/reviews/', function (req, res) {
   getReviews()
     .then((data) => {
-      console.log('getting reviews success!');
+      console.log('getting reviews success! data is: ', data);
       console.log('reviews are: ', data);
       res.status(200).send(data);
     })

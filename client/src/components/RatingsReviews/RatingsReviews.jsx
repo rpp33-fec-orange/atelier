@@ -12,23 +12,29 @@ class RatingsReviews extends React.Component {
     super(props);
     this.state = {
       reviews: {},
-      id: props.id
+      id: props.id,
+      sort: 'newest'
     }
     this.reviewHandler = this.reviewHandler.bind(this);
   }
 
   reviewHandler() {
-    var url = '/'
+    // var url = `/reviews/${this.state.id}`;
+    // var url = '/reviews/';
+    console.log('review product id is: ', this.state.id);
+    var url = `/reviews/${this.state.id}`;
    $.ajax({
-     method: "GET",
+     context: this,
+     type: "GET",
      url: url,
      success: (reviews) => {
+      console.log('review ajax success! reviews are: ', reviews);
       this.setState({
         reviews: reviews
       });
      },
-     error: (err) => {
-      console.log('error from get request');
+     error: (error) => {
+      console.log('error from get request: ', error);
      }
    })
    .done(function() {
@@ -36,7 +42,12 @@ class RatingsReviews extends React.Component {
    });
   }
 
+  componentDidMount() {
+    this.reviewHandler();
+  }
+
   render() {
+    console.log('id in product review is: ', this.state.id);
     console.log('this is this.state.reviews: ', this.state.reviews);
     return (
       <div>
@@ -46,8 +57,6 @@ class RatingsReviews extends React.Component {
         <SizeSlider />
         <ComfortSlider />
         <h3>248 reviews, sorted by relevance</h3>
-        {/* <div> Review #1 </div>
-      <div> Review #2 </div> */}
         <ReviewItem reviews={this.state.reviews}/>
       </div>
     );
