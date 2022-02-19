@@ -1,11 +1,11 @@
-#overview {
-  /* display: grid; */
-  /* grid-template-columns: repeat(5, 1fr);
+/* #overview {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(5, 1fr);
   grid-column-gap: 0px;
-  grid-row-gap: 0px; */
-  /* border: 1px solid black; */
-}
+  grid-row-gap: 0px;
+  border: 1px solid black;
+} */
 
 #topbar {
   /* grid-area: 1 / 1 / 2 / 6; */
@@ -27,11 +27,10 @@
 #photos {
   /* grid-area: 2 / 1 / 5 / 4; */
   border: 1px solid black;
-
 }
 
 #mainPhoto {
-  justify-content: center;
+  cursor: pointer;
 }
 
 #subPhoto{

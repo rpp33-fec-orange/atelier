@@ -1,17 +1,21 @@
 import React from 'react';
+import $ from 'jquery';
 
 class Styles extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       productById: props.productById,
+      rating: '★★★★☆',
       productStylesById: props.productStylesById,
       styles: props.productStylesById.results,
       currentStyle: props.productStylesById.results[0],
       currentStyleSkus: props.productStylesById.results[0].skus,
       currentSku: props.productStylesById.results[0].skus[Object.keys(props.productStylesById.results[0].skus)[0]],
+      skuCode: '',
       mainPhotoURL: props.productStylesById.results[0].photos[0].url,
-      subPhotos: props.productStylesById.results[0].photos
+      subPhotos: props.productStylesById.results[0].photos,
+      cart: []
     }
     this.photoClick = this.photoClick.bind(this);
     this.styleChange = this.styleChange.bind(this);
@@ -21,9 +25,8 @@ class Styles extends React.Component {
   }
 
   photoClick(e) {
-    console.log('target data', e.target)
     this.setState({
-      mainPhotoURL: e.target.src,    //main updated with the photo clicked
+      mainPhotoURL: e.target.src
     })
   }
 
@@ -34,7 +37,7 @@ class Styles extends React.Component {
         this.setState({
           currentStyle: selectedStyle,
           currentStyleSkus: selectedStyle.skus,
-          mainPhotoURL: selectedStyle.photos[0],
+          mainPhotoURL: selectedStyle.photos[0].url,
           subPhotos: selectedStyle.photos
         });
       }
@@ -47,14 +50,33 @@ class Styles extends React.Component {
       if (this.state.currentStyleSkus[skuKeys[i]].size === e.target.value) {
         let selectedSku = this.state.currentStyleSkus[skuKeys[i]];
         this.setState({
-          currentSku: selectedSku
+          currentSku: selectedSku,
+          skuCode: skuKeys[i]
         });
       }
     }
   }
 
   cartClick() {
-
+    let cartItem = {
+      sku: this.state.skuCode,
+      quantity: this.state.currentSku.quantity
+    }
+    this.state.cart.push(cartItem);
+    console.log('cart item added: ', cartItem);
+    // $.ajax({
+    //   context: this,
+    //   type: 'POST',
+    //   url: '/addToCart',
+    //   data: JSON.stringify({ cartItem }),
+    //   contentType: 'application/json',
+    //   success: function (successAjax) {
+    //     console.log('Ajax POST Success!');
+    //   },
+    //   error: function (errorAjax) {
+    //     console.log('Ajax POST Error!');
+    //   },
+    // })
   }
 
   favoriteClick() {
@@ -64,6 +86,7 @@ class Styles extends React.Component {
   render() {
     let productById = this.state.productById;
     let productStylesById = this.state.productStylesById;
+    let rating = this.state.rating;
     let styles = this.state.styles;
     let currentStyle = this.state.currentStyle;
     let currentStyleSkus = this.state.currentStyleSkus;
@@ -80,7 +103,7 @@ class Styles extends React.Component {
           )}
         </div>
         <div id="details">
-          <div id="rating">★★★★☆</div>
+          <div id="rating">{rating}</div>
           <div id="category">{productById.category}</div>
           <div id="name">{productById.name}</div>
           <div id="price">{productById.default_price}</div>
@@ -101,7 +124,8 @@ class Styles extends React.Component {
             <option value="nullQuantity">Quantity</option>
             <option value={currentSku.quantity}>{currentSku.quantity}</option>
           </select><br></br>
-          <button id="add" onClick={this.cartClick}>ADD TO CART</button><button id="favorte" onClick={this.favoriteClick}>☆</button>
+          {currentSku.quantity ? <button id="add" onClick={this.cartClick}>ADD TO CART</button> : <button id="outOfStock" disabled>Out of Stock</button>}
+          <button id="favorite" onClick={this.favoriteClick}>☆</button>
         </div >
       </div >
     )
