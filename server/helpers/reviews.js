@@ -38,3 +38,16 @@ let getReviewsByID = (id) => {
 }
 
 module.exports.getReviewsByID = getReviewsByID;
+
+
+// app.get('/reviews/', function (req, res) {
+//   getReviewsByID(req.query.product_id)
+//     .then((success) => {
+//       console.log('getting reviews success! data is: ', success.data.results);
+//       // console.log('reviews are: ', data);
+//       res.status(200).send(success.data);
+//     })
+//     .catch((error) => {
+//       console.log('error getting reviews!');
+//     })
+// });

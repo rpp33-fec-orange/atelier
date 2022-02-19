@@ -45,17 +45,17 @@ app.get('/products/:product_id/styles', function (req, res) {
     })
 });
 
-app.get('/reviews/', function (req, res) {
-  getReviewsByID(req.query.product_id)
-    .then((success) => {
-      console.log('getting reviews success! data is: ', success.data.results);
-      // console.log('reviews are: ', data);
-      res.status(200).send(success.data);
-    })
-    .catch((error) => {
-      console.log('error getting reviews!');
-    })
-});
+// app.get('/reviews/', function (req, res) {
+//   getReviewsByID(req.query.product_id)
+//     .then((success) => {
+//       console.log('getting reviews success! data is: ', success.data.results);
+//       // console.log('reviews are: ', data);
+//       res.status(200).send(success.data);
+//     })
+//     .catch((error) => {
+//       console.log('error getting reviews!');
+//     })
+// });
 
 let port = 2000;
 app.listen(port, function () {
