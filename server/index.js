@@ -20,7 +20,7 @@ app.get('/products', function (req, res) {
     })
 });
 
-app.get('/products/:product_id', function (req, res) { //products?product_id=insertHere
+app.get('/products/:product_id', function (req, res) {
   let id = req.params.product_id;
   getProductById(id)
     .then((data) => {

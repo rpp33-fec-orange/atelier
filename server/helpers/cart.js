@@ -41,7 +41,7 @@ module.exports.getCart = getCart;
 //     })
 // });
 
-// app.post('/addToCart', function (req, res) {
+// app.post('/cart', function (req, res) {
 //   addToCart(req.body.cartItem)
 //     .then((data) => {
 //       console.log('server addToCart success');

@@ -20,7 +20,7 @@ class Styles extends React.Component {
     this.photoClick = this.photoClick.bind(this);
     this.styleChange = this.styleChange.bind(this);
     this.skuChange = this.skuChange.bind(this);
-    this.addToCart = this.addToCart.bind(this);
+    this.postCart = this.postCart.bind(this);
     this.getCart = this.getCart.bind(this);
     this.favoriteClick = this.favoriteClick.bind(this);
   }
@@ -58,20 +58,16 @@ class Styles extends React.Component {
     }
   }
 
-  addToCart() {
+  postCart() {
     let cartItem = {
       sku: this.state.skuCode,
       quantity: this.state.currentSku.quantity
     }
     this.state.cart.push(cartItem);
-  }
-
-  getCart() {
-    console.log('cart: ', this.state.cart);
     // $.ajax({
     //   context: this,
     //   type: 'POST',
-    //   url: '/addToCart',
+    //   url: '/cart',
     //   data: JSON.stringify({ cartItem }),
     //   contentType: 'application/json',
     //   success: function (successAjax) {
@@ -80,6 +76,25 @@ class Styles extends React.Component {
     //   error: function (errorAjax) {
     //     console.log('Ajax POST Error!');
     //   },
+    // })
+  }
+
+  getCart() {
+    console.log('user cart: ', this.state.cart);
+    // $.ajax({
+    //   context: this,
+    //   type: 'GET',
+    //   url: '/cart',
+    //   success: function (success) {
+    //     console.log('getCart ajax GET success:');
+    //     this.setState({
+    //       cart: success,
+    //     })
+    //   },
+    //   error: function (error) {
+    //     console.log('getCart ajax GET error: ', error);
+    //   },
+    //   contentType: "application/json",
     // })
   }
 
@@ -127,8 +142,8 @@ class Styles extends React.Component {
             <option value="nullQuantity">Quantity</option>
             <option value={currentSku.quantity}>{currentSku.quantity}</option>
           </select><br></br>
-          {currentSku.quantity ? <button id="addToCart" onClick={this.addToCart}>ADD TO CART</button> : <button id="outOfStock" disabled>Out of Stock</button>}
-          <button id="favorite" onClick={this.favoriteClick}>☆</button><button id="cart" onClick={this.getCart}>YOUR CART</button>
+          {currentSku.quantity ? <button id="postCart" onClick={this.postCart}>ADD TO CART</button> : <button id="outOfStock" disabled>Out of Stock</button>}
+          <button id="favorite" onClick={this.favoriteClick}>☆</button><button id="getCart" onClick={this.getCart}>YOUR CART</button>
         </div >
       </div >
     )
