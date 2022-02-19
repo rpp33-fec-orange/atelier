@@ -1,7 +1,7 @@
 import React from 'react';
 import RelatedProductsRow from './RelatedProdcutsRow.jsx'
 import YourOutfitRow from './YourOutfitRow.jsx'
-import searchAPI from '../../../../server/helpers/relatedItems.js'
+import $ from 'jquery';
 
 class RelatedProducts extends React.Component {
 
@@ -10,42 +10,51 @@ class RelatedProducts extends React.Component {
     var product_id = props.id
     super(props);
     this.state = {
-      product_id: product_id || 64621
+      product_id: product_id,
+      relatedProducts: null,
+      relatedProductsInfo: null,
+      relatedStylesInfo: null
     }
+    // this.componentDidMount = this.componentDidMount.bind(this);
   }
-
-  // 64620, 64621. 64622, 64623, 64624
-
-  // /:product_id/related
 
   componentDidMount () {
 
-    var options = {
-      purpose: 'get products',
-      endPoint: 'products',
-      page: 10,
-      count: 10
-    }
-    searchAPI(options, (err, data) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log(data);
-      }
-    });
+    // This AJAX request fetches related products info
 
-    var options = {
-      purpose: 'get related product ids',
-      endPoint: 'products/:product_id/related',
-      product_id: 64623,
-    }
-    searchAPI(options, (err, data) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log(data);
-      }
-    });
+    $.ajax({
+      context: this,
+      type: 'GET',
+      url: `/products/${this.state.product_id}/related`,
+      contentType: "application/json",
+      success: function (data) {
+        console.log('product data received by client', data)
+          this.setState({
+            relatedProductsInfo: data
+          })
+      },
+      error: function (error) {
+        console.log('error in GET request')
+      },
+    })
+
+    // This AJAX request fetches related products styles (for product photos)
+
+    // $.ajax({
+    //   context: this,
+    //   type: 'GET',
+    //   url: `/products/${this.state.product_id}/relatedStyles`,
+    //   contentType: "application/json",
+    //   success: function (data) {
+    //     console.log('style data received by client')
+    //       this.setState({
+    //         relatedStylesInfo: data
+    //       })
+    //   },
+    //   error: function (error) {
+    //     console.log('error in GET request')
+    //   },
+    // })
 
   }
 
@@ -54,7 +63,7 @@ class RelatedProducts extends React.Component {
       <div id = 'related-products-and-items'>
         <div className = "related-products-row">
           <h4 id = 'related-products'>Related Products</h4>
-          <RelatedProductsRow/>
+          <RelatedProductsRow relatedProductsInfo = {this.state.relatedProductsInfo}/>
         </div>
         <div className = "your-outfit-row">
           <h4 id = 'your-outfit'>Your Outfit</h4>
