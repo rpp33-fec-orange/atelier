@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Search extends React.Component {
+class TopBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,7 +25,7 @@ class Search extends React.Component {
 
   render() {
     return (
-      <div id="search">
+      <div id="topbar">
         <div id="logo">Atelier<input id="input" placeholder="keyword" onChange={this.onChange}></input><button id="inputButton" onClick={this.clickHandler}>Search</button></div>
         <div id="message">Valentine's Day Sale! ---Extra 40% off on select items--- Free shipping for orders over $50!</div>
       </div >
@@ -33,4 +33,4 @@ class Search extends React.Component {
   }
 }
 
-export default Search;
+export default TopBar;

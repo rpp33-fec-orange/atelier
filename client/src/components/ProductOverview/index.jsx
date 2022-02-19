@@ -1,6 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
-import Search from './Search.jsx';
+import TopBar from './TopBar.jsx';
 import Styles from './Styles.jsx';
 import Descriptions from './Descriptions.jsx';
 
@@ -83,7 +83,7 @@ class ProductOverview extends React.Component {
     if (this.state.initialized) {
       return (
         <div id="overview">
-          <Search searchHandler={this.searchHandler} />
+          <TopBar searchHandler={this.searchHandler} />
           <Styles productById={this.state.productById} productStylesById={this.state.productStylesById} />
           <Descriptions productById={this.state.productById} />
         </div>

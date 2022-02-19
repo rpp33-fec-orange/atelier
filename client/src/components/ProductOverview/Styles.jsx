@@ -13,36 +13,68 @@ class Styles extends React.Component {
       mainPhoto: props.productStylesById.results[0].photos[0],
       subPhotos: props.productStylesById.results[0].photos
     }
-    // this.clickHandler = this.clickHandler.bind(this);
+    this.photoClick = this.photoClick.bind(this);
+    this.styleChange = this.styleChange.bind(this);
+    this.skuChange = this.skuChange.bind(this);
+    this.cartClick = this.cartClick.bind(this);
+    this.favoriteClick = this.favoriteClick.bind(this);
   }
 
-  // photoClickHandler(e) {
-  //   this.setState({
-  //     mainPhoto: '',    //main updated with the photo clicked
-  //     subPhotos: ''   //all photos besides the one clicked
-  //   })
-  // }
+  photoClick(e) {
+    console.log('photo clicked!');
+    // this.setState({
+    //   mainPhoto: '',    //main updated with the photo clicked
+    //   subPhotos: ''   //all photos besides the one clicked
+    // })
+  }
 
-  // styleClicKHandler(e) {
-  //   this.setState({
-  //     currentStyle: ''
-  //   })
-  // }
+  styleChange(e) {
+    for (let i = 0; i < this.state.styles.length; i++) {
+      if (this.state.styles[i].name === e.target.value) {
+        let selectedStyle = this.state.styles[i];
+        this.setState({
+          currentStyle: selectedStyle
+        });
+      }
+    }
+  }
+
+  skuChange(e) {
+    let skuKeys = Object.keys(this.state.currentStyleSkus);
+    for (let i = 0; i < skuKeys.length; i++) {
+      if (this.state.currentStyleSkus[skuKeys[i]].size === e.target.value) {
+        let selectedSku = this.state.currentStyleSkus[skuKeys[i]];
+        this.setState({
+          currentSku: selectedSku
+        });
+      }
+    }
+  }
+
+  cartClick() {
+
+  }
+
+  favoriteClick() {
+
+  }
 
   render() {
-    console.log('id: ', this.state.productById.id, ' style: ', (this.state.currentStyle), ' current sku: ', this.state.currentSku);
     let productById = this.state.productById;
     let productStylesById = this.state.productStylesById;
     let styles = this.state.styles;
     let currentStyle = this.state.currentStyle;
+    let currentStyleSkus = this.state.currentStyleSkus;
+    let currentSku = this.state.currentSku;
     let mainPhoto = this.state.mainPhoto;
     let subPhotos = this.state.subPhotos;
+    console.log('productStylesById: ', productStylesById);
     return (
       <div>
         <div id="photos">
           <img id="mainPhoto" src={mainPhoto.url} width="300" height="425"></img> <br></br>
           {subPhotos.map((photo) =>
-            <img id="subPhoto" src={photo.url} width="75" height="100"></img>
+            <img id="subPhoto" src={photo.url} width="75" height="100" onClick={this.photoClick}></img>
           )}
         </div>
         <div id="details">
@@ -51,20 +83,20 @@ class Styles extends React.Component {
           <div id="name">{productById.name}</div>
           <div id="price">{productById.default_price}</div>
           <div id="selector">Select Style/Size/Quantity</div>
-          <select id="style">
+          <select id="style" onChange={this.styleChange}>
             {styles.map((style) =>
               <option>{style.name}</option>
             )}
           </select>
-          <select id="size">
-            {Object.keys(this.state.currentStyleSkus).map((sku) =>
-              <option>{this.state.currentStyleSkus[sku].size}</option>
+          <select id="size" onChange={this.skuChange}>
+            {Object.keys(currentStyleSkus).map((sku) =>
+              <option>{currentStyleSkus[sku].size}</option>
             )}
           </select>
           <select id="quantity">
-            <option>{this.state.currentSku.quantity}</option>
+            <option>{currentSku.quantity}</option>
           </select><br></br>
-          <button id="add">ADD TO CART</button><button id="favorte">☆</button>
+          <button id="add" onClick={this.cartClick}>ADD TO CART</button><button id="favorte" onClick={this.favoriteClick}>☆</button>
         </div >
       </div >
     )
