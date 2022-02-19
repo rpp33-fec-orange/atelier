@@ -13,7 +13,7 @@ class RatingsReviews extends React.Component {
     this.state = {
       reviews: {},
       // id: props.id,
-      id: 2,
+      id: props.id,
       sort: 'newest'
     }
     this.getReviewsHandler = this.getReviewsHandler.bind(this);
@@ -48,17 +48,17 @@ class RatingsReviews extends React.Component {
   getReviewsByIDHandler(id) {
     // var url = `/reviews/${this.state.id}`;
     // product_id=64620
-    var url = `/reviews/?sort=newest&product_id=${this.state.id}`;
+    var url = `/reviews/?sort=${this.state.sort}&product_id=${this.state.id}`;
     console.log('review product id is: ', this.state.id);
     // var url = `/reviews/${this.state.id}`;
     $.ajax({
       context: this,
       method: "GET",
       url: url,
-      success: (reviews) => {
-        console.log('review ajax success! reviews are: ', reviews);
+      success: (data) => {
+        // console.log('review ajax success! reviews are: ', reviews);
         this.setState({
-          reviews: reviews
+          reviews: data.results
         });
       },
       error: (error) => {
