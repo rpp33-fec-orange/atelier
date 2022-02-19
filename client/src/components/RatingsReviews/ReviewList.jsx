@@ -8,18 +8,16 @@ const ReviewList = (props) => {
 		<ReviewItem key={review.review_id.toString()} review={review} />
 	);
 	console.log('this is reviews: ', reviews);
-	// console.log('type of reviews: ', typeof reviews);
-	// var reviewList = [];
-	// // for (var i = 0; i < reviews; i++) {
-	// reviews.forEach(element =>
-	// 	reviewList.push(<ReviewItem review={element} />)
-	// 		);
-console.log('finally, reviewList is: ', reviewList);
-return (
-	<div>
-		{reviewList}
-	</div>
-)
-	}
+	console.log('finally, reviewList is: ', reviewList);
+	return (
+		<div id="list">
+			{reviewList}
+			<div className="five" id="buttons">
+				<button>MORE REVIEWS</button>
+				<button>ADD A REVIEW</button>
+			</div>
+		</div>
+	)
+}
 
 export default ReviewList;

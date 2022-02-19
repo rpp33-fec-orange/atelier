@@ -13,7 +13,6 @@ class RatingsReviews extends React.Component {
     super(props);
     this.state = {
       reviews: [],
-      // id: props.id,
       id: props.id,
       sort: 'newest',
       count: 0
@@ -74,7 +73,6 @@ class RatingsReviews extends React.Component {
         console.log('get reviews request is done');
       });
   }
-
 componentDidMount() {
   this.getReviewsByIDHandler(this.state.id);
 }
@@ -83,14 +81,16 @@ render() {
   console.log('this.state.reviews: ', this.state.reviews);
   console.log('this.state.count: ', this.state.count);
   var list = this.state.reviews;
+  var count = this.state.count;
+  var sort = this.state.sort;
   return (
-    <div>
-      <h1 id='ratings-reviews'>RATINGS AND REVIEWS</h1>
+    <div className="wrapper" id="flex-container">
+      <h1 id='ratings-reviews' id="zero">RATINGS AND REVIEWS</h1>
       <StarNumber />
       <StarList />
       <SizeSlider />
       <ComfortSlider />
-      <h3>{this.state.count} reviews, sorted by {this.state.sort}</h3>
+      <h3>{count} reviews, sorted by {sort}</h3>
       <ReviewList reviews={list} />
     </div>
   );

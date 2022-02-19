@@ -7,7 +7,7 @@ class ComfortSlider extends React.Component {
 
 	render() {
 		return (
-			<div className="wrapper">
+			<div className="four" id="four">
 				<p>Comfort</p>
 				<div>Poor     |     Perfect</div>
 			</div>

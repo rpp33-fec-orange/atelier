@@ -1,6 +1,31 @@
 import React from 'react';
 
-const ReviewItem = (props) => {
+class ReviewItem extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			review: props.review,
+			recommend: true,
+			ready: false
+		}
+		this.getRecommendation = this.getRecommendation.bind(this);
+	}
+
+	getRecommendation(event) {
+		event.preventDefault();
+		this.setState({
+			recommend: event.target.value
+		});
+	}
+
+	isReady() {
+		var propsReady = this.state.ready;
+
+	}
+
+
+	render() {
+		console.log('can i get props in ReviewItem: ', this.props);
 		return (
 			// <div className="wrapper">
 			// 	<div className="one" id="review-list">
@@ -24,14 +49,47 @@ const ReviewItem = (props) => {
 
 			<div className="wrapper">
 				<div className="one" id="review-list">
-					<p>&#9734;&#9734;&#9734;&#9734;                    {props.review.reviewer_name}, {props.review.date}</p>
-					<h3>{props.review.summary}</h3>
-					<p>{props.review.body}</p>
-					<sub>Helpful?  Yes ({props.review.helpfulness})  |  Report</sub>
+					<p>&#9734;&#9734;&#9734;&#9734;                    {this.state.review.reviewer_name}, {this.state.review.date}</p>
+					<h3>{this.state.review.summary}</h3>
+					<p>{this.state.review.body}</p>
+					<sub>Helpful?  Yes ({this.state.review.helpfulness})  |  Report</sub>
+					{this.state.review.recommend &&
+						<div>
+							✔ I recommend this product
+						</div>
+					}
+					<div>Do you recommend this product?</div>
+					<form>
+						<div className="radio">
+							<label>
+								<input type="radio" id="recommended" onChange={this.getRecommendation} />
+								I recommend!
+							</label>
+						</div>
+						<div className="radio">
+							<label>
+								<input type="radio" id="notRecommended" onChange={this.getRecommendation} />
+								I don't recommend!
+							</label>
+						</div>
+					</form>
+					<div className="productPhoto">
+						<sub>Product Photo: </sub>
+						{this.state.review.photos.length > 0
+							? <div>
+									{this.state.review.photos}
+								</div>
+							: <div>
+						<img src = 'https://i.vimeocdn.com/portrait/1274237_300x300.jpg' />
+								</div>
+						}
+						{/* <img src = 'https://i.vimeocdn.com/portrait/1274237_300x300.jpg' /> */}
+					</div>
 					<hr></hr>
 				</div>
 			</div>
 		);
 	}
+}
 
 export default ReviewItem;
