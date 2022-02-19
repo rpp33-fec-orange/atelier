@@ -25,7 +25,7 @@ class RelatedProducts extends React.Component {
         console.log(data);
       }
     });
-    
+
   }
 
   render() {
