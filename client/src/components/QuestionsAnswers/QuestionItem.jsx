@@ -28,7 +28,7 @@ class QuestionItem extends React.Component {
       <div className="questionItem">
         <div className="questionMain" style={{display: 'inline-block'}}>
           <span className="questionText">
-            Q: {question.body}
+            Q: {question.question_body}
           </span>
           <AnswerList answers={question.answers} />
         </div>
@@ -36,7 +36,7 @@ class QuestionItem extends React.Component {
           <span className="questionHelpfulness">
             Helpful?
             <span className="markQuestionHelpful" onClick={this.markQuestionHelpful}>Yes</span>
-            {`(${question.helpfulness})  |  `}
+            {`(${question.question_helpfulness})  |  `}
             <span className="addAnswer" onClick={this.addAnswer}>Add Answer</span>
             {'  |  '}
             <span className="reportQuestion" onClick={this.reportQuestion}>Report</span>

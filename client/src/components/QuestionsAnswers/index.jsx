@@ -28,10 +28,11 @@ class QuestionsAnswers extends React.Component {
   getQuestions() {
 
     $.ajax({
+      context: this,
       type: 'GET',
       url: `qa/questions/${this.state.productId}`,
       success: (data) => {
-        console.log('questions received', data);
+        this.parseQuestions(data);
       },
       dataType: 'json'
     });
@@ -62,8 +63,23 @@ class QuestionsAnswers extends React.Component {
     // handle on client using return from GET /qa/questions
   }
 
-  parseQuestions(results) {
+  parseQuestions(data) {
+    console.log('the return is: ', data);
+    let newAnswers = [];
+    if (data.length > 2) {
+      data.length = 2;
+      data.map(qtn => {
+        qtn.answers.length = 2;
+      });
+      console.log('the mapped return is: ', data);
 
+    }
+
+    if (data.length === 2) {
+      this.setState({
+        questions: data
+      });
+    }
   }
 
   render() {

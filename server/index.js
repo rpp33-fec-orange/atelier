@@ -53,11 +53,12 @@ app.get('/qa/questions/:product_id', function (req, res) {
   getQuestionsByProductId(id)
     .then((data) => {
       console.log('server getQuestionsByProductId success');
-      res.status(200).send(data);
+      res.status(200).json(data).end();
     })
     .catch((error) => {
       console.log('server getQuestionsByProductId error');
-    })
+      res.status(400).end();
+    });
 });
 
 app.get('/reviews/', function (req, res) {

@@ -33,7 +33,7 @@ class AnswerList extends React.Component {
         </span>
         <br></br>
         <span className="answerActions">
-          {`by ${answer.answerer}, ${answer.date}  |  Helpful? `}
+          {`by ${answer.answerer_name}, ${answer.date}  |  Helpful? `}
           <span className="markAnswerHelpful" onClick={this.markAnswerHelpful}>Yes</span>
           {`(${answer.helpfulness})  |  `}
           <span className="reportAnswer" onClick={this.reportAnswer}>
