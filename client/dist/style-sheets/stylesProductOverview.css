@@ -1,14 +1,14 @@
-#overview {
+/* #overview {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(5, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   border: 1px solid black;
-}
+} */
 
-#search {
-  grid-area: 1 / 1 / 2 / 6;
+#topbar {
+  /* grid-area: 1 / 1 / 2 / 6; */
   border: 1px solid black;
 }
 
@@ -17,7 +17,7 @@
 }
 
 #inputButton {
-  align-items: end
+  align-items: end;
 }
 
 #message {
@@ -25,28 +25,32 @@
 }
 
 #photos {
-  grid-area: 2 / 1 / 5 / 4;
+  /* grid-area: 2 / 1 / 5 / 4; */
   border: 1px solid black;
-
 }
 
 #mainPhoto {
+  cursor: pointer;
+}
+
+#subPhoto{
+  cursor: pointer;
 }
 
 #descriptions {
-  grid-area: 5 / 1 / 6 / 4;
+  /* grid-area: 5 / 1 / 6 / 4; */
   border: 1px solid black;
   text-align: center;
 }
 
 #details {
-  grid-area: 2 / 4 / 5 / 6;
+  /* grid-area: 2 / 4 / 5 / 6; */
   border: 1px solid black;
   text-align: center;
 }
 
 #features {
-  grid-area: 5 / 4 / 6 / 6;
+  /* grid-area: 5 / 4 / 6 / 6; */
   border: 1px solid black;
   text-align: center;
 }

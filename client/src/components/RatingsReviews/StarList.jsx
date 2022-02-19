@@ -7,7 +7,7 @@ class StarList extends React.Component {
 
 	render() {
 		return (
-			<div className="wrapper">
+			<div className="two" id="two">
 				<p>100% of reviews recommend this product</p>
 				<table>
 					<tbody>

@@ -7,7 +7,7 @@ class SizeSlider extends React.Component {
 
 	render() {
 		return (
-			<div className="wrapper">
+			<div className="three" id="three">
 				<p>Size</p>
 				<div>Too Small     |     Perfect      |      Too Large</div>
 			</div>

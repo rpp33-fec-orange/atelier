@@ -4,11 +4,11 @@ const config = require('../../config.js');
 const getProducts = function () {
   return axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products', { headers: { 'Authorization': config.API_KEY } })
     .then(success => {
-      console.log('api axios GET success: ');
+      console.log('helpers getProducts GET success: ');
       return success.data;
     })
     .catch(error => {
-      console.log('api axios GET error')
+      console.log('helpers getProducts GET error')
     })
 };
 
@@ -16,22 +16,22 @@ const getProductById = function (id) {
   console.log('helper product id', id);
   return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}`, { headers: { 'Authorization': config.API_KEY } })
     .then(success => {
-      console.log('getProductById GET success: ');
+      console.log('helpers getProductById GET success: ');
       return success.data;
     })
     .catch(error => {
-      console.log('getProductById GET error')
+      console.log('helpers getProductById GET error')
     })
 };
 
 const getProductStylesById = function (id) {
   return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}/styles`, { headers: { 'Authorization': config.API_KEY } })
     .then(success => {
-      console.log('getProductStylesById GET success: ');
+      console.log('helpers getProductStylesById GET success: ');
       return success.data;
     })
     .catch(error => {
-      console.log('getProductStylesById axios GET error')
+      console.log('helpers getProductStylesById axios GET error')
     })
 };
 

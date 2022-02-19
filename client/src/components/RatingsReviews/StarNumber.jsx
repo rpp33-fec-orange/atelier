@@ -7,7 +7,7 @@ class StarNumber extends React.Component {
 
 	render() {
 		return (
-			<div className="wrapper">
+			<div className="one" id="one">
 				<h1>3.5</h1>
 				<div>&#9733;&#9733;&#9733;&#9734;&#9734;</div>
 			</div>
