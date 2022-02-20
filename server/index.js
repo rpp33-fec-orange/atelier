@@ -3,6 +3,9 @@ const getProducts = require('./helpers/products.js').getProducts;
 const getProductById = require('./helpers/products.js').getProductById;
 const getProductStylesById = require('./helpers/products.js').getProductStylesById;
 const getReviews = require('./helpers/reviews.js').getReviews;
+const { getQuestionsByProductId } = require('./helpers/questions.js');
+
+
 let app = express();
 
 app.use(express.json());
@@ -42,6 +45,19 @@ app.get('/products/:product_id/styles', function (req, res) {
     .catch((error) => {
       console.log('server getProductStylesById error');
     })
+});
+
+app.get('/qa/questions/:product_id', function (req, res) {
+  let id = req.params.product_id;
+  getQuestionsByProductId(id)
+    .then((data) => {
+      console.log('server getQuestionsByProductId success');
+      res.status(200).json(data).end();
+    })
+    .catch((error) => {
+      console.log('server getQuestionsByProductId error');
+      res.status(400).end();
+    });
 });
 
 app.get('/reviews/', function (req, res) {
