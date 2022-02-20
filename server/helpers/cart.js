@@ -22,32 +22,4 @@ const getCart = function () {
     })
 };
 
-module.exports.addToCart = addToCart;
-module.exports.getCart = getCart;
-
-// SERVER ENDPOINTS FROM CLIENT REQUEST TO HELPERS API CALL
-
-// const addToCart = require('./helpers/cart.js').addToCart;
-// const getCart = require('./helpers/cart.js').getCart;
-
-// app.get('/cart', function (req, res) {
-//   getCart()
-//     .then((data) => {
-//       console.log('server getCart success');
-//       res.status(200).send(data);
-//     })
-//     .catch((error) => {
-//       console.log('server getCart reviews');
-//     })
-// });
-
-// app.post('/cart', function (req, res) {
-//   addToCart(req.body.cartItem)
-//     .then((data) => {
-//       console.log('server addToCart success');
-//       res.status(201).send(data);
-//     })
-//     .catch((error) => {
-//       console.log('server addToCart error');
-//     })
-// });
+module.exports = { addToCart, getCart };

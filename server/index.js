@@ -1,10 +1,9 @@
 const express = require('express');
-const getProducts = require('./helpers/products.js').getProducts;
-const getProductById = require('./helpers/products.js').getProductById;
-const getProductStylesById = require('./helpers/products.js').getProductStylesById;
-const getReviews = require('./helpers/reviews.js').getReviews;
+const { getProducts, getProductById, getProductStylesById } = require('./helpers/products.js');
+const { addToCart, getCart } = require('./helpers/cart.js');
+const { getRelatedStylesById, getProductsById } = require('./helpers/relatedItems.js');
 const { getQuestionsByProductId } = require('./helpers/questions.js');
-
+const getReviewsByID = require('./helpers/reviews.js').getReviewsByID;
 
 let app = express();
 
@@ -60,14 +59,62 @@ app.get('/qa/questions/:product_id', function (req, res) {
     });
 });
 
-app.get('/reviews/', function (req, res) {
-  getReviews()
+app.get('/cart', function (req, res) {
+  getCart()
     .then((data) => {
-      console.log('server getReviews success');
+      console.log('server getCart success');
       res.status(200).send(data);
     })
     .catch((error) => {
-      console.log('server getReviews reviews');
+      console.log('server getCart reviews');
+    })
+});
+
+app.post('/cart', function (req, res) {
+  addToCart(req.body.cartItem)
+    .then((data) => {
+      console.log('server addToCart success');
+      res.status(201).send(data);
+    })
+    .catch((error) => {
+      console.log('server addToCart error');
+    })
+});
+
+app.get('/products/:product_id/related', function (req, res) {
+  var relatedProducts = [];
+  getProductsById(req.params.product_id)
+    .then((productData) => {
+      console.log('server getProductById success');
+      relatedProducts = productData;
+      getRelatedStylesById(req.params.product_id)
+        .then((stylesData) => {
+          for (var i = 0; i < relatedProducts.length; i++) {
+            for (var j = 0; j < stylesData.length; j++) {
+              if (relatedProducts[i].id.toString() === stylesData[j].product_id) {
+                relatedProducts[i]['photos'] = stylesData[j].results[0].photos;
+              }
+            }
+          }
+          res.status(200).send(relatedProducts);
+        })
+        .catch((error) => {
+          console.log('server getProductStylesById error');
+        })
+    })
+    .catch((error) => {
+      console.log('server getProductStylesById error');
+    })
+});
+
+app.get('/reviews/', function (req, res) {
+  getReviewsByID(req.query.product_id)
+    .then((success) => {
+      console.log('getting reviews success! data is: ', success.data.results);
+      res.status(200).send(success.data);
+    })
+    .catch((error) => {
+      console.log('error getting reviews!');
     })
 });
 

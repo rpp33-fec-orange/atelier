@@ -35,6 +35,4 @@ const getProductStylesById = function (id) {
     })
 };
 
-module.exports.getProducts = getProducts;
-module.exports.getProductById = getProductById;
-module.exports.getProductStylesById = getProductStylesById;
+module.exports = { getProducts, getProductById, getProductStylesById };
