@@ -1,7 +1,7 @@
 const axios = require('axios');
 const Promise = require('promise');
-const  $ = require('jquery')
-const {API_KEY} = require ('../../config.js');
+const $ = require('jquery')
+const { API_KEY } = require('../../config.js');
 
 const API_URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/';
 
@@ -15,29 +15,29 @@ const getProductsById = (id) => { //This function makes a GET request for produc
   return axios({
     method: 'GET',
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}/related`,
-    headers: { 'Authorization': API_KEY},
+    headers: { 'Authorization': API_KEY },
   })
     .then((productIds) => {
       // console.log('productIds at helper function', productIds)
       for (var i = 0; i < productIds.data.length; i++) {
 
-        relatedProductsInfoPromiseArray.push (
+        relatedProductsInfoPromiseArray.push(
 
           axios({
             method: 'GET',
             url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${productIds.data[i]}`,
-            headers: { 'Authorization': API_KEY},
+            headers: { 'Authorization': API_KEY },
           })
-          .then((productInfo) => {
-            return relatedProductsInfoArray.push(productInfo.data);
-          })
+            .then((productInfo) => {
+              return relatedProductsInfoArray.push(productInfo.data);
+            })
         )
       }
 
       return Promise.all(relatedProductsInfoPromiseArray)
-      .then(() => {
-        return relatedProductsInfoArray;
-      });
+        .then(() => {
+          return relatedProductsInfoArray;
+        });
     })
     .catch((err) => {
       console.log('error in related items helper function', err)
@@ -53,35 +53,34 @@ const getRelatedStylesById = (id) => { //This function makes a GET request for p
   return axios({
     method: 'GET',
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}/related`,
-    headers: { 'Authorization': API_KEY},
+    headers: { 'Authorization': API_KEY },
   })
     .then((productIds) => {
       for (var i = 0; i < productIds.data.length; i++) {
 
-        relatedStylesInfoPromiseArray.push (
+        relatedStylesInfoPromiseArray.push(
           axios({
             method: 'GET',
             url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${productIds.data[i]}/styles`,
-            headers: { 'Authorization': API_KEY},
+            headers: { 'Authorization': API_KEY },
           })
-          .then((productStyles) => {
-            return relatedStylesInfoArray.push(productStyles.data);
-          })
+            .then((productStyles) => {
+              return relatedStylesInfoArray.push(productStyles.data);
+            })
         )
       }
 
       return Promise.all(relatedStylesInfoPromiseArray)
-      .then(() => {
-        return relatedStylesInfoArray;
-      });
+        .then(() => {
+          return relatedStylesInfoArray;
+        });
     })
     .catch((err) => {
       console.log('error in related items helper function', err)
     })
 }
 
-module.exports.getRelatedStylesById = getRelatedStylesById;
-module.exports.getProductsById = getProductsById;
+module.exports = { getRelatedStylesById, getProductsById };
 
 
 
