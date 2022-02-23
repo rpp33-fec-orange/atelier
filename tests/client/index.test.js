@@ -10,12 +10,12 @@ describe.only('Main component test', () => {
   const testRenderer = TestRenderer.create(<App />);
   const testInstance = testRenderer.root;
 
-  test('it should contain a class subcomponent called RelatedProducts', () => {
-    expect(testInstance.findByType(ProductOverview)).toBeDefined();
-    expect(testInstance.findByType(QuestionsAnswers)).toBeDefined();
-    expect(testInstance.findByType(RatingsReviews)).toBeDefined();
-    expect(testInstance.findByType(RelatedProducts)).toBeDefined();
-  });
+  // test('it should contain a class subcomponent called RelatedProducts', () => {
+  //   expect(testInstance.findByType(ProductOverview)).toBeDefined();
+  //   expect(testInstance.findByType(QuestionsAnswers)).toBeDefined();
+  //   expect(testInstance.findByType(RatingsReviews)).toBeDefined();
+  //   expect(testInstance.findByType(RelatedProducts)).toBeDefined();
+  // });
 
   it('it should teach us math', function () {
     const received = 4;

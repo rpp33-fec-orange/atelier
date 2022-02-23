@@ -18,7 +18,7 @@ class RelatedProducts extends React.Component {
     // this.componentDidMount = this.componentDidMount.bind(this);
   }
 
-  componentDidMount () {
+  componentDidMount() {
 
     // This AJAX request fetches related products info
 
@@ -29,9 +29,9 @@ class RelatedProducts extends React.Component {
       contentType: "application/json",
       success: function (data) {
         console.log('product data received by client', data)
-          this.setState({
-            relatedProductsInfo: data
-          })
+        this.setState({
+          relatedProductsInfo: data
+        })
       },
       error: function (error) {
         console.log('error in GET request')
@@ -60,14 +60,14 @@ class RelatedProducts extends React.Component {
 
   render() {
     return (
-      <div id = 'related-products-and-items'>
-        <div className = "related-products-row">
-          <h4 id = 'related-products'>Related Products</h4>
-          <RelatedProductsRow relatedProductsInfo = {this.state.relatedProductsInfo}/>
+      <div id='related-products-and-items'>
+        <div className="related-products-row">
+          <h4 id='related-products'>Related Products</h4>
+          <RelatedProductsRow relatedProductsInfo={this.state.relatedProductsInfo} />
         </div>
-        <div className = "your-outfit-row">
-          <h4 id = 'your-outfit'>Your Outfit</h4>
-          <YourOutfitRow/>
+        <div className="your-outfit-row">
+          <h4 id='your-outfit'>Your Outfit</h4>
+          <YourOutfitRow />
         </div>
       </div>
     )

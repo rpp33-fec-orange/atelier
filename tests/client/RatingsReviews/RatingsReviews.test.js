@@ -12,5 +12,3 @@ describe('Initial RatingsnReviews Test Suite', () => {
 	});
 
 });
-
-

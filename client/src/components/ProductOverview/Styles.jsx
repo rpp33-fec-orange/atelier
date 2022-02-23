@@ -125,21 +125,21 @@ class Styles extends React.Component {
           <div id="category">{productById.category}</div>
           <div id="name">{productById.name}</div>
           <div id="price">{productById.default_price}</div>
-          <div id="selector">Select Style/Size/Quantity</div>
-          <select name="Style" id="style" onChange={this.styleChange}>
-            <option value="nullStyle">Style</option>
+          <div data-testid="selector" id="selector">Select Style/Size/Quantity</div>
+          <select id="style" onChange={this.styleChange}>
+            <option value="nullStyle">-</option>
             {styles.map((style) =>
               <option value={style.name}>{style.name}</option>
             )}
           </select>
-          <select name="Size" id="size" onChange={this.skuChange}>
-            <option value="nullSize">Size</option>
+          <select id="size" onChange={this.skuChange}>
+            <option value="nullSize">-</option>
             {Object.keys(currentStyleSkus).map((sku) =>
               <option value={currentStyleSkus[sku].size}>{currentStyleSkus[sku].size}</option>
             )}
           </select>
-          <select name="Quantity" id="quantity">
-            <option value="nullQuantity">Quantity</option>
+          <select id="quantity">
+            <option value="nullQuantity">-</option>
             <option value={currentSku.quantity}>{currentSku.quantity}</option>
           </select><br></br>
           {currentSku.quantity ? <button id="postCart" onClick={this.postCart}>ADD TO CART</button> : <button id="outOfStock" disabled>Out of Stock</button>}

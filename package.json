@@ -6,7 +6,8 @@
   "scripts": {
     "frontend-dev": "npx webpack watch --mode development",
     "backend-dev": "npx nodemon server/index.js",
-    "test": "jest --verbose"
+    "test": "jest --verbose",
+    "coverage": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -23,7 +24,9 @@
     "@babel/plugin-syntax-jsx": "^7.16.7",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
+    "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
     "babel-jest": "^27.5.1",
     "babel-loader": "^8.2.3",
     "jest": "^27.5.1",

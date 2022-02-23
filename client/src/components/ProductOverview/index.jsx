@@ -1,6 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
-// import TopBar from './TopBar.jsx';
+import TopBar from './TopBar.jsx';
 import Styles from './Styles.jsx';
 import Descriptions from './Descriptions.jsx';
 
@@ -82,15 +82,16 @@ class ProductOverview extends React.Component {
   render() {
     if (this.state.initialized) {
       return (
-        <div id="overview">
-          {/* <TopBar searchHandler={this.searchHandler} /> */}
-          <Styles productById={this.state.productById} productStylesById={this.state.productStylesById} />
-          <Descriptions productById={this.state.productById} />
+        <div id="productOverview">
+          <h4>Product Overview</h4>
+          <TopBar data-testid="topbar?" searchHandler={this.searchHandler} />
+          <Styles data-testid="styles?" productById={this.state.productById} productStylesById={this.state.productStylesById} />
+          <Descriptions data-testid="descriptions?" productById={this.state.productById} />
         </div>
       )
     } else {
       return (
-        <div id="loading">
+        <div data-testid="loading" id="loading">
           ⇆ Loading...
         </div>
       )
