@@ -15,6 +15,8 @@ class Styles extends React.Component {
       skuCode: '',
       mainPhotoURL: props.productStylesById.results[0].photos[0].url,
       subPhotos: props.productStylesById.results[0].photos,
+      quantityArray: [],
+      quantitySelected: 0,
       cart: []
     }
     this.photoClick = this.photoClick.bind(this);
@@ -23,6 +25,8 @@ class Styles extends React.Component {
     this.postCart = this.postCart.bind(this);
     this.getCart = this.getCart.bind(this);
     this.favoriteClick = this.favoriteClick.bind(this);
+    this.makeQuantityArray = this.makeQuantityArray.bind(this);
+    this.quantityChange = this.quantityChange.bind(this);
   }
 
   photoClick(e) {
@@ -61,45 +65,59 @@ class Styles extends React.Component {
   postCart() {
     let cartItem = {
       sku: this.state.skuCode,
-      quantity: this.state.currentSku.quantity
-    }
+      quantity: this.state.quantitySelected
+    };
     this.state.cart.push(cartItem);
-    // $.ajax({
-    //   context: this,
-    //   type: 'POST',
-    //   url: '/cart',
-    //   data: JSON.stringify({ cartItem }),
-    //   contentType: 'application/json',
-    //   success: function (successAjax) {
-    //     console.log('Ajax POST Success!');
-    //   },
-    //   error: function (errorAjax) {
-    //     console.log('Ajax POST Error!');
-    //   },
-    // })
+    $.ajax({
+      context: this,
+      type: 'POST',
+      url: '/cart',
+      data: JSON.stringify({ cartItem }),
+      contentType: 'application/json',
+      success: function (successAjax) {
+        console.log('Ajax POST Success!');
+      },
+      error: function (errorAjax) {
+        console.log('Ajax POST Error!');
+      },
+    })
   }
 
   getCart() {
-    console.log('user cart: ', this.state.cart);
-    // $.ajax({
-    //   context: this,
-    //   type: 'GET',
-    //   url: '/cart',
-    //   success: function (success) {
-    //     console.log('getCart ajax GET success:');
-    //     this.setState({
-    //       cart: success,
-    //     })
-    //   },
-    //   error: function (error) {
-    //     console.log('getCart ajax GET error: ', error);
-    //   },
-    //   contentType: "application/json",
-    // })
+    console.log('html cart: ', this.state.cart);
+    $.ajax({
+      context: this,
+      type: 'GET',
+      url: '/cart',
+      success: function (success) {
+        console.log('getCart ajax GET success: ', success);
+        this.setState({
+          cart: success,
+        })
+      },
+      error: function (error) {
+        console.log('getCart ajax GET error: ', error);
+      },
+      contentType: "application/json",
+    })
+    console.log('api cart: ', this.state.cart);
   }
 
   favoriteClick() {
 
+  }
+
+  makeQuantityArray() {
+    const arrayCreated = Array.from({ length: this.state.currentSku.quantity }, (v, i) => i);
+    this.setState({
+      quantityArray: arrayCreated
+    })
+  }
+
+  quantityChange(e) {
+    this.setState({
+      quantitySelected: e.target.value
+    })
   }
 
   render() {
@@ -112,6 +130,7 @@ class Styles extends React.Component {
     let currentSku = this.state.currentSku;
     let mainPhotoURL = this.state.mainPhotoURL;
     let subPhotos = this.state.subPhotos;
+    let quantityArray = this.state.quantityArray;
     return (
       <div>
         <div id="photos">
@@ -126,7 +145,7 @@ class Styles extends React.Component {
           <div id="name">{productById.name}</div>
           <div id="price">{productById.default_price}</div>
           <div data-testid="selector" id="selector">Select Style/Size/Quantity</div>
-          <select id="style" onChange={this.styleChange}>
+          <select id="style" onChange={this.styleChange} onChange={this.makeQuantityArray}>
             <option value="nullStyle">-</option>
             {styles.map((style) =>
               <option value={style.name}>{style.name}</option>
@@ -138,9 +157,11 @@ class Styles extends React.Component {
               <option value={currentStyleSkus[sku].size}>{currentStyleSkus[sku].size}</option>
             )}
           </select>
-          <select id="quantity">
+          <select id="quantity" onChange={this.quantityChange}>
             <option value="nullQuantity">-</option>
-            <option value={currentSku.quantity}>{currentSku.quantity}</option>
+            {quantityArray.map((quantityItem) =>
+              <option value={quantityItem}>{quantityItem}</option>
+            )}
           </select><br></br>
           {currentSku.quantity ? <button id="postCart" onClick={this.postCart}>ADD TO CART</button> : <button id="outOfStock" disabled>Out of Stock</button>}
           <button id="favorite" onClick={this.favoriteClick}>☆</button><button id="getCart" onClick={this.getCart}>YOUR CART</button>
