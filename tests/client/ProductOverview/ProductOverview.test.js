@@ -1,6 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import TestRenderer from 'react-test-renderer';
+import Enzyme from 'enzyme';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import { shallow } from 'enzyme';
 import { render, screen, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom'
@@ -8,6 +10,8 @@ import ProductOverview from '../../../client/src/components/ProductOverview/inde
 import Descriptions from '../../../client/src/components/ProductOverview/Descriptions.jsx';
 import Styles from '../../../client/src/components/ProductOverview/Styles.jsx';
 import TopBar from '../../../client/src/components/ProductOverview/TopBar.jsx';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 test('render loading page on ProductOverview component startup', () => {
   render(<ProductOverview />);
@@ -44,19 +48,23 @@ test('matches snapshot ', () => {
 });
 
 it("should render my component", () => {
-  const wrapper = shallow(<ProductOverview />);
+  const component = shallow(<ProductOverview />);
+  expect(component.exists()).toBe(true);
 });
 
 it("should render my component", () => {
-  const wrapper = shallow(<Descriptions />);
+  const component = shallow(<Descriptions />);
+  expect(component.exists()).toBe(true);
 });
 
 it("should render my component", () => {
-  const wrapper = shallow(<Styles />);
+  const component = shallow(<Styles />);
+  expect(component.exists()).toBe(true);
 });
 
 it("should render my component", () => {
-  const wrapper = shallow(<TopBar />);
+  const component = shallow(<TopBar />);
+  expect(component.exists()).toBe(true);
 });
 
 describe('Question and Answer component test', () => {
