@@ -27,6 +27,7 @@ class Styles extends React.Component {
     this.favoriteClick = this.favoriteClick.bind(this);
     this.makeQuantityArray = this.makeQuantityArray.bind(this);
     this.quantityChange = this.quantityChange.bind(this);
+    this.readReviews = this.readReviews.bind(this);
   }
 
   photoClick(e) {
@@ -37,7 +38,7 @@ class Styles extends React.Component {
 
   styleChange(e) {
     for (let i = 0; i < this.state.styles.length; i++) {
-      if (this.state.styles[i].name === e.target.value) {
+      if (this.state.styles[i].name === e.target.id) {
         let selectedStyle = this.state.styles[i];
         this.setState({
           currentStyle: selectedStyle,
@@ -60,6 +61,7 @@ class Styles extends React.Component {
         });
       }
     }
+    this.makeQuantityArray();
   }
 
   postCart() {
@@ -107,8 +109,14 @@ class Styles extends React.Component {
 
   }
 
+  readReviews() {
+
+  }
+
   makeQuantityArray() {
-    const arrayCreated = Array.from({ length: this.state.currentSku.quantity }, (v, i) => i);
+    let updatedLength = this.state.currentSku.quantity + 1;
+    var arrayCreated = Array.from({ length: updatedLength }, (v, i) => i);
+    let shiftedArray = arrayCreated.shift();
     this.setState({
       quantityArray: arrayCreated
     })
@@ -131,6 +139,7 @@ class Styles extends React.Component {
     let mainPhotoURL = this.state.mainPhotoURL;
     let subPhotos = this.state.subPhotos;
     let quantityArray = this.state.quantityArray;
+    console.log('product styles', productStylesById);
     return (
       <div>
         <div id="photos">
@@ -139,26 +148,24 @@ class Styles extends React.Component {
             <img id="subPhoto" src={photo.url} width="75" height="105" onClick={this.photoClick}></img>
           )}
         </div>
-        <div id="details">
-          <div id="rating">{rating}</div>
+        <div id="styles">
+          <div id="rating">{rating} <button onClick={this.readReviews}>Read Reviews</button></div>
           <div id="category">{productById.category}</div>
           <div id="name">{productById.name}</div>
           <div id="price">{productById.default_price}</div>
           <div data-testid="selector" id="selector">Select Style/Size/Quantity</div>
-          <select id="style" onChange={this.styleChange} onChange={this.makeQuantityArray}>
-            <option value="nullStyle">-</option>
+          <div id="style">
             {styles.map((style) =>
-              <option value={style.name}>{style.name}</option>
+              <img id={style.name} src={style.photos[0].url} width="35" height="45" onClick={this.styleChange}></img>
             )}
-          </select>
+          </div>
           <select id="size" onChange={this.skuChange}>
-            <option value="nullSize">-</option>
+            <option value="nullSize">Select Size</option>
             {Object.keys(currentStyleSkus).map((sku) =>
               <option value={currentStyleSkus[sku].size}>{currentStyleSkus[sku].size}</option>
             )}
           </select>
           <select id="quantity" onChange={this.quantityChange}>
-            <option value="nullQuantity">-</option>
             {quantityArray.map((quantityItem) =>
               <option value={quantityItem}>{quantityItem}</option>
             )}

@@ -37,13 +37,13 @@
   cursor: pointer;
 }
 
-#descriptions {
+#info {
   /* grid-area: 5 / 1 / 6 / 4; */
   border: 1px solid black;
   text-align: center;
 }
 
-#details {
+#styles {
   /* grid-area: 2 / 4 / 5 / 6; */
   border: 1px solid black;
   text-align: center;

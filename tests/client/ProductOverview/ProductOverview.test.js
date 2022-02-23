@@ -14,48 +14,47 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe('ProductOverview component tests', () => {
   const testRenderer = TestRenderer.create(<ProductOverview />);
-  const testInstance = TestRenderer.root;
+  const testInstance = testRenderer.root;
 
   test('it should contain a h4 element with the text "⇆ Loading..." in index.jsx', () => {
     expect(testInstance.findByProps({ id: "loading" }).children).toEqual(['⇆ Loading...']);
   });
 
-  test('render loading page on index.jsx on start up', () => {
+  test('it should render loading page on index.jsx on start up', () => {
     render(<ProductOverview />);
     const element = screen.getByTestId('loading');
     expect(element).toBeInTheDocument();
     expect(element).toHaveTextContent('⇆ Loading...');
   });
 
-  test('render logo at TopBar component startup', () => {
+  test('it should render logo at TopBar component startup', () => {
     render(<TopBar />);
     const element = screen.getByTestId('logo');
     expect(element).toBeInTheDocument();
     expect(element).toHaveTextContent('Atelier');
   });
 
-  test('matches snapshot ', () => {
+  test('it should match snapshot ', () => {
     const tree = TestRenderer.create(<ProductOverview />).toJSON();
     expect(tree).toMatchSnapshot();
-    console.log(tree);
   });
 
-  it("should render my component", () => {
+  it("it should render index.jsx component", () => {
     const component = shallow(<ProductOverview />);
     expect(component.exists()).toBe(true);
   });
 
-  it("should render my component", () => {
+  it("it should render Descriptions component", () => {
     const component = shallow(<Descriptions />);
     expect(component.exists()).toBe(true);
   });
 
-  it("should render my component", () => {
+  it("it should render Styles component", () => {
     const component = shallow(<Styles />);
     expect(component.exists()).toBe(true);
   });
 
-  it("should render my component", () => {
+  it("it should render TopBar component", () => {
     const component = shallow(<TopBar />);
     expect(component.exists()).toBe(true);
   });

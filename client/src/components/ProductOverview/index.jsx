@@ -2,7 +2,7 @@ import React from 'react';
 import $ from 'jquery';
 import TopBar from './TopBar.jsx';
 import Styles from './Styles.jsx';
-import Descriptions from './Descriptions.jsx';
+import Info from './Info.jsx';
 
 class ProductOverview extends React.Component {
   constructor(props) {
@@ -86,7 +86,7 @@ class ProductOverview extends React.Component {
           <h4>Product Overview</h4>
           <TopBar data-testid="topbar?" searchHandler={this.searchHandler} />
           <Styles data-testid="styles?" productById={this.state.productById} productStylesById={this.state.productStylesById} />
-          <Descriptions data-testid="descriptions?" productById={this.state.productById} />
+          <Info data-testid="descriptions?" productById={this.state.productById} />
         </div>
       )
     } else {
