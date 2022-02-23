@@ -11,12 +11,13 @@ class Styles extends React.Component {
       styles: props.productStylesById.results,
       currentStyle: props.productStylesById.results[0],
       currentStyleSkus: props.productStylesById.results[0].skus,
-      currentSku: props.productStylesById.results[0].skus[Object.keys(props.productStylesById.results[0].skus)[0]],
+      currentSku: '',
       skuCode: '',
       mainPhotoURL: props.productStylesById.results[0].photos[0].url,
       subPhotos: props.productStylesById.results[0].photos,
       quantityArray: [],
       quantitySelected: 0,
+      quantityBool: false,
       cart: []
     }
     this.photoClick = this.photoClick.bind(this);
@@ -38,7 +39,7 @@ class Styles extends React.Component {
 
   styleChange(e) {
     for (let i = 0; i < this.state.styles.length; i++) {
-      if (this.state.styles[i].name === e.target.id) {
+      if (this.state.styles[i].name === e.target.name) {
         let selectedStyle = this.state.styles[i];
         this.setState({
           currentStyle: selectedStyle,
@@ -118,7 +119,8 @@ class Styles extends React.Component {
     var arrayCreated = Array.from({ length: updatedLength }, (v, i) => i);
     let shiftedArray = arrayCreated.shift();
     this.setState({
-      quantityArray: arrayCreated
+      quantityArray: arrayCreated,
+      quantityBool: true
     })
   }
 
@@ -141,9 +143,9 @@ class Styles extends React.Component {
     let quantityArray = this.state.quantityArray;
     console.log('product styles', productStylesById);
     return (
-      <div>
+      <div id="Styles">
         <div id="photos">
-          <img id="mainPhoto" src={mainPhotoURL} width="300" height="425"></img> <br></br>
+          <img id="mainPhoto" src={mainPhotoURL} width="300" height="375"></img> <br></br>
           {subPhotos.map((photo) =>
             <img id="subPhoto" src={photo.url} width="75" height="105" onClick={this.photoClick}></img>
           )}
@@ -153,24 +155,31 @@ class Styles extends React.Component {
           <div id="category">{productById.category}</div>
           <div id="name">{productById.name}</div>
           <div id="price">{productById.default_price}</div>
-          <div data-testid="selector" id="selector">Select Style/Size/Quantity</div>
+          <div >Style> {currentStyle.name}</div>
           <div id="style">
             {styles.map((style) =>
-              <img id={style.name} src={style.photos[0].url} width="35" height="45" onClick={this.styleChange}></img>
+              <img id="styleThumbnail" name={style.name} src={style.photos[0].url} width="35" height="45" onClick={this.styleChange}></img>
             )}
           </div>
-          <select id="size" onChange={this.skuChange}>
-            <option value="nullSize">Select Size</option>
-            {Object.keys(currentStyleSkus).map((sku) =>
-              <option value={currentStyleSkus[sku].size}>{currentStyleSkus[sku].size}</option>
-            )}
-          </select>
-          <select id="quantity" onChange={this.quantityChange}>
-            {quantityArray.map((quantityItem) =>
-              <option value={quantityItem}>{quantityItem}</option>
-            )}
-          </select><br></br>
-          {currentSku.quantity ? <button id="postCart" onClick={this.postCart}>ADD TO CART</button> : <button id="outOfStock" disabled>Out of Stock</button>}
+          <div>
+            <select id="size" onChange={this.skuChange} >
+              <option value="nullSize">Select Size</option>
+              {Object.keys(currentStyleSkus).map((sku) =>
+                <option value={currentStyleSkus[sku].size} >{currentStyleSkus[sku].size}</option>
+              )}
+            </select>
+            <select id="quantity" onChange={this.quantityChange}>
+              {quantityArray.map((quantityItem) =>
+                <option value={quantityItem} >{quantityItem}</option>
+              )}
+            </select><br></br>
+            <select id="quantity" onChange={this.quantityChange}>
+              {this.quantityBool ? quantityArray.map((quantityItem) =>
+                <option value={quantityItem} >{quantityItem}</option>)
+                : <option value="nullQuantity">-</option>}
+            </select><br></br>
+          </div>
+          {currentSku.quantity ? <button id="postCart" onClick={this.postCart}>ADD TO CART</button> : <button id="outOfStock" disabled>ADD TO CART</button>}
           <button id="favorite" onClick={this.favoriteClick}>☆</button><button id="getCart" onClick={this.getCart}>YOUR CART</button>
         </div >
       </div >

@@ -37,13 +37,17 @@
   cursor: pointer;
 }
 
-#info {
+#styleThumbnail{
+  cursor: pointer;
+}
+
+#Info {
   /* grid-area: 5 / 1 / 6 / 4; */
   border: 1px solid black;
   text-align: center;
 }
 
-#styles {
+#Styles {
   /* grid-area: 2 / 4 / 5 / 6; */
   border: 1px solid black;
   text-align: center;
@@ -55,4 +59,6 @@
   text-align: center;
 }
 
-#logo { background: turquoise; }
+#logo {
+  background: turquoise;
+}

@@ -25,8 +25,8 @@ class TopBar extends React.Component {
 
   render() {
     return (
-      <div id="topbar">
-        <div data-testid ="logo" id="logo">Atelier<input id="input" placeholder="keyword" onChange={this.onChange}></input><button id="inputButton" onClick={this.clickHandler}>Search</button></div>
+      <div id="TopBar">
+        <div data-testid="logo" id="logo">Atelier<input id="input" placeholder="keyword" onChange={this.onChange}></input><button id="inputButton" onClick={this.clickHandler}>Search</button></div>
         <div id="message">Valentine's Day Sale! ---Extra 40% off on select items--- Free shipping for orders over $50!</div>
       </div >
     )

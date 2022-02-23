@@ -73,28 +73,30 @@ class RatingsReviews extends React.Component {
         console.log('get reviews request is done');
       });
   }
-componentDidMount() {
-  this.getReviewsByIDHandler(this.state.id);
-}
+  componentDidMount() {
+    this.getReviewsByIDHandler(this.state.id);
+  }
 
-render() {
-  console.log('this.state.reviews: ', this.state.reviews);
-  console.log('this.state.count: ', this.state.count);
-  var list = this.state.reviews;
-  var count = this.state.count;
-  var sort = this.state.sort;
-  return (
-    <div className="wrapper" id="flex-container">
-      <h1 id='ratings-reviews' id="zero">RATINGS AND REVIEWS</h1>
-      <StarNumber />
-      <StarList />
-      <SizeSlider />
-      <ComfortSlider />
-      <h3>{count} reviews, sorted by {sort}</h3>
-      <ReviewList reviews={list} />
-    </div>
-  );
-}
+  render() {
+    console.log('this.state.reviews: ', this.state.reviews);
+    console.log('this.state.count: ', this.state.count);
+    var list = this.state.reviews;
+    var count = this.state.count;
+    var sort = this.state.sort;
+    return (
+      <div className="wrapper" id="flex-container">
+        <h4 id='ratings-reviews' id="zero">Ratings and Reviews</h4>
+        <h1>
+          <StarNumber />
+        </h1>
+        <StarList />
+        <SizeSlider />
+        <ComfortSlider />
+        <h3>{count} reviews, sorted by {sort}</h3>
+        <ReviewList reviews={list} />
+      </div>
+    );
+  }
 }
 
 export default RatingsReviews;
