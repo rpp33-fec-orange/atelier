@@ -15,19 +15,19 @@ class StarList extends React.Component {
 
   componentDidMount() {
 		console.log('this is ratings: ', this.props.ratings);
-    // var one = (this.props.ratings.1 === 'undefined') ? 0 : this.props.ratings.1;
-		// var two = (this.props.ratings.2 === 'undefined') ? 0 : this.props.ratings.2;
-    // var three = (this.props.ratings.3 === 'undefined') ? 0 : this.props.ratings.3;
-    // var four = (this.props.ratings.4 === 'undefined') ? 0 : this.props.ratings.4;
-    // var five = (this.props.ratings.5 === 'undefined') ? 0 : this.props.ratings.5;
+    var one = (this.props.ratings[1] === undefined) ? 0 : this.props.ratings[1];
+		var two = (this.props.ratings[2] === undefined) ? 0 : this.props.ratings[2];
+    var three = (this.props.ratings[3] === undefined) ? 0 : this.props.ratings[3];
+    var four = (this.props.ratings[4] === undefined) ? 0 : this.props.ratings[4];
+    var five = (this.props.ratings[5] === undefined) ? 0 : this.props.ratings[5];
 
-    // this.setState({
-		// 	one: one,
-		// 	two: two,
-		// 	three: three,
-		// 	four: four,
-		// 	five: five
-		// });
+    this.setState({
+			one: one,
+			two: two,
+			three: three,
+			four: four,
+			five: five
+		});
 	}
 
 	render() {
@@ -45,7 +45,7 @@ class StarList extends React.Component {
 							<td>5 stars</td>
 							<td>
 								<div>
-									Blue
+									{this.state.five}
 								</div>
 							</td>
 						</tr>
@@ -53,7 +53,7 @@ class StarList extends React.Component {
 							<td>4 stars</td>
 							<td>
 								<div>
-									Green
+								{this.state.four}
 								</div>
 							</td>
 						</tr>
@@ -61,7 +61,7 @@ class StarList extends React.Component {
 							<td>3 stars</td>
 							<td>
 								<div>
-									Blue
+								{this.state.three}
 								</div>
 							</td>
 						</tr>
@@ -69,7 +69,7 @@ class StarList extends React.Component {
 							<td>2 stars</td>
 							<td>
 								<div>
-									Blue
+								{this.state.two}
 								</div>
 							</td>
 						</tr>
@@ -77,7 +77,7 @@ class StarList extends React.Component {
 							<td>1 star</td>
 							<td>
 								<div>
-									Blue
+								{this.state.one}
 								</div>
 							</td>
 						</tr>
