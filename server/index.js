@@ -3,7 +3,9 @@ const { getProducts, getProductById, getProductStylesById } = require('./helpers
 const { addToCart, getCart } = require('./helpers/cart.js');
 const { getRelatedStylesById, getProductsById } = require('./helpers/relatedItems.js');
 const { getQuestionsByProductId } = require('./helpers/questions.js');
-const getReviewsByID = require('./helpers/reviews.js').getReviewsByID;
+// const getReviewsByID = require('./helpers/reviews.js').getReviewsByID;
+const { getReviewsByID, getReviewsMeta, postReview, putReview } = require('./helpers/reviews.js');
+
 
 let app = express();
 
@@ -110,13 +112,47 @@ app.get('/products/:product_id/related', function (req, res) {
 app.get('/reviews/', function (req, res) {
   getReviewsByID(req.query.product_id)
     .then((success) => {
-      console.log('getting reviews success! data is: ', success.data.results);
+      // console.log('getting reviews success! data is: ', success.data.results);
       res.status(200).send(success.data);
     })
     .catch((error) => {
       console.log('error getting reviews!');
     })
 });
+
+app.get('/reviews/meta', function (req, res) {
+  getReviewsMeta(req.query.product_id)
+    .then((success) => {
+      console.log('getting reviews meta success! data is: ', success.data);
+      res.status(200).send(success.data);
+    })
+    .catch((error) => {
+      console.log('error getting reviews!');
+    })
+});
+
+app.post('/reviews', function (req, res) {
+  postReview(req.query.product_id, req.query.rating, req.query.summary, req.query.body, req.query.recommend, req.query.name, req.query.email, req.query.photos, req.query.characteristics)
+    .then((success) => {
+      // console.log('getting reviews meta success! data is: ', success.data);
+      res.status(201).send(success.data);
+    })
+    .catch((error) => {
+      console.log('error getting reviews!');
+    })
+});
+
+app.put('/reviews/:review_id/helpful', function (req, res) {
+  putReview(req.body.review_id)
+    .then((success) => {
+      // console.log('getting reviews meta success! data is: ', success.data);
+      res.status(204).send(success.data);
+    })
+    .catch((error) => {
+      console.log('error getting reviews!');
+    })
+});
+
 
 let port = 2000;
 app.listen(port, function () {
