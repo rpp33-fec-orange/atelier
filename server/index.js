@@ -50,11 +50,11 @@ app.get('/qa/questions/:product_id', function (req, res) {
   let id = req.params.product_id;
   getQuestionsByProductId(id)
     .then((data) => {
-      console.log('server getQuestionsByProductId success');
+      // console.log('server getQuestionsByProductId success');
       res.status(200).json(data).end();
     })
-    .catch((error) => {
-      console.log('server getQuestionsByProductId error');
+    .catch(() => {
+      // console.log('server getQuestionsByProductId error');
       res.status(400).end();
     });
 });

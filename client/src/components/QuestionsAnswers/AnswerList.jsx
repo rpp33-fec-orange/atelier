@@ -26,7 +26,7 @@ class AnswerList extends React.Component {
 
   renderAnswerItem(answer) {
     return (
-      <div className="answerItem">
+      <div className="answerItem" key={answer.id}>
         <span className="answerKey">
           A: <span className="answerText">{answer.body}</span>
           {/* add conditional photo rendering logic here */}

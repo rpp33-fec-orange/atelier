@@ -4,7 +4,6 @@ import $ from 'jquery';
 import QuestionSearch from './QuestionSearch.jsx';
 import QuestionItem from './QuestionItem.jsx';
 import QuestionAddons from './QuestionAddons.jsx';
-import listOfQuestions from './listOfQuestions.js';
 
 
 class QuestionsAnswers extends React.Component {
@@ -14,38 +13,48 @@ class QuestionsAnswers extends React.Component {
     this.state = {
       productId: id,
       showMoreQuestions: true,
-      questions: listOfQuestions
+      fullQuestionList: [],
+      questions: []
     };
     this.search = this.search.bind(this);
-    this.getQuestions = this.getQuestions.bind(this);
-    this.getAnswers = this.getAnswers.bind(this);
+    this.getMoreQuestions = this.getMoreQuestions.bind(this);
+    this.getMoreAnswers = this.getMoreAnswers.bind(this);
   }
 
   componentDidMount() {
-    this.getQuestions();
+    this.loadQuestions();
   }
 
-  getQuestions() {
+  loadQuestions() {
 
     $.ajax({
       context: this,
       type: 'GET',
       url: `qa/questions/${this.state.productId}`,
       success: (data) => {
-        this.parseQuestions(data);
+        const initialRender = (data) => {
+          if (data.length > 2) {
+            data.length = 2;
+            data.map(qtn => {
+              qtn.answers.length = 2;
+            });
+          }
+          return data;
+        };
+
+        this.setState({
+          fullQuestionList: data,
+          questions: initialRender(data)
+        });
       },
       dataType: 'json'
     });
 
   }
 
-  // getQuestions() {
-    // keep track of number of questions - update after "MORE ANSWERED QUESTIONS CLICK"
-    // keep track of number of answers - update after "LOAD MORE ANSWERS CLICK"
-    // add two after after filtering
-  // }
+  getMoreQuestions() {}
 
-  getAnswers() {}
+  getMoreAnswers() {}
 
   submitQuestion() {}
 
@@ -61,25 +70,6 @@ class QuestionsAnswers extends React.Component {
 
   search(q) {
     // handle on client using return from GET /qa/questions
-  }
-
-  parseQuestions(data) {
-    console.log('the return is: ', data);
-    let newAnswers = [];
-    if (data.length > 2) {
-      data.length = 2;
-      data.map(qtn => {
-        qtn.answers.length = 2;
-      });
-      console.log('the mapped return is: ', data);
-
-    }
-
-    if (data.length === 2) {
-      this.setState({
-        questions: data
-      });
-    }
   }
 
   render() {

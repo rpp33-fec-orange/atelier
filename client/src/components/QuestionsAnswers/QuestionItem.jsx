@@ -25,7 +25,7 @@ class QuestionItem extends React.Component {
   render() {
     let question = this.props.question;
     return (
-      <div className="questionItem">
+      <div className="questionItem" key={question.question_id}>
         <div className="questionMain" style={{display: 'inline-block'}}>
           <span className="questionText">
             Q: {question.question_body}
