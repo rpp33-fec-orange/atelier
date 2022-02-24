@@ -210,7 +210,7 @@ render() {
     return (
       <div className="wrapper" id="flex-container">
         <h1 id='ratings-reviews' id="zero">RATINGS AND REVIEWS</h1>
-        <StarNumber recommended={meta_recommended} />
+        <StarNumber recommended={meta_recommended} ratings={meta_ratings} />
         <StarList ratings={meta_ratings} />
         <SizeSlider size={meta_characteristics} />
         <ComfortSlider comfort={meta_characteristics} />
