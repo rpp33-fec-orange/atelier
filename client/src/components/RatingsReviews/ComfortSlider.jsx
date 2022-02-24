@@ -44,8 +44,8 @@ class ComfortSlider extends React.Component {
 				<div className="four" id="four">
 					<p>Comfort</p>
 					{/* <div>comfort value: {comfort}</div> */}
-					<div>{JSON.stringify(comfort)}</div>
-					<div>Poor     |     Perfect</div>
+					{/* <div>{JSON.stringify(comfort)}</div> */}
+					<div>Poor     | {comfort}|     Perfect</div>
 				</div>
 
 			);

@@ -195,6 +195,7 @@ render() {
   var sort = this.state.sort;
   var meta_characteristics = this.state.meta_characteristics;
   var meta_recommended = this.state.meta_recommended;
+  var meta_ratings = this.state.meta_ratings;
   console.log('this.state.meta_characteristics is: ', this.state.meta_characteristics);
 
   if (!this.state.dataReady) {
@@ -210,7 +211,7 @@ render() {
       <div className="wrapper" id="flex-container">
         <h1 id='ratings-reviews' id="zero">RATINGS AND REVIEWS</h1>
         <StarNumber recommended={meta_recommended} />
-        <StarList />
+        <StarList ratings={meta_ratings} />
         <SizeSlider size={meta_characteristics} />
         <ComfortSlider comfort={meta_characteristics} />
         <h3>{count} reviews, sorted by {sort}</h3>

@@ -10,10 +10,14 @@ class StarNumber extends React.Component {
 	}
 
 	percentRecommended() {
-		var recommended = this.props.recommended.true;
-		var notRecommended = this.props.recommended.false;
+		var recommended = parseInt(this.props.recommended.true);
+		console.log('recommended is: ', recommended);
+		var notRecommended = parseInt(this.props.recommended.false);
+		console.log('notRecommended is: ', notRecommended);
+		console.log('sum is: ', recommended + notRecommended);
 		var result = (recommended * 100) / (recommended + notRecommended);
-		return result;
+
+		return Math.round(result * 100) / 100;
 	}
 
 	componentDidMount() {
@@ -27,8 +31,7 @@ class StarNumber extends React.Component {
 			<div className="one" id="one">
 				<h1>3.5</h1>
 				<div>&#9733;&#9733;&#9733;&#9734;&#9734;</div>
-				<div>Number of recommended: {this.props.recommended.true}</div>
-				<div>{this.state.percentage} of reviews recommend this product</div>
+				<div>{this.state.percentage}% of reviews recommend this product</div>
 			</div>
 
 		);
