@@ -15,7 +15,6 @@ class Styles extends React.Component {
       skuCode: '',
       mainPhotoURL: props.productStylesById.results[0].photos[0].url,
       subPhotos: props.productStylesById.results[0].photos,
-      quantityArray: [],
       quantitySelected: 0,
       quantityBool: false,
       cart: []
@@ -26,7 +25,6 @@ class Styles extends React.Component {
     this.postCart = this.postCart.bind(this);
     this.getCart = this.getCart.bind(this);
     this.favoriteClick = this.favoriteClick.bind(this);
-    this.makeQuantityArray = this.makeQuantityArray.bind(this);
     this.quantityChange = this.quantityChange.bind(this);
     this.readReviews = this.readReviews.bind(this);
   }
@@ -62,7 +60,6 @@ class Styles extends React.Component {
         });
       }
     }
-    this.makeQuantityArray();
   }
 
   postCart() {
@@ -114,16 +111,6 @@ class Styles extends React.Component {
 
   }
 
-  makeQuantityArray() {
-    let updatedLength = this.state.currentSku.quantity + 1;
-    var arrayCreated = Array.from({ length: updatedLength }, (v, i) => i);
-    let shiftedArray = arrayCreated.shift();
-    this.setState({
-      quantityArray: arrayCreated,
-      quantityBool: true
-    })
-  }
-
   quantityChange(e) {
     this.setState({
       quantitySelected: e.target.value
@@ -141,11 +128,16 @@ class Styles extends React.Component {
     let mainPhotoURL = this.state.mainPhotoURL;
     let subPhotos = this.state.subPhotos;
     let quantityArray = this.state.quantityArray;
-    console.log('product styles', productStylesById);
+    let shiftedArray = [];
+    if (currentSku.quantity > 0) {
+      for (let i = 1; i <= currentSku.quantity; i++) {
+        shiftedArray.push(i);
+      }
+    }
     return (
       <div id="Styles">
         <div id="photos">
-          <img id="mainPhoto" src={mainPhotoURL} width="300" height="375"></img> <br></br>
+          <img id="mainPhoto" src={mainPhotoURL} width="300" height="390"></img> <br></br>
           {subPhotos.map((photo) =>
             <img id="subPhoto" src={photo.url} width="75" height="105" onClick={this.photoClick}></img>
           )}
@@ -169,7 +161,7 @@ class Styles extends React.Component {
               )}
             </select>
             <select id="quantity" onChange={this.quantityChange}>
-              {quantityArray.map((quantityItem) =>
+              {shiftedArray && shiftedArray.map((quantityItem) =>
                 <option value={quantityItem} >{quantityItem}</option>
               )}
             </select><br></br>
