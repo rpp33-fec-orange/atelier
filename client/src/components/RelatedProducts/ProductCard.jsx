@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { RiInformationLine } from 'react-icons/ri';
+import RelatedProductModal from './RelatedProductModal.jsx';
 
 const rowStyle = {
   display: 'flex'
@@ -22,32 +23,36 @@ class RelatedProductCard extends React.Component {
     super(props);
 
     this.state = {
-
+      showModal: false
     }
 
-    this.handleProductClick = this.handleProductClick.bind(this);
-    this.handleModalClick = this.handleModalClick.bind(this);
+    // this.handleProductClick = this.handleProductClick.bind(this);
+    // this.handleModalClick = this.handleModalClick.bind(this);
 
   }
 
-  handleProductClick() {
+  // style={{ transform: `translateX(${currentPosition}px)` }}
 
-  }
+  showModal(e) {
 
-  handleModalClick() {
+    this.setState({
+      showModal: !this.state.showModal
+    })
 
   }
 
   render() {
 
-    const  { product } = this.props;
-    console.log('product', product)
+    const  { product, currentPosition } = this.props;
+
+    // console.log('product', product)
 
     return (
-      <div className = "col-md-2" style = {columnStyle}  align = 'center'>
-        <div className="related-product-card">
-          <div className="related-modal-star" onClick={this.handleModalClick} role="link" tabIndex={0} align = 'right'>
-          <RiInformationLine />
+      <div className = "col-md-2" style = {columnStyle}>
+        <div className="related-product-card" align = 'right'>
+          <button className = 'toggle-button' onClick = {(e) => {this.showModal(e)}} align = 'right'></button>
+          <RelatedProductModal onClose = {this.showModal} show = {this.state.showModal}/>
+          {/* <RiInformationLine /> */}
           </div>
           <img className = 'related-product-image' src = {product.photos[0].url || photoUnavailable} alt = {product.name} height = "150" width = '150'/>
           <div className = "related-modal-star" onClick={this.handleModalClick}>
@@ -57,7 +62,6 @@ class RelatedProductCard extends React.Component {
           </div>
           <div className = 'related-product-product-rating'>★★★★☆</div>
         </div>
-      </div>
     )
   }
 

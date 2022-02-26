@@ -34,7 +34,7 @@ class RelatedProductsRow extends React.Component {
 
     const {currentPosition, currentPositionIndex} = this.state;
 
-    const newPosition = currentPosition + 216;
+    const newPosition = currentPosition - 162;
     const nextPositionIndex = currentPositionIndex - 1;
 
     this.setState({
@@ -48,7 +48,7 @@ class RelatedProductsRow extends React.Component {
 
     const {currentPosition, currentPositionIndex} = this.state;
 
-    const newPosition = currentPosition - 216;
+    const newPosition = currentPosition + 162;
     const nextPositionIndex = currentPositionIndex + 1;
 
     this.setState({
@@ -56,7 +56,16 @@ class RelatedProductsRow extends React.Component {
       currentPositionIndex: nextPositionIndex
     });
 
+  // handleModalClick(e) {
+
+  //   this.setState({
+  //     showModal: true
+  //   })
+  // }
+
   }
+
+
 
   render () {
 
@@ -66,17 +75,20 @@ class RelatedProductsRow extends React.Component {
     const moveRightArrow = null;
 
     if (currentPosition < 0) {
+
+      console.log('left arrow', currentPosition)
       moveLeftArrow = (
-        <div className = 'related-products-left-arrow' onClick = {this.move}>
-          <GoChevronLeft className="related-icon" />
+        <div className = 'related-products-left-arrow' onClick = {this.moveLeft}>
+          <GoChevronLeft className="related-arrow-icon" />
         </div>
       )
     }
 
     if (relatedProductsIds.length > 4 && currentPositionIndex < (relatedProductsIds.length - 4)) {
+      console.log('right arrow', currentPosition)
       moveRightArrow = (
-        <div className = 'related-products-right-arrow' onClick = {this.move}>
-          <GoChevronLeft className="related-icon" />
+        <div className = 'related-products-right-arrow' onClick = {this.moveRight}>
+          <GoChevronLeft className="related-arrow-icon" />
         </div>
       )
     }
@@ -89,7 +101,9 @@ class RelatedProductsRow extends React.Component {
        )
     } else {
       var DOMarray = this.props.relatedProductsInfo.map((product) => {
-        return ( <RelatedProductCard product = {product}/>);
+        return (
+            <RelatedProductCard product = {product} currentPosition = {this.state.currentPosition}/>
+        );
       });
 
       return (
