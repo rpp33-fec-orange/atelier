@@ -1,32 +1,5 @@
-/* #overview {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(5, 1fr);
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-  border: 1px solid black;
-} */
-
-#topbar {
-  /* grid-area: 1 / 1 / 2 / 6; */
-  border: 1px solid black;
-}
-
-#input {
-  align-items: end
-}
-
-#inputButton {
-  align-items: end;
-}
-
-#message {
-  text-align: center;
-}
-
-#photos {
-  /* grid-area: 2 / 1 / 5 / 4; */
-  border: 1px solid black;
+#logo {
+  background: turquoise;
 }
 
 #mainPhoto {
@@ -41,24 +14,6 @@
   cursor: pointer;
 }
 
-#Info {
-  /* grid-area: 5 / 1 / 6 / 4; */
-  border: 1px solid black;
-  text-align: center;
-}
-
-#Styles {
-  /* grid-area: 2 / 4 / 5 / 6; */
-  border: 1px solid black;
-  text-align: center;
-}
-
-#features {
-  /* grid-area: 5 / 4 / 6 / 6; */
-  border: 1px solid black;
-  text-align: center;
-}
-
-#logo {
-  background: turquoise;
+#styleThumbnail {
+  border-radius: 50%;
 }
