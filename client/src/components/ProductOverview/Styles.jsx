@@ -12,7 +12,7 @@ class Styles extends React.Component {
       currentStyle: props.productStylesById.results[0],
       currentStyleSkus: props.productStylesById.results[0].skus,
       currentSku: '',
-      skuCode: '',
+      skuId: '',
       sizeStatus: '',
       mainPhotoURL: props.productStylesById.results[0].photos[0].url,
       subPhotos: props.productStylesById.results[0].photos,
@@ -25,9 +25,9 @@ class Styles extends React.Component {
     this.skuChange = this.skuChange.bind(this);
     this.postCart = this.postCart.bind(this);
     this.getCart = this.getCart.bind(this);
-    this.favoriteClick = this.favoriteClick.bind(this);
+    this.outfitClick = this.outfitClick.bind(this);
     this.quantityChange = this.quantityChange.bind(this);
-    this.readReviews = this.readReviews.bind(this);
+    this.reviewsClick = this.reviewsClick.bind(this);
   }
 
   photoClick(e) {
@@ -46,7 +46,7 @@ class Styles extends React.Component {
           mainPhotoURL: selectedStyle.photos[0].url,
           subPhotos: selectedStyle.photos,
           currentSku: '',
-          skuCode: '',
+          skuId: '',
           quantityArray: [],
           sizeStatus: ''
         });
@@ -61,7 +61,7 @@ class Styles extends React.Component {
         let selectedSku = this.state.currentStyleSkus[skuKeys[i]];
         this.setState({
           currentSku: selectedSku,
-          skuCode: skuKeys[i],
+          skuId: skuKeys[i],
           sizeStatus: e.target.value
         });
       }
@@ -70,28 +70,23 @@ class Styles extends React.Component {
 
 
   postCart() {
-    let cartItem = {
-      sku: this.state.skuCode,
-      quantity: this.state.quantitySelected
-    };
-    this.state.cart.push(cartItem);
+    let skuId = this.state.skuId;
     $.ajax({
       context: this,
       type: 'POST',
       url: '/cart',
-      data: JSON.stringify({ cartItem }),
+      data: JSON.stringify({ skuId }),
       contentType: 'application/json',
       success: function (successAjax) {
-        console.log('Ajax POST Success!');
+        console.log('postCart ajax POST Success!');
       },
       error: function (errorAjax) {
-        console.log('Ajax POST Error!');
+        console.log('postCart ajax POST Error!');
       },
     })
   }
 
   getCart() {
-    console.log('html cart: ', this.state.cart);
     $.ajax({
       context: this,
       type: 'GET',
@@ -110,12 +105,13 @@ class Styles extends React.Component {
     console.log('api cart: ', this.state.cart);
   }
 
-  favoriteClick() {
+  outfitClick() {
 
   }
 
-  readReviews() {
-
+  reviewsClick() {
+    // let anchor = RatingsReviews;
+    // anchor.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
   quantityChange(e) {
@@ -150,7 +146,7 @@ class Styles extends React.Component {
           )}
         </div>
         <div id="styles">
-          <div id="rating">{rating} <button onClick={this.readReviews}>Read Reviews</button></div>
+          <div id="rating">{rating} <button onClick={this.reviewsClick}>Read Reviews</button></div>
           <div id="category">{productById.category}</div>
           <div id="name">{productById.name}</div>
           <div id="price">{productById.default_price}</div>
@@ -175,7 +171,7 @@ class Styles extends React.Component {
             </select>
           </div>
           {currentSku.quantity ? <button id="postCart" onClick={this.postCart}>ADD TO CART</button> : <button id="outOfStock" disabled>ADD TO CART</button>}
-          <button id="favorite" onClick={this.favoriteClick}>☆</button><button id="getCart" onClick={this.getCart}>YOUR CART</button>
+          <button id="favorite" onClick={this.outfitClick}>☆</button><button id="getCart" onClick={this.getCart}>YOUR CART</button>
         </div >
       </div >
     )
