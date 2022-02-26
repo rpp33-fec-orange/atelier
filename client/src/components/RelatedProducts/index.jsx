@@ -11,14 +11,54 @@ class RelatedProducts extends React.Component {
     super(props);
     this.state = {
       product_id: product_id,
-      relatedProducts: null,
-      relatedProductsInfo: null,
-      relatedStylesInfo: null
+      relatedProducts: [],
+      relatedProductsInfo: [],
+      relatedStylesInfo: [],
+      parentProduct: [],
+      relatedProductsIds: []
     }
-    // this.componentDidMount = this.componentDidMount.bind(this);
   }
 
   componentDidMount () {
+
+    // This AJAX request fetches product data for parent product (shown in product overview section) info
+
+    $.ajax({
+      context: this,
+      type: 'GET',
+      url: `/products/${this.state.product_id}`,
+      contentType: "application/json",
+      success: function (data) {
+        // console.log('parent product data received by client', data)
+        this.setState({
+          parentProduct: [data]
+        })
+      },
+      error: function (error) {
+        console.log('error in GET request', error);
+      },
+    })
+
+    // This AJAX request fetches styles data (including photos) for parent product (shown in product overview section) info
+
+    $.ajax({
+      context: this,
+      type: 'GET',
+      url: `/products/${this.state.product_id}/styles`,
+      contentType: "application/json",
+      success: function (data) {
+        // console.log('parent product styles data received by client', data)
+        const parentProduct = this.state.parentProduct[0];
+        parentProduct['styles'] = data.results;
+        // console.log('parent product with styles', parentProduct)
+        this.setState({
+          parentProduct: parentProduct
+        })
+      },
+      error: function (error) {
+        console.log('error in GET request', error);
+      },
+    })
 
     // This AJAX request fetches related products info
 
@@ -28,33 +68,19 @@ class RelatedProducts extends React.Component {
       url: `/products/${this.state.product_id}/related`,
       contentType: "application/json",
       success: function (data) {
-        console.log('product data received by client', data)
+        // console.log('product data received by client', data)
+
+        const relatedProductsIds = data.shift();
+
           this.setState({
-            relatedProductsInfo: data
+            relatedProductsInfo: data,
+            relatedProductsIds: relatedProductsIds
           })
       },
       error: function (error) {
-        console.log('error in GET request')
+        console.log('error in GET request', error);
       },
     })
-
-    // This AJAX request fetches related products styles (for product photos)
-
-    // $.ajax({
-    //   context: this,
-    //   type: 'GET',
-    //   url: `/products/${this.state.product_id}/relatedStyles`,
-    //   contentType: "application/json",
-    //   success: function (data) {
-    //     console.log('style data received by client')
-    //       this.setState({
-    //         relatedStylesInfo: data
-    //       })
-    //   },
-    //   error: function (error) {
-    //     console.log('error in GET request')
-    //   },
-    // })
 
   }
 
@@ -63,7 +89,7 @@ class RelatedProducts extends React.Component {
       <div id = 'related-products-and-items'>
         <div className = "related-products-row">
           <h4 id = 'related-products'>Related Products</h4>
-          <RelatedProductsRow relatedProductsInfo = {this.state.relatedProductsInfo}/>
+          <RelatedProductsRow relatedProductsIds = {this.state.relatedProductsIds} parentProduct = {this.state.parentProduct} relatedProductsInfo = {this.state.relatedProductsInfo}/>
         </div>
         <div className = "your-outfit-row">
           <h4 id = 'your-outfit'>Your Outfit</h4>

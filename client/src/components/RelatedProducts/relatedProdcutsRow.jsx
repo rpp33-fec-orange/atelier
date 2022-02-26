@@ -1,7 +1,9 @@
 import React from 'react';
+import {GoChevronLeft, GoChevronRight} from 'react-icons/go';
 import images from './stockImages.jsx';
+import RelatedProductCard from './ProductCard.jsx';
 
-var photoUnavailable = 'https://icon-library.com/images/no-picture-available-icon/no-picture-available-icon-1.jpg'
+const photoUnavailable = 'https://icon-library.com/images/no-picture-available-icon/no-picture-available-icon-1.jpg'
 
 const rowStyle = {
   display: 'flex'
@@ -14,98 +16,90 @@ const columnStyle = {
   width: '150'
 };
 
-const RelatedProductsRow = (props) => {
+class RelatedProductsRow extends React.Component {
 
-  if (props.relatedProductsInfo === null) {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentPosition: 0,
+      currentPositionIndex: 0
+    }
 
-    return (
-      <div className = " related-products-row" style = {rowStyle}>
-        <div className = "col-md-2" style = {columnStyle}>
-          <img src = {images.relatedProductImages[0]} alt = "Sample Image" height = "150" />
-          <div id = 'category'>Men's Clothing</div>
-          <div id = 'product-description'>Collared T-shirt</div>
-          <div id = 'price'>$19.99</div>
-          <div id = 'rating'>★★★★☆</div>
-        </div>
-        <div className = "col-md-2" style = {columnStyle}>
-          <img src = {images.relatedProductImages[1]} alt = "Sample Image" height = "150" />
-          <div id = 'category'>Men's Clothing</div>
-          <div id = 'product-description'>Collared Green T-shirt</div>
-          <div id = 'price'>$19.99</div>
-          <div id = 'rating'>★★★★☆</div>
-        </div>
-        <div className = "col-md-2" style = {columnStyle}>
-          <img src = {images.relatedProductImages[2]} alt = "Sample Image" height = "150" />
-          <div id = 'category'>Men's Clothing</div>
-          <div id = 'product-description'>Collared Pink T-shirt</div>
-          <div id = 'price'>$19.99</div>
-          <div id = 'rating'>★★★★☆</div>
-        </div>
-        <div className = "col-md-2" style = {columnStyle}>
-          <img src = {images.relatedProductImages[3]} alt = "Sample Image" height = "150" />
-          <div id = 'category'>Men's Clothing</div>
-          <div id = 'product-description'>White T-shirt</div>
-          <div id = 'price'>$19.99</div>
-          <div id = 'rating'>★★★★☆</div>
-        </div>
-      </div>
-     )
+    this.moveLeft = this.moveLeft.bind(this);
+    this.moveRight = this.moveRight.bind(this);
 
-  } else if (props.relatedProductsInfo) {
+  }
 
-    var DOMarray = props.relatedProductsInfo.map((product) => {
-      console.log('product in component', product);
-      return (
-        <div className = "col-md-2" style = {columnStyle}  align = 'center'>
-          <img src = {product.photos[0].url || photoUnavailable} alt = "Sample Image" height = "150" width = '150'/>
-          <div id = 'category'>{product.category}</div>
-          <div id = 'product-description'>{product.name}</div>
-          <div id = 'price'>{product.default_price}</div>
-          <div id = 'rating'>★★★★☆</div>
+  moveLeft() {
+
+    const {currentPosition, currentPositionIndex} = this.state;
+
+    const newPosition = currentPosition + 216;
+    const nextPositionIndex = currentPositionIndex - 1;
+
+    this.setState({
+      currentPosition: newPosition,
+      currentPositionIndex: nextPositionIndex
+    });
+
+  }
+
+  moveRight() {
+
+    const {currentPosition, currentPositionIndex} = this.state;
+
+    const newPosition = currentPosition - 216;
+    const nextPositionIndex = currentPositionIndex + 1;
+
+    this.setState({
+      currentPosition: newPosition,
+      currentPositionIndex: nextPositionIndex
+    });
+
+  }
+
+  render () {
+
+    const {relatedProductsIds} = this.props;
+    const {currentPosition, currentPositionIndex} = this.state;
+    const moveLeftArrow = null;
+    const moveRightArrow = null;
+
+    if (currentPosition < 0) {
+      moveLeftArrow = (
+        <div className = 'related-products-left-arrow' onClick = {this.move}>
+          <GoChevronLeft className="related-icon" />
         </div>
       )
-    })
+    }
 
-    return (
-      <div className = " related-products-row" style = {rowStyle}>
-        {DOMarray}
-      </div>
-    )
+    if (relatedProductsIds.length > 4 && currentPositionIndex < (relatedProductsIds.length - 4)) {
+      moveRightArrow = (
+        <div className = 'related-products-right-arrow' onClick = {this.move}>
+          <GoChevronLeft className="related-icon" />
+        </div>
+      )
+    }
 
-    // return (
-    //   <div className = " related-products-row" style = {rowStyle}>
-    //     <div className = "col-md-2" style = {columnStyle}>
-    //       <img src = {images.relatedProductImages[0]} alt = "Sample Image" height = "150" />
-    //       <div id = 'category'>${props.relatedProductsInfo[0].category}</div>
-    //       <div id = 'product-description'>${props.relatedProductsInfo[0].name}</div>
-    //       <div id = 'price'>${props.relatedProductsInfo[0].default_price}</div>
-    //       <div id = 'rating'>★★★★☆</div>
-    //     </div>
-    //     <div className = "col-md-2" style = {columnStyle}>
-    //       <img src = {images.relatedProductImages[1]} alt = "Sample Image" height = "150" />
-    //       <div id = 'category'>Men's Clothing</div>
-    //       <div id = 'product-description'>Collared Green T-shirt</div>
-    //       <div id = 'price'>$19.99</div>
-    //       <div id = 'rating'>★★★★☆</div>
-    //     </div>
-    //     <div className = "col-md-2" style = {columnStyle}>
-    //       <img src = {images.relatedProductImages[2]} alt = "Sample Image" height = "150" />
-    //       <div id = 'category'>Men's Clothing</div>
-    //       <div id = 'product-description'>Collared Pink T-shirt</div>
-    //       <div id = 'price'>$19.99</div>
-    //       <div id = 'rating'>★★★★☆</div>
-    //     </div>
-    //     <div className = "col-md-2" style = {columnStyle}>
-    //       <img src = {images.relatedProductImages[3]} alt = "Sample Image" height = "150" />
-    //       <div id = 'category'>Men's Clothing</div>
-    //       <div id = 'product-description'>White T-shirt</div>
-    //       <div id = 'price'>$19.99</div>
-    //       <div id = 'rating'>★★★★☆</div>
-    //     </div>
-    //   </div>
-    //  )
+    if (this.props.relatedProductsInfo === null) {
+      return (
+        <div id="loading">
+          ⇆ Loading...
+        </div>
+       )
+    } else {
+      var DOMarray = this.props.relatedProductsInfo.map((product) => {
+        return ( <RelatedProductCard product = {product}/>);
+      });
 
-    //
+      return (
+        <div className = " related-products-row" style = {rowStyle}>
+          {moveLeftArrow}
+          {DOMarray}
+          {moveRightArrow}
+        </div>
+      )
+    }
 
   }
 }

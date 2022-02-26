@@ -1,7 +1,7 @@
 const express = require('express');
 const { getProducts, getProductById, getProductStylesById } = require('./helpers/products.js');
 const { addToCart, getCart } = require('./helpers/cart.js');
-const { getRelatedStylesById, getProductsById } = require('./helpers/relatedItems.js');
+const { getRelatedStylesById, getRelatedProductsById } = require('./helpers/relatedItems.js');
 const { getQuestionsByProductId } = require('./helpers/questions.js');
 const getReviewsByID = require('./helpers/reviews.js').getReviewsByID;
 
@@ -35,7 +35,9 @@ app.get('/products/:product_id', function (req, res) {
 });
 
 app.get('/products/:product_id/styles', function (req, res) {
+
   let id = req.params.product_id;
+
   getProductStylesById(id)
     .then((data) => {
       console.log('server getProductStylesById success');
@@ -83,13 +85,13 @@ app.post('/cart', function (req, res) {
 
 app.get('/products/:product_id/related', function (req, res) {
   var relatedProducts = [];
-  getProductsById(req.params.product_id)
+  getRelatedProductsById(req.params.product_id)
     .then((productData) => {
-      console.log('server getProductById success');
+      // console.log('server getProductById success', productData);
       relatedProducts = productData;
       getRelatedStylesById(req.params.product_id)
         .then((stylesData) => {
-          for (var i = 0; i < relatedProducts.length; i++) {
+          for (var i = 1; i < relatedProducts.length; i++) {
             for (var j = 0; j < stylesData.length; j++) {
               if (relatedProducts[i].id.toString() === stylesData[j].product_id) {
                 relatedProducts[i]['photos'] = stylesData[j].results[0].photos;
@@ -99,11 +101,11 @@ app.get('/products/:product_id/related', function (req, res) {
           res.status(200).send(relatedProducts);
         })
         .catch((error) => {
-          console.log('server getProductStylesById error');
+          console.log('server getProductStylesById error', error);
         })
     })
     .catch((error) => {
-      console.log('server getProductStylesById error');
+      console.log('server getProductStylesById error', error);
     })
 });
 
