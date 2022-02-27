@@ -21,11 +21,11 @@ class QuestionAddons extends React.Component {
 
 
   render() {
-    const showMore = this.props.canShowMore;
+    const showMoreQuestions = this.props.canShowMore;
     return (
       <div id="questionAddons">
         {
-          showMore
+          showMoreQuestions
           &&
           <button
             id="moreAnsweredQuestions"

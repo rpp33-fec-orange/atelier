@@ -33,13 +33,12 @@ class QuestionsAnswers extends React.Component {
       type: 'GET',
       url: `qa/questions/${this.state.productId}`,
       success: (data) => {
-        let fullSet = [...data];
+        let fullSet = JSON.parse(JSON.stringify(data));
+
         this.setState({
           allQuestions: fullSet,
           renderedQuestions: this.initialRender(data)
         });
-        console.log(`the fullSet is ${fullSet.length}`);
-        console.log(`the full question set is ${this.state.allQuestions.length}, while the rendered is ${this.state.renderedQuestions.length}`);
       },
       dataType: 'json'
     });
@@ -48,8 +47,14 @@ class QuestionsAnswers extends React.Component {
   initialRender(data) {
     if (data.length >= 2) {
       data.length = 2;
-      data.map(qtn => {
-        qtn.answers.length = 2;
+      data.map(question => {
+        if (question.answers.length > 2) {
+          console.log(`checking length of answers ${question.answers.length}`);
+          question.answers['canShowMore'] = true;
+        } else if (question.answers.length <= 2) {
+          question.answers['canShowMore'] = false;
+        }
+        question.answers.length = 2;
       });
     }
     return data;
@@ -57,13 +62,10 @@ class QuestionsAnswers extends React.Component {
 
   getMoreQuestions() {
     let { renderedQuestions, allQuestions } = this.state;
-    console.log(`the currentRender: ${renderedQuestions.length} and all: ${allQuestions.length}`);
 
     let grabbed = allQuestions.slice(renderedQuestions.length, renderedQuestions.length + 2);
     let parsed = this.initialRender(grabbed);
     let rendered = [...renderedQuestions, ...parsed];
-
-    console.log(`after showing more Questions, ${rendered.length}`);
 
     if (allQuestions.length > rendered.length) {
       this.setState({
@@ -76,19 +78,30 @@ class QuestionsAnswers extends React.Component {
       });
     }
 
-    // if (allQuestions.length > renderedQuestions.length) {
-    //   this.setState({
-    //     renderedQuestions: [...renderedQuestions, ...this.initialRender(grabbed)]
-    //   });
-    // } else {
-    //   this.setState({
-    //     showMoreQuestions: false,
-    //     renderedQuestions: [...renderedQuestions, ...this.initialRender(grabbed)]
-    //   });
-    // }
   }
 
-  getMoreAnswers() {}
+  getMoreAnswers(questionId) {
+    let { renderedQuestions, allQuestions } = this.state;
+
+    let questionObj = allQuestions.find(question => question.question_id === questionId );
+    let renderedQuestionIndex = renderedQuestions.findIndex(question => question.question_id === questionId );
+    let renderedAnswers = renderedQuestions[renderedQuestionIndex].answers;
+
+    let grabbedAnswers = questionObj.answers.slice(renderedAnswers.length, renderedAnswers.length + 2);
+
+    renderedQuestions[renderedQuestionIndex].answers = [...renderedAnswers, ...grabbedAnswers];
+
+    if (questionObj.answers.length > renderedQuestions[renderedQuestionIndex].answers.length) {
+      renderedQuestions[renderedQuestionIndex].answers['canShowMore'] = true;
+    } else if (questionObj.answers.length === renderedQuestions[renderedQuestionIndex].answers.length) {
+      renderedQuestions[renderedQuestionIndex].answers['canShowMore'] = false;
+    }
+
+    this.setState({
+      renderedQuestions: renderedQuestions
+    });
+
+  }
 
   submitQuestion() {}
 
@@ -115,7 +128,12 @@ class QuestionsAnswers extends React.Component {
         <div id="questionList">
           {
             questions.map(questionObject => {
-              return (<QuestionItem question={questionObject} />)
+              return (
+                <QuestionItem
+                  question={questionObject}
+                  loadMore={this.getMoreAnswers}
+                />
+                )
             })
           }
         </div>

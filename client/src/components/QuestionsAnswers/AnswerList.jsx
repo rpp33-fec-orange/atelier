@@ -21,7 +21,8 @@ class AnswerList extends React.Component {
   }
 
   loadMoreAnswers() {
-    this.props.loadMoreAnswers();
+    let id = this.props.questionId;
+    this.props.loadMore(id);
   }
 
   renderAnswerItem(answer) {
@@ -45,12 +46,13 @@ class AnswerList extends React.Component {
   }
 
   render() {
-    let answerItems = this.props.answers.map(this.renderAnswerItem);
+    let answers = this.props.answers;
+    let answerItems = answers.map(this.renderAnswerItem);
     return (
       <div className="answerList">
         {answerItems}
         {
-          this.state.someAnswersHidden
+          answers.canShowMore
           &&
           <span className="loadMore" onClick={this.loadMoreAnswers}>
             LOAD MORE ANSWERS

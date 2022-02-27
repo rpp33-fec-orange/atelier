@@ -30,7 +30,11 @@ class QuestionItem extends React.Component {
           <span className="questionText">
             Q: {question.question_body}
           </span>
-          <AnswerList answers={question.answers} />
+          <AnswerList
+            answers={question.answers}
+            questionId={question.question_id}
+            loadMore={this.props.loadMore}
+          />
         </div>
         <div className="questionAction" style={{display: 'inline-block'}}>
           <span className="questionHelpfulness">
