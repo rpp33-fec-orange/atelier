@@ -4,13 +4,12 @@ class QuestionAddons extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.loadMoreQuestions = this.loadMoreQuestions.bind(this);
+    this.getMoreQuestions = this.getMoreQuestions.bind(this);
     this.addQuestion = this.addQuestion.bind(this);
   }
 
-  loadMoreQuestions() {
-    // load 2 additional questions
-    // figure out how to handle count of questions
+  getMoreQuestions() {
+    this.props.loadMore();
   }
 
   addQuestion() {
@@ -22,7 +21,7 @@ class QuestionAddons extends React.Component {
 
 
   render() {
-    const showMore = this.props.showMore;
+    const showMore = this.props.canShowMore;
     return (
       <div id="questionAddons">
         {
@@ -31,7 +30,7 @@ class QuestionAddons extends React.Component {
           <button
             id="moreAnsweredQuestions"
             type="button"
-            onClick={this.loadMoreQuestions}
+            onClick={this.getMoreQuestions}
           >
             More Answered Questions
           </button>
