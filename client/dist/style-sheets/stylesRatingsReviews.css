@@ -49,3 +49,42 @@ h1 {
 #flex-container > .two {
   width: 5rem;
 } */
+
+.modal {
+	display: none;
+	position: fixed;
+	padding-top: 50px;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgb(0, 0, 0);
+	background-color: rgba( 0, 0, 0, 0.5);
+}
+
+.modal-content {
+	position: relative;
+	background-color: white;
+	padding: 20px;
+	margin: auto;
+	width: 75%;
+}
+
+.close-btn {
+	float: right;
+	color: lightgray;
+	font-size: 24px;
+	font-weight: 24px;
+}
+
+.close-btn:hover {
+	color: darkgray;
+}
+
+.display-block {
+  display: block;
+}
+
+.display-none {
+  display: none;
+}

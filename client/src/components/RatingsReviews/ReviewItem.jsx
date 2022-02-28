@@ -1,4 +1,5 @@
 import React from 'react';
+import Modal from './Modal.jsx';
 
 class ReviewItem extends React.Component {
 	constructor(props) {
@@ -84,6 +85,9 @@ class ReviewItem extends React.Component {
 								</div>
 						}
 						{/* <img src = 'https://i.vimeocdn.com/portrait/1274237_300x300.jpg' /> */}
+					</div>
+					<div>
+						<Modal />
 					</div>
 					<hr></hr>
 				</div>

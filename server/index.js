@@ -123,7 +123,7 @@ app.get('/reviews/', function (req, res) {
 app.get('/reviews/meta', function (req, res) {
   getReviewsMeta(req.query.product_id)
     .then((success) => {
-      console.log('getting reviews meta success! data is: ', success.data);
+      // console.log('getting reviews meta success! data is: ', success.data);
       res.status(200).send(success.data);
     })
     .catch((error) => {
