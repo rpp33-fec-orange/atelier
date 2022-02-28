@@ -110,8 +110,14 @@ class Styles extends React.Component {
   }
 
   reviewsClick() {
+    console.log('read all reviews clicked!')
     // let anchor = RatingsReviews;
     // anchor.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    // let navigate = useNavigate();
+    // const routeChange = () => {
+    //   let path = '../RatingsReviews/RatingsReviews.jsx';
+    //   navigate(path);
+    // }
   }
 
   quantityChange(e) {
@@ -138,15 +144,15 @@ class Styles extends React.Component {
       }
     }
     return (
-      <div id="Styles">
-        <div id="photos">
+      <div class="styles-container" id="Styles">
+        <div class="styles-item styles-item-1" id="photos">
           <img id="mainPhoto" src={mainPhotoURL} width="300" height="390"></img> <br></br>
           {subPhotos.map((photo) =>
             <img id="subPhoto" src={photo.url} width="75" height="105" onClick={this.photoClick}></img>
           )}
         </div>
-        <div id="styles">
-          <div id="rating">{rating} <button onClick={this.reviewsClick}>Read Reviews</button></div>
+        <div class="styles-item styles-item-2" id="styles">
+          <div id="rating">{rating} <span id="readAllReviewsButton" onClick={this.reviewsClick}>Read all reviews</span></div>
           <div id="category">{productById.category}</div>
           <div id="name">{productById.name}</div>
           <div id="price">{productById.default_price}</div>

@@ -82,11 +82,17 @@ class ProductOverview extends React.Component {
   render() {
     if (this.state.initialized) {
       return (
-        <div id="productOverview">
-          <h4>Product Overview</h4>
-          <TopBar data-testid="topbar?" searchHandler={this.searchHandler} />
-          <Styles data-testid="styles?" productById={this.state.productById} productStylesById={this.state.productStylesById} />
-          <Info data-testid="descriptions?" productById={this.state.productById} />
+        <div class="index-container" id="productOverview">
+          <div class="index-item index-item-1">
+            <TopBar data-testid="topbar?" searchHandler={this.searchHandler} />
+          </div>
+          <div id="message">Valentine's Day Sale! ---Extra 40% off on select items--- Free shipping for orders over $50!</div>
+          <div class="index-item index-item-2">
+            <Styles data-testid="styles?" productById={this.state.productById} productStylesById={this.state.productStylesById} />
+          </div>
+          <div class="index-item index-item-2">
+            <Info data-testid="descriptions?" productById={this.state.productById} />
+          </div>
         </div>
       )
     } else {

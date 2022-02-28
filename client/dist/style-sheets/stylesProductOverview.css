@@ -1,6 +1,81 @@
-#logo {
-  background: turquoise;
+.index-container {
+  display: flex;
+  flex-direction: column;
 }
+
+.index-item {
+  width: 70%;
+  margin: 5px;
+  margin-left: 15%;
+  margin-right: 15%;
+  background-color: rgb(89, 216, 216);
+}
+
+.index-item-1 {
+  min-height: 60px;
+}
+
+.index-item-2 {
+  min-height: 100px;
+}
+
+.index-item-3 {
+  min-height: 200px;
+}
+
+.topbar-container {
+  display: flex;
+}
+
+.topbar-item {
+
+}
+
+.topbar-item-1{
+
+}
+
+.topbar-item-2{
+
+}
+
+.styles-container {
+  display: flex;
+}
+
+.styles-item {
+
+  background-color: rgb(235, 93, 235);
+}
+
+.styles-item-1 {
+  width: 60%;
+  margin: 10px;
+
+}
+
+.styles-item-2 {
+  width: 40%;
+  margin: 10px;
+
+}
+
+/* #logoSearch {
+  background: turquoise;
+  height: 50px;
+  width: 70%;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-top: 5%;
+} */
+
+#message {
+  text-align: center;
+}
+
+/* #logo {
+  margin-top: 5%;
+} */
 
 #mainPhoto {
   cursor: pointer;
@@ -16,4 +91,9 @@
 
 #styleThumbnail {
   border-radius: 50%;
+}
+
+#readAllReviewsButton {
+  text-decoration-line: underline;
+  cursor: pointer;
 }
