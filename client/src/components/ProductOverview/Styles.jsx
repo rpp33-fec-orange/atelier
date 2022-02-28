@@ -148,7 +148,7 @@ class Styles extends React.Component {
         <div class="styles-item styles-item-1" id="photos">
           <img id="mainPhoto" src={mainPhotoURL} width="300" height="390"></img> <br></br>
           {subPhotos.map((photo) =>
-            <img id="subPhoto" src={photo.url} width="75" height="105" onClick={this.photoClick}></img>
+            <img id="subPhoto" src={photo.url} width="50" height="50" onClick={this.photoClick}></img>
           )}
         </div>
         <div class="styles-item styles-item-2" id="styles">
@@ -159,7 +159,7 @@ class Styles extends React.Component {
           <div >Style> {currentStyle.name}</div>
           <div id="style">
             {styles.map((style) =>
-              <img id="styleThumbnail" name={style.name} src={style.photos[0].url} width="40" height="40" onClick={this.styleChange}></img>
+              <img id="styleThumbnail" name={style.name} src={style.photos[0].url} width="50" height="50" onClick={this.styleChange}></img>
             )}
           </div>
           <div>

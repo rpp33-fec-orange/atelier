@@ -1,12 +1,12 @@
 import React from 'react';
 
 const Info = (props) => (
-  <div id="Info">
-    <div id="slogan&descriptions">
-      {props.productById.slogan}<br></br>
+  <div class="info-container" id="Info">
+    <div class="info-item info-item-1">
+      <div id="slogan">{props.productById.slogan}</div>
       {props.productById.description}
     </div>
-    <div id="features">
+    <div class="info-item info-item-2" id="features">
       {props.productById.features.map((singleData) =>
         <div>
           ✔ {singleData.feature}: {singleData.value}

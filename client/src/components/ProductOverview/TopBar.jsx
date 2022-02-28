@@ -25,9 +25,10 @@ class TopBar extends React.Component {
 
   render() {
     return (
-      <div id="TopBar">
-        <div id="logoSearch">
-          <div data-testid="logo" id="logo">Atelier<input id="input" placeholder="keyword" onChange={this.onChange}></input><button id="inputButton" onClick={this.clickHandler}>Search</button></div>
+      <div class="topbar-container" id="TopBar">
+        <div class="topbar-item topbar-item-1" data-testid="logo" id="logo">Atelier</div>
+        <div class="topbar-item topbar-item-2">
+          <input id="seach-box" placeholder="keyword" onChange={this.onChange}></input><button id="search-button" onClick={this.clickHandler}>Search</button>
         </div>
       </div >
     )
