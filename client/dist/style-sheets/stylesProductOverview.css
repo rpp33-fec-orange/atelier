@@ -55,15 +55,93 @@
 }
 
 .styles-item-1 {
-  width: 60%;
-  height: 90%;
+  width: 65%;
   margin: 5px;
+  display: flex;
+}
+
+.styles-item-1-2 {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  background-color: yellow;
+}
+
+.styles-item-1-2-1 {
+  margin: 5px;
+  background-color: yellow;
 }
 
 .styles-item-2 {
-  width: 40%;
-  height: 30%;
+  width: 35%;
   margin: 5px;
+  font-family: Poppins;
+  display: flex;
+  flex-direction: column;
+}
+
+.styles-item-2-1 {
+  margin: 10px;
+  background-color: yellow;
+}
+
+.styles-item-2-2 {
+  margin: 10px;
+  background-color: yellow;
+}
+
+.styles-item-2-3 {
+  margin: 10px;
+  background-color: yellow;
+}
+
+.styles-item-2-4 {
+  margin: 10px;
+  background-color: yellow;
+}
+
+.styles-item-2-5 {
+  margin: 10px;
+  background-color: yellow;
+}
+
+.styles-item-2-6 {
+  margin: 10px;
+  background-color: yellow;
+}
+
+.styles-item-2-7 {
+  margin: 10px;
+  background-color: yellow;
+}
+
+.styles-item-2-container {
+  margin: 10px;
+  background-color: yellow;
+}
+.styles-item-2-8 {
+  margin: 10px;
+  background-color: white;
+}
+
+.styles-item-2-9 {
+  margin: 10px;
+  background-color: white;
+}
+
+.styles-item-2-10 {
+  margin: 10px;
+  background-color: white;
+}
+
+.styles-item-2-11 {
+  margin: 10px;
+  background-color: white;
+}
+
+.styles-item-2-12 {
+  margin: 10px;
+  background-color: white;
 }
 
 .info-container {
@@ -74,22 +152,29 @@
   align-items: center;
 }
 
-.info-item {
-  background-color: rgb(235, 93, 235);
-}
-
 .info-item-1 {
-  width: 62.5%;
+  width: 70%;
   margin: 5px;
 }
 
 .info-item-2 {
-  width: 37.5%;
+  width: 30%;
   margin: 5px;
 }
 
 #slogan {
-  text-align: center;
+  font-family: Lato;
+  font-weight: 500;
+}
+
+#description {
+  font-family: Poppins;
+  font-size: 12px;
+}
+
+#features {
+  font-family: Poppins;
+  font-size: 12px;
 }
 
 #logo {
@@ -97,9 +182,11 @@
   font-size: 20px;
   color: white;
 }
+
 #message {
   font-family: Roboto;
   text-align: center;
+  font-size: 15px;
 }
 
 #mainPhoto {

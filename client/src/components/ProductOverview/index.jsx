@@ -86,7 +86,7 @@ class ProductOverview extends React.Component {
           <div class="index-item index-item-1">
             <TopBar data-testid="topbar?" searchHandler={this.searchHandler} />
           </div>
-          <div id="message">Valentine's Day Sale! ---Extra 40% off on select items--- Free shipping for orders over $50!</div>
+          <div id="message">Hack Reactor Sale! ---Extra 40% off on selected items--- Free shipping for orders over $50!</div>
           <div class="index-item index-item-2">
             <Styles data-testid="styles?" productById={this.state.productById} productStylesById={this.state.productStylesById} />
           </div>
