@@ -1,5 +1,5 @@
 import React from 'react';
-import Modal from './Modal.js';
+import Modal from './Modal.jsx';
 
 class Dashboard extends React.Component {
 	constructor(props) {
@@ -21,14 +21,24 @@ class Dashboard extends React.Component {
 
 	render() {
 		return (
+			// <div>
+			// 	<h1>React Modal</h1>
+      //   <button id="modal-btn" onClick={this.showModal} >This is a Modal</button>
+			//   <div className="modal">Hello
+			// 		<div className="modal-content">
+      //     <span className="close-btn" onClick={this.hideModal}>&times;</span>
+			// 		<p>this is the text inside the modal</p>
+			// 	  </div>
+			// 	</div>
+			// </div>
+
 			<div>
-        <button id="modal-btn" onClick={this.showModal} >This is a Modal</button>
-			  <div className="modal">Hello
-					<div className="modal-content">
-          <span className="close-btn" onClick={this.hideModal}>&times;</span>
-					<p>this is the text inside the modal</p>
-				  </div>
-				</div>
+				<Modal show={this.state.show} handleClose={this.hideModal} />
+					<h2>Write Your Review</h2>
+
+				<button type="button" onClick={this.showModal} >
+					Write Your Review
+				</button>
 			</div>
 		);
 	}

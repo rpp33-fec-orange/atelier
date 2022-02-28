@@ -7,6 +7,7 @@ import StarItem from './StarItem.jsx';
 import ComfortSlider from './ComfortSlider.jsx';
 import SizeSlider from './SizeSlider.jsx';
 import ReviewList from './ReviewList.jsx';
+import Dashboard from './Dashboard.jsx';
 
 class RatingsReviews extends React.Component {
   constructor(props) {
@@ -216,6 +217,7 @@ render() {
         <ComfortSlider comfort={meta_characteristics} />
         <h3>{count} reviews, sorted by {sort}</h3>
         <ReviewList reviews={list} />
+				<Dashboard />
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from './Modal.jsx';
+import Dashboard from './Dashboard.jsx';
 
 class ReviewItem extends React.Component {
 	constructor(props) {
@@ -59,21 +60,17 @@ class ReviewItem extends React.Component {
 							✔ I recommend this product
 						</div>
 					}
-					<div>Do you recommend this product?</div>
-					<form>
-						<div className="radio">
-							<label>
-								<input type="radio" id="recommended" onChange={this.getRecommendation} />
-								I recommend!
-							</label>
+					<p>Do you recommend this product?</p>
+					<div className="modal-recommended" >
+						<div>
+								<input type="radio" id="yes" name="recommended" value="yes" />
+							  <label htmlFor="yes">Yes</label>
 						</div>
-						<div className="radio">
-							<label>
-								<input type="radio" id="notRecommended" onChange={this.getRecommendation} />
-								I don't recommend!
-							</label>
+						<div>
+								<input type="radio" id="no" name="recommended" value="no" />
+							  <label htmlFor="no">No</label>
 						</div>
-					</form>
+					</div>
 					<div className="productPhoto">
 						<sub>Product Photo: </sub>
 						{this.state.review.photos.length > 0
@@ -85,9 +82,6 @@ class ReviewItem extends React.Component {
 								</div>
 						}
 						{/* <img src = 'https://i.vimeocdn.com/portrait/1274237_300x300.jpg' /> */}
-					</div>
-					<div>
-						<Modal />
 					</div>
 					<hr></hr>
 				</div>
