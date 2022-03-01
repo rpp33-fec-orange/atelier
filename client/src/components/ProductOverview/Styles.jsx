@@ -177,7 +177,7 @@ class Styles extends React.Component {
             <select class="styles-item-2-8" value={sizeStatus} id="size-selector" onChange={this.skuChange} >
               <option class="styles-item-2-8-1" value="nullSize">SELECT SIZE</option>
               {Object.keys(currentStyleSkus).map((sku) =>
-                <option value={currentStyleSkus[sku].size} >{currentStyleSkus[sku].size}</option>
+                <option id="size-option" value={currentStyleSkus[sku].size} >{currentStyleSkus[sku].size}</option>
               )}
             </select>
             <select class="styles-item-2-9" id="quantity-selector" onChange={this.quantityChange}>
@@ -188,7 +188,7 @@ class Styles extends React.Component {
             </select>
             <button class="styles-item-2-12" id="getCart-button" onClick={this.getCart}>CART</button>
             {quantitySelectedBool ? <button class="styles-item-2-10" id="postCart-button" onClick={this.postCart}>ADD TO CART +</button> : <button class="styles-item-2-13" id="defaultCart-button" disabled>ADD TO CART +</button>}
-            <button class="styles-item-2-11" id="outfit-button" onClick={this.outfitClick}>SAVE OUTFIT</button>
+            <button class="styles-item-2-11" id="save-outfit-button" onClick={this.outfitClick}>SAVE OUTFIT</button>
           </div>
         </div >
       </div >

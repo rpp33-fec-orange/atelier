@@ -345,6 +345,10 @@
   border-color: rgba(0, 0, 0, 0.5);
 }
 
+#size-option {
+  text-align: center;
+}
+
 #quantity-selector {
   -webkit-appearance: button;
   border: 1px solid black;
