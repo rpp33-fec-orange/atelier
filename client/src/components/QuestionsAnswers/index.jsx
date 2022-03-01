@@ -49,7 +49,6 @@ class QuestionsAnswers extends React.Component {
       data.length = 2;
       data.map(question => {
         if (question.answers.length > 2) {
-          console.log(`checking length of answers ${question.answers.length}`);
           question.answers['canShowMore'] = true;
         } else if (question.answers.length <= 2) {
           question.answers['canShowMore'] = false;

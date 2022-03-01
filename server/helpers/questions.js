@@ -7,6 +7,15 @@ const options = {
   baseUrl: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp'
 };
 
+const getDateString = (utcString) => {
+  let date = new Date(utcString);
+
+  let [monthNum, day, year] = [date.getMonth(), date.getDate(), date.getFullYear()];
+  let month = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(monthNum);
+
+  return `${month} ${day}, ${year}`;
+};
+
 const getQuestionsByProductId = function(id) {
 
   return axios({
@@ -19,7 +28,7 @@ const getQuestionsByProductId = function(id) {
     }
   })
     .then(success => {
-      console.log(`getQuestionsByProductId GET success`);
+      // console.log(`getQuestionsByProductId GET success`);
 
       let parsedQuestions = success.data.results.sort((pre, post) => {
         return post.question_helpfulness - pre.question_helpfulness;
@@ -42,6 +51,14 @@ const getQuestionsByProductId = function(id) {
           sortedAnswers.splice(sellerIndex, 1);
           sortedAnswers.unshift(sellerAnswer);
         }
+
+        let questionDateString = getDateString(question.question_date);
+        question.question_date = questionDateString;
+
+        sortedAnswers.map(answer => {
+          let answerDateString = getDateString(answer.date);
+          answer.date = answerDateString;
+        });
 
         question.answers = sortedAnswers;
       });

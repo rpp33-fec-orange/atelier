@@ -110,7 +110,7 @@ app.get('/products/:product_id/related', function (req, res) {
 app.get('/reviews/', function (req, res) {
   getReviewsByID(req.query.product_id)
     .then((success) => {
-      console.log('getting reviews success! data is: ', success.data.results);
+      // console.log('getting reviews success! data is: ', success.data.results);
       res.status(200).send(success.data);
     })
     .catch((error) => {
