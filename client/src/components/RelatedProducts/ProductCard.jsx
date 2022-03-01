@@ -43,7 +43,7 @@ class RelatedProductCard extends React.Component {
 
   render() {
 
-    const  { product, currentPosition } = this.props;
+    const  { parentProduct, relatedProduct, currentPosition } = this.props;
 
     // console.log('product', product)
 
@@ -51,16 +51,15 @@ class RelatedProductCard extends React.Component {
       <div className = "col-md-2" style = {columnStyle}>
         <div className="related-product-card" align = 'right'>
           <button className = 'toggle-button' onClick = {(e) => {this.showModal(e)}} align = 'right'></button>
-          <RelatedProductModal onClose = {this.showModal} show = {this.state.showModal}/>
+          <RelatedProductModal parentProduct = {parentProduct} relatedProduct = {relatedProduct} onClose = {this.showModal} show = {this.state.showModal}/>
           {/* <RiInformationLine /> */}
           </div>
-          <img className = 'related-product-image' src = {product.photos[0].url || photoUnavailable} alt = {product.name} height = "150" width = '150'/>
-          <div className = "related-modal-star" onClick={this.handleModalClick}>
-            <div className = 'related-product-category'>{product.category}</div>
-            <div className = 'related-product-product-name'>{product.name}</div>
-            <div className = 'related-product-product-price'>${product.default_price}</div>
-          </div>
-          <div className = 'related-product-product-rating'>★★★★☆</div>
+          <img className = 'related-product-image' src = {relatedProduct.photos[0].url || photoUnavailable} alt = {relatedProduct.name} height = "150" width = '150'/>
+          <div className = "related-modal-star" onClick={this.handleModalClick}></div>
+            <div className = 'related-product-category'>{relatedProduct.category}</div>
+            <div className = 'related-product-product-name'>{relatedProduct.name}</div>
+            <div className = 'related-product-product-price'>${relatedProduct.default_price}</div>
+            <div className = 'related-product-product-rating'>★★★★☆</div>
         </div>
     )
   }

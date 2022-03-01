@@ -10,9 +10,13 @@ class App extends React.Component {
     super(props);
     this.state = {
       id: '',
-      initialized: false
+      initialized: false,
+      currentStyle: null,
+      yourOutfitArray: []
     }
     this.productsHandler = this.productsHandler.bind(this);
+    this.currentStyleHandler = this.currentStyleHandler.bind(this);
+    this.yourOutfitHandleClick = this.yourOutfitHandleClick.bind(this);
   }
 
   productsHandler() {
@@ -34,16 +38,57 @@ class App extends React.Component {
     })
   }
 
+  currentStyleHandler(selectedStyle) {
+    this.setState({
+      currentStyle: selectedStyle
+    })
+  }
+
+  yourOutfitHandleClick () {
+
+    console.log('currentStyle', this.state.currentStyle)
+    // alert('success');
+
+    var currentStyle =  this.state.currentStyle;
+
+    if (currentStyle) {
+
+      var currentStyleId = currentStyle.style_id;
+      var yourOutfit = this.state.yourOutfitArray;
+
+      if (yourOutfit.length !== 0) {
+        for (var i = 0; i < yourOutfit.length; i++) {
+          if (yourOutfit[i].style_id === currentStyleId) {
+            break;
+          } else {
+            yourOutfit.push(currentStyle);
+          }
+        }
+      } else {
+        yourOutfit.push(currentStyle);
+      }
+
+      this.setState({
+        yourOutfitArray: yourOutfit
+      }, () => {
+        console.log('array updated', this.state.yourOutfitArray)
+      })
+
+    }
+  }
+
   componentDidMount() {
     this.productsHandler();
+    this.yourOutfitHandleClick ();
   }
 
   render() {
+
     if (this.state.initialized) {
       return (
         <div id="container">
-          <ProductOverview id={this.state.id} />
-          <RelatedProducts id={this.state.id}/>
+          <ProductOverview id={this.state.id} currentStyleHandler = {this.currentStyleHandler} yourOutfitHandleClick = {this.yourOutfitHandleClick}/>
+          <RelatedProducts id={this.state.id} yourOutfitArray = {this.state.yourOutfitArray} yourOutfitHandleClick = {this.yourOutfitHandleClick}/>
           <QuestionsAnswers id={this.state.id} />
           <RatingsReviews id={this.state.id}/>
         </div>
@@ -59,3 +104,5 @@ class App extends React.Component {
 }
 
 export default App;
+
+{/* <RelatedProducts id={this.state.id} currentStyle = {this.state.currentStyle} yourOutfitHandleClick = {this.yourOutfitHandleClick}/> */}

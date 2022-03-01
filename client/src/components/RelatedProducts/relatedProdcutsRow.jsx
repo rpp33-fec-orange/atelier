@@ -69,7 +69,7 @@ class RelatedProductsRow extends React.Component {
 
   render () {
 
-    const {relatedProductsIds} = this.props;
+    const {relatedProductsIds, parentProduct} = this.props;
     const {currentPosition, currentPositionIndex} = this.state;
     const moveLeftArrow = null;
     const moveRightArrow = null;
@@ -100,9 +100,9 @@ class RelatedProductsRow extends React.Component {
         </div>
        )
     } else {
-      var DOMarray = this.props.relatedProductsInfo.map((product) => {
+      var DOMarray = this.props.relatedProductsInfo.map((relatedProduct) => {
         return (
-            <RelatedProductCard product = {product} currentPosition = {this.state.currentPosition}/>
+            <RelatedProductCard parentProduct = {parentProduct} relatedProduct = {relatedProduct} currentPosition = {this.state.currentPosition}/>
         );
       });
 

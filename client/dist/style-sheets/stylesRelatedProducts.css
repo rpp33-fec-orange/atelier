@@ -11,3 +11,59 @@
     font-size: 0.8rem;
     line-height: 1;
   }
+
+
+.modal {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 200px;
+  background-color: white;
+  z-index: 1000;
+  border-radius: 5px;
+  border: 1px solid #1e1d51;
+
+  -webkit-box-shadow:0 10px 40px rgba(0, 0, 0, 0.3);
+     -moz-box-shadow:0 10px 40px rgba(0, 0, 0, 0.3);
+          box-shadow:0 10px 40px rgba(194, 50, 50, 0.3);
+
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 20% 80%;
+  overflow: hidden;
+}
+
+.modal-table-header{
+  grid-area: 1/1/2/2;
+  background-color: grey;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.modal-table-body {
+  grid-area: 2/1/3/2;
+  overflow: auto;
+}
+
+.modal-table-body::-webkit-scrollbar {
+  display: none;
+}
+
+.modal-col {
+  text-align: center;
+}
+
+.modal-col-1 {
+  width: 175px;
+}
+
+.modal-col-2 {
+  width: 150px;
+}
+
+.modal-col-3 {
+  width: 175px;
+}

@@ -85,6 +85,8 @@ class RelatedProducts extends React.Component {
   }
 
   render() {
+
+    console.log('props in Index', this.props)
     return (
       <div id = 'related-products-and-items'>
         <div className = "related-products-row">
@@ -93,7 +95,7 @@ class RelatedProducts extends React.Component {
         </div>
         <div className = "your-outfit-row">
           <h4 id = 'your-outfit'>Your Outfit</h4>
-          <YourOutfitRow/>
+          <YourOutfitRow currentStyle = {this.props.currentStyle} yourOutfitArray = {this.props.yourOutfitArray} yourOutfitHandleClick = {this.props.yourOutfitHandleClick}/>
         </div>
       </div>
     )

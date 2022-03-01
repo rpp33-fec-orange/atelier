@@ -1,5 +1,7 @@
 import React from 'react';
 import images from './stockImages.jsx';
+import AddtoOutfitCard from './AddtoOutfitCard.jsx'
+import YourOutfitCard from './YourOutfitCard.jsx'
 
 const rowStyle = {
   display: 'flex'
@@ -13,21 +15,80 @@ const columnStyle = {
 
 
 
-const YourOutfitRow = () => {
-  return (
+class YourOutfitRow extends React.Component {
 
-    <div className = " related-products-row" style = {rowStyle} align = 'center'>
-      <div className = "col-md-2" style = {columnStyle}>
-        <img src = 'https://www.freeiconspng.com/thumbs/plus-icon/plus-icon-black-2.png' alt = "Sample Image" height = "150" width = '150'/>
+  constructor(props) {
+    super(props);
+    this.state = {
+      yourOutfit: []
+    }
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick () {
+
+    this.props.yourOutfitHandleClick();
+
+    var yourOutfitArray = this.props.yourOutfitArray;
+
+    this.setState({
+      yourOutfit: yourOutfitArray
+    })
+
+    // console.log('currentStyle', this.props.currentStyle)
+    // // alert('success');
+
+    // var currentStyle =  this.props.currentStyle;
+
+    // if (currentStyle) {
+
+    //   var currentStyleId = currentStyle.style_id;
+    //   var yourOutfitArray = this.state.yourOutfit;
+
+    //   if (this.state.yourOutfit.length !== 0) {
+    //     for (var i = 0; i < yourOutfitArray.length; i++) {
+    //       if (yourOutfitArray[i].style_id === currentStyleId) {
+    //         break;
+    //       } else {
+    //         yourOutfitArray.push(currentStyle);
+    //       }
+    //     }
+    //   } else {
+    //     yourOutfitArray.push(currentStyle);
+    //   }
+
+    //   this.setState({
+    //     yourOutfit: yourOutfitArray
+    //   }, () => {
+    //     console.log('array updated', this.state.yourOutfit)
+    //   })
+
+    // }
+  }
+
+  render() {
+
+    const {yourOutfit} = this.state;
+
+    var DOMarray = '';
+
+
+    if (yourOutfit.length > 0) {
+      DOMarray = yourOutfit.map((product) => {
+        return (
+          <YourOutfitCard product = {product}/>
+        )
+      })
+    }
+
+    return (
+      <div>
+        <AddtoOutfitCard handleClick = {this.handleClick}/>
+        {DOMarray}
       </div>
-      <div className = "col-md-2" style = {columnStyle}>
-      </div>
-      <div className = "col-md-2" style = {columnStyle}>
-      </div>
-      <div className = "col-md-2" style = {columnStyle}>
-      </div>
-    </div>
-  )
+    )
+
+  }
 }
 
 export default YourOutfitRow;

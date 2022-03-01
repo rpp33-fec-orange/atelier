@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import YourOutfitRow from '.././RelatedProducts/YourOutfitRow.jsx'
 
 class Styles extends React.Component {
   constructor(props) {
@@ -40,6 +41,9 @@ class Styles extends React.Component {
           currentStyleSkus: selectedStyle.skus,
           mainPhotoURL: selectedStyle.photos[0].url,
           subPhotos: selectedStyle.photos
+        }, () => {
+          this.props.currentStyleHandler(this.state.currentStyle);
+          // this.props.yourOutfitHandleClick();
         });
       }
     }
@@ -99,8 +103,12 @@ class Styles extends React.Component {
   }
 
   favoriteClick() {
-
+    this.props.yourOutfitHandleClick(); //storage parameter???
   }
+
+  // componentDidMount() {
+  //   this.props.currentStyleHandler(this.state.currentStyle);
+  // }
 
   render() {
     let productById = this.state.productById;
