@@ -187,7 +187,7 @@ class Styles extends React.Component {
               )}
             </select>
             <button class="styles-item-2-12" id="getCart-button" onClick={this.getCart}>CART</button>
-            {quantitySelectedBool ? <button class="styles-item-2-10" id="postCart-button" onClick={this.postCart}>ADD TO CART +</button> : <button class="styles-item-2-10" id="postCart-button" disabled>ADD TO CART +</button>}
+            {quantitySelectedBool ? <button class="styles-item-2-10" id="postCart-button" onClick={this.postCart}>ADD TO CART +</button> : <button class="styles-item-2-13" id="defaultCart-button" disabled>ADD TO CART +</button>}
             <button class="styles-item-2-11" id="outfit-button" onClick={this.outfitClick}>SAVE OUTFIT</button>
           </div>
         </div >

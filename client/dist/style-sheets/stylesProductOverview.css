@@ -118,7 +118,6 @@
 
 .styles-item-2-3 {
   margin-right: 10px;
-  margin-bottom: 2px;
   /* background-color: yellow; */
   font-size: 15px;
 }
@@ -165,6 +164,7 @@
 .styles-item-2-7-container {
   display: inline;
   margin-right: 10px;
+  margin-top: 13px;
   /* background-color: green; */
 }
 
@@ -234,6 +234,14 @@
   margin-left: 10px;
   background-color: white;
   cursor: pointer;
+  text-align: center;
+}
+
+.styles-item-2-13 {
+  height: 40px;
+  width: 180px;
+  background-color: white;
+  cursor: not-allowed;
   text-align: center;
 }
 
@@ -314,6 +322,17 @@
   cursor: pointer;
 }
 
+#search-box {
+  background-color: rgb(82, 88, 88);
+  color: white;
+}
+
+#search-button {
+  /* background-color: rgb(82, 88, 88);
+  color: white; */
+  cursor: pointer;
+}
+
 /* buttons */
 
 #size-selector {
@@ -340,6 +359,16 @@
   -webkit-appearance: button;
   border: 1px solid black;
   color: #555;
+  font-size: 11px;
+  background-color: white;
+  font-family: Arimo;
+  border-color: rgba(0, 0, 0, 0.5);
+}
+
+#defaultCart-button {
+  -webkit-appearance: button;
+  border: 1px solid black;
+  color: rgb(179, 176, 176);
   font-size: 11px;
   background-color: white;
   font-family: Arimo;
