@@ -16,7 +16,7 @@
 }
 
 .index-item-2 {
-  min-height: 100px;
+  max-height: 500px;
   /* background-color: rgb(89, 216, 216); */
 }
 
@@ -239,20 +239,32 @@
 
 .info-container {
   display: flex;
-  height: 15vh;
+  height: 10vh;
   margin-left: 10%;
   margin-right: 10%;
   align-items: center;
 }
 
-.info-item-1 {
+.info-item-1-container {
+  display: flex;
+  flex-direction: column;
   width: 68%;
   margin: 5px;
+}
+
+.info-item-1-1 {
+  /* background-color:rgb(235, 93, 235); */
+  margin-bottom: 10px;
+}
+
+.info-item-1-2 {
+  /* background-color:rgb(235, 93, 235); */
 }
 
 .info-item-2 {
   width: 32%;
   margin: 5px;
+  /* background-color:rgb(235, 93, 235); */
 }
 
 #slogan {
@@ -284,10 +296,16 @@
 
 #mainPhoto {
   cursor: pointer;
+  object-fit: cover;
+  width: 475px;
+  height: 475px;
 }
 
 #subPhoto{
   cursor: pointer;
+  object-fit: cover;
+  width: 60px;
+  height: 60px;
 }
 
 #styleThumbnail {
