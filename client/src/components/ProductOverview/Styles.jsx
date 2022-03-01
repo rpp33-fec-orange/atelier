@@ -87,6 +87,7 @@ class Styles extends React.Component {
         console.log('postCart ajax POST Error!');
       },
     })
+    alert('Added item to cart!');
   }
 
   getCart() {
@@ -95,32 +96,25 @@ class Styles extends React.Component {
       type: 'GET',
       url: '/cart',
       success: function (success) {
-        console.log('getCart ajax GET success: ', success);
+        console.log('getCart ajax GET success');
         this.setState({
           cart: success,
         })
+        console.log('CART', this.state.cart);
       },
       error: function (error) {
         console.log('getCart ajax GET error: ', error);
       },
       contentType: "application/json",
     })
-    console.log('api cart: ', this.state.cart);
   }
 
   outfitClick() {
-
+    console.log('add to outfit clicked!');
   }
 
   reviewsClick() {
-    console.log('read all reviews clicked!')
-    // let anchor = RatingsReviews;
-    // anchor.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    // let navigate = useNavigate();
-    // const routeChange = () => {
-    //   let path = '../RatingsReviews/RatingsReviews.jsx';
-    //   navigate(path);
-    // }
+    console.log('read all reviews clicked!');
   }
 
   quantityChange(e) {
@@ -157,35 +151,44 @@ class Styles extends React.Component {
             )}
           </div>
           <div class="styles-item-1-1">
-            <img id="mainPhoto" src={mainPhotoURL} width="360" height="480"></img> <br></br>
+            <img class="styles-item-1-1" id="mainPhoto" src={mainPhotoURL} width="360" height="480"></img> <br></br>
           </div>
         </div>
         <div class="styles-item styles-item-2" id="styles">
-          <div class="styles-item-2-1" id="rating">{rating} <span class="styles-item-2-2" id="readAllReviewsButton" onClick={this.reviewsClick}>Read all reviews</span></div>
+          <div class="styles-item-2-1-container">
+            <div class="styles-item-2-1" id="rating" onClick={this.reviewsClick}>{rating}</div>
+            <div class="styles-item-2-2" id="read-all-reviews-button">Read all reviews</div>
+          </div>
           <div class="styles-item-2-3" id="category">{productById.category}</div>
           <div class="styles-item-2-4" id="name">{productById.name}</div>
-          <div class="styles-item-2-5" id="price">{productById.default_price}</div>
-          <div class="styles-item-2-6">Style> {currentStyle.name}</div>
-          <div class="styles-item-2-7" id="style">
+          <div class="styles-item-2-5" id="price">${productById.default_price}</div>
+          <div class="styles-item-2-6-container">
+            <div class="styles-item-2-6-1">Style></div>
+            <div class="styles-item-2-6-2">{currentStyle.name}</div>
+          </div>
+          <div class="styles-item-2-7-container" id="style">
             {styles.map((style) =>
-              <img class="styles-item-2-7-1" id="styleThumbnail" name={style.name} src={style.photos[0].url} width="50" height="50" onClick={this.styleChange}></img>
+              <div class="styles-item-2-7-1">
+                <img id="styleThumbnail" name={style.name} src={style.photos[0].url} width="50" height="50" onClick={this.styleChange}></img>
+              </div>
             )}
           </div>
-          <div class="styles-item-2-container">
-            <select class="styles-item-2-8" value={sizeStatus} id="size" onChange={this.skuChange} >
-              <option value="nullSize">Select Size</option>
+          <div class="styles-item-2-8-container">
+            <select class="styles-item-2-8" value={sizeStatus} id="size-selector" onChange={this.skuChange} >
+              <option class="styles-item-2-8-1" value="nullSize">SELECT SIZE</option>
               {Object.keys(currentStyleSkus).map((sku) =>
                 <option value={currentStyleSkus[sku].size} >{currentStyleSkus[sku].size}</option>
               )}
             </select>
-            <select class="styles-item-2-9" id="quantity" onChange={this.quantityChange}>
+            <select class="styles-item-2-9" id="quantity-selector" onChange={this.quantityChange}>
               < option value="nullQuantity" >-</option>
               {quantityArray && quantityArray.map((quantityItem) =>
                 <option value={quantityItem} >{quantityItem}</option>
               )}
             </select>
-            {quantitySelectedBool ? <button class="styles-item-2-10" id="postCart" onClick={this.postCart}>ADD TO CART +</button> : <button class="styles-item-2-10" id="outOfStock" disabled>ADD TO CART +</button>}
-            <button class="styles-item-2-11" id="favorite" onClick={this.outfitClick}>☆</button><button class="styles-item-2-12" id="getCart" onClick={this.getCart}>CART</button>
+            <button class="styles-item-2-12" id="getCart-button" onClick={this.getCart}>CART</button>
+            {quantitySelectedBool ? <button class="styles-item-2-10" id="postCart-button" onClick={this.postCart}>ADD TO CART +</button> : <button class="styles-item-2-10" id="postCart-button" disabled>ADD TO CART +</button>}
+            <button class="styles-item-2-11" id="outfit-button" onClick={this.outfitClick}>SAVE OUTFIT</button>
           </div>
         </div >
       </div >
