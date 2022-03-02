@@ -283,6 +283,46 @@
   /* background-color:rgb(235, 93, 235); */
 }
 
+.expanded-view {
+  position: absolute;
+  /* background-color: white; */
+  background: rgba(0,0,0,0.5);
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+}
+
+.expanded-mainPhoto {
+  position: absolute;
+  object-fit: cover;
+  top: 4%;
+  left: 14%;
+  width: 920px;
+  height: 620px;
+}
+
+.expanded-subPhoto {
+  position: absolute;
+  top: 22px;
+  left: 8%;
+}
+
+.expanded-magnifying-glass {
+  position: absolute;
+  right: 200px;
+  top: 40px;
+  cursor: pointer;
+}
+
+.collapsed-magnifying-glass {
+  position: absolute;
+  top: 5px;
+  left: 550px;
+  cursor: pointer;
+  z-index: 3;
+}
+
 #slogan {
   font-family: Lato;
   font-weight: 500;

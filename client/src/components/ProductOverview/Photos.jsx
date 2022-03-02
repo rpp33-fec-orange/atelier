@@ -44,19 +44,26 @@ class Photos extends React.Component {
             {subPhotos.map((photo) =>
               <img class="styles-item-1-2-1" id="subPhoto" src={photo.url} width="50" height="70" onClick={this.photoClick}></img>
             )}
+            <div class="styles-item-1-1 collapsed-magnifying-glass" onClick={this.expandClick}>🔍</div>
           </div>
           <div class="styles-item-1-1">
             <img class="styles-item-1-1" id="mainPhoto" src={mainPhotoURL} width="360" height="480"></img>
             {/* <img id="zoom-icon" src={zoomIcon} width="20" height="20"></img> */}
-            <div class="magnifying-glass" onClick={this.expandClick}>🔍</div>
           </div>
         </div>
       )
     } else {
       return (
-        <div>
-          HELLO WORLD!!!
-          <div class="magnifying-glass" onClick={this.expandClick}>🔍</div>
+        <div class="expanded-view">
+          <div class="expanded-subPhoto">
+            {subPhotos.map((photo) =>
+              <div>
+                <img class="styles-item-1-2-1" id="subPhoto" src={photo.url} width="50" height="70" onClick={this.photoClick}></img>
+              </div>
+            )}
+          </div>
+          <img class="expanded-mainPhoto" src={mainPhotoURL} width="575" height="700"></img>
+          <div class="expanded-magnifying-glass" onClick={this.expandClick}>🔍</div>
         </div>
       )
     }
