@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import Photos from './Photos.jsx';
 
 class Styles extends React.Component {
   constructor(props) {
@@ -142,17 +143,11 @@ class Styles extends React.Component {
         quantityArray.push(i);
       }
     }
+    console.log('current style: ', currentStyle);
     return (
       <div class="styles-container" id="Styles">
         <div class="styles-item styles-item-1" id="photos">
-          <div class="styles-item-1-2">
-            {subPhotos.map((photo) =>
-              <img class="styles-item-1-2-1" id="subPhoto" src={photo.url} width="50" height="70" onClick={this.photoClick}></img>
-            )}
-          </div>
-          <div class="styles-item-1-1">
-            <img class="styles-item-1-1" id="mainPhoto" src={mainPhotoURL} width="360" height="480"></img> <br></br>
-          </div>
+          <Photos currentStyle={currentStyle} />
         </div>
         <div class="styles-item styles-item-2" id="styles">
           <div class="styles-item-2-1-container">
