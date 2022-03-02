@@ -28,10 +28,18 @@ class AnswerList extends React.Component {
   renderAnswerItem(answer) {
     return (
       <div className="answerItem" key={answer.id}>
-        <span className="answerKey">
+        <div className="answerKey">
           A: <span className="answerText">{answer.body}</span>
-          {/* add conditional photo rendering logic here */}
-        </span>
+          {
+            !!answer.photos.length // only render if photos array contains urls
+            &&
+            answer.photos.map(photo => {
+              return (
+                <img className="answerPhoto" src={photo} height="64" width="64"></img>
+              )
+            })
+          }
+        </div>
         <br></br>
         <span className="answerActions">
           {`by ${answer.answerer_name}, ${answer.date}  |  Helpful? `}
