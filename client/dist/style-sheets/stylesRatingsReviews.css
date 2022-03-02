@@ -1,3 +1,4 @@
+
 /* h1 {
 	color: red;
 }; */
@@ -120,3 +121,119 @@
 .display-none {
   display: none;
 }
+
+.star-rating input {
+  display: none;
+}
+
+.star-rating label {
+  width: 30px;
+  height: 30px;
+  font-family: Verdana;
+  font-size: 30px;
+  color: orange;
+}
+
+.star-rating label::before {
+  content: '\2606';
+  color: red;
+  position: absolute;
+  top: 0px;
+  line-height: 26px;
+}
+
+:root {
+  --star-size: 60px;
+  --star-color: #fff;
+  --star-background: #fc0;
+}
+
+
+.star-ratings-sprite {
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
+  font-size: 0;
+  height: 21px;
+  line-height: 0;
+  overflow: hidden;
+  text-indent: -999em;
+  width: 110px;
+  margin: 0 auto;
+}
+.star-ratings-sprite-rating {
+    background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
+    background-position: 0 100%;
+    float: left;
+    height: 21px;
+    display:block;
+  }
+
+  .container {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+  }
+
+  table {
+    margin: 0 auto;
+    text-align: center;
+    border-collapse: collapse;
+    border: 1px solid #d4d4d4;
+    font-size: 20px;
+    background: #fff;
+  }
+
+  table th,
+  table tr:nth-child(2n+2) {
+    background: #e7e7e7;
+  }
+
+  table th,
+  table td {
+    padding: 20px 50px;
+  }
+
+  table th {
+    border-bottom: 1px solid #d4d4d4;
+  }
+
+  /* .stars-outer {
+    display: inline-block;
+    position: relative;
+    font-family: FontAwesome;
+  } */
+
+  /* .stars-outer::before {
+    content: "\f006 \f006 \f006 \f006 \f005";
+  } */
+
+  /* .stars-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 67%;
+  } */
+
+  .stars-inner::before {
+    content: "\f005 \f005 \f005 \f005 \f005";
+    color: #f8ce0b;
+  }
+
+  .star {
+    display: inline-block;
+    position: relative;
+    font-size: 20px;
+    color: #ddd;
+  }
+
+  /* .star:after {
+    font-family: FontAwesome;
+    content: "\f005";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 60%;
+    overflow: hidden;
+    color: #f80;
+  } */

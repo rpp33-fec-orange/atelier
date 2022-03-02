@@ -1,4 +1,5 @@
 import React from 'react';
+import StarRating from './StarRating.jsx';
 
 class StarNumber extends React.Component {
 	constructor(props) {
@@ -14,6 +15,7 @@ class StarNumber extends React.Component {
 			five: 0
 		};
 		this.percentRecommended = this.percentRecommended.bind(this);
+		this.fillStars = this.fillStars.bind(this);
 		// this.ratingSummary = this.ratingSummary.bind(this);
 	}
 
@@ -57,11 +59,18 @@ class StarNumber extends React.Component {
 		});
 	}
 
+  fillStars(stars) {
+		console.log('this function will fill your stars!');
+		// round stars number up to a quarter of a review point.
+		// We have : 0.00, 0.25, 0.50, 0.75, and 1.00
+	}
+
 	render() {
 		return (
 			<div className="one" id="one">
-				<h1>{this.state.ratingSummary}</h1>
-				<div>&#9733;&#9733;&#9733;&#9734;&#9734;</div>
+				<h1 className="rating-summary">{this.state.ratingSummary}</h1>
+				<StarRating num={this.state.ratingSummary} />
+				{/* <div>&#9733;&#9733;&#9733;&#9734;&#9734;</div> */}
 				<div>{this.state.percentage}% of reviews recommend this product</div>
 			</div>
 

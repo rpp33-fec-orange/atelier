@@ -8,6 +8,7 @@ import ComfortSlider from './ComfortSlider.jsx';
 import SizeSlider from './SizeSlider.jsx';
 import ReviewList from './ReviewList.jsx';
 import Dashboard from './Dashboard.jsx';
+import StarRating from './StarRating.jsx';
 
 class RatingsReviews extends React.Component {
   constructor(props) {
@@ -218,6 +219,7 @@ render() {
         <h3>{count} reviews, sorted by {sort}</h3>
         <ReviewList reviews={list} />
 				<Dashboard />
+        {/* <StarRating /> */}
       </div>
     );
   }
