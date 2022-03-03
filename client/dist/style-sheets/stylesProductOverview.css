@@ -351,7 +351,6 @@
 }
 
 #mainPhoto {
-  cursor: pointer;
   object-fit: cover;
   width: 590px;
   height: 470px;
@@ -447,10 +446,34 @@
   border-color: rgba(0, 0, 0, 0.5);
 }
 
-#left-arrow {
+#collapsed-left-arrow {
   cursor: pointer;
+  position: absolute;
+  top: 495px;
+  left: 100px;
+  z-index: 3;
 }
 
-#right-arrow {
+#collapsed-right-arrow {
   cursor: pointer;
+  position: absolute;
+  top: 495px;
+  left: 645px;
+  z-index: 3;
+}
+
+#expanded-left-arrow {
+  cursor: pointer;
+  position: absolute;
+  top: 325px;
+  left: 200px;
+  z-index: 3;
+}
+
+#expanded-right-arrow {
+  cursor: pointer;
+  position: absolute;
+  top: 325px;
+  left: 1060px;
+  z-index: 3;
 }

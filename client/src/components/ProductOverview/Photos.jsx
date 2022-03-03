@@ -1,5 +1,4 @@
 import React from 'react';
-// import zoomIcon from './zoomIcon.png';
 
 class Photos extends React.Component {
   constructor(props) {
@@ -96,9 +95,8 @@ class Photos extends React.Component {
           </div>
           <div class="styles-item-1-1">
             <img class="styles-item-1-1" id="mainPhoto" src={mainPhotoArray[mainPhotoIndex].url} width="360" height="480"></img>
-            {/* <img id="zoom-icon" src={zoomIcon} width="20" height="20"></img> */}
-            <div id="left-arrow" onClick={this.leftClick}>←left</div>
-            <div id="right-arrow" onClick={this.rightClick}>right→</div>
+            <div id="collapsed-left-arrow" onClick={this.leftClick}>←</div>
+            <div id="collapsed-right-arrow" onClick={this.rightClick}>→</div>
           </div>
         </div>
       )
@@ -112,8 +110,10 @@ class Photos extends React.Component {
               </div>
             )}
           </div>
-          <img class="expanded-mainPhoto" src={mainPhotoURL} width="575" height="700"></img>
+          <img class="expanded-mainPhoto" src={mainPhotoArray[mainPhotoIndex].url} width="575" height="700"></img>
           <div class="expanded-magnifying-glass" onClick={this.expandClick}>🔍</div>
+          <div id="expanded-left-arrow" onClick={this.leftClick}>←</div>
+          <div id="expanded-right-arrow" onClick={this.rightClick}>→</div>
         </div>
       )
     }
