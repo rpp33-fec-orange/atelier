@@ -49,11 +49,11 @@ class AnswerList extends React.Component {
           {
             !answer.reported
             ?
-            <span className="reportAnswer" onClick={() => this.reportAnswer(answer.id)}>
+            <span className="reportAnswer-unreported" onClick={() => this.reportAnswer(answer.id)}>
               Report
             </span>
             :
-            <span className="reportAnswer">
+            <span className="reportAnswer-reported">
               Reported
             </span>
           }

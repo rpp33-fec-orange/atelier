@@ -68,6 +68,19 @@ const getQuestionsByProductId = (id) => {
     });
 };
 
+const reportQuestion = (question_id) => {
+
+  return axios({
+    method: 'put',
+    url: `${options.baseUrl}/qa/questions/${question_id}/report`,
+    responseType: 'json',
+    headers: options.auth,
+    validateStatus: (status) => {
+      return status === 204;
+    }
+  });
+};
+
 const reportAnswer = (answer_id) => {
 
   return axios({
@@ -84,5 +97,6 @@ const reportAnswer = (answer_id) => {
 
 module.exports = {
   getQuestionsByProductId,
+  reportQuestion,
   reportAnswer
 };

@@ -20,6 +20,7 @@ class QuestionsAnswers extends React.Component {
     this.initialRender =  this.initialRender.bind(this);
     this.getMoreQuestions = this.getMoreQuestions.bind(this);
     this.getMoreAnswers = this.getMoreAnswers.bind(this);
+    this.reportQuestion = this.reportQuestion.bind(this);
     this.reportAnswer = this.reportAnswer.bind(this);
   }
 
@@ -111,7 +112,29 @@ class QuestionsAnswers extends React.Component {
 
   markAnswerHelpful() {}
 
-  reportQuestion() {}
+  reportQuestion(questionId) {
+    $.ajax({
+      context: this,
+      type: 'PUT',
+      url: `qa/questions/${questionId}/report`,
+      success: () => {
+        let { allQuestions, renderedQuestions } = this.state;
+
+        let questionIndex = allQuestions.findIndex(question => {
+          return question.question_id === questionId;
+        });
+
+        allQuestions[questionIndex].reported = true;
+        renderedQuestions[questionIndex].reported = true;
+
+        this.setState({
+          allQuestions: allQuestions,
+          renderedQuestions: renderedQuestions
+        });
+      },
+      dataType: 'json'
+    });
+  }
 
   reportAnswer(questionId, answerId) {
     $.ajax({
@@ -158,6 +181,7 @@ class QuestionsAnswers extends React.Component {
                 <QuestionItem
                   question={questionObject}
                   loadMore={this.getMoreAnswers}
+                  reportQuestion={this.reportQuestion}
                   reportAnswer={this.reportAnswer}
                 />
                 )

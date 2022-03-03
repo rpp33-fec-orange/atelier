@@ -24,8 +24,8 @@ class QuestionItem extends React.Component {
     this.props.reportAnswer(questionId, answerId);
   }
 
-  reportQuestion() {
-    this.props.reportQuestion();
+  reportQuestion(questionId) {
+    this.props.reportQuestion(questionId);
   }
 
   render() {
@@ -50,7 +50,17 @@ class QuestionItem extends React.Component {
             {`(${question.question_helpfulness})  |  `}
             <span className="addAnswer" onClick={this.addAnswer}>Add Answer</span>
             {'  |  '}
-            <span className="reportQuestion" onClick={this.reportQuestion}>Report</span>
+            {
+              !question.reported
+              ?
+              <span className="reportQuestion-unreported" onClick={() => this.reportQuestion(question.question_id)}>
+                Report
+              </span>
+              :
+              <span className="reportQuestion-reported">
+                Reported
+              </span>
+            }
           </span>
         </div>
       </div>
