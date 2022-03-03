@@ -8,6 +8,7 @@ class QuestionItem extends React.Component {
     this.addAnswer = this.addAnswer.bind(this);
     this.markQuestionHelpful = this.markQuestionHelpful.bind(this);
     this.reportQuestion = this.reportQuestion.bind(this);
+    this.reportAnswer = this.reportAnswer.bind(this);
   }
 
   addAnswer() {
@@ -18,8 +19,13 @@ class QuestionItem extends React.Component {
     // this.props.markQuestionHelpful();
   }
 
+  reportAnswer(answerId) {
+    let questionId = this.props.question.question_id;
+    this.props.reportAnswer(questionId, answerId);
+  }
+
   reportQuestion() {
-    // this.props.reportQuestion();
+    this.props.reportQuestion();
   }
 
   render() {
@@ -34,6 +40,7 @@ class QuestionItem extends React.Component {
             answers={question.answers}
             questionId={question.question_id}
             loadMore={this.props.loadMore}
+            reportAnswer={this.reportAnswer}
           />
         </div>
         <div className="questionAction" style={{display: 'inline-block'}}>

@@ -2,7 +2,7 @@ const express = require('express');
 const { getProducts, getProductById, getProductStylesById } = require('./helpers/products.js');
 const { addToCart, getCart } = require('./helpers/cart.js');
 const { getRelatedStylesById, getProductsById } = require('./helpers/relatedItems.js');
-const { getQuestionsByProductId } = require('./helpers/questions.js');
+const { getQuestionsByProductId, reportAnswer } = require('./helpers/questions.js');
 const getReviewsByID = require('./helpers/reviews.js').getReviewsByID;
 
 let app = express();
@@ -46,7 +46,7 @@ app.get('/products/:product_id/styles', function (req, res) {
     })
 });
 
-app.get('/qa/questions/:product_id', function (req, res) {
+app.get('/qa/questions/:product_id', (req, res) => {
   let id = req.params.product_id;
   getQuestionsByProductId(id)
     .then((data) => {
@@ -55,6 +55,17 @@ app.get('/qa/questions/:product_id', function (req, res) {
     })
     .catch(() => {
       // console.log('server getQuestionsByProductId error');
+      res.status(400).end();
+    });
+});
+
+app.put('/qa/answers/:answer_id/report', (req, res) => {
+  let id = req.params.answer_id;
+  reportAnswer(id)
+    .then(() => {
+      res.status(204).end();
+    })
+    .catch(() => {
       res.status(400).end();
     });
 });

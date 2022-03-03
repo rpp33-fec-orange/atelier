@@ -20,6 +20,7 @@ class QuestionsAnswers extends React.Component {
     this.initialRender =  this.initialRender.bind(this);
     this.getMoreQuestions = this.getMoreQuestions.bind(this);
     this.getMoreAnswers = this.getMoreAnswers.bind(this);
+    this.reportAnswer = this.reportAnswer.bind(this);
   }
 
   componentDidMount() {
@@ -112,7 +113,33 @@ class QuestionsAnswers extends React.Component {
 
   reportQuestion() {}
 
-  reportAnswer() {}
+  reportAnswer(questionId, answerId) {
+    $.ajax({
+      context: this,
+      type: 'PUT',
+      url: `qa/answers/${answerId}/report`,
+      success: () => {
+        let { allQuestions, renderedQuestions } = this.state;
+
+        let questionIndex = allQuestions.findIndex(question => {
+          return question.question_id === questionId;
+        });
+
+        let answerIndex = allQuestions[questionIndex].answers.findIndex(answer => {
+          return answer.id === answerId;
+        });
+
+        allQuestions[questionIndex].answers[answerIndex].reported = true;
+        renderedQuestions[questionIndex].answers[answerIndex].reported = true;
+
+        this.setState({
+          allQuestions: allQuestions,
+          renderedQuestions: renderedQuestions
+        });
+      },
+      dataType: 'json'
+    });
+  }
 
   search(q) {
     // handle on client using return from GET /qa/questions
@@ -131,6 +158,7 @@ class QuestionsAnswers extends React.Component {
                 <QuestionItem
                   question={questionObject}
                   loadMore={this.getMoreAnswers}
+                  reportAnswer={this.reportAnswer}
                 />
                 )
             })

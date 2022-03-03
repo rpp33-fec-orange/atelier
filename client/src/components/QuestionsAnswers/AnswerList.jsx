@@ -12,8 +12,8 @@ class AnswerList extends React.Component {
     this.loadMoreAnswers = this.loadMoreAnswers.bind(this);
   }
 
-  reportAnswer() {
-    this.props.reportAnswer();
+  reportAnswer(id) {
+    this.props.reportAnswer(id);
   }
 
   markAnswerHelpful() {
@@ -29,25 +29,34 @@ class AnswerList extends React.Component {
     return (
       <div className="answerItem" key={answer.id}>
         <div className="answerKey">
-          A: <span className="answerText">{answer.body}</span>
-          {
-            !!answer.photos.length // only render if photos array contains urls
-            &&
-            answer.photos.map(photo => {
-              return (
-                <img className="answerPhoto" src={photo} height="64" width="64"></img>
-              )
-            })
-          }
+          <span className="answerText">{answer.body}</span>
+          <div className="answerImages">
+            {
+              !!answer.photos.length // only render if photos array contains urls
+              &&
+              answer.photos.map(photo => {
+                return (
+                  <img className="answerPhoto" src={photo} height="64" width="64"></img>
+                )
+              })
+            }
+          </div>
         </div>
-        <br></br>
         <span className="answerActions">
           {`by ${answer.answerer_name}, ${answer.date}  |  Helpful? `}
           <span className="markAnswerHelpful" onClick={this.markAnswerHelpful}>Yes</span>
           {`(${answer.helpfulness})  |  `}
-          <span className="reportAnswer" onClick={this.reportAnswer}>
-            Report
-          </span>
+          {
+            !answer.reported
+            ?
+            <span className="reportAnswer" onClick={() => this.reportAnswer(answer.id)}>
+              Report
+            </span>
+            :
+            <span className="reportAnswer">
+              Reported
+            </span>
+          }
         </span>
       </div>
     );
@@ -57,15 +66,18 @@ class AnswerList extends React.Component {
     let answers = this.props.answers;
     let answerItems = answers.map(this.renderAnswerItem);
     return (
-      <div className="answerList">
-        {answerItems}
-        {
-          answers.canShowMore
-          &&
-          <span className="loadMore" onClick={this.loadMoreAnswers}>
-            LOAD MORE ANSWERS
-          </span>
-        }
+      <div className="answers-container">
+        <div className="answerFlag" style={{ display: 'inline-block'}}>{'A:'}</div>
+        <div className="answerList" style={{ display: 'inline-block'}}>
+          {answerItems}
+          {
+            answers.canShowMore
+            &&
+            <span className="loadMore" onClick={this.loadMoreAnswers}>
+              LOAD MORE ANSWERS
+            </span>
+          }
+        </div>
       </div>
     );
   }

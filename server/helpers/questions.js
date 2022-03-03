@@ -16,7 +16,7 @@ const getDateString = (utcString) => {
   return `${month} ${day}, ${year}`;
 };
 
-const getQuestionsByProductId = function(id) {
+const getQuestionsByProductId = (id) => {
 
   return axios({
     method: 'get',
@@ -58,6 +58,7 @@ const getQuestionsByProductId = function(id) {
         sortedAnswers.map(answer => {
           let answerDateString = getDateString(answer.date);
           answer.date = answerDateString;
+          answer.reported = false;
         });
 
         question.answers = sortedAnswers;
@@ -67,5 +68,21 @@ const getQuestionsByProductId = function(id) {
     });
 };
 
+const reportAnswer = (answer_id) => {
 
-module.exports = { getQuestionsByProductId };
+  return axios({
+    method: 'put',
+    url: `${options.baseUrl}/qa/answers/${answer_id}/report`,
+    responseType: 'json',
+    headers: options.auth,
+    validateStatus: (status) => {
+      return status === 204;
+    }
+  });
+};
+
+
+module.exports = {
+  getQuestionsByProductId,
+  reportAnswer
+};
