@@ -446,3 +446,11 @@
   font-family: Arimo;
   border-color: rgba(0, 0, 0, 0.5);
 }
+
+#left-arrow {
+  cursor: pointer;
+}
+
+#right-arrow {
+  cursor: pointer;
+}

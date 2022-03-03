@@ -6,11 +6,17 @@ class Photos extends React.Component {
     super(props);
     this.state = {
       currentStyle: props.currentStyle,
+      mainPhotoArray: props.currentStyle.photos,
+      mainPhotoIndex: 0,
       mainPhotoURL: props.currentStyle.photos[0].url,
       subPhotos: props.currentStyle.photos,
-      expand: false
+      expanded: false,
+      arrayLeftEnd: false,
+      arrayRightEnd: false
     }
     this.photoClick = this.photoClick.bind(this);
+    this.leftClick = this.leftClick.bind(this);
+    this.rightClick = this.rightClick.bind(this);
     this.expandClick = this.expandClick.bind(this);
   }
 
@@ -20,24 +26,55 @@ class Photos extends React.Component {
     })
   }
 
+  leftClick() {
+    this.state.mainPhotoIndex--;
+    if (this.state.mainPhotoIndex) {
+      this.setState({
+        arrayLeftEnd: true
+      })
+    }
+  }
+
+  rightClick() {
+    this.state.mainPhotoIndex++;
+    if (this.statemainPhotoIndex) {
+      this.setState({
+        arrayRightEnd: true
+      })
+    }
+  }
+
   expandClick(e) {
-    if (!this.state.expand) {
+    if (!this.state.expanded) {
       console.log('EXPANDED!')
       this.setState({
-        expand: true
+        expanded: true
       })
     } else {
       console.log('COLLAPSED!')
       this.setState({
-        expand: false
+        expanded: false
+      })
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.currentStyle !== prevProps.currentStyle) {
+      this.setState({
+        currentStyle: this.props.currentStyle,
+        mainPhotoURL: this.props.currentStyle.photos[0].url,
+        subPhotos: this.props.currentStyle.photos
       })
     }
   }
 
   render() {
+    let mainPhotoArray = this.state.mainPhotoArray;
+    let mainPhotoIndex = this.state.mainPhotoIndex;
     let mainPhotoURL = this.state.mainPhotoURL;
     let subPhotos = this.state.subPhotos;
-    if (!this.state.expand) {
+    console.log('PHOTOS current style: ', this.state.currentStyle);
+    if (!this.state.expanded) {
       return (
         <div>
           <div class="styles-item-1-2">
@@ -49,6 +86,8 @@ class Photos extends React.Component {
           <div class="styles-item-1-1">
             <img class="styles-item-1-1" id="mainPhoto" src={mainPhotoURL} width="360" height="480"></img>
             {/* <img id="zoom-icon" src={zoomIcon} width="20" height="20"></img> */}
+            <div id="left-arrow" onClick={this.leftClick}>←left</div>
+            <div id="right-arrow" onClick={this.rightClick}>right→</div>
           </div>
         </div>
       )
