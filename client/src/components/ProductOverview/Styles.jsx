@@ -143,7 +143,6 @@ class Styles extends React.Component {
         quantityArray.push(i);
       }
     }
-    console.log('rendered! current style: ', currentStyle);
     return (
       <div>
         <div class="styles-container" id="Styles">
