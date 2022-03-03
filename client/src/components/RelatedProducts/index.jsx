@@ -21,6 +21,10 @@ class RelatedProducts extends React.Component {
 
   componentDidMount () {
 
+    this.setState({
+      product_id: this.props.id,
+    })
+
     // This AJAX request fetches product data for parent product (shown in product overview section) info
 
     $.ajax({
@@ -31,7 +35,6 @@ class RelatedProducts extends React.Component {
       success: function (data) {
         // console.log('parent product data received by client', data)
         this.setState({
-          product_id: this.props.id,
           parentProduct: [data]
         })
       },

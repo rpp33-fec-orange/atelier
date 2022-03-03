@@ -28,30 +28,26 @@ class YourOutfitRow extends React.Component {
 
   handleAddOutfit () {
     this.props.yourOutfitHandleClick();
-    const yourOutfitArray = this.props.yourOutfitArray;
+    console.log('add outfit button was clicked. state updated in App.jsx')
+    var yourOutfitArray = this.props.yourOutfitArray;
+    console.log('outfit array props recevied at component ')
     this.setState({
       yourOutfit: yourOutfitArray
+    }, () => {
+      console.log('state updated in outfit component')
     })
   }
 
   handleDeleteOutfit(styleId) {
-    console.log('styleId', styleId)
-    var updatedOutfitArray;
-    const yourOutfitArray = JSON.parse(JSON.stringify(this.state.yourOutfit));
 
-    console.log('before', yourOutfitArray)
+    var yourOutfitArray = this.state.yourOutfit;
 
-    for (var i = 0; i< yourOutfitArray.length; i++) {
-      if (yourOutfitArray[i].style_id === styleId) {
-        console.log('before', yourOutfitArray)
-        console.log('id match', yourOutfitArray[i].style_id)
-        updatedOutfitArray = yourOutfitArray.slice(i, 1)
-        console.log('after', updatedOutfitArray)
-      }
-    }
+    var deleteOutfitAtIndex = yourOutfitArray.findIndex(element => element.style_id === styleId);
+
+    yourOutfitArray.splice(deleteOutfitAtIndex, 1);
 
     this.setState({
-      yourOutfit: updatedOutfitArray
+      yourOutfit: yourOutfitArray
     })
 
   }

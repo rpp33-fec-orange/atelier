@@ -45,8 +45,8 @@ class RelatedProductCard extends React.Component {
 
     const  { parentProduct, relatedProduct, currentPosition, handleProductChange } = this.props;
 
-    console.log('relatedProduct', relatedProduct)
-    console.log('parentProduct', parentProduct)
+    // console.log('relatedProduct', relatedProduct)
+    // console.log('parentProduct', parentProduct)
 
     return (
         <div className = "related-product-card" /*style = {columnStyle}*/ onClick = {() => {handleProductChange(relatedProduct.id)}}>

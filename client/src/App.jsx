@@ -42,27 +42,20 @@ class App extends React.Component {
   currentStyleHandler(selectedStyle) {
       this.setState({
         currentStyle: selectedStyle
+      }, () => {
+        console.log('currentStyle changed')
       })
   }
 
   yourOutfitHandleClick () {
 
-    console.log('currentStyle', this.state.currentStyle)
+    // console.log('currentStyle', this.state.currentStyle)
     var currentStyle =  this.state.currentStyle;
+    var yourOutfit = this.state.yourOutfitArray;
 
-    if (currentStyle) {
-      var currentStyleId = currentStyle.style_id;
-      var yourOutfit = JSON.parse(JSON.stringify(this.state.yourOutfitArray));
+    const styleExists = yourOutfit.findIndex(element => element.style_id === currentStyle.style_id)
 
-      if (yourOutfit.length !== 0) {
-        for (var i = 0; i < yourOutfit.length; i++) {
-          if (yourOutfit[i].style_id === currentStyleId) {
-            continue;
-          } else {
-            yourOutfit.push(currentStyle);
-          }
-        }
-      } else {
+      if (styleExists === -1) {
         yourOutfit.push(currentStyle);
       }
 
@@ -71,7 +64,6 @@ class App extends React.Component {
       }, () => {
         console.log('array updated', this.state.yourOutfitArray)
       })
-    }
   }
 
   handleProductChange(productId) {
