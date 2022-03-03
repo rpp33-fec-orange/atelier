@@ -11,17 +11,15 @@ const columnStyle = {
   width: '150'
 };
 
-const addToOutfit = '+'
+const addToOutfit = 'https://images.cdn1.stockunlimited.net/preview1300/plus-sign_1647891.jpg'
 
 const AddtoOutfitCard = (props) => {
 
     return (
-      <div className = " your-outfit-row" style = {rowStyle} align = 'center'>
         <div className = "col-md-2" style = {columnStyle}>
-          {/* <img src = {addSign} alt = "Sample Image" height = "150" width = '150' onClick = {(e) => {props.handleClick(e)}}/> */}
-          <div className = "add-to-outfit-button" style = {columnStyle} onClick = {(e) => {props.handleClick(e)}} height = "150" width = '150'>{addToOutfit}</div>
+          <img src = {addToOutfit} alt = "Sample Image" height = "150" width = '150' onClick = {(e) => {props.handleClick(e)}}/>
+          <div className = "add-to-outfit-button" onClick = {(e) => {props.handleClick(e)}} height = "150" width = '150'></div>
         </div>
-    </div>
     )
 
 }

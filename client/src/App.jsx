@@ -17,6 +17,7 @@ class App extends React.Component {
     this.productsHandler = this.productsHandler.bind(this);
     this.currentStyleHandler = this.currentStyleHandler.bind(this);
     this.yourOutfitHandleClick = this.yourOutfitHandleClick.bind(this);
+    this.handleProductChange = this.handleProductChange.bind(this);
   }
 
   productsHandler() {
@@ -39,27 +40,24 @@ class App extends React.Component {
   }
 
   currentStyleHandler(selectedStyle) {
-    this.setState({
-      currentStyle: selectedStyle
-    })
+      this.setState({
+        currentStyle: selectedStyle
+      })
   }
 
   yourOutfitHandleClick () {
 
     console.log('currentStyle', this.state.currentStyle)
-    // alert('success');
-
     var currentStyle =  this.state.currentStyle;
 
     if (currentStyle) {
-
       var currentStyleId = currentStyle.style_id;
-      var yourOutfit = this.state.yourOutfitArray;
+      var yourOutfit = JSON.parse(JSON.stringify(this.state.yourOutfitArray));
 
       if (yourOutfit.length !== 0) {
         for (var i = 0; i < yourOutfit.length; i++) {
           if (yourOutfit[i].style_id === currentStyleId) {
-            break;
+            continue;
           } else {
             yourOutfit.push(currentStyle);
           }
@@ -73,13 +71,21 @@ class App extends React.Component {
       }, () => {
         console.log('array updated', this.state.yourOutfitArray)
       })
-
     }
+  }
+
+  handleProductChange(productId) {
+
+    console.log('id in app', productId)
+    this.setState({
+      id: productId
+    }, () => {
+      console.log('updated state', this.state.id)
+    })
   }
 
   componentDidMount() {
     this.productsHandler();
-    this.yourOutfitHandleClick ();
   }
 
   render() {
@@ -88,7 +94,7 @@ class App extends React.Component {
       return (
         <div id="container">
           <ProductOverview id={this.state.id} currentStyleHandler = {this.currentStyleHandler} yourOutfitHandleClick = {this.yourOutfitHandleClick}/>
-          <RelatedProducts id={this.state.id} yourOutfitArray = {this.state.yourOutfitArray} yourOutfitHandleClick = {this.yourOutfitHandleClick}/>
+          <RelatedProducts id={this.state.id} yourOutfitArray = {this.state.yourOutfitArray} yourOutfitHandleClick = {this.yourOutfitHandleClick} handleProductChange = {this.handleProductChange}/>
           <QuestionsAnswers id={this.state.id} />
           <RatingsReviews id={this.state.id}/>
         </div>
@@ -105,4 +111,3 @@ class App extends React.Component {
 
 export default App;
 
-{/* <RelatedProducts id={this.state.id} currentStyle = {this.state.currentStyle} yourOutfitHandleClick = {this.yourOutfitHandleClick}/> */}

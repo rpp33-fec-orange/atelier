@@ -103,12 +103,13 @@ class Styles extends React.Component {
   }
 
   favoriteClick() {
+    // this.props.currentStyleHandler(this.state.currentStyle);
     this.props.yourOutfitHandleClick(); //storage parameter???
   }
 
-  // componentDidMount() {
-  //   this.props.currentStyleHandler(this.state.currentStyle);
-  // }
+  componentDidMount() {
+    this.props.currentStyleHandler(this.state.currentStyle);
+  }
 
   render() {
     let productById = this.state.productById;

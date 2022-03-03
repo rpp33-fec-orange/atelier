@@ -87,7 +87,17 @@ app.get('/products/:product_id/related', function (req, res) {
   var relatedProducts = [];
   getRelatedProductsById(req.params.product_id)
     .then((productData) => {
-      // console.log('server getProductById success', productData);
+      console.log('server getProductById success', productData);
+
+      //
+      // for (var i=0; i < productData.length; i++) {
+      //   relatedProducts.push(productData[i])
+      //   relatedProducts.push(productData[i])
+      // }
+      // console.log('server relatedProducts ', relatedProducts);
+
+      //
+
       relatedProducts = productData;
       getRelatedStylesById(req.params.product_id)
         .then((stylesData) => {

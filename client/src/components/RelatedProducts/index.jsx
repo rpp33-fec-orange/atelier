@@ -7,10 +7,10 @@ class RelatedProducts extends React.Component {
 
   constructor(props) {
 
-    var product_id = props.id
+    // var product_id = props.id
     super(props);
     this.state = {
-      product_id: product_id,
+      product_id: null,
       relatedProducts: [],
       relatedProductsInfo: [],
       relatedStylesInfo: [],
@@ -26,11 +26,12 @@ class RelatedProducts extends React.Component {
     $.ajax({
       context: this,
       type: 'GET',
-      url: `/products/${this.state.product_id}`,
+      url: `/products/${this.props.id}`,
       contentType: "application/json",
       success: function (data) {
         // console.log('parent product data received by client', data)
         this.setState({
+          product_id: this.props.id,
           parentProduct: [data]
         })
       },
@@ -44,7 +45,7 @@ class RelatedProducts extends React.Component {
     $.ajax({
       context: this,
       type: 'GET',
-      url: `/products/${this.state.product_id}/styles`,
+      url: `/products/${this.props.id}/styles`,
       contentType: "application/json",
       success: function (data) {
         // console.log('parent product styles data received by client', data)
@@ -65,12 +66,13 @@ class RelatedProducts extends React.Component {
     $.ajax({
       context: this,
       type: 'GET',
-      url: `/products/${this.state.product_id}/related`,
+      url: `/products/${this.props.id}/related`,
       contentType: "application/json",
       success: function (data) {
         // console.log('product data received by client', data)
 
-        const relatedProductsIds = data.shift();
+        var relatedProductsIds = data.shift();
+        // relatedProductsIds = data.shift();
 
           this.setState({
             relatedProductsInfo: data,
@@ -91,7 +93,7 @@ class RelatedProducts extends React.Component {
       <div id = 'related-products-and-items'>
         <div className = "related-products-row">
           <h4 id = 'related-products'>Related Products</h4>
-          <RelatedProductsRow relatedProductsIds = {this.state.relatedProductsIds} parentProduct = {this.state.parentProduct} relatedProductsInfo = {this.state.relatedProductsInfo}/>
+          <RelatedProductsRow relatedProductsIds = {this.state.relatedProductsIds} parentProduct = {this.state.parentProduct} relatedProductsInfo = {this.state.relatedProductsInfo} handleProductChange = {this.props.handleProductChange}/>
         </div>
         <div className = "your-outfit-row">
           <h4 id = 'your-outfit'>Your Outfit</h4>

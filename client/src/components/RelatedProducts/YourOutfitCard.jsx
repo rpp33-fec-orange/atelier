@@ -17,32 +17,27 @@ const photoUnavailable = 'https://icon-library.com/images/no-picture-available-i
 class YourOutfitCard extends React.Component {
 
   constructor(props) {
-
     super(props);
-
     this.state = {
-      showModal: false
     }
-
-    // this.handleProductClick = this.handleProductClick.bind(this);
-    // this.handleModalClick = this.handleModalClick.bind(this);
-
   }
 
   render() {
 
-    const  { product } = this.props;
-
-    // console.log('product', product)
+    const  { product, handleDelete} = this.props;
+    // console.log('delete', handleDelete)
 
     return (
       <div className = "col-md-2" style = {columnStyle}>
+        <div>
+        <button className = 'delete-button' onClick = {() => {handleDelete(product.style_id)}} align = 'right'></button>
+        </div>
         {/* <div className="your-outfit-card" align = 'right'> */}
-          <img className = 'your-outfit-image' src = {product.photos[0].url || photoUnavailable} alt = {product.name} height = "150" width = '150'/>
-          {/* <div className = 'your-outfit-star' onClick={this.handleModalClick}></div> */}
-          {/* <div className = 'your-outfit-category'>{product.category}</div> */}
-          <div className = 'your-outfit-name'>{product.name}</div>
-          <div className = 'your-outfit-price'>${product.original_price}</div>
+        <img className = 'your-outfit-image' src = {product.photos[0].url || photoUnavailable} alt = {product.name} height = "150" width = '150'/>
+        {/* <div className = 'your-outfit-star' onClick={this.handleModalClick}></div> */}
+        {/* <div className = 'your-outfit-category'>{product.category}</div> */}
+        <div className = 'your-outfit-name'>{product.name}</div>
+        <div className = 'your-outfit-price'>${product.original_price}</div>
         {/* </div> */}
         <div className = 'your-outfit-rating'>★★★★☆</div>
       </div>

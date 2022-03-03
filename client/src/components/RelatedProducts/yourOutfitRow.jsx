@@ -22,72 +22,58 @@ class YourOutfitRow extends React.Component {
     this.state = {
       yourOutfit: []
     }
-    this.handleClick = this.handleClick.bind(this);
+    this.handleAddOutfit = this.handleAddOutfit.bind(this);
+    this.handleDeleteOutfit = this.handleDeleteOutfit.bind(this);
   }
 
-  handleClick () {
-
+  handleAddOutfit () {
     this.props.yourOutfitHandleClick();
-
-    var yourOutfitArray = this.props.yourOutfitArray;
-
+    const yourOutfitArray = this.props.yourOutfitArray;
     this.setState({
       yourOutfit: yourOutfitArray
     })
+  }
 
-    // console.log('currentStyle', this.props.currentStyle)
-    // // alert('success');
+  handleDeleteOutfit(styleId) {
+    console.log('styleId', styleId)
+    var updatedOutfitArray;
+    const yourOutfitArray = JSON.parse(JSON.stringify(this.state.yourOutfit));
 
-    // var currentStyle =  this.props.currentStyle;
+    console.log('before', yourOutfitArray)
 
-    // if (currentStyle) {
+    for (var i = 0; i< yourOutfitArray.length; i++) {
+      if (yourOutfitArray[i].style_id === styleId) {
+        console.log('before', yourOutfitArray)
+        console.log('id match', yourOutfitArray[i].style_id)
+        updatedOutfitArray = yourOutfitArray.slice(i, 1)
+        console.log('after', updatedOutfitArray)
+      }
+    }
 
-    //   var currentStyleId = currentStyle.style_id;
-    //   var yourOutfitArray = this.state.yourOutfit;
+    this.setState({
+      yourOutfit: updatedOutfitArray
+    })
 
-    //   if (this.state.yourOutfit.length !== 0) {
-    //     for (var i = 0; i < yourOutfitArray.length; i++) {
-    //       if (yourOutfitArray[i].style_id === currentStyleId) {
-    //         break;
-    //       } else {
-    //         yourOutfitArray.push(currentStyle);
-    //       }
-    //     }
-    //   } else {
-    //     yourOutfitArray.push(currentStyle);
-    //   }
-
-    //   this.setState({
-    //     yourOutfit: yourOutfitArray
-    //   }, () => {
-    //     console.log('array updated', this.state.yourOutfit)
-    //   })
-
-    // }
   }
 
   render() {
 
     const {yourOutfit} = this.state;
-
     var DOMarray = '';
-
-
     if (yourOutfit.length > 0) {
       DOMarray = yourOutfit.map((product) => {
         return (
-          <YourOutfitCard product = {product}/>
+          <YourOutfitCard product = {product} handleDelete = {this.handleDeleteOutfit}/>
         )
       })
     }
 
     return (
-      <div>
-        <AddtoOutfitCard handleClick = {this.handleClick}/>
+      <div className = " your-outfit-row" style = {rowStyle} align = 'left'>
+        <AddtoOutfitCard handleClick = {this.handleAddOutfit}/>
         {DOMarray}
       </div>
     )
-
   }
 }
 
