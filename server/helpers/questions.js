@@ -59,14 +59,43 @@ const getQuestionsByProductId = (id) => {
           let answerDateString = getDateString(answer.date);
           answer.date = answerDateString;
           answer.reported = false;
+          answer.marked_helpful = false;
         });
 
+        question.marked_helpful = false;
         question.answers = sortedAnswers;
       });
 
       return sortedQuestions;
     });
 };
+
+const markQuestionHelpful = (question_id) => {
+
+  return axios({
+    method: 'put',
+    url: `${options.baseUrl}/qa/questions/${question_id}/helpful`,
+    responseType: 'json',
+    headers: options.auth,
+    validateStatus: (status) => {
+      return status === 204;
+    }
+  });
+};
+
+const markAnswerHelpful = (answer_id) => {
+
+  return axios({
+    method: 'put',
+    url: `${options.baseUrl}/qa/answers/${answer_id}/helpful`,
+    responseType: 'json',
+    headers: options.auth,
+    validateStatus: (status) => {
+      return status === 204;
+    }
+  });
+};
+
 
 const reportQuestion = (question_id) => {
 
@@ -97,6 +126,8 @@ const reportAnswer = (answer_id) => {
 
 module.exports = {
   getQuestionsByProductId,
+  markQuestionHelpful,
+  markAnswerHelpful,
   reportQuestion,
   reportAnswer
 };

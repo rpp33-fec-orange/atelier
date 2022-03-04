@@ -22,6 +22,8 @@ class QuestionsAnswers extends React.Component {
     this.getMoreAnswers = this.getMoreAnswers.bind(this);
     this.reportQuestion = this.reportQuestion.bind(this);
     this.reportAnswer = this.reportAnswer.bind(this);
+    this.markQuestionHelpful = this.markQuestionHelpful.bind(this);
+    this.markAnswerHelpful = this.markAnswerHelpful.bind(this);
   }
 
   componentDidMount() {
@@ -108,9 +110,63 @@ class QuestionsAnswers extends React.Component {
 
   submitAnswer() {}
 
-  markQuestionHelpful() {}
+  markQuestionHelpful(questionId) {
+    $.ajax({
+      context: this,
+      type: 'PUT',
+      url: `qa/questions/${questionId}/helpful`,
+      success: () => {
+        let { allQuestions, renderedQuestions } = this.state;
 
-  markAnswerHelpful() {}
+        let questionIndex = allQuestions.findIndex(question => {
+          return question.question_id === questionId;
+        });
+
+        allQuestions[questionIndex].marked_helpful = true;
+        renderedQuestions[questionIndex].marked_helpful = true;
+
+        allQuestions[questionIndex].question_helpfulness++;
+        renderedQuestions[questionIndex].question_helpfulness++;
+
+        this.setState({
+          allQuestions: allQuestions,
+          renderedQuestions: renderedQuestions
+        });
+      },
+      dataType: 'json'
+    });
+  }
+
+  markAnswerHelpful(questionId, answerId) {
+    $.ajax({
+      context: this,
+      type: 'PUT',
+      url: `qa/answers/${answerId}/helpful`,
+      success: () => {
+        let { allQuestions, renderedQuestions } = this.state;
+
+        let questionIndex = allQuestions.findIndex(question => {
+          return question.question_id === questionId;
+        });
+
+        let answerIndex = allQuestions[questionIndex].answers.findIndex(answer => {
+          return answer.id === answerId;
+        });
+
+        allQuestions[questionIndex].answers[answerIndex].marked_helpful = true;
+        renderedQuestions[questionIndex].answers[answerIndex].marked_helpful = true;
+
+        allQuestions[questionIndex].answers[answerIndex].helpfulness++;
+        renderedQuestions[questionIndex].answers[answerIndex].helpfulness++;
+
+        this.setState({
+          allQuestions: allQuestions,
+          renderedQuestions: renderedQuestions
+        });
+      },
+      dataType: 'json'
+    });
+  }
 
   reportQuestion(questionId) {
     $.ajax({
@@ -181,6 +237,8 @@ class QuestionsAnswers extends React.Component {
                 <QuestionItem
                   question={questionObject}
                   loadMore={this.getMoreAnswers}
+                  helpfulQuestion={this.markQuestionHelpful}
+                  helpfulAnswer={this.markAnswerHelpful}
                   reportQuestion={this.reportQuestion}
                   reportAnswer={this.reportAnswer}
                 />

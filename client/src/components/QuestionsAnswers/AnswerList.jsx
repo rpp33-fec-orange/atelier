@@ -16,8 +16,8 @@ class AnswerList extends React.Component {
     this.props.reportAnswer(id);
   }
 
-  markAnswerHelpful() {
-    this.props.markAnswerHelpful();
+  markAnswerHelpful(answerId) {
+    this.props.markAnswerHelpful(answerId);
   }
 
   loadMoreAnswers() {
@@ -44,7 +44,15 @@ class AnswerList extends React.Component {
         </div>
         <span className="answerActions">
           {`by ${answer.answerer_name}, ${answer.date}  |  Helpful? `}
-          <span className="markAnswerHelpful" onClick={this.markAnswerHelpful}>Yes</span>
+          {
+            !answer.marked_helpful
+            ?
+            <span className="markAnswerHelpful-unmarked" onClick={() => this.markAnswerHelpful(answer.id)}>
+              Yes
+            </span>
+            :
+            <span className="markAnswerHelpful-marked">Yes</span>
+          }
           {`(${answer.helpfulness})  |  `}
           {
             !answer.reported

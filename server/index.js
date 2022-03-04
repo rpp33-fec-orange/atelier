@@ -2,7 +2,7 @@ const express = require('express');
 const { getProducts, getProductById, getProductStylesById } = require('./helpers/products.js');
 const { addToCart, getCart } = require('./helpers/cart.js');
 const { getRelatedStylesById, getProductsById } = require('./helpers/relatedItems.js');
-const { getQuestionsByProductId, reportQuestion, reportAnswer } = require('./helpers/questions.js');
+const { getQuestionsByProductId, markQuestionHelpful, markAnswerHelpful, reportQuestion, reportAnswer } = require('./helpers/questions.js');
 const getReviewsByID = require('./helpers/reviews.js').getReviewsByID;
 
 let app = express();
@@ -55,6 +55,28 @@ app.get('/qa/questions/:product_id', (req, res) => {
     })
     .catch(() => {
       // console.log('server getQuestionsByProductId error');
+      res.status(400).end();
+    });
+});
+
+app.put('/qa/questions/:question_id/helpful', (req, res) => {
+  let id = req.params.question_id;
+  markQuestionHelpful(id)
+    .then(() => {
+      res.status(204).end();
+    })
+    .catch(() => {
+      res.status(400).end();
+    });
+});
+
+app.put('/qa/answers/:answer_id/helpful', (req, res) => {
+  let id = req.params.answer_id;
+  markAnswerHelpful(id)
+    .then(() => {
+      res.status(204).end();
+    })
+    .catch(() => {
       res.status(400).end();
     });
 });

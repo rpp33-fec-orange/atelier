@@ -7,6 +7,7 @@ class QuestionItem extends React.Component {
     this.state = {};
     this.addAnswer = this.addAnswer.bind(this);
     this.markQuestionHelpful = this.markQuestionHelpful.bind(this);
+    this.markAnswerHelpful = this.markAnswerHelpful.bind(this);
     this.reportQuestion = this.reportQuestion.bind(this);
     this.reportAnswer = this.reportAnswer.bind(this);
   }
@@ -15,8 +16,17 @@ class QuestionItem extends React.Component {
     // this.props.addAnswer();
   }
 
-  markQuestionHelpful() {
-    // this.props.markQuestionHelpful();
+  markQuestionHelpful(questionId) {
+    this.props.helpfulQuestion(questionId);
+  }
+
+  markAnswerHelpful(answerId) {
+    let questionId = this.props.question.question_id;
+    this.props.helpfulAnswer(questionId, answerId);
+  }
+
+  reportQuestion(questionId) {
+    this.props.reportQuestion(questionId);
   }
 
   reportAnswer(answerId) {
@@ -24,9 +34,6 @@ class QuestionItem extends React.Component {
     this.props.reportAnswer(questionId, answerId);
   }
 
-  reportQuestion(questionId) {
-    this.props.reportQuestion(questionId);
-  }
 
   render() {
     let question = this.props.question;
@@ -40,13 +47,22 @@ class QuestionItem extends React.Component {
             answers={question.answers}
             questionId={question.question_id}
             loadMore={this.props.loadMore}
+            markAnswerHelpful={this.markAnswerHelpful}
             reportAnswer={this.reportAnswer}
           />
         </div>
         <div className="questionAction" style={{display: 'inline-block'}}>
           <span className="questionHelpfulness">
             Helpful?
-            <span className="markQuestionHelpful" onClick={this.markQuestionHelpful}>Yes</span>
+            {
+              !question.marked_helpful
+              ?
+              <span className="markQuestionHelpful-unmarked" onClick={() => this.markQuestionHelpful(question.question_id)}>
+                Yes
+              </span>
+              :
+              <span className="markQuestionHelpful-marked">Yes</span>
+            }
             {`(${question.question_helpfulness})  |  `}
             <span className="addAnswer" onClick={this.addAnswer}>Add Answer</span>
             {'  |  '}
