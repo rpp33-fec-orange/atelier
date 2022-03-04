@@ -61,13 +61,19 @@
 }
 
 .styles-item-1-1 {
-  top: 50px;
-  left: 80px;
-  position: absolute;
-  z-index: 1;
   display: flex;
   margin: 5px;
   background-color: yellow;
+}
+
+.styles-item-1-1-1 {
+  object-fit: cover;
+  width: 590px;
+  height: 470px;
+  top: 110px;
+  left: 170px;
+  position: absolute;
+  z-index: 1;
 }
 
 .styles-item-1-2 {
@@ -84,6 +90,10 @@
 .styles-item-1-2-1 {
   margin: 5px;
   background-color: yellow;
+  cursor: pointer;
+  object-fit: cover;
+  width: 60px;
+  height: 60px;
 }
 
 .styles-item-2 {
@@ -350,18 +360,18 @@
   font-size: 15px;
 }
 
-#mainPhoto {
+/* #mainPhoto {
   object-fit: cover;
   width: 590px;
   height: 470px;
-}
+} */
 
-#subPhoto{
+/* #subPhoto{
   cursor: pointer;
   object-fit: cover;
   width: 60px;
   height: 60px;
-}
+} */
 
 #styleThumbnail {
   border-radius: 50%;
@@ -449,17 +459,21 @@
 #collapsed-left-arrow {
   cursor: pointer;
   position: absolute;
-  top: 495px;
-  left: 100px;
+  top: 552px;
+  left: 178px;
   z-index: 3;
+  background-color: white;
+  border-radius: 50%;
 }
 
 #collapsed-right-arrow {
   cursor: pointer;
   position: absolute;
-  top: 495px;
-  left: 645px;
+  top: 550px;
+  left: 740px;
   z-index: 3;
+  background-color: white;
+  border-radius: 50%;
 }
 
 #expanded-left-arrow {
@@ -468,6 +482,8 @@
   top: 325px;
   left: 200px;
   z-index: 3;
+  background-color: white;
+  border-radius: 50%;
 }
 
 #expanded-right-arrow {
@@ -476,4 +492,6 @@
   top: 325px;
   left: 1060px;
   z-index: 3;
+  background-color: white;
+  border-radius: 50%;
 }
