@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import StarRating from '../RatingsReviews/StarRating.jsx';
 
 class Styles extends React.Component {
   constructor(props) {
@@ -112,6 +113,7 @@ class Styles extends React.Component {
     let currentSku = this.state.currentSku;
     let mainPhotoURL = this.state.mainPhotoURL;
     let subPhotos = this.state.subPhotos;
+    console.log('this.props.rating inside Styles.jsx is: ', this.props.rating);
     return (
       <div>
         <div id="photos">
@@ -121,7 +123,8 @@ class Styles extends React.Component {
           )}
         </div>
         <div id="details">
-          <div id="rating">{rating}</div>
+          {/* <div id="rating">{rating}</div> */}
+          <StarRating num={this.props.rating}/>
           <div id="category">{productById.category}</div>
           <div id="name">{productById.name}</div>
           <div id="price">{productById.default_price}</div>

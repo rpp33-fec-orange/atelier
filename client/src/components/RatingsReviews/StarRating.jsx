@@ -39,7 +39,9 @@ class StarRating extends React.Component {
 				stars.push(<img className="star" src={this.state.fullStar} key={i} />);
 			}
 		}
-		stars.push(<img className="star" src={this.state[leftoverNumStr]} key={mainNum} />);
+		if (mainNum < 5) {
+			stars.push(<img className="star" src={this.state[leftoverNumStr]} key={mainNum} />);
+		}
 		console.log('this is stars: ', stars);
 		return stars;
 	}
@@ -50,6 +52,19 @@ class StarRating extends React.Component {
 
 	render() {
 		var stars = this.renderStars();
+		// var renderStars = (
+		// 	<div className="container">
+		// 		<img className="star" src={this.state[0]} />
+		// 		<img className="star" src={this.state[0]} />
+		// 		<img className="star" src={this.state[0]} />
+		// 		<img className="star" src={this.state[0]} />
+		// 		<img className="star" src={this.state[0]} />
+		// 		<div className="filledStars">{stars}</div>
+		// 	</div>
+		// );
+			console.log('props in StarRating: ', this.props);
+		// this.props.handleRating(renderStars)
+
 		return (
 			<div className="container">
 				<img className="star" src={this.state[0]} />

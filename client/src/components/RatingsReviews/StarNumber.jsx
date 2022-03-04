@@ -15,7 +15,8 @@ class StarNumber extends React.Component {
 			five: 0
 		};
 		this.percentRecommended = this.percentRecommended.bind(this);
-		this.fillStars = this.fillStars.bind(this);
+		this.setRatingSummary = this.setRatingSummary.bind(this);
+		this.giveRating = this.giveRating.bind(this);
 		// this.ratingSummary = this.ratingSummary.bind(this);
 	}
 
@@ -30,7 +31,57 @@ class StarNumber extends React.Component {
 		return Math.round(result * 100) / 100;
 	}
 
+	// componentDidMount() {
+	// 	this.setRatingSummary();
+
+	// 	// insert handleGetRating here
+	// 	var rating = this.state.ratingSummary;
+	// 	console.log('this.state.ratingSummary inside StarNumber is: ', rating);
+	// }
+
 	componentDidMount() {
+		// var promise = new Promise((resolve, reject)) {
+		// 	var rating = this.setRatingSummary();
+		// 	if (error) {
+		// 		reject(error);
+		// 	} else {
+		// 		resolve(rating, one, two, three, four, five);
+		// 	}
+		// }
+		// promise.then((results) =>
+		// 	this.setState({
+		// 		one: results[1],
+		// 		two: results[2],
+		// 		three: results[3],
+		// 		four: results[4],
+		// 		five: results[5],
+		// 		ratingSummary: results[0]
+		// 	});
+		// )
+		// .catch((error) =>
+    //   console.log('promise error in StarNumber!');
+		// );
+		var results = this.setRatingSummary();
+		this.setState({
+			one: results[1],
+			two: results[2],
+			three: results[3],
+			four: results[4],
+			five: results[5],
+			ratingSummary: results[0]
+		}, this.giveRating);
+	}
+
+	giveRating() {
+		var ratingSummary = this.state.ratingSummary;
+		this.props.handleGetRating(ratingSummary);
+	}
+
+	setRatingSummary() {
+		console.log('this function will fill your stars!');
+		// round stars number up to a quarter of a review point.
+		// We have : 0.00, 0.25, 0.50, 0.75, and 1.00
+		var results = [];
 		var percentage = this.percentRecommended();
 		this.setState({
 			percentage: percentage
@@ -49,27 +100,18 @@ class StarNumber extends React.Component {
 		var sum = one + two + three + four + five;
 		var ratingSummary = (1 * one + 2 * two + 3 * three + 4 * four + 5 * five) / sum;
 		ratingSummary = Math.round(ratingSummary * 100) / 100;
-		this.setState({
-			one: one,
-			two: two,
-			three: three,
-			four: four,
-			five: five,
-			ratingSummary: ratingSummary
-		});
-	}
+		results.push(ratingSummary, one, two, three, four, five);
+		return results;
 
-  fillStars(stars) {
-		console.log('this function will fill your stars!');
-		// round stars number up to a quarter of a review point.
-		// We have : 0.00, 0.25, 0.50, 0.75, and 1.00
 	}
 
 	render() {
 		return (
 			<div className="one" id="one">
 				<h1 className="rating-summary">{this.state.ratingSummary}</h1>
-				<StarRating num={this.state.ratingSummary} />
+				<StarRating num={this.state.ratingSummary} handleRating={this.props.handleRating} />
+				{/* <StarRating num={3.45} /> */}
+
 				{/* <div>&#9733;&#9733;&#9733;&#9734;&#9734;</div> */}
 				<div>{this.state.percentage}% of reviews recommend this product</div>
 			</div>

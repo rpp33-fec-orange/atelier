@@ -84,7 +84,7 @@ class ProductOverview extends React.Component {
       return (
         <div id="overview">
           {/* <TopBar searchHandler={this.searchHandler} /> */}
-          <Styles productById={this.state.productById} productStylesById={this.state.productStylesById} />
+          <Styles productById={this.state.productById} productStylesById={this.state.productStylesById} rating={this.props.rating} />
           <Descriptions productById={this.state.productById} />
         </div>
       )
