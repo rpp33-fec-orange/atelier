@@ -19,35 +19,23 @@ const photoUnavailable = 'https://icon-library.com/images/no-picture-available-i
 class RelatedProductCard extends React.Component {
 
   constructor(props) {
-
     super(props);
-
     this.state = {
       showModal: false
     }
-
-    // this.handleProductClick = this.handleProductClick.bind(this);
-    // this.handleModalClick = this.handleModalClick.bind(this);
-
+    this.showModal = this.showModal.bind(this);
   }
 
-  // style={{ transform: `translateX(${currentPosition}px)` }}
-
   showModal(e) {
-
     this.setState({
       showModal: !this.state.showModal
     })
-
   }
 
   render() {
-
     const  { parentProduct, relatedProduct, currentPosition, handleProductChange } = this.props;
-
     // console.log('relatedProduct', relatedProduct)
     // console.log('parentProduct', parentProduct)
-
     return (
         <div className = "related-product-card" /*style = {columnStyle}*/ onClick = {() => {handleProductChange(relatedProduct.id)}}>
           {/* <div className="related-product-card" align = 'right' > */}
@@ -55,11 +43,10 @@ class RelatedProductCard extends React.Component {
             <RelatedProductModal parentProduct = {parentProduct} relatedProduct = {relatedProduct} onClose = {this.showModal} show = {this.state.showModal}/>
             {/* </div> */}
             <img className = 'related-product-image' src = {relatedProduct.photos[0].url || photoUnavailable} alt = {relatedProduct.name} height = "150" width = '150'/>
-            <div className = "related-modal-star" onClick={this.handleModalClick}></div>
             <div className = 'related-product-category'>{relatedProduct.category}</div>
-            <div className = 'related-product-product-name'>{relatedProduct.name}</div>
-            <div className = 'related-product-product-price'>${relatedProduct.default_price}</div>
-            <div className = 'related-product-product-rating'>★★★★☆</div>
+            <div className = 'related-product-name'>{relatedProduct.name}</div>
+            <div className = 'related-product-price'>${relatedProduct.default_price}</div>
+            <div className = 'related-product-rating'>★★★★☆</div>
         </div>
     )
   }

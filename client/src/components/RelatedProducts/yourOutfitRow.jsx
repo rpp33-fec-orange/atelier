@@ -13,8 +13,6 @@ const columnStyle = {
   border: '1px solid #555'
 };
 
-
-
 class YourOutfitRow extends React.Component {
 
   constructor(props) {
@@ -24,6 +22,7 @@ class YourOutfitRow extends React.Component {
     }
     this.handleAddOutfit = this.handleAddOutfit.bind(this);
     this.handleDeleteOutfit = this.handleDeleteOutfit.bind(this);
+    this.scroll = this.scroll.bind(this);
   }
 
   handleAddOutfit () {
@@ -39,21 +38,21 @@ class YourOutfitRow extends React.Component {
   }
 
   handleDeleteOutfit(styleId) {
-
     var yourOutfitArray = this.state.yourOutfit;
-
     var deleteOutfitAtIndex = yourOutfitArray.findIndex(element => element.style_id === styleId);
-
     yourOutfitArray.splice(deleteOutfitAtIndex, 1);
-
     this.setState({
       yourOutfit: yourOutfitArray
-    })
+    });
+  }
 
+  scroll(direction) {
+    let far = $( '.related-product-container' ).width()/4*direction;
+    let pos = $('.related-product-container').scrollLeft() + far;
+    $('.related-product-container').animate( { scrollLeft: pos }, 1000)
   }
 
   render() {
-
     const {yourOutfit} = this.state;
     var DOMarray = '';
     if (yourOutfit.length > 0) {
@@ -65,9 +64,13 @@ class YourOutfitRow extends React.Component {
     }
 
     return (
-      <div className = " your-outfit-row" style = {rowStyle} align = 'left'>
-        <AddtoOutfitCard handleClick = {this.handleAddOutfit}/>
-        {DOMarray}
+      <div className = "wrapper">
+        <div className = "your-outfit-container">
+          <a className ='prev' onClick = {this.scroll.bind(null, -1)}>&#10094;</a>
+          <AddtoOutfitCard handleClick = {this.handleAddOutfit}/>
+          {DOMarray}
+          <a className ='next' onClick = {this.scroll.bind(null, 1)}>&#10095;</a>
+        </div>
       </div>
     )
   }
