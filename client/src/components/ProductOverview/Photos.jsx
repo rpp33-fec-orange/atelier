@@ -21,9 +21,31 @@ class Photos extends React.Component {
   }
 
   photoClick(e) {
-    this.setState({
-      mainPhotoURL: e.target.src
-    })
+    console.log('EVENT TARGET: ', e.target);
+    for (let i = 0; i < this.state.mainPhotoArray.length; i++) {
+      if (e.target.src === this.state.mainPhotoArray[i].url) {
+        let clickedIndex = i;
+        this.setState({
+          mainPhotoIndex: clickedIndex
+        })
+        if (i === 0) {
+          this.setState({
+            arrayLeftEnd: true,
+            arrayRightEnd: false
+          })
+        } else if (i === this.state.mainPhotoArray.length - 1) {
+          this.setState({
+            arrayLeftEnd: false,
+            arrayRightEnd: true
+          })
+        } else {
+          this.setState({
+            arrayLeftEnd: false,
+            arrayRightEnd: false
+          })
+        }
+      }
+    }
   }
 
   leftClick() {
