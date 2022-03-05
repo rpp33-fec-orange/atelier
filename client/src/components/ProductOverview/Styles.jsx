@@ -2,6 +2,7 @@ import React from 'react';
 import $ from 'jquery';
 import StarRating from '../RatingsReviews/StarRating.jsx';
 import Photos from './Photos.jsx';
+import YourOutfitRow from '.././RelatedProducts/YourOutfitRow.jsx'
 
 class Styles extends React.Component {
   constructor(props) {
@@ -53,6 +54,8 @@ class Styles extends React.Component {
           quantityArray: [],
           quantitySelectedBool: false,
           sizeStatus: ''
+        }, () => {
+          this.props.currentStyleHandler(this.state.currentStyle);
         });
       }
     }
@@ -113,6 +116,8 @@ class Styles extends React.Component {
 
   outfitClick() {
     console.log('add to outfit clicked!');
+    this.props.currentStyleHandler(this.state.currentStyle);
+    this.props.yourOutfitHandleClick();
   }
 
   reviewsClick() {
@@ -124,6 +129,10 @@ class Styles extends React.Component {
       quantitySelected: e.target.value,
       quantitySelectedBool: true
     })
+  }
+
+  componentDidMount() {
+    this.props.currentStyleHandler(this.state.currentStyle);
   }
 
   render() {
@@ -189,7 +198,6 @@ class Styles extends React.Component {
               <button class="styles-item-2-11" id="save-outfit-button" onClick={this.outfitClick}>SAVE OUTFIT</button>
             </div>
           </div >
->>>>>>> main
         </div >
       </div>
 

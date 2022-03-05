@@ -11,11 +11,16 @@ class App extends React.Component {
     this.state = {
       id: '',
       initialized: false,
-      rating: 0
+      rating: 0,
+      currentStyle: null,
+      yourOutfitArray: []
     }
     this.productsHandler = this.productsHandler.bind(this);
     this.handleRating = this.handleRating.bind(this);
     this.getRating = this.getRating.bind(this);
+    this.currentStyleHandler = this.currentStyleHandler.bind(this);
+    this.yourOutfitHandleClick = this.yourOutfitHandleClick.bind(this);
+    this.handleProductChange = this.handleProductChange.bind(this);
   }
 
   productsHandler() {
@@ -55,12 +60,41 @@ class App extends React.Component {
     });
   }
 
+  currentStyleHandler(selectedStyle) {
+    this.setState({
+      currentStyle: selectedStyle
+    }, () => {
+      console.log('currentStyle changed')
+    })
+  }
+
+  yourOutfitHandleClick () {
+    // console.log('currentStyle', this.state.currentStyle)
+    var currentStyle =  this.state.currentStyle;
+    var yourOutfit = this.state.yourOutfitArray;
+    const styleExists = yourOutfit.findIndex(element => element.style_id === currentStyle.style_id)
+      if (styleExists === -1) {
+        yourOutfit.push(currentStyle);
+      }
+      this.setState({
+        yourOutfitArray: yourOutfit
+      })
+  }
+
+  handleProductChange(productId) {
+    // console.log('id in app', productId)
+    this.setState({
+      id: productId
+    })
+  }
+
   render() {
+
     if (this.state.initialized) {
       return (
         <div id="container">
-          <ProductOverview id={this.state.id} rating={this.state.rating} />
-          <RelatedProducts id={this.state.id}/>
+          <ProductOverview id={this.state.id} rating={this.state.rating} currentStyleHandler = {this.currentStyleHandler} yourOutfitHandleClick = {this.yourOutfitHandleClick}/>
+          <RelatedProducts id={this.state.id} yourOutfitArray = {this.state.yourOutfitArray} yourOutfitHandleClick = {this.yourOutfitHandleClick} handleProductChange = {this.handleProductChange}/>
           <QuestionsAnswers id={this.state.id} />
           <RatingsReviews id={this.state.id} handleRating = {this.handleRating} handleGetRating={this.getRating} />
         </div>
@@ -76,3 +110,5 @@ class App extends React.Component {
 }
 
 export default App;
+
+
