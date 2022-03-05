@@ -1,10 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
-<<<<<<< HEAD
 import StarRating from '../RatingsReviews/StarRating.jsx';
-=======
 import Photos from './Photos.jsx';
->>>>>>> main
 
 class Styles extends React.Component {
   constructor(props) {
