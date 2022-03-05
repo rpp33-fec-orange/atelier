@@ -116,7 +116,6 @@ class Styles extends React.Component {
 
   outfitClick() {
     console.log('add to outfit clicked!');
-    this.props.currentStyleHandler(this.state.currentStyle);
     this.props.yourOutfitHandleClick();
   }
 
@@ -198,6 +197,7 @@ class Styles extends React.Component {
               <button class="styles-item-2-11" id="save-outfit-button" onClick={this.outfitClick}>SAVE OUTFIT</button>
             </div>
           </div >
+
         </div >
       </div>
 

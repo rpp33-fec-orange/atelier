@@ -78,36 +78,36 @@ class RelatedProductModal extends React.Component {
 
     if (show) {
       return (
-        <div className = 'modal'>
+        <div className = 'related-product-modal'>
           <div align = 'left'>Comparing</div>
-          <div className = 'modal-content'>
-            <div className = 'modal-table-header'>
+          <div className = 'related-product-modal-content'>
+            <div className = 'related-product-modal-table-header'>
               <table>
                 <tbody>
                   <tr>
-                    <th className="modal-col modal-col-1">{parentProduct.name}</th>
-                    <th className="modal-col modal-col-2"></th>
-                    <th className="modal-col modal-col-3">{relatedProduct.name}</th>
+                    <th className="related-product-modal-col related-product-modal-col-1">{parentProduct.name}</th>
+                    <th className="related-product-modal-col related-product-modal-col-2"></th>
+                    <th className="related-product-modal-col related-product-modal-col-3">{relatedProduct.name}</th>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <div className = 'modal-table-body'>
+            <div className = 'related-product-modal-table-body'>
               <table>
                 <tbody>
                   {combinedFeatures.map((feature) => {
                     return (<tr key = {feature.feature}>
-                      <th className="modal-col modal-col-1">{feature.parentProductValue}</th>
-                      <th className="modal-col modal-col-2">{feature.feature}</th>
-                      <th className="modal-col modal-col-3">{feature.relatedProductValue}</th>
+                      <th className="related-product-modal-col related-product-modal-col-1">{feature.parentProductValue}</th>
+                      <th className="related-product-modal-col mrelated-product-odal-col-2">{feature.feature}</th>
+                      <th className="related-product-modal-col related-product-modal-col-3">{feature.relatedProductValue}</th>
                     </tr>)
                   })}
                 </tbody>
               </table>
             </div>
           </div>
-          <div className = 'modal-actions'>
-            <button className = 'toggle-button' onClose = {(e) => {this.onClose(e)}}></button>
+          <div className = 'related-product-modal-actions'>
+            <button className = 'modal-close-button' onClick = {(e) => {this.onClose()}}>Close</button>
           </div>
         </div>
       )

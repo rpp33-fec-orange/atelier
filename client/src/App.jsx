@@ -69,7 +69,7 @@ class App extends React.Component {
   }
 
   yourOutfitHandleClick () {
-    // console.log('currentStyle', this.state.currentStyle)
+    console.log('currentStyle', this.state.currentStyle)
     var currentStyle =  this.state.currentStyle;
     var yourOutfit = this.state.yourOutfitArray;
     const styleExists = yourOutfit.findIndex(element => element.style_id === currentStyle.style_id)
@@ -78,6 +78,8 @@ class App extends React.Component {
       }
       this.setState({
         yourOutfitArray: yourOutfit
+      }, () => {
+        console.log('outfit updated')
       })
   }
 
