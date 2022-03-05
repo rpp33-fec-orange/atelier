@@ -30,9 +30,11 @@ class ReviewList extends React.Component {
 		super(props);
 		this.state = {
 			reviewList: [],
-			currentList: []
+			holdingReviews: [],
+			postPerShowing: 0
 		}
 		this.mappingReviews = this.mappingReviews.bind(this);
+		this.handleShowMoreReviews = this.handleShowMoreReviews.bind(this);
 	}
 
 	mappingReviews() {
@@ -44,13 +46,14 @@ class ReviewList extends React.Component {
 		this.setState({
       reviewList: reviewList
 		});
-		var currentList = [];
-		console.log('this is reviews: ', reviews);
-		console.log('finally, reviewList is: ', this.state.reviewList);
 	}
 
 	componentDidMount() {
 		this.mappingReviews();
+	}
+
+	handleShowMoreReviews() {
+		console.log('write logic for showing more reviews here!');
 	}
 
 
@@ -58,11 +61,12 @@ class ReviewList extends React.Component {
 	// When no more reviews can be added, such as when length of this.state.reviews is reached, hide the Add More button.
 
 	render() {
+		console.log('finally, this.state.reviewList in ReviewList is: ', this.state.reviewList);
 		return (
 			<div id="list">
 				{this.state.reviewList}
 				<div className="five" id="buttons">
-					<button>MORE REVIEWS</button>
+					<button onClick={handleShowMoreReviews}>MORE REVIEWS</button>
 					{/* <button>ADD A REVIEW</button> */}
 				</div>
 			</div>
