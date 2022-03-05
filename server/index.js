@@ -73,7 +73,8 @@ app.get('/cart', function (req, res) {
 });
 
 app.post('/cart', function (req, res) {
-  addToCart(req.body.cartItem)
+  console.log(req.body.skuId);
+  addToCart(req.body.skuId)
     .then((data) => {
       console.log('server addToCart success');
       res.status(201).send(data);
