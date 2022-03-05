@@ -10,9 +10,12 @@ class App extends React.Component {
     super(props);
     this.state = {
       id: '',
-      initialized: false
+      initialized: false,
+      rating: 0
     }
     this.productsHandler = this.productsHandler.bind(this);
+    this.handleRating = this.handleRating.bind(this);
+    this.getRating = this.getRating.bind(this);
   }
 
   productsHandler() {
@@ -34,18 +37,32 @@ class App extends React.Component {
     })
   }
 
+  handleRating(string){
+    console.log('star rating', string)
+  }
+
   componentDidMount() {
     this.productsHandler();
+  }
+
+  componentWillMount() {
+    this.getRating();
+  }
+
+  getRating(rating) {
+    this.setState({
+      rating: rating
+    });
   }
 
   render() {
     if (this.state.initialized) {
       return (
         <div id="container">
-          <ProductOverview id={this.state.id} />
+          <ProductOverview id={this.state.id} rating={this.state.rating} />
           <RelatedProducts id={this.state.id}/>
           <QuestionsAnswers id={this.state.id} />
-          <RatingsReviews id={this.state.id}/>
+          <RatingsReviews id={this.state.id} handleRating = {this.handleRating} handleGetRating={this.getRating} />
         </div>
       )
     } else {
