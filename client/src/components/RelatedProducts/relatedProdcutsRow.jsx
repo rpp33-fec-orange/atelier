@@ -6,17 +6,6 @@ import $ from 'jquery';
 
 const photoUnavailable = 'https://icon-library.com/images/no-picture-available-icon/no-picture-available-icon-1.jpg'
 
-const rowStyle = {
-  // display: 'flex'
-};
-
-const columnStyle = {
-  // flex: '33.33%',
-  // padding: '5px',
-  // border: '1px solid #555',
-  // width: '150'
-};
-
 class RelatedProductsRow extends React.Component {
 
   constructor(props) {
@@ -35,7 +24,10 @@ class RelatedProductsRow extends React.Component {
   }
 
   render () {
+
     const {relatedProductsIds, parentProduct, handleProductChange} = this.props;
+
+    // console.log('all related products', this.props.relatedProductsInfo)
 
     if (this.props.relatedProductsInfo === null) {
       return (
@@ -51,12 +43,12 @@ class RelatedProductsRow extends React.Component {
       });
 
       return (
-        <div className = "wrapper">
-          <div className = 'related-product-container'>
-            <a className ='prev' onClick = {this.scroll.bind(null, -1)}>&#10094;</a>
+        <div className = 'related-products-container'>
+          <a className ='prev' onClick = {this.scroll.bind(null, -1)}>&#10094;</a>
+          <div className = 'products-only-container'>
             {DOMarray}
-            <a className ='next' onClick = {this.scroll.bind(null, 1)}>&#10095;</a>
           </div>
+          <a className ='next' onClick = {this.scroll.bind(null, 1)}>&#10095;</a>
         </div>
       )
     }

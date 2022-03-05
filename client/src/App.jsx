@@ -61,18 +61,13 @@ class App extends React.Component {
 
       this.setState({
         yourOutfitArray: yourOutfit
-      }, () => {
-        console.log('array updated', this.state.yourOutfitArray)
       })
   }
 
   handleProductChange(productId) {
-
-    console.log('id in app', productId)
+    // console.log('id in app', productId)
     this.setState({
       id: productId
-    }, () => {
-      console.log('updated state', this.state.id)
     })
   }
 
@@ -102,4 +97,5 @@ class App extends React.Component {
 }
 
 export default App;
+
 

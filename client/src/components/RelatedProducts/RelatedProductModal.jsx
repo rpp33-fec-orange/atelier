@@ -19,8 +19,15 @@ class RelatedProductModal extends React.Component {
 
     const {parentProduct, relatedProduct} = this.props;
 
+    // console.log('props in modal ', this.props)
+    // console.log('parent product in modal', parentProduct)
+    // console.log('related products in modal', relatedProduct)
+
     var parentProductFeatures = parentProduct.features;
     var relatedProductFeatures = relatedProduct.features;
+
+    // console.log('parent product features', parentProductFeatures)
+    // console.log('related products features', relatedProductFeatures)
     var combinedFeatures = parentProductFeatures.concat(relatedProductFeatures);
 
     for (var i = 0; i < combinedFeatures.length; i++) {
@@ -99,15 +106,14 @@ class RelatedProductModal extends React.Component {
               </table>
             </div>
           </div>
-          {/* <div className = 'modal-actions'>
+          <div className = 'modal-actions'>
             <button className = 'toggle-button' onClose = {(e) => {this.onClose(e)}}></button>
-          </div> */}
+          </div>
         </div>
       )
     } else {
       return null;
     }
-
   }
 }
 

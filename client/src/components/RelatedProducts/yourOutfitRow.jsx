@@ -3,16 +3,6 @@ import images from './stockImages.jsx';
 import AddtoOutfitCard from './AddtoOutfitCard.jsx'
 import YourOutfitCard from './YourOutfitCard.jsx'
 
-const rowStyle = {
-  display: 'flex'
-};
-
-const columnStyle = {
-  flex: '33.33%',
-  padding: '5px',
-  border: '1px solid #555'
-};
-
 class YourOutfitRow extends React.Component {
 
   constructor(props) {
@@ -27,9 +17,9 @@ class YourOutfitRow extends React.Component {
 
   handleAddOutfit () {
     this.props.yourOutfitHandleClick();
-    console.log('add outfit button was clicked. state updated in App.jsx')
+    // console.log('add outfit button was clicked. state updated in App.jsx')
     var yourOutfitArray = this.props.yourOutfitArray;
-    console.log('outfit array props recevied at component ')
+    // console.log('outfit array props recevied at component ')
     this.setState({
       yourOutfit: yourOutfitArray
     }, () => {
@@ -64,13 +54,13 @@ class YourOutfitRow extends React.Component {
     }
 
     return (
-      <div className = "wrapper">
-        <div className = "your-outfit-container">
-          <a className ='prev' onClick = {this.scroll.bind(null, -1)}>&#10094;</a>
+      <div className = "your-outfit-container">
+        <a className ='prev' onClick = {this.scroll.bind(null, -1)}>&#10094;</a>
+        <div className = 'outfit-only-container'>
           <AddtoOutfitCard handleClick = {this.handleAddOutfit}/>
           {DOMarray}
-          <a className ='next' onClick = {this.scroll.bind(null, 1)}>&#10095;</a>
         </div>
+        <a className ='next' onClick = {this.scroll.bind(null, 1)}>&#10095;</a>
       </div>
     )
   }

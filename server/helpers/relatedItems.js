@@ -24,7 +24,7 @@ const getRelatedProductsById = (id) => { //This function makes a GET request for
     .then((productIds) => {
 
       relatedProductIds.relatedProductIds = productIds.data;
-      console.log('productIds at helper function', productIds.data)
+      // console.log('productIds at helper function', productIds.data)
       for (var i = 0; i < productIds.data.length; i++) {
 
         relatedProductsInfoPromiseArray.push(
