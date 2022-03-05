@@ -7,7 +7,16 @@ const options = {
   baseUrl: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp'
 };
 
-const getQuestionsByProductId = function(id) {
+const getDateString = (utcString) => {
+  let date = new Date(utcString);
+
+  let [monthNum, day, year] = [date.getMonth(), date.getDate(), date.getFullYear()];
+  let month = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(monthNum);
+
+  return `${month} ${day}, ${year}`;
+};
+
+const getQuestionsByProductId = (id) => {
 
   return axios({
     method: 'get',
@@ -19,7 +28,7 @@ const getQuestionsByProductId = function(id) {
     }
   })
     .then(success => {
-      console.log(`getQuestionsByProductId GET success`);
+      // console.log(`getQuestionsByProductId GET success`);
 
       let parsedQuestions = success.data.results.sort((pre, post) => {
         return post.question_helpfulness - pre.question_helpfulness;
@@ -43,6 +52,17 @@ const getQuestionsByProductId = function(id) {
           sortedAnswers.unshift(sellerAnswer);
         }
 
+        let questionDateString = getDateString(question.question_date);
+        question.question_date = questionDateString;
+
+        sortedAnswers.map(answer => {
+          let answerDateString = getDateString(answer.date);
+          answer.date = answerDateString;
+          answer.reported = false;
+          answer.marked_helpful = false;
+        });
+
+        question.marked_helpful = false;
         question.answers = sortedAnswers;
       });
 
@@ -50,5 +70,64 @@ const getQuestionsByProductId = function(id) {
     });
 };
 
+const markQuestionHelpful = (question_id) => {
 
-module.exports = { getQuestionsByProductId };
+  return axios({
+    method: 'put',
+    url: `${options.baseUrl}/qa/questions/${question_id}/helpful`,
+    responseType: 'json',
+    headers: options.auth,
+    validateStatus: (status) => {
+      return status === 204;
+    }
+  });
+};
+
+const markAnswerHelpful = (answer_id) => {
+
+  return axios({
+    method: 'put',
+    url: `${options.baseUrl}/qa/answers/${answer_id}/helpful`,
+    responseType: 'json',
+    headers: options.auth,
+    validateStatus: (status) => {
+      return status === 204;
+    }
+  });
+};
+
+
+const reportQuestion = (question_id) => {
+
+  return axios({
+    method: 'put',
+    url: `${options.baseUrl}/qa/questions/${question_id}/report`,
+    responseType: 'json',
+    headers: options.auth,
+    validateStatus: (status) => {
+      return status === 204;
+    }
+  });
+};
+
+const reportAnswer = (answer_id) => {
+
+  return axios({
+    method: 'put',
+    url: `${options.baseUrl}/qa/answers/${answer_id}/report`,
+    responseType: 'json',
+    headers: options.auth,
+    validateStatus: (status) => {
+      return status === 204;
+    }
+  });
+};
+
+
+module.exports = {
+  getQuestionsByProductId,
+  markQuestionHelpful,
+  markAnswerHelpful,
+  reportQuestion,
+  reportAnswer
+};

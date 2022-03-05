@@ -12,50 +12,81 @@ class AnswerList extends React.Component {
     this.loadMoreAnswers = this.loadMoreAnswers.bind(this);
   }
 
-  reportAnswer() {
-    this.props.reportAnswer();
+  reportAnswer(id) {
+    this.props.reportAnswer(id);
   }
 
-  markAnswerHelpful() {
-    this.props.markAnswerHelpful();
+  markAnswerHelpful(answerId) {
+    this.props.markAnswerHelpful(answerId);
   }
 
   loadMoreAnswers() {
-    this.props.loadMoreAnswers();
+    let id = this.props.questionId;
+    this.props.loadMore(id);
   }
 
   renderAnswerItem(answer) {
+    // console.log(`the answer object is: ${JSON.stringify(answer)}`);
     return (
-      <div className="answerItem">
-        <span className="answerKey">
-          A: <span className="answerText">{answer.body}</span>
-          {/* add conditional photo rendering logic here */}
-        </span>
-        <br></br>
+      <div className="answerItem" key={answer.id}>
+        <div className="answerKey">
+          <span className="answerText">{answer.body}</span>
+          <div className="answerImages">
+            {
+              !!answer.photos.length // only render if photos array contains urls
+              &&
+              answer.photos.map(photo => {
+                return (
+                  <img className="answerPhoto" src={photo} height="64" width="64"></img>
+                )
+              })
+            }
+          </div>
+        </div>
         <span className="answerActions">
           {`by ${answer.answerer_name}, ${answer.date}  |  Helpful? `}
-          <span className="markAnswerHelpful" onClick={this.markAnswerHelpful}>Yes</span>
+          {
+            !answer.marked_helpful
+            ?
+            <span className="markAnswerHelpful-unmarked" onClick={() => this.markAnswerHelpful(answer.id)}>
+              Yes
+            </span>
+            :
+            <span className="markAnswerHelpful-marked">Yes</span>
+          }
           {`(${answer.helpfulness})  |  `}
-          <span className="reportAnswer" onClick={this.reportAnswer}>
-            Report
-          </span>
+          {
+            !answer.reported
+            ?
+            <span className="reportAnswer-unreported" onClick={() => this.reportAnswer(answer.id)}>
+              Report
+            </span>
+            :
+            <span className="reportAnswer-reported">
+              Reported
+            </span>
+          }
         </span>
       </div>
     );
   }
 
   render() {
-    let answerItems = this.props.answers.map(this.renderAnswerItem);
+    let answers = this.props.answers;
+    let answerItems = answers.map(this.renderAnswerItem);
     return (
-      <div className="answerList">
-        {answerItems}
-        {
-          this.state.someAnswersHidden
-          &&
-          <span className="loadMore" onClick={this.loadMoreAnswers}>
-            LOAD MORE ANSWERS
-          </span>
-        }
+      <div className="answers-container">
+        <div className="answerFlag" style={{ display: 'inline-block'}}>{'A:'}</div>
+        <div className="answerList" style={{ display: 'inline-block'}}>
+          {answerItems}
+          {
+            answers.canShowMore
+            &&
+            <span className="loadMore" onClick={this.loadMoreAnswers}>
+              LOAD MORE ANSWERS
+            </span>
+          }
+        </div>
       </div>
     );
   }
