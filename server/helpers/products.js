@@ -13,7 +13,6 @@ const getProducts = function () {
 };
 
 const getProductById = function (id) {
-  console.log('helper product id', id);
   return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}`, { headers: { 'Authorization': config.API_KEY } })
     .then(success => {
       console.log('helpers getProductById GET success: ');
