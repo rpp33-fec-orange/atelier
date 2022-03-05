@@ -26,7 +26,7 @@ class AnswerList extends React.Component {
   }
 
   renderAnswerItem(answer) {
-    console.log(`the answer object is: ${JSON.stringify(answer)}`);
+    // console.log(`the answer object is: ${JSON.stringify(answer)}`);
     return (
       <div className="answerItem" key={answer.id}>
         <div className="answerKey">
