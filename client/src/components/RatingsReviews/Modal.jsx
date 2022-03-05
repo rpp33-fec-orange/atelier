@@ -2,18 +2,18 @@ import React from 'react';
 // import stylesRatingsReviews from '../../../../client/dist/style-sheets/stylesRatingsReviews.css';
 
 const Modal = (props) => {
-	const showHideClassName = props.show ? "modal display-block" : "modal display-none";
+	const showHideClassName = props.show ? "modal-rr display-block" : "modal-rr display-none";
 
 	return (
 		<div className={showHideClassName} >
-			<section className="modal-main">
+			<section className="modal-rr-main">
 				<h1>Write Your Review</h1>
 				<p>About the [Product Name Here] </p>
-				<div className="modal-overallrating">
+				<div className="modal-rr-overallrating">
 					&#9734;&#9734;&#9734;&#9734;&#9734;
 				</div>
 				<p>Do you recommend this product?</p>
-				<div className="modal-recommended" >
+				<div className="modal-rr-recommended" >
 					<div>
 						<input type="radio" id="yes" name="recommended" value="yes" />
 						<label htmlFor="yes">Yes</label>

@@ -63,7 +63,7 @@ class ReviewList extends React.Component {
 				{this.state.reviewList}
 				<div className="five" id="buttons">
 					<button>MORE REVIEWS</button>
-					<button>ADD A REVIEW</button>
+					{/* <button>ADD A REVIEW</button> */}
 				</div>
 			</div>
 		)
