@@ -36,10 +36,10 @@
 
 .modal-table-header{
   grid-area: 1/1/2/2;
-  /* background-color: grey; */
+  background-color: rgb(187, 184, 184);
   display: flex;
   align-items: center;
-  color: white;
+  color: black;
 }
 
 .modal-table-body {
