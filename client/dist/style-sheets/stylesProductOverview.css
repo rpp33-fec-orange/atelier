@@ -17,12 +17,12 @@
 
 .index-item-2 {
   max-height: 500px;
-  background-color: rgb(89, 216, 216);
+  /* background-color: rgb(89, 216, 216); */
 }
 
 .index-item-3 {
   min-height: 100px;
-  background-color: rgb(89, 216, 216);
+  /* background-color: rgb(89, 216, 216); */
 }
 
 .topbar-container {
@@ -51,7 +51,7 @@
 }
 
 .styles-item {
-  background-color: rgb(235, 93, 235);
+  /* background-color: rgb(235, 93, 235); */
 }
 
 .styles-item-1 {
@@ -63,7 +63,7 @@
 .styles-item-1-1 {
   display: flex;
   margin: 5px;
-  background-color: yellow;
+  /* background-color: yellow; */
 }
 
 .styles-item-1-1-1 {
@@ -84,12 +84,12 @@
   display: flex;
   flex-direction: column;
   margin: 5px;
-  background-color: yellow;
+  /* background-color: yellow; */
 }
 
 .styles-item-1-2-1 {
   margin: 5px;
-  background-color: yellow;
+  /* background-color: yellow; */
   cursor: pointer;
   object-fit: cover;
   width: 60px;
@@ -111,13 +111,13 @@
 
 .styles-item-2-1-container{
   display: flex;
-  background-color: green;
+  /* background-color: green; */
   margin-right: 10px;
   margin-top: 25px;
 }
 
 .styles-item-2-1 {
-  background-color: yellow;
+  /* background-color: yellow; */
   font-size: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -128,7 +128,7 @@
   margin-top: 10px;
   margin-right: 10px;
   margin-bottom: 11px;
-  background-color: yellow;
+  /* background-color: yellow; */
   cursor: pointer;
   font-size: 10px;
   text-decoration-line: underline
@@ -136,13 +136,13 @@
 
 .styles-item-2-3 {
   margin-right: 10px;
-  background-color: yellow;
+  /* background-color: yellow; */
   font-size: 15px;
 }
 
 .styles-item-2-4 {
   margin-right: 10px;
-  background-color: yellow;
+  /* background-color: yellow; */
   font-size: 25px;
   font-family: Oswald;
 }
@@ -152,12 +152,12 @@
   margin-top: 20px;
   margin-bottom: 20px;
   font-size: 13px;
-  background-color: yellow;
+  /* background-color: yellow; */
 }
 
 .styles-item-2-6-container {
   display: flex;
-  background-color: green;
+  /* background-color: green; */
   margin-right: 10px;
   margin-bottom: 5px;
 }
@@ -169,21 +169,21 @@
   font-size: 14px;
   margin-top: 3px;
   margin-bottom: 5px;
-  background-color: yellow;
+  /* background-color: yellow; */
 }
 
 .styles-item-2-6-2 {
   font-size: 14px;
   margin-top: 2px;
   margin-bottom: 5px;
-  background-color: yellow;
+  /* background-color: yellow; */
 }
 
 .styles-item-2-7-container {
   display: inline;
   margin-right: 10px;
   margin-top: 13px;
-  background-color: green;
+  /* background-color: green; */
 }
 
 .styles-item-2-7-1 {
@@ -192,7 +192,7 @@
   max-width: 60px;
   min-width: 50px;
   display:inline;
-  background-color: yellow;
+  /* background-color: yellow; */
   float:left;
 }
 
@@ -203,7 +203,7 @@
 .styles-item-2-8-container {
   margin-top: 10px;
   margin-right: 10px;
-  background-color: yellow;
+  /* background-color: yellow; */
 }
 .styles-item-2-8 {
   height: 40px;
