@@ -14,7 +14,10 @@ class QuestionsAnswers extends React.Component {
       productId: id,
       showMoreQuestions: true,
       allQuestions: [],
-      renderedQuestions: []
+      renderedQuestions: [],
+      searchedQuestions: [],
+      renderedSearch: [],
+      renderSearch: false
     };
     this.search = this.search.bind(this);
     this.initialRender =  this.initialRender.bind(this);
@@ -24,6 +27,7 @@ class QuestionsAnswers extends React.Component {
     this.reportAnswer = this.reportAnswer.bind(this);
     this.markQuestionHelpful = this.markQuestionHelpful.bind(this);
     this.markAnswerHelpful = this.markAnswerHelpful.bind(this);
+    this.hideSearchResults = this.hideSearchResults.bind(this);
   }
 
   componentDidMount() {
@@ -220,16 +224,57 @@ class QuestionsAnswers extends React.Component {
     });
   }
 
-  search(q) {
-    // handle on client using return from GET /qa/questions
+  search(query) {
+    let { allQuestions } = this.state;
+    let searchedQuestions = [];
+    let toRender = [];
+
+    const searchQuestions = (string) => {
+      let results = [];
+      allQuestions.forEach(question => {
+        if (question.question_body.includes(string)) {
+          results.push(question);
+        }
+      });
+
+      return results;
+    };
+
+    searchedQuestions = searchQuestions(query);
+    toRender = JSON.parse(JSON.stringify(searchedQuestions));
+
+    // add search to show moreAnswers/Questions
+
+    this.setState({
+      searchedQuestions: searchedQuestions,
+      renderedSearch: this.initialRender(toRender),
+      renderSearch: true
+    });
+
+  }
+
+  hideSearchResults() {
+    this.setState({
+      renderSearch: false
+    });
   }
 
   render() {
-    let questions = this.state.renderedQuestions;
+    let questions = [];
+
+    if (!this.state.renderSearch) {
+      questions = this.state.renderedQuestions;
+    } else {
+      questions = this.state.renderedSearch;
+    }
+
     return (
-      <div>
-        <h4 id="questionsAndAnswers">Questions and Answers</h4>
-        <QuestionSearch searchQuestion={this.search} />
+      <div id="questionsAndAnswers">
+        <h4>Questions and Answers</h4>
+        <QuestionSearch
+          searchQuestion={this.search}
+          hideSearchResults={this.hideSearchResults}
+        />
         <div id="questionList">
           {
             questions.map(questionObject => {
