@@ -3,6 +3,7 @@ import axios from 'axios';
 import { RiInformationLine } from 'react-icons/ri';
 import {AiOutlineStar} from 'react-icons/ai'
 import RelatedProductModal from './RelatedProductModal.jsx';
+import StarRating from './Ratings.jsx';
 
 const photoUnavailable = 'https://icon-library.com/images/no-picture-available-icon/no-picture-available-icon-1.jpg'
 
@@ -33,7 +34,9 @@ class RelatedProductCard extends React.Component {
             <div className = 'related-product-category'>{relatedProduct.category}</div>
             <div className = 'related-product-name'>{relatedProduct.name}</div>
             <div className = 'related-product-price'>${relatedProduct.default_price}</div>
-            <div className = 'related-product-rating'>★★★★☆</div>
+            <div className = 'related-product-rating'>
+              <StarRating num = {relatedProduct.num_Rating}/>
+            </div>
         </div>
     )
   }

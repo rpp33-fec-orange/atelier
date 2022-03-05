@@ -154,6 +154,25 @@
   z-index: 2;
 }
 
+.rp-rating-container {
+	width: 100px;
+	height: 25px;
+  position: relative;
+	display: flex;
+}
+
+.rp-star {
+	width: 100%;
+	height: 15px;
+}
+
+.rp-filledStars {
+	position: absolute;
+    top: 5px;
+    left: 0px;
+		display: flex;
+}
+
 .prev, .next {
   flex-direction: column;
   align-self: center;
