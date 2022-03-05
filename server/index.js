@@ -1,9 +1,11 @@
 const express = require('express');
 const { getProducts, getProductById, getProductStylesById } = require('./helpers/products.js');
 const { addToCart, getCart } = require('./helpers/cart.js');
-const { getRelatedStylesById, getProductsById } = require('./helpers/relatedItems.js');
+const { getRelatedStylesById, getRelatedProductsById } = require('./helpers/relatedItems.js');
 const { getQuestionsByProductId, markQuestionHelpful, markAnswerHelpful, reportQuestion, reportAnswer } = require('./helpers/questions.js');
-const getReviewsByID = require('./helpers/reviews.js').getReviewsByID;
+// const getReviewsByID = require('./helpers/reviews.js').getReviewsByID;
+const { getReviewsByID, getReviewsMeta, postReview, putReview } = require('./helpers/reviews.js');
+
 
 let app = express();
 
@@ -35,7 +37,9 @@ app.get('/products/:product_id', function (req, res) {
 });
 
 app.get('/products/:product_id/styles', function (req, res) {
+
   let id = req.params.product_id;
+
   getProductStylesById(id)
     .then((data) => {
       console.log('server getProductStylesById success');
@@ -115,7 +119,8 @@ app.get('/cart', function (req, res) {
 });
 
 app.post('/cart', function (req, res) {
-  addToCart(req.body.cartItem)
+  console.log(req.body.skuId);
+  addToCart(req.body.skuId)
     .then((data) => {
       console.log('server addToCart success');
       res.status(201).send(data);
@@ -127,13 +132,21 @@ app.post('/cart', function (req, res) {
 
 app.get('/products/:product_id/related', function (req, res) {
   var relatedProducts = [];
-  getProductsById(req.params.product_id)
+  getRelatedProductsById(req.params.product_id)
     .then((productData) => {
-      console.log('server getProductById success');
-      relatedProducts = productData;
+      // console.log('server getProductById success', productData);
+
+
+      for (var i=0; i < productData.length; i++) {
+        relatedProducts.push(productData[i])
+        // relatedProducts.push(productData[i])
+      }
+      // console.log('server relatedProducts ', relatedProducts);
+
+      // relatedProducts = productData;
       getRelatedStylesById(req.params.product_id)
         .then((stylesData) => {
-          for (var i = 0; i < relatedProducts.length; i++) {
+          for (var i = 1; i < relatedProducts.length; i++) {
             for (var j = 0; j < stylesData.length; j++) {
               if (relatedProducts[i].id.toString() === stylesData[j].product_id) {
                 relatedProducts[i]['photos'] = stylesData[j].results[0].photos;
@@ -143,11 +156,11 @@ app.get('/products/:product_id/related', function (req, res) {
           res.status(200).send(relatedProducts);
         })
         .catch((error) => {
-          console.log('server getProductStylesById error');
+          console.log('server getProductStylesById error', error);
         })
     })
     .catch((error) => {
-      console.log('server getProductStylesById error');
+      console.log('server getProductStylesById error', error);
     })
 });
 
@@ -161,6 +174,40 @@ app.get('/reviews/', function (req, res) {
       console.log('error getting reviews!');
     })
 });
+
+app.get('/reviews/meta', function (req, res) {
+  getReviewsMeta(req.query.product_id)
+    .then((success) => {
+      // console.log('getting reviews meta success! data is: ', success.data);
+      res.status(200).send(success.data);
+    })
+    .catch((error) => {
+      console.log('error getting reviews!');
+    })
+});
+
+app.post('/reviews', function (req, res) {
+  postReview(req.query.product_id, req.query.rating, req.query.summary, req.query.body, req.query.recommend, req.query.name, req.query.email, req.query.photos, req.query.characteristics)
+    .then((success) => {
+      // console.log('getting reviews meta success! data is: ', success.data);
+      res.status(201).send(success.data);
+    })
+    .catch((error) => {
+      console.log('error getting reviews!');
+    })
+});
+
+app.put('/reviews/:review_id/helpful', function (req, res) {
+  putReview(req.body.review_id)
+    .then((success) => {
+      // console.log('getting reviews meta success! data is: ', success.data);
+      res.status(204).send(success.data);
+    })
+    .catch((error) => {
+      console.log('error getting reviews!');
+    })
+});
+
 
 let port = 2000;
 app.listen(port, function () {

@@ -1,5 +1,8 @@
 import React from 'react';
 import $ from 'jquery';
+import StarRating from '../RatingsReviews/StarRating.jsx';
+import Photos from './Photos.jsx';
+import YourOutfitRow from '.././RelatedProducts/YourOutfitRow.jsx'
 
 class Styles extends React.Component {
   constructor(props) {
@@ -11,10 +14,14 @@ class Styles extends React.Component {
       styles: props.productStylesById.results,
       currentStyle: props.productStylesById.results[0],
       currentStyleSkus: props.productStylesById.results[0].skus,
-      currentSku: props.productStylesById.results[0].skus[Object.keys(props.productStylesById.results[0].skus)[0]],
-      skuCode: '',
+      currentSku: '',
+      skuId: '',
+      sizeStatus: '',
       mainPhotoURL: props.productStylesById.results[0].photos[0].url,
       subPhotos: props.productStylesById.results[0].photos,
+      quantitySelected: 0,
+      quantitySelectedBool: false,
+      quantityArray: [],
       cart: []
     }
     this.photoClick = this.photoClick.bind(this);
@@ -22,7 +29,9 @@ class Styles extends React.Component {
     this.skuChange = this.skuChange.bind(this);
     this.postCart = this.postCart.bind(this);
     this.getCart = this.getCart.bind(this);
-    this.favoriteClick = this.favoriteClick.bind(this);
+    this.outfitClick = this.outfitClick.bind(this);
+    this.quantityChange = this.quantityChange.bind(this);
+    this.reviewsClick = this.reviewsClick.bind(this);
   }
 
   photoClick(e) {
@@ -33,13 +42,20 @@ class Styles extends React.Component {
 
   styleChange(e) {
     for (let i = 0; i < this.state.styles.length; i++) {
-      if (this.state.styles[i].name === e.target.value) {
+      if (this.state.styles[i].name === e.target.name) {
         let selectedStyle = this.state.styles[i];
         this.setState({
           currentStyle: selectedStyle,
           currentStyleSkus: selectedStyle.skus,
           mainPhotoURL: selectedStyle.photos[0].url,
-          subPhotos: selectedStyle.photos
+          subPhotos: selectedStyle.photos,
+          currentSku: '',
+          skuId: '',
+          quantityArray: [],
+          quantitySelectedBool: false,
+          sizeStatus: ''
+        }, () => {
+          this.props.currentStyleHandler(this.state.currentStyle);
         });
       }
     }
@@ -48,58 +64,75 @@ class Styles extends React.Component {
   skuChange(e) {
     let skuKeys = Object.keys(this.state.currentStyleSkus);
     for (let i = 0; i < skuKeys.length; i++) {
-      if (this.state.currentStyleSkus[skuKeys[i]].size === e.target.value) {
+      if (e.target.value === this.state.currentStyleSkus[skuKeys[i]].size) {
         let selectedSku = this.state.currentStyleSkus[skuKeys[i]];
         this.setState({
           currentSku: selectedSku,
-          skuCode: skuKeys[i]
+          skuId: skuKeys[i],
+          sizeStatus: e.target.value,
+          quantitySeletedBool: false
         });
       }
     }
   }
 
+
   postCart() {
-    let cartItem = {
-      sku: this.state.skuCode,
-      quantity: this.state.currentSku.quantity
-    }
-    this.state.cart.push(cartItem);
-    // $.ajax({
-    //   context: this,
-    //   type: 'POST',
-    //   url: '/cart',
-    //   data: JSON.stringify({ cartItem }),
-    //   contentType: 'application/json',
-    //   success: function (successAjax) {
-    //     console.log('Ajax POST Success!');
-    //   },
-    //   error: function (errorAjax) {
-    //     console.log('Ajax POST Error!');
-    //   },
-    // })
+    let skuId = this.state.skuId;
+    $.ajax({
+      context: this,
+      type: 'POST',
+      url: '/cart',
+      data: JSON.stringify({ skuId }),
+      contentType: 'application/json',
+      success: function (successAjax) {
+        console.log('postCart ajax POST Success!');
+      },
+      error: function (errorAjax) {
+        console.log('postCart ajax POST Error!');
+      },
+    })
+    alert('Added item to cart!');
   }
 
   getCart() {
-    console.log('user cart: ', this.state.cart);
-    // $.ajax({
-    //   context: this,
-    //   type: 'GET',
-    //   url: '/cart',
-    //   success: function (success) {
-    //     console.log('getCart ajax GET success:');
-    //     this.setState({
-    //       cart: success,
-    //     })
-    //   },
-    //   error: function (error) {
-    //     console.log('getCart ajax GET error: ', error);
-    //   },
-    //   contentType: "application/json",
-    // })
+    $.ajax({
+      context: this,
+      type: 'GET',
+      url: '/cart',
+      success: function (success) {
+        console.log('getCart ajax GET success');
+        this.setState({
+          cart: success,
+        })
+        console.log('CART', this.state.cart);
+      },
+      error: function (error) {
+        console.log('getCart ajax GET error: ', error);
+      },
+      contentType: "application/json",
+    })
   }
 
-  favoriteClick() {
+  outfitClick() {
+    console.log('add to outfit clicked!');
+    this.props.currentStyleHandler(this.state.currentStyle);
+    this.props.yourOutfitHandleClick();
+  }
 
+  reviewsClick() {
+    console.log('read all reviews clicked!');
+  }
+
+  quantityChange(e) {
+    this.setState({
+      quantitySelected: e.target.value,
+      quantitySelectedBool: true
+    })
+  }
+
+  componentDidMount() {
+    this.props.currentStyleHandler(this.state.currentStyle);
   }
 
   render() {
@@ -112,40 +145,62 @@ class Styles extends React.Component {
     let currentSku = this.state.currentSku;
     let mainPhotoURL = this.state.mainPhotoURL;
     let subPhotos = this.state.subPhotos;
+    let quantityArray = this.state.quantityArray;
+    let sizeStatus = this.state.sizeStatus;
+    let quantitySelectedBool = this.state.quantitySelectedBool;
+    if (currentSku.quantity > 0) {
+      for (let i = 1; i <= currentSku.quantity; i++) {
+        quantityArray.push(i);
+      }
+    }
     return (
       <div>
-        <div id="photos">
-          <img id="mainPhoto" src={mainPhotoURL} width="300" height="425"></img> <br></br>
-          {subPhotos.map((photo) =>
-            <img id="subPhoto" src={photo.url} width="75" height="105" onClick={this.photoClick}></img>
-          )}
-        </div>
-        <div id="details">
-          <div id="rating">{rating}</div>
-          <div id="category">{productById.category}</div>
-          <div id="name">{productById.name}</div>
-          <div id="price">{productById.default_price}</div>
-          <div id="selector">Select Style/Size/Quantity</div>
-          <select name="Style" id="style" onChange={this.styleChange}>
-            <option value="nullStyle">Style</option>
-            {styles.map((style) =>
-              <option value={style.name}>{style.name}</option>
-            )}
-          </select>
-          <select name="Size" id="size" onChange={this.skuChange}>
-            <option value="nullSize">Size</option>
-            {Object.keys(currentStyleSkus).map((sku) =>
-              <option value={currentStyleSkus[sku].size}>{currentStyleSkus[sku].size}</option>
-            )}
-          </select>
-          <select name="Quantity" id="quantity">
-            <option value="nullQuantity">Quantity</option>
-            <option value={currentSku.quantity}>{currentSku.quantity}</option>
-          </select><br></br>
-          {currentSku.quantity ? <button id="postCart" onClick={this.postCart}>ADD TO CART</button> : <button id="outOfStock" disabled>Out of Stock</button>}
-          <button id="favorite" onClick={this.favoriteClick}>☆</button><button id="getCart" onClick={this.getCart}>YOUR CART</button>
+        <div class="styles-container" id="Styles">
+          <div class="styles-item styles-item-1" id="photos">
+            <Photos currentStyle={currentStyle} />
+          </div>
+          <div class="styles-item styles-item-2" id="styles">
+            <div class="styles-item-2-1-container">
+              <div class="styles-item-2-1" id="rating" onClick={this.reviewsClick}>
+              <StarRating num={this.props.rating}/>
+              </div>
+              <div class="styles-item-2-2" id="read-all-reviews-button">Read all reviews</div>
+            </div>
+            <div class="styles-item-2-3" id="category">{productById.category}</div>
+            <div class="styles-item-2-4" id="name">{productById.name}</div>
+            <div class="styles-item-2-5" id="price">${productById.default_price}</div>
+            <div class="styles-item-2-6-container">
+              <div class="styles-item-2-6-1">Style></div>
+              <div class="styles-item-2-6-2">{currentStyle.name}</div>
+            </div>
+            <div class="styles-item-2-7-container" id="style">
+              {styles.map((style) =>
+                <div class="styles-item-2-7-1">
+                  <img id="styleThumbnail" name={style.name} src={style.photos[0].url} width="50" height="50" onClick={this.styleChange}></img>
+                </div>
+              )}
+            </div>
+            <div class="styles-item-2-8-container">
+              <select class="styles-item-2-8" value={sizeStatus} id="size-selector" onChange={this.skuChange} >
+                <option class="styles-item-2-8-1" value="nullSize">SELECT SIZE</option>
+                {Object.keys(currentStyleSkus).map((sku) =>
+                  <option id="size-option" value={currentStyleSkus[sku].size} >{currentStyleSkus[sku].size}</option>
+                )}
+              </select>
+              <select class="styles-item-2-9" id="quantity-selector" onChange={this.quantityChange}>
+                < option value="nullQuantity" >-</option>
+                {quantityArray && quantityArray.map((quantityItem) =>
+                  <option value={quantityItem} >{quantityItem}</option>
+                )}
+              </select>
+              <button class="styles-item-2-12" id="getCart-button" onClick={this.getCart}>CART</button>
+              {quantitySelectedBool ? <button class="styles-item-2-10" id="postCart-button" onClick={this.postCart}>ADD TO CART +</button> : <button class="styles-item-2-13" id="defaultCart-button" disabled>ADD TO CART +</button>}
+              <button class="styles-item-2-11" id="save-outfit-button" onClick={this.outfitClick}>SAVE OUTFIT</button>
+            </div>
+          </div >
         </div >
-      </div >
+      </div>
+
     )
   }
 }

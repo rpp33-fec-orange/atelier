@@ -1,8 +1,8 @@
 import React from 'react';
 import $ from 'jquery';
-// import TopBar from './TopBar.jsx';
+import TopBar from './TopBar.jsx';
 import Styles from './Styles.jsx';
-import Descriptions from './Descriptions.jsx';
+import Info from './Info.jsx';
 
 class ProductOverview extends React.Component {
   constructor(props) {
@@ -82,15 +82,22 @@ class ProductOverview extends React.Component {
   render() {
     if (this.state.initialized) {
       return (
-        <div id="overview">
-          {/* <TopBar searchHandler={this.searchHandler} /> */}
-          <Styles productById={this.state.productById} productStylesById={this.state.productStylesById} />
-          <Descriptions productById={this.state.productById} />
+        <div class="index-container" id="productOverview">
+          <div class="index-item index-item-1">
+            <TopBar data-testid="topbar?" searchHandler={this.searchHandler} />
+          </div>
+          <div id="message">Hack Reactor Sale! ---Extra 40% off on selected items--- Free shipping for orders over $50!</div>
+          <div class="index-item index-item-2">
+            <Styles data-testid="styles?" productById={this.state.productById} productStylesById={this.state.productStylesById} rating={this.props.rating} currentStyleHandler = {this.props.currentStyleHandler} yourOutfitHandleClick = {this.props.yourOutfitHandleClick}/>
+          </div>
+          <div class="index-item index-item-2">
+            <Info data-testid="descriptions?" productById={this.state.productById} />
+          </div>
         </div>
       )
     } else {
       return (
-        <div id="loading">
+        <div data-testid="loading" id="loading">
           ⇆ Loading...
         </div>
       )

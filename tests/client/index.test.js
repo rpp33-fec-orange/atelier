@@ -6,7 +6,7 @@ import QuestionsAnswers from '../../client/src/components/QuestionsAnswers/index
 import RatingsReviews from '../../client/src/components/RatingsReviews/RatingsReviews.jsx';
 import RelatedProducts from '../../client/src/components/RelatedProducts/index.jsx';
 
-describe.only('Main component test', () => {
+describe('Main app test', () => {
   const testRenderer = TestRenderer.create(<App />);
   const testInstance = testRenderer.root;
 

@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductOverview component tests it should match snapshot  1`] = `
+<div
+  data-testid="loading"
+  id="loading"
+>
+  ⇆ Loading...
+</div>
+`;

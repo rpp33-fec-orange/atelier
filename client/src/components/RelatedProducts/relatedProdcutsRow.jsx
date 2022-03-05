@@ -1,112 +1,57 @@
 import React from 'react';
+import {GoChevronLeft, GoChevronRight} from 'react-icons/go';
 import images from './stockImages.jsx';
+import RelatedProductCard from './ProductCard.jsx';
+import $ from 'jquery';
 
-var photoUnavailable = 'https://icon-library.com/images/no-picture-available-icon/no-picture-available-icon-1.jpg'
+const photoUnavailable = 'https://icon-library.com/images/no-picture-available-icon/no-picture-available-icon-1.jpg'
 
-const rowStyle = {
-  display: 'flex'
-};
+class RelatedProductsRow extends React.Component {
 
-const columnStyle = {
-  flex: '33.33%',
-  padding: '5px',
-  border: '1px solid #555',
-  width: '150'
-};
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentPosition: 0,
+      currentPositionIndex: 0
+    }
+    this.scroll = this.scroll.bind(this);
+  }
 
-const RelatedProductsRow = (props) => {
+  scroll(direction) {
+    let far = $( '.related-product-container' ).width()/4*direction;
+    let pos = $('.related-product-container').scrollLeft() + far;
+    $('.related-product-container').animate( { scrollLeft: pos }, 1000)
+  }
 
-  if (props.relatedProductsInfo === null) {
+  render () {
 
-    return (
-      <div className = " related-products-row" style = {rowStyle}>
-        <div className = "col-md-2" style = {columnStyle}>
-          <img src = {images.relatedProductImages[0]} alt = "Sample Image" height = "150" />
-          <div id = 'category'>Men's Clothing</div>
-          <div id = 'product-description'>Collared T-shirt</div>
-          <div id = 'price'>$19.99</div>
-          <div id = 'rating'>★★★★☆</div>
-        </div>
-        <div className = "col-md-2" style = {columnStyle}>
-          <img src = {images.relatedProductImages[1]} alt = "Sample Image" height = "150" />
-          <div id = 'category'>Men's Clothing</div>
-          <div id = 'product-description'>Collared Green T-shirt</div>
-          <div id = 'price'>$19.99</div>
-          <div id = 'rating'>★★★★☆</div>
-        </div>
-        <div className = "col-md-2" style = {columnStyle}>
-          <img src = {images.relatedProductImages[2]} alt = "Sample Image" height = "150" />
-          <div id = 'category'>Men's Clothing</div>
-          <div id = 'product-description'>Collared Pink T-shirt</div>
-          <div id = 'price'>$19.99</div>
-          <div id = 'rating'>★★★★☆</div>
-        </div>
-        <div className = "col-md-2" style = {columnStyle}>
-          <img src = {images.relatedProductImages[3]} alt = "Sample Image" height = "150" />
-          <div id = 'category'>Men's Clothing</div>
-          <div id = 'product-description'>White T-shirt</div>
-          <div id = 'price'>$19.99</div>
-          <div id = 'rating'>★★★★☆</div>
-        </div>
-      </div>
-     )
+    const {relatedProductsIds, parentProduct, handleProductChange} = this.props;
 
-  } else if (props.relatedProductsInfo) {
+    // console.log('all related products', this.props.relatedProductsInfo)
 
-    var DOMarray = props.relatedProductsInfo.map((product) => {
-      console.log('product in component', product);
+    if (this.props.relatedProductsInfo === null) {
       return (
-        <div className = "col-md-2" style = {columnStyle}  align = 'center'>
-          <img src = {product.photos[0].url || photoUnavailable} alt = "Sample Image" height = "150" width = '150'/>
-          <div id = 'category'>{product.category}</div>
-          <div id = 'product-description'>{product.name}</div>
-          <div id = 'price'>{product.default_price}</div>
-          <div id = 'rating'>★★★★☆</div>
+        <div id="loading">
+          ⇆ Loading...
+        </div>
+       )
+    } else {
+      var DOMarray = this.props.relatedProductsInfo.map((relatedProduct) => {
+        return (
+            <RelatedProductCard parentProduct = {parentProduct} relatedProduct = {relatedProduct} currentPosition = {this.state.currentPosition} handleProductChange = {handleProductChange}/>
+        );
+      });
+
+      return (
+        <div className = 'related-products-container'>
+          <a className ='prev' onClick = {this.scroll.bind(null, -1)}>&#10094;</a>
+          <div className = 'products-only-container'>
+            {DOMarray}
+          </div>
+          <a className ='next' onClick = {this.scroll.bind(null, 1)}>&#10095;</a>
         </div>
       )
-    })
-
-    return (
-      <div className = " related-products-row" style = {rowStyle}>
-        {DOMarray}
-      </div>
-    )
-
-    // return (
-    //   <div className = " related-products-row" style = {rowStyle}>
-    //     <div className = "col-md-2" style = {columnStyle}>
-    //       <img src = {images.relatedProductImages[0]} alt = "Sample Image" height = "150" />
-    //       <div id = 'category'>${props.relatedProductsInfo[0].category}</div>
-    //       <div id = 'product-description'>${props.relatedProductsInfo[0].name}</div>
-    //       <div id = 'price'>${props.relatedProductsInfo[0].default_price}</div>
-    //       <div id = 'rating'>★★★★☆</div>
-    //     </div>
-    //     <div className = "col-md-2" style = {columnStyle}>
-    //       <img src = {images.relatedProductImages[1]} alt = "Sample Image" height = "150" />
-    //       <div id = 'category'>Men's Clothing</div>
-    //       <div id = 'product-description'>Collared Green T-shirt</div>
-    //       <div id = 'price'>$19.99</div>
-    //       <div id = 'rating'>★★★★☆</div>
-    //     </div>
-    //     <div className = "col-md-2" style = {columnStyle}>
-    //       <img src = {images.relatedProductImages[2]} alt = "Sample Image" height = "150" />
-    //       <div id = 'category'>Men's Clothing</div>
-    //       <div id = 'product-description'>Collared Pink T-shirt</div>
-    //       <div id = 'price'>$19.99</div>
-    //       <div id = 'rating'>★★★★☆</div>
-    //     </div>
-    //     <div className = "col-md-2" style = {columnStyle}>
-    //       <img src = {images.relatedProductImages[3]} alt = "Sample Image" height = "150" />
-    //       <div id = 'category'>Men's Clothing</div>
-    //       <div id = 'product-description'>White T-shirt</div>
-    //       <div id = 'price'>$19.99</div>
-    //       <div id = 'rating'>★★★★☆</div>
-    //     </div>
-    //   </div>
-    //  )
-
-    //
-
+    }
   }
 }
 
