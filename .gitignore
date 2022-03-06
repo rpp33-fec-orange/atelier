@@ -113,8 +113,7 @@ config.js
 FEC-HR.pem
 HR-FEC.pem
 Tan.pem
+hr-rpp33-fec.pem
 
 # DS store
 .DS_Store
-
-
