@@ -7,7 +7,7 @@ class StarRating extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			0: 'https://www.surecritic.com/assets/star2-0.svg',
+			greyStar: 'https://www.surecritic.com/assets/star2-0.svg',
 			0.25: 'https://www.surecritic.com/assets/star2-1q.svg',
 			0.5: 'https://www.surecritic.com/assets/star2-2q.svg',
 			0.75: 'https://www.surecritic.com/assets/star2-3q.svg',
@@ -15,64 +15,77 @@ class StarRating extends React.Component {
 		}
 		this.roundToQuater = this.roundToQuater.bind(this);
 		this.renderStars = this.renderStars.bind(this);
-		this.renderOneStar = this.renderOneStar.bind(this);
 	}
 
 	roundToQuater(rawNum) {
 		var number = rawNum;
-		if (number >= 0 && number <= 5) {
+		if (number > 0 && number <= 5) {
 			number = (Math.round(number * 4) / 4).toFixed(2);
 			return number;
 		}
-		return ('number has to be between 0 and 5');
+		return ('number has to be between 1 and 5');
 	}
 
 	renderStars() {
-		var roundedNum = this.roundToQuater(this.props.num);  // e.g: 3.25
-		console.log('props.num is: ', this.props.num);
-		var mainNum = Math.floor(roundedNum);
-		var leftoverNum = roundedNum - mainNum;
-		var leftoverNumStr = JSON.stringify(leftoverNum);
-		var stars = [];
-		if (mainNum) {
-			for (var i = 0; i < mainNum; i++) {
-				stars.push(<img className="star" src={this.state.fullStar} key={i} />);
+		if (this.props.num === 0) {
+			var allGrey = [];    // store all 5 grey stars just in case
+			for (var j = 0; j < 5; j++) {
+				allGrey.push(<img className="star" src={this.state.greyStar} key={j} />);
 			}
-		}
-		if (mainNum < 5) {
-			stars.push(<img className="star" src={this.state[leftoverNumStr]} key={mainNum} />);
-		}
-		console.log('this is stars: ', stars);
-		return stars;
-	}
+			return allGrey;
+		} else {
+			// Do everything else just like before
+			console.log('props.num is: ', this.props.num);
+			var roundedNum = 0;
+			if (this.props.num != 0) {
+				var roundedNum = this.roundToQuater(this.props.num);  // e.g: 3.25
+			}
+			var mainNum = Math.floor(roundedNum);    // this is 3 filled stars
+			var leftoverNum = 5 - mainNum;    // this is   2 grey stars
+			var fractionNum = roundedNum - mainNum;   // this is 0.25 star
+			var fractionNumLeftover = 1 - fractionNum;  // this is 0.75
+			var fractionNumStr = JSON.stringify(fractionNum);   // 0.25 star but String
+			var stars = [];    // store all the filled and grey stars
+			if (mainNum) {     // this loop will render all filled full stars
+				for (var i = 0; i < mainNum; i++) {
+					stars.push(<img className="star" src={this.state.fullStar} key={i} />);
+				}
+				// fractionNum can only be 0, 0.25, 0.5 and 0.75
+			}
 
-	renderOneStar(source) {
-		return <img className="star" src={source} />
+			if (fractionNum === 0.25) {
+				stars.push(<img className="star" src={this.state[0.25]} key={mainNum} />);
+				for (var k = 0; k < leftoverNum - 1; k++) {
+					stars.push(<img className="star" src={this.state.greyStar} key={mainNum + 1 + k} />);
+				}
+			} else if (fractionNum === 0.5) {
+				stars.push(<img className="star" src={this.state[0.5]} key={mainNum} />);
+				for (var k = 0; k < leftoverNum - 1; k++) {
+					stars.push(<img className="star" src={this.state.greyStar} key={mainNum + 1 + k} />);
+				}
+			} else if (fractionNum === 0.75) {
+				stars.push(<img className="star" src={this.state[0.75]} key={mainNum} />);
+				for (var k = 0; k < leftoverNum - 1; k++) {
+					stars.push(<img className="star" src={this.state.greyStar} key={mainNum + 1 + k} />);
+				}
+			} else {
+				for (var k = 0; k < leftoverNum; k++) {
+					stars.push(<img className="star" src={this.state.greyStar} key={mainNum + 1 + k} />);
+				}
+			}
+
+			console.log('this is stars: ', stars);
+			return stars;
+		}
 	}
 
 	render() {
 		var stars = this.renderStars();
-		// var renderStars = (
-		// 	<div className="container">
-		// 		<img className="star" src={this.state[0]} />
-		// 		<img className="star" src={this.state[0]} />
-		// 		<img className="star" src={this.state[0]} />
-		// 		<img className="star" src={this.state[0]} />
-		// 		<img className="star" src={this.state[0]} />
-		// 		<div className="filledStars">{stars}</div>
-		// 	</div>
-		// );
-			console.log('props in StarRating: ', this.props);
-		// this.props.handleRating(renderStars)
+		console.log('props in StarRating: ', this.props);
 
 		return (
 			<div className="container">
-				<img className="star" src={this.state[0]} />
-				<img className="star" src={this.state[0]} />
-				<img className="star" src={this.state[0]} />
-				<img className="star" src={this.state[0]} />
-				<img className="star" src={this.state[0]} />
-				<div className="filledStars">{stars}</div>
+				<div className="filledStars" >{stars}</div>
 			</div>
 		);
 	}
