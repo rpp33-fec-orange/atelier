@@ -3,6 +3,7 @@ import {GoChevronLeft, GoChevronRight} from 'react-icons/go';
 import images from './stockImages.jsx';
 import RelatedProductCard from './ProductCard.jsx';
 import $ from 'jquery';
+import setRatingSummary from './HelperFunctions.js'
 
 const photoUnavailable = 'https://icon-library.com/images/no-picture-available-icon/no-picture-available-icon-1.jpg'
 
@@ -15,6 +16,7 @@ class RelatedProductsRow extends React.Component {
       currentPositionIndex: 0
     }
     this.scroll = this.scroll.bind(this);
+    this.relatedProductsRatingSummary = this.relatedProductsRatingSummary.bind(this)
   }
 
   scroll(direction) {
@@ -23,11 +25,19 @@ class RelatedProductsRow extends React.Component {
     $('.related-product-container').animate( { scrollLeft: pos }, 1000)
   }
 
+  relatedProductsRatingSummary (relatedProducts) {
+    for (var i = 0; i < relatedProducts.length; i++) {
+      var num_Rating = setRatingSummary(relatedProducts[i].meta_ratings);
+      relatedProducts[i]['num_Rating'] = num_Rating[0];
+    }
+    return relatedProducts;
+  }
+
   render () {
 
-    const {relatedProductsIds, parentProduct, handleProductChange} = this.props;
+    const {relatedProductsIds, parentProduct, handleProductChange, relatedProductsInfo, handleStateChange} = this.props;
 
-    // console.log('all related products', this.props.relatedProductsInfo)
+    var relatedProductsWithRatings = this.relatedProductsRatingSummary(relatedProductsInfo);
 
     if (this.props.relatedProductsInfo === null) {
       return (
@@ -36,9 +46,9 @@ class RelatedProductsRow extends React.Component {
         </div>
        )
     } else {
-      var DOMarray = this.props.relatedProductsInfo.map((relatedProduct) => {
+      var DOMarray = relatedProductsWithRatings.map((relatedProduct) => {
         return (
-            <RelatedProductCard parentProduct = {parentProduct} relatedProduct = {relatedProduct} currentPosition = {this.state.currentPosition} handleProductChange = {handleProductChange}/>
+            <RelatedProductCard parentProduct = {parentProduct} relatedProduct = {relatedProduct} currentPosition = {this.state.currentPosition} handleProductChange = {handleProductChange} handleStateChange = {handleStateChange}/>
         );
       });
 

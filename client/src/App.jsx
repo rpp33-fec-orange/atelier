@@ -69,8 +69,9 @@ class App extends React.Component {
   }
 
   yourOutfitHandleClick () {
-    // console.log('currentStyle', this.state.currentStyle)
+    console.log('currentStyle', this.state.currentStyle)
     var currentStyle =  this.state.currentStyle;
+    currentStyle['num_Rating'] = this.state.rating;
     var yourOutfit = this.state.yourOutfitArray;
     const styleExists = yourOutfit.findIndex(element => element.style_id === currentStyle.style_id)
       if (styleExists === -1) {
@@ -78,14 +79,14 @@ class App extends React.Component {
       }
       this.setState({
         yourOutfitArray: yourOutfit
+      }, () => {
+        console.log('outfit updated')
       })
   }
 
   handleProductChange(productId) {
     // console.log('id in app', productId)
-    this.setState({
-      id: productId
-    })
+    this.setState({...this.state, id: productId}, () => {console.log('product id updated')})
   }
 
   render() {
