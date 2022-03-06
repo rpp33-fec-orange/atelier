@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from './Modal.jsx';
 import Dashboard from './Dashboard.jsx';
+import StarRating from './StarRating.jsx';
 
 class ReviewItem extends React.Component {
 	constructor(props) {
@@ -8,7 +9,8 @@ class ReviewItem extends React.Component {
 		this.state = {
 			review: props.review,
 			recommend: true,
-			ready: false
+			ready: false,
+			ratingReview: 0
 		}
 		this.getRecommendation = this.getRecommendation.bind(this);
 	}
@@ -25,9 +27,16 @@ class ReviewItem extends React.Component {
 
 	}
 
+	componentDidMount() {
+		this.setState({
+      ratingReview: this.props.review.rating
+		});
+	}
+
 
 	render() {
 		console.log('can i get props in ReviewItem: ', this.props);
+		console.log('review.rating in ReviewItem is: ', this.props.review.rating);
 		return (
 			// <div className="wrapper">
 			// 	<div className="one" id="review-list">
@@ -51,7 +60,7 @@ class ReviewItem extends React.Component {
 
 			<div className="wrapper">
 				<div className="one" id="review-list">
-					<p>&#9734;&#9734;&#9734;&#9734;                    {this.state.review.reviewer_name}, {this.state.review.date}</p>
+					<div><StarRating num={this.props.review.rating} />  {this.state.review.reviewer_name}, {this.state.review.date}</div>
 					<h3>{this.state.review.summary}</h3>
 					<p>{this.state.review.body}</p>
 					<sub>Helpful?  Yes ({this.state.review.helpfulness})  |  Report</sub>
