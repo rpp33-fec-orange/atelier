@@ -60,7 +60,7 @@ class ReviewItem extends React.Component {
 
 			<div className="wrapper">
 				<div className="one" id="review-list">
-					<p><StarRating num={this.props.review.rating} />  {this.state.review.reviewer_name}, {this.state.review.date}</p>
+					<div><StarRating num={this.props.review.rating} />  {this.state.review.reviewer_name}, {this.state.review.date}</div>
 					<h3>{this.state.review.summary}</h3>
 					<p>{this.state.review.body}</p>
 					<sub>Helpful?  Yes ({this.state.review.helpfulness})  |  Report</sub>

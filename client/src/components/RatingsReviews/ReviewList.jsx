@@ -66,7 +66,7 @@ class ReviewList extends React.Component {
 			<div id="list">
 				{this.state.reviewList}
 				<div className="five" id="buttons">
-					<button onClick={handleShowMoreReviews}>MORE REVIEWS</button>
+					<button onClick={this.handleShowMoreReviews}>MORE REVIEWS</button>
 					{/* <button>ADD A REVIEW</button> */}
 				</div>
 			</div>
