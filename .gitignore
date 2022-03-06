@@ -109,5 +109,11 @@ client/dist/bundle.js
 # API Token config file
 config.js
 
-# deployment .pem file
+# AWS PEM files
+FEC-HR.pem
+HR-FEC.pem
+Tan.pem
 hr-rpp33-fec.pem
+
+# DS store
+.DS_Store

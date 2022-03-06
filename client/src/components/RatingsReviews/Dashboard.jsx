@@ -5,28 +5,28 @@ class Dashboard extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-      show: false
+			show: false
 		};
 		this.showModal = this.showModal.bind(this);
 		this.hideModal = this.hideModal.bind(this);
 	}
 
 	showModal = () => {
-    this.setState({ show: true });
+		this.setState({ show: true });
 	};
 
 	hideModal = () => {
-    this.setState({ show: false });
+		this.setState({ show: false });
 	};
 
 	render() {
 		return (
 			// <div>
 			// 	<h1>React Modal</h1>
-      //   <button id="modal-btn" onClick={this.showModal} >This is a Modal</button>
+			//   <button id="modal-btn" onClick={this.showModal} >This is a Modal</button>
 			//   <div className="modal">Hello
 			// 		<div className="modal-content">
-      //     <span className="close-btn" onClick={this.hideModal}>&times;</span>
+			//     <span className="close-btn" onClick={this.hideModal}>&times;</span>
 			// 		<p>this is the text inside the modal</p>
 			// 	  </div>
 			// 	</div>
@@ -34,10 +34,8 @@ class Dashboard extends React.Component {
 
 			<div>
 				<Modal show={this.state.show} handleClose={this.hideModal} />
-					<h2>Write Your Review</h2>
-
 				<button type="button" onClick={this.showModal} >
-					Write Your Review
+					ADD A REVIEW
 				</button>
 			</div>
 		);

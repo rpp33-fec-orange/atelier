@@ -42,42 +42,42 @@ class StarList extends React.Component {
 				<table>
 					<tbody>
 						<tr>
-							<td>5 stars</td>
+							<td>5 stars:</td>
 							<td>
 								<div>
-									{this.state.five}
+									{this.state.five} votes
 								</div>
 							</td>
 						</tr>
 						<tr>
-							<td>4 stars</td>
+							<td>4 stars:</td>
 							<td>
 								<div>
-								{this.state.four}
+								{this.state.four} votes
 								</div>
 							</td>
 						</tr>
 						<tr>
-							<td>3 stars</td>
+							<td>3 stars:</td>
 							<td>
 								<div>
-								{this.state.three}
+								{this.state.three} votes
 								</div>
 							</td>
 						</tr>
 						<tr>
-							<td>2 stars</td>
+							<td>2 stars:</td>
 							<td>
 								<div>
-								{this.state.two}
+								{this.state.two} votes
 								</div>
 							</td>
 						</tr>
 						<tr>
-							<td>1 star</td>
+							<td>1 star:</td>
 							<td>
 								<div>
-								{this.state.one}
+								{this.state.one} votes
 								</div>
 							</td>
 						</tr>
