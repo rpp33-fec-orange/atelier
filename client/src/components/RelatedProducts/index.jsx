@@ -18,6 +18,7 @@ class RelatedProducts extends React.Component {
     this.fetchParentProductData = this.fetchParentProductData.bind(this);
     this.fetchParentProductStyles = this.fetchParentProductStyles.bind(this);
     this.fetchRelatedProductsData = this.fetchRelatedProductsData.bind(this);
+    // this.handleStateChange = this.handleStateChange.bind(this)
     // this.fetchRelatedProductsReviewMeta = this.fetchRelatedProductsReviewMeta.bind(this);
   }
 
@@ -102,12 +103,31 @@ class RelatedProducts extends React.Component {
   //   if (this.props.id !== prevProps.id) {
   // }
 
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   if (this.props.id !== nextProps.id) {
+  //     return true;
+  //   }
+  //   return false;
+  // }
+
+  // handleStateChange(newProductId) {
+  //   this.setState({...this.state,
+  //     relatedProducts: [],
+  //     relatedProductsInfo: [],
+  //     relatedStylesInfo: [],
+  //     parentProduct: [],
+  //     relatedProductsIds: []}, () => {
+  //       console.log('product id updated');
+  //       this.props.handleProductChange(newProductId);
+  //     });
+  // }
+
   render() {
     return (
       <div className = 'related-products-and-items'>
         <div className = "related-products-row">
           <div className = 'heading'>Related Products</div>
-          <RelatedProductsRow relatedProductsIds = {this.state.relatedProductsIds} parentProduct = {this.state.parentProduct} relatedProductsInfo = {this.state.relatedProductsInfo} handleProductChange = {this.props.handleProductChange}/>
+          <RelatedProductsRow relatedProductsIds = {this.state.relatedProductsIds} parentProduct = {this.state.parentProduct} relatedProductsInfo = {this.state.relatedProductsInfo} handleProductChange = {this.props.handleProductChange} />
         </div>
         <div className = "your-outfit-row">
           <div className = 'heading'>Your Outfit</div>

@@ -108,3 +108,10 @@ client/dist/bundle.js
 
 # API Token config file
 config.js
+
+# PEM files
+FEC-HR.pem
+HR-FEC.pem
+
+# DS store
+.DS_Store

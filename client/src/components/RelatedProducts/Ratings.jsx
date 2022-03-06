@@ -3,7 +3,7 @@ import React from 'react';
 // equivalent to the value passed in.
 // The value passed in must be between 0 and 5.
 
-class StarRating extends React.Component {
+class StarRating extends React.PureComponent {
 	constructor(props) {
 		super(props);
 		this.state = {

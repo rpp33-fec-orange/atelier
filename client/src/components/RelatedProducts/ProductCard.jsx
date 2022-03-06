@@ -14,6 +14,7 @@ class RelatedProductCard extends React.Component {
       showModal: false
     }
     this.showModal = this.showModal.bind(this);
+    // this.handleclick = this.handleclick.bind(this);
   }
 
   showModal(e) {
@@ -22,12 +23,19 @@ class RelatedProductCard extends React.Component {
     })
   }
 
+  // handleclick(newProductId) {
+  //   console.log('all props in card', this.props)
+  //   this.props.handleStateChange(newProductId);
+  // }
+
+
+
   render() {
     const  { parentProduct, relatedProduct, currentPosition, handleProductChange } = this.props;
     // console.log('relatedProduct', relatedProduct)
     // console.log('parentProduct', parentProduct)
     return (
-        <div className = "related-product-card" onClick = {() => {handleProductChange(relatedProduct.id)}}>
+        <div className = "related-product-card" onClick = {() => {this.handleProductChange(relatedProduct.id)}}>
             <AiOutlineStar className = 'toggle-button' onClick = {(e) => {this.showModal()}}/>
             <RelatedProductModal parentProduct = {parentProduct} relatedProduct = {relatedProduct} onClose = {this.showModal} show = {this.state.showModal}/>
             <img className = 'related-product-image' src = {relatedProduct.photos[0].url || photoUnavailable} alt = {relatedProduct.name}/>

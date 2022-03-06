@@ -35,11 +35,9 @@ class RelatedProductsRow extends React.Component {
 
   render () {
 
-    const {relatedProductsIds, parentProduct, handleProductChange, relatedProductsInfo} = this.props;
+    const {relatedProductsIds, parentProduct, handleProductChange, relatedProductsInfo, handleStateChange} = this.props;
 
     var relatedProductsWithRatings = this.relatedProductsRatingSummary(relatedProductsInfo);
-
-    console.log('all related products with ratings', relatedProductsWithRatings)
 
     if (this.props.relatedProductsInfo === null) {
       return (
@@ -50,7 +48,7 @@ class RelatedProductsRow extends React.Component {
     } else {
       var DOMarray = relatedProductsWithRatings.map((relatedProduct) => {
         return (
-            <RelatedProductCard parentProduct = {parentProduct} relatedProduct = {relatedProduct} currentPosition = {this.state.currentPosition} handleProductChange = {handleProductChange}/>
+            <RelatedProductCard parentProduct = {parentProduct} relatedProduct = {relatedProduct} currentPosition = {this.state.currentPosition} handleProductChange = {handleProductChange} handleStateChange = {handleStateChange}/>
         );
       });
 

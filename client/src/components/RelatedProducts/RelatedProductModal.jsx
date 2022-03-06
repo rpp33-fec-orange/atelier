@@ -79,12 +79,12 @@ class RelatedProductModal extends React.Component {
     if (show) {
       return (
         <div className = 'related-product-modal'>
-          <div align = 'left'>Comparing</div>
+          <div className = 'comparing' align = 'left'>Comparing</div>
           <div className = 'related-product-modal-content'>
             <div className = 'related-product-modal-table-header'>
               <table>
                 <tbody>
-                  <tr>
+                  <tr rowspan="1">
                     <th className="related-product-modal-col related-product-modal-col-1">{parentProduct.name}</th>
                     <th className="related-product-modal-col related-product-modal-col-2"></th>
                     <th className="related-product-modal-col related-product-modal-col-3">{relatedProduct.name}</th>
@@ -94,9 +94,14 @@ class RelatedProductModal extends React.Component {
             </div>
             <div className = 'related-product-modal-table-body'>
               <table>
+                <tfoot className = 'related-product-modal-table-footer'>
+                  <tr align = 'left'>
+                    <button className = 'modal-close-button' onClick = {(e) => {this.onClose()}}>Close</button>
+                  </tr>
+                </tfoot>
                 <tbody>
                   {combinedFeatures.map((feature) => {
-                    return (<tr key = {feature.feature}>
+                    return (<tr key = {feature.feature} rowspan="0.75">
                       <th className="related-product-modal-col related-product-modal-col-1">{feature.parentProductValue}</th>
                       <th className="related-product-modal-col mrelated-product-odal-col-2">{feature.feature}</th>
                       <th className="related-product-modal-col related-product-modal-col-3">{feature.relatedProductValue}</th>
@@ -105,9 +110,6 @@ class RelatedProductModal extends React.Component {
                 </tbody>
               </table>
             </div>
-          </div>
-          <div className = 'related-product-modal-actions'>
-            <button className = 'modal-close-button' onClick = {(e) => {this.onClose()}}>Close</button>
           </div>
         </div>
       )
