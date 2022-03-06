@@ -94,17 +94,16 @@
 
 
 /* Newer modal css code */
-.modal {
+.modal-rr {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
-  border: red 6px solid;
 }
 
-.modal-main {
+.modal-rr-main {
   position: fixed;
   background: white;
   width: 80%;

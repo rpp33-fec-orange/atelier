@@ -116,7 +116,6 @@ class Styles extends React.Component {
 
   outfitClick() {
     console.log('add to outfit clicked!');
-    this.props.currentStyleHandler(this.state.currentStyle);
     this.props.yourOutfitHandleClick();
   }
 
@@ -162,7 +161,8 @@ class Styles extends React.Component {
           <div class="styles-item styles-item-2" id="styles">
             <div class="styles-item-2-1-container">
               <div class="styles-item-2-1" id="rating" onClick={this.reviewsClick}>
-              <StarRating num={this.props.rating}/>
+                {/* <StarRating num={this.props.rating}/> */}
+                {rating}
               </div>
               <div class="styles-item-2-2" id="read-all-reviews-button">Read all reviews</div>
             </div>
@@ -198,6 +198,7 @@ class Styles extends React.Component {
               <button class="styles-item-2-11" id="save-outfit-button" onClick={this.outfitClick}>SAVE OUTFIT</button>
             </div>
           </div >
+
         </div >
       </div>
 

@@ -1,7 +1,7 @@
 const express = require('express');
 const { getProducts, getProductById, getProductStylesById } = require('./helpers/products.js');
 const { addToCart, getCart } = require('./helpers/cart.js');
-const { getRelatedStylesById, getRelatedProductsById } = require('./helpers/relatedItems.js');
+const { getRelatedStylesById, getRelatedProductsById, getRelatedProductsReviewMeta} = require('./helpers/relatedItems.js');
 const { getQuestionsByProductId, markQuestionHelpful, markAnswerHelpful, reportQuestion, reportAnswer } = require('./helpers/questions.js');
 // const getReviewsByID = require('./helpers/reviews.js').getReviewsByID;
 const { getReviewsByID, getReviewsMeta, postReview, putReview } = require('./helpers/reviews.js');
@@ -137,7 +137,7 @@ app.get('/products/:product_id/related', function (req, res) {
       // console.log('server getProductById success', productData);
 
 
-      for (var i=0; i < productData.length; i++) {
+      for (var i = 0; i < productData.length; i++) {
         relatedProducts.push(productData[i])
         // relatedProducts.push(productData[i])
       }
@@ -153,14 +153,31 @@ app.get('/products/:product_id/related', function (req, res) {
               }
             }
           }
-          res.status(200).send(relatedProducts);
+          getRelatedProductsReviewMeta(req.params.product_id, relatedProducts[0])
+            .then((reviewMetaData) => {
+              for (var i = 1; i < relatedProducts.length; i++) {
+                for (var j = 0; j < reviewMetaData.length; j++) {
+                  if (relatedProducts[i].id.toString() === reviewMetaData[j].product_id) {
+                    relatedProducts[i]['meta_ratings'] = reviewMetaData[j].ratings;
+                  }
+                }
+              }
+              res.status(200).send(relatedProducts);
+              // console.log('reviews Meta Data', reviewMetaData);
+            })
+            .catch((error) => {
+              console.log('server getRelatedProductsReviewMeta error', error);
+              res.status(400).send(error);
+            })
         })
         .catch((error) => {
           console.log('server getProductStylesById error', error);
+          res.status(400).send(error);
         })
     })
     .catch((error) => {
       console.log('server getProductStylesById error', error);
+      res.status(400).send(error);
     })
 });
 
@@ -209,7 +226,7 @@ app.put('/reviews/:review_id/helpful', function (req, res) {
 });
 
 
-let port = 2000;
+let port = 3000;
 app.listen(port, function () {
   console.log(`listening on port ${port}`);
 });

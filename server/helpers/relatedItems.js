@@ -5,7 +5,6 @@ const { API_KEY } = require('../../config.js');
 
 const API_URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/';
 
-
 const getRelatedProductsById = (id) => { //This function makes a GET request for product info by product_id
 
   // console.log('product id at server helper', id);
@@ -91,5 +90,35 @@ const getRelatedStylesById = (id) => { //This function makes a GET request for p
     })
 }
 
-module.exports = { getRelatedStylesById, getRelatedProductsById };
+const getRelatedProductsReviewMeta = (ParentProductId, relatedProducts) => {
+
+  var productIds = relatedProducts.relatedProductIds
+  var relatedReviewMetaPromiseArray = [];
+  var relatedReviewMetaInfoArray = [];
+
+  for (var i = 0; i < productIds.length; i++) {
+    relatedReviewMetaPromiseArray.push(
+      axios({
+        method: 'GET',
+        url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta`,
+        params: {
+			    product_id: productIds[i]
+		    },
+        headers: { 'Authorization': API_KEY },
+      })
+        .then((reviews) => {
+          return relatedReviewMetaInfoArray.push(reviews.data);
+        })
+        .catch((error) => {
+          console.log('error in fetching review meta data', error)
+        })
+    )
+  }
+  return Promise.all(relatedReviewMetaPromiseArray)
+    .then(() => {
+      return relatedReviewMetaInfoArray;
+    });
+}
+
+module.exports = { getRelatedStylesById, getRelatedProductsById, getRelatedProductsReviewMeta };
 

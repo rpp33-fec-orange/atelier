@@ -1,5 +1,6 @@
 import React from 'react';
 import { RiInformationLine } from 'react-icons/ri';
+import StarRating from './Ratings.jsx';
 
 const photoUnavailable = 'https://icon-library.com/images/no-picture-available-icon/no-picture-available-icon-1.jpg'
 
@@ -20,7 +21,9 @@ class YourOutfitCard extends React.Component {
         <div className = 'your-outfit-category'>{product.category}</div>
         <div className = 'your-outfit-name'>{product.name}</div>
         <div className = 'your-outfit-price'>${product.original_price}</div>
-        <div className = 'your-outfit-rating'>★★★★☆</div>
+        <div className = 'your-outfit-rating'>
+          <StarRating num = {product.num_Rating}/>
+        </div>
       </div>
     )
   }
