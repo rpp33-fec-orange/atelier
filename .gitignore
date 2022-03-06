@@ -108,3 +108,6 @@ client/dist/bundle.js
 
 # API Token config file
 config.js
+
+# AWS config
+HR-FEC.pem
