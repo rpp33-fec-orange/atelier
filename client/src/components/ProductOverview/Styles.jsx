@@ -162,7 +162,8 @@ class Styles extends React.Component {
           <div class="styles-item styles-item-2" id="styles">
             <div class="styles-item-2-1-container">
               <div class="styles-item-2-1" id="rating" onClick={this.reviewsClick}>
-              <StarRating num={this.props.rating}/>
+                {/* <StarRating num={this.props.rating}/> */}
+                {rating}
               </div>
               <div class="styles-item-2-2" id="read-all-reviews-button">Read all reviews</div>
             </div>

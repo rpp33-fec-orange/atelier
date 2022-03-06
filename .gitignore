@@ -108,3 +108,6 @@ client/dist/bundle.js
 
 # API Token config file
 config.js
+
+# deployment .pem file
+hr-rpp33-fec.pem

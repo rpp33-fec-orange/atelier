@@ -137,7 +137,7 @@ app.get('/products/:product_id/related', function (req, res) {
       // console.log('server getProductById success', productData);
 
 
-      for (var i=0; i < productData.length; i++) {
+      for (var i = 0; i < productData.length; i++) {
         relatedProducts.push(productData[i])
         // relatedProducts.push(productData[i])
       }
@@ -209,7 +209,7 @@ app.put('/reviews/:review_id/helpful', function (req, res) {
 });
 
 
-let port = 2000;
+let port = 3000;
 app.listen(port, function () {
   console.log(`listening on port ${port}`);
 });

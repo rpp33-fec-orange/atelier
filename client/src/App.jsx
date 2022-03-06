@@ -42,7 +42,7 @@ class App extends React.Component {
     })
   }
 
-  handleRating(string){
+  handleRating(string) {
     console.log('star rating', string)
   }
 
@@ -68,17 +68,17 @@ class App extends React.Component {
     })
   }
 
-  yourOutfitHandleClick () {
-    // console.log('currentStyle', this.state.currentStyle)
-    var currentStyle =  this.state.currentStyle;
+  yourOutfitHandleClick() {
+    console.log('currentStyle', this.state.currentStyle)
+    var currentStyle = this.state.currentStyle;
     var yourOutfit = this.state.yourOutfitArray;
     const styleExists = yourOutfit.findIndex(element => element.style_id === currentStyle.style_id)
-      if (styleExists === -1) {
-        yourOutfit.push(currentStyle);
-      }
-      this.setState({
-        yourOutfitArray: yourOutfit
-      })
+    if (styleExists === -1) {
+      yourOutfit.push(currentStyle);
+    }
+    this.setState({
+      yourOutfitArray: yourOutfit
+    })
   }
 
   handleProductChange(productId) {
@@ -93,10 +93,10 @@ class App extends React.Component {
     if (this.state.initialized) {
       return (
         <div id="container">
-          <ProductOverview id={this.state.id} rating={this.state.rating} currentStyleHandler = {this.currentStyleHandler} yourOutfitHandleClick = {this.yourOutfitHandleClick}/>
-          <RelatedProducts id={this.state.id} yourOutfitArray = {this.state.yourOutfitArray} yourOutfitHandleClick = {this.yourOutfitHandleClick} handleProductChange = {this.handleProductChange}/>
+          <ProductOverview id={this.state.id} rating={this.state.rating} currentStyleHandler={this.currentStyleHandler} yourOutfitHandleClick={this.yourOutfitHandleClick} />
+          <RelatedProducts id={this.state.id} yourOutfitArray={this.state.yourOutfitArray} yourOutfitHandleClick={this.yourOutfitHandleClick} handleProductChange={this.handleProductChange} />
           <QuestionsAnswers id={this.state.id} />
-          <RatingsReviews id={this.state.id} handleRating = {this.handleRating} handleGetRating={this.getRating} />
+          <RatingsReviews id={this.state.id} handleRating={this.handleRating} handleGetRating={this.getRating} />
         </div>
       )
     } else {
