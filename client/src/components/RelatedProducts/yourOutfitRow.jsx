@@ -1,5 +1,5 @@
 import React from 'react';
-import images from './stockImages.jsx';
+import images from './StockImages.jsx';
 import AddtoOutfitCard from './AddtoOutfitCard.jsx'
 import YourOutfitCard from './YourOutfitCard.jsx'
 
