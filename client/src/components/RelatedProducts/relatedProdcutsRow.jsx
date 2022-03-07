@@ -1,6 +1,6 @@
 import React from 'react';
 import {GoChevronLeft, GoChevronRight} from 'react-icons/go';
-import images from './stockImages.jsx';
+import images from './StockImages.jsx';
 import RelatedProductCard from './ProductCard.jsx';
 import $ from 'jquery';
 import setRatingSummary from './HelperFunctions.js'
