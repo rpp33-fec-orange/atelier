@@ -1,11 +1,6 @@
 const axios = require('axios');
-const config = require('../../config.js');
+const { options } = require('./options.js');
 
-
-const options = {
-  auth: { 'Authorization': config.API_KEY },
-  baseUrl: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp'
-};
 
 const getDateString = (utcString) => {
   let date = new Date(utcString);
