@@ -16,12 +16,34 @@ class QuestionAnswerModal extends React.Component {
     this.props.onClose() && this.props.onClose(e);
   }
 
+  formHandler() {}
+
+  addQuestionAnswer(e) {
+    e.preventDefault();
+
+    this.props.addQuestionAnswer({
+      type: this.props.modalType,
+      body: this.state.body,
+      nickname: this.state.nickname,
+      email: this.state.email
+    });
+
+    this.props.modalHandler();
+
+    this.setState({
+      body: '',
+      nickname: '',
+      email: ''
+    });
+  }
+
   modalFormParams(type) {
     if (type === 'question') {} else if (type === 'answer') {}
   }
 
   render () {
-    const { type } = this.props;
+    const { modalType } = this.props;
+    let formType = this.modalFormParams(modalType);
 
     return (
       <div>
