@@ -26,6 +26,10 @@ class ReviewList extends React.Component {
 		console.log('finally, this.state.reviewList is: ', this.state.reviewList);
 	}
 
+	// componentDidUpdate() {
+	// 	this.handleShowInitialReviews();
+	// }
+
 	mappingReviews() {
 		console.log('props.reviews in Reviewlist: ', this.props.reviews);
 		// var reviews = this.props.reviews;
@@ -38,7 +42,7 @@ class ReviewList extends React.Component {
 		});
 	}
 
-	slicedReviewList(callback) {
+	slicedReviewList() {
 		var currentIndex = this.state.currentIndex;
 		var reviewsPerClick = this.state.reviewsPerClick;
 		console.log('finally, this.state.reviewList is: ', this.state.reviewList);
@@ -59,6 +63,11 @@ class ReviewList extends React.Component {
 
 	handleShowMoreReviews() {
 		console.log('write logic for showing more reviews here!');
+		var currentReviewsPerClick = this.state.reviewsPerClick;
+		currentReviewsPerClick += 2;
+		this.setState({
+			reviewsPerClick: currentReviewsPerClick
+		}, this.slicedReviewList);
 	}
 
 
