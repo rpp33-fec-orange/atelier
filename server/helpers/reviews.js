@@ -1,5 +1,5 @@
 const axios = require('axios');
-const config = require('../../config.js');
+const { options } = require('./options.js');
 
 
 // let getReviews = () => {
@@ -29,7 +29,7 @@ let getReviewsByID = (id) => {
 		},
 		headers: {
 			'User-Agent': 'request',
-			'Authorization': `${config.API_KEY}`
+			'Authorization': `${options.auth.Authorization}`
 		}
 	})
 	.catch(function(error) {
@@ -47,7 +47,7 @@ let getReviewsMeta = (id) => {
 		},
 		headers: {
 			'User-Agent': 'request',
-			'Authorization': `${config.API_KEY}`
+			'Authorization': `${options.auth.Authorization}`
 		}
 	})
 	.catch(function(error) {
@@ -73,7 +73,7 @@ let postReview = (product_id, rating, summary, body, recommend, name, email, pho
 		},
 		headers: {
 			'User-Agent': 'request',
-			'Authorization': `${config.API_KEY}`
+			'Authorization': `${options.auth.Authorization}`
 		}
 	})
 	.catch(function(error) {
@@ -92,7 +92,7 @@ let putReview = (review_id) => {
 		},
 		headers: {
 			'User-Agent': 'request',
-			'Authorization': `${config.API_KEY}`
+			'Authorization': `${options.auth.Authorization}`
 		}
 	})
 	.catch(function(error) {

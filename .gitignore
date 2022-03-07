@@ -109,10 +109,6 @@ client/dist/bundle.js
 # API Token config file
 config.js
 
-<<<<<<< HEAD
-# AWS config
-HR-FEC.pem
-=======
 # AWS PEM files
 FEC-HR.pem
 HR-FEC.pem
@@ -121,4 +117,3 @@ hr-rpp33-fec.pem
 
 # DS store
 .DS_Store
->>>>>>> main

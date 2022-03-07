@@ -1,7 +1,7 @@
 const axios = require('axios');
 const Promise = require('promise');
 const $ = require('jquery')
-const { API_KEY } = require('../../config.js');
+const { options } = require('./options.js');
 
 const API_URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/';
 
@@ -18,7 +18,7 @@ const getRelatedProductsById = (id) => { //This function makes a GET request for
   return axios({
     method: 'GET',
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}/related`,
-    headers: { 'Authorization': API_KEY },
+    headers: options.auth,
   })
     .then((productIds) => {
 
@@ -31,7 +31,7 @@ const getRelatedProductsById = (id) => { //This function makes a GET request for
           axios({
             method: 'GET',
             url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${productIds.data[i]}`,
-            headers: { 'Authorization': API_KEY },
+            headers: options.auth,
           })
             .then((productInfo) => {
               return relatedProductsInfoArray.push(productInfo.data);
@@ -63,7 +63,7 @@ const getRelatedStylesById = (id) => { //This function makes a GET request for p
   return axios({
     method: 'GET',
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}/related`,
-    headers: { 'Authorization': API_KEY },
+    headers: options.auth,
   })
     .then((productIds) => {
       for (var i = 0; i < productIds.data.length; i++) {
@@ -72,7 +72,7 @@ const getRelatedStylesById = (id) => { //This function makes a GET request for p
           axios({
             method: 'GET',
             url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${productIds.data[i]}/styles`,
-            headers: { 'Authorization': API_KEY },
+            headers: options.auth,
           })
             .then((productStyles) => {
               return relatedStylesInfoArray.push(productStyles.data);
@@ -104,7 +104,7 @@ const getRelatedProductsReviewMeta = (ParentProductId, relatedProducts) => {
         params: {
 			    product_id: productIds[i]
 		    },
-        headers: { 'Authorization': API_KEY },
+        headers: options.auth,
       })
         .then((reviews) => {
           return relatedReviewMetaInfoArray.push(reviews.data);
