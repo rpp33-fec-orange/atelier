@@ -17,8 +17,7 @@ app.get('/products', function (req, res) {
   getProducts()
     .then((data) => {
       console.log('server getProducts success');
-      res.status(200).send(data);
-    })
+                     })
     .catch((error) => {
       console.log('server getProducts error');
     })
