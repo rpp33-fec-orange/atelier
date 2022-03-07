@@ -48,9 +48,6 @@ class App extends React.Component {
 
   componentDidMount() {
     this.productsHandler();
-  }
-
-  componentWillMount() {
     this.getRating();
   }
 

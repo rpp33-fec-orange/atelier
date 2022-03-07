@@ -227,3 +227,6 @@ render() {
 }
 
 export default RatingsReviews;
+
+
+// some comments
