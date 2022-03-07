@@ -1,5 +1,5 @@
 import React from 'react';
-import RelatedProductsRow from './RelatedProdcutsRow.jsx'
+import RelatedProductsRow from './RelatedProductsRow.jsx'
 import YourOutfitRow from './YourOutfitRow.jsx'
 import $ from 'jquery';
 
