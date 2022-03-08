@@ -9,9 +9,10 @@ import QuestionAddons from './QuestionAddons.jsx';
 class QuestionsAnswers extends React.Component {
   constructor(props) {
     super(props);
-    let id = this.props.id;
+    let { id, productName } = this.props;
     this.state = {
       productId: id,
+      productName: productName,
       showMoreQuestions: true,
       allQuestions: [],
       renderedQuestions: [],
@@ -114,7 +115,7 @@ class QuestionsAnswers extends React.Component {
 
   }
 
-  handleModal() {
+  handleModal(e) {
     this.setState({
       showModal: !this.state.showModal
     });
@@ -272,6 +273,17 @@ class QuestionsAnswers extends React.Component {
   render() {
     let questions = [];
 
+    let questionPrompt = {
+      type: 'Question',
+      product_id: this.state.productId,
+      productName: this.state.productName
+    };
+
+    let answerPrompt = {
+      type: 'Answer',
+      productName: this.state.productName
+    };
+
     if (!this.state.renderSearch) {
       questions = this.state.renderedQuestions;
     } else {
@@ -296,18 +308,22 @@ class QuestionsAnswers extends React.Component {
                   helpfulAnswer={this.markAnswerHelpful}
                   reportQuestion={this.reportQuestion}
                   reportAnswer={this.reportAnswer}
-                  modalHandler={this.handleModal}
+                  showModal={this.state.showModal}
+                  toggleModal={this.handleModal}
                   addAnswer={this.submitAnswer}
+                  prompt={answerPrompt}
                 />
-                )
+              )
             })
           }
         </div>
         <QuestionAddons
           canShowMore={this.state.showMoreQuestions}
           loadMore={this.getMoreQuestions}
-          modalHandler={this.handleModal}
+          showModal={this.state.showModal}
+          toggleModal={this.handleModal}
           addQuestion={this.submitQuestion}
+          prompt={questionPrompt}
         />
       </div>
     );

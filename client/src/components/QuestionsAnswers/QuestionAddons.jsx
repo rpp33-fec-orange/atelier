@@ -1,4 +1,6 @@
 import React from 'react';
+import QuestionAnswerModal from './QuestionAnswerModal.jsx';
+
 
 class QuestionAddons extends React.Component {
   constructor(props) {
@@ -38,10 +40,15 @@ class QuestionAddons extends React.Component {
         <button
           id="addQuestion"
           type="button"
-          onClick={this.addQuestion}
+          onClick={() => this.props.toggleModal()}
         >
           Add A Question
         </button>
+        <QuestionAnswerModal
+          prompt={this.props.prompt}
+          toggleModal={this.props.toggleModal}
+          showModal={this.props.showModal}
+        />
       </div>
     );
   }

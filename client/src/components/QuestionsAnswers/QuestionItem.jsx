@@ -1,5 +1,7 @@
 import React from 'react';
 import AnswerList from './AnswerList.jsx';
+import QuestionAnswerModal from './QuestionAnswerModal.jsx';
+
 
 class QuestionItem extends React.Component {
   constructor(props) {
@@ -36,7 +38,12 @@ class QuestionItem extends React.Component {
 
 
   render() {
-    let question = this.props.question;
+    let { question, prompt } = this.props;
+
+    prompt.questionId = question.question_id;
+    prompt.questionBody = question.question_body;
+
+
     return (
       <div className="questionItem" key={question.question_id}>
         <div className="questionMain" style={{display: 'inline-block'}}>
@@ -64,7 +71,14 @@ class QuestionItem extends React.Component {
               <span className="markQuestionHelpful-marked">Yes</span>
             }
             {`(${question.question_helpfulness})  |  `}
-            <span className="addAnswer" onClick={this.addAnswer}>Add Answer</span>
+            <span className="addAnswer" onClick={() => this.props.toggleModal()}>
+              Add Answer
+            </span>
+            <QuestionAnswerModal
+              prompt={prompt}
+              toggleModal={this.props.toggleModal}
+              showModal={this.props.showModal}
+            />
             {'  |  '}
             {
               !question.reported
