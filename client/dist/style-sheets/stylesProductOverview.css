@@ -332,6 +332,10 @@
   left: 8%;
 }
 
+.selected-photo {
+  border: 2px solid turquoise;
+}
+
 .expanded-magnifying-glass {
   position: absolute;
   right: 200px;

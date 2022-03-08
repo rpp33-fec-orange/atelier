@@ -62,6 +62,14 @@ class Styles extends React.Component {
 
   skuChange(e) {
     let skuKeys = Object.keys(this.state.currentStyleSkus);
+    if (e.target.value === 'SELECT SIZE') {
+      this.setState({
+        currentSku: '',
+        skuId: '',
+        sizeStatus: '',
+        quantitySeletedBool: false
+      });
+    }
     for (let i = 0; i < skuKeys.length; i++) {
       if (e.target.value === this.state.currentStyleSkus[skuKeys[i]].size) {
         let selectedSku = this.state.currentStyleSkus[skuKeys[i]];
@@ -74,7 +82,6 @@ class Styles extends React.Component {
       }
     }
   }
-
 
   postCart() {
     let skuId = this.state.skuId;
@@ -123,10 +130,17 @@ class Styles extends React.Component {
   }
 
   quantityChange(e) {
-    this.setState({
-      quantitySelected: e.target.value,
-      quantitySelectedBool: true
-    })
+    if (e.target.value === '-') {
+      this.setState({
+        quantitySelected: 0,
+        quantitySelectedBool: false
+      })
+    } else {
+      this.setState({
+        quantitySelected: e.target.value,
+        quantitySelectedBool: true
+      })
+    }
   }
 
   componentDidMount() {
@@ -182,13 +196,13 @@ class Styles extends React.Component {
             </div>
             <div class="styles-item-2-8-container">
               <select class="styles-item-2-8" value={sizeStatus} id="size-selector" onChange={this.skuChange} >
-                <option class="styles-item-2-8-1" value="nullSize">SELECT SIZE</option>
+                <option class="styles-item-2-8-1" value="SELECT SIZE">SELECT SIZE</option>
                 {Object.keys(currentStyleSkus).map((sku) =>
                   <option id="size-option" value={currentStyleSkus[sku].size} >{currentStyleSkus[sku].size}</option>
                 )}
               </select>
               <select class="styles-item-2-9" id="quantity-selector" onChange={this.quantityChange}>
-                < option value="nullQuantity" >-</option>
+                < option value="-" >-</option>
                 {quantityArray && quantityArray.map((quantityItem) =>
                   <option value={quantityItem} >{quantityItem}</option>
                 )}

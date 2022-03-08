@@ -21,7 +21,6 @@ class Photos extends React.Component {
   }
 
   photoClick(e) {
-    console.log('EVENT TARGET: ', e.target);
     for (let i = 0; i < this.state.mainPhotoArray.length; i++) {
       if (e.target.src === this.state.mainPhotoArray[i].url) {
         let clickedIndex = i;
@@ -63,7 +62,6 @@ class Photos extends React.Component {
         mainPhotoIndex: newIndex
       });
     }
-    console.log('left, index', this.state.mainPhotoIndex)
   }
 
   rightClick() {
@@ -81,7 +79,6 @@ class Photos extends React.Component {
         mainPhotoIndex: newIndex
       });
     }
-    console.log('right, index', this.state.mainPhotoIndex);
   }
 
   expandClick(e) {
