@@ -1,5 +1,5 @@
 import React from 'react';
-// import zoomIcon from './zoomIcon.png';
+// import zoomIcon from '../../../dist/zoomIcon.png';
 
 class Photos extends React.Component {
   constructor(props) {
@@ -10,13 +10,19 @@ class Photos extends React.Component {
       mainPhotoIndex: 0,
       mainPhotoURL: props.currentStyle.photos[0].url,
       subPhotosArray: props.currentStyle.photos,
+      subPhotosSliceStartIndex: 0,
+      subPhotosSliceEndIndex: 4,
       expanded: false,
       arrayLeftEnd: true,
-      arrayRightEnd: false
+      arrayRightEnd: false,
+      arrayTopEnd: true,
+      arrayBottomEnd: false
     }
     this.photoClick = this.photoClick.bind(this);
     this.leftClick = this.leftClick.bind(this);
     this.rightClick = this.rightClick.bind(this);
+    this.upClick = this.upClick.bind(this);
+    this.downClick = this.downClick.bind(this);
     this.expandClick = this.expandClick.bind(this);
   }
 
@@ -81,6 +87,42 @@ class Photos extends React.Component {
     }
   }
 
+  upClick() {
+    let newStartIndex = this.state.subPhotosSliceStartIndex - 1;
+    let newEndIndex = this.state.subPhotosSliceEndIndex - 1;
+    if (this.state.subPhotosSliceStartIndex === 0 || newStartIndex === 0) {
+      this.setState({
+        arrayTopEnd: true,
+        arrayBottomEnd: false
+      })
+    }
+    this.setState({
+      subPhotosSliceStartIndex: newStartIndex,
+      subPhotosSliceEndIndex: newEndIndex
+    })
+  }
+
+  downClick() {
+    let newStartIndex = this.state.subPhotosSliceStartIndex + 1;
+    let newEndIndex = this.state.subPhotosSliceEndIndex + 1;
+    if (newStartIndex > 0 && newEndIndex < this.state.subPhotosArray.length) {
+      this.setState({
+        arrayTopEnd: false,
+        arrayBottomEnd: false
+      })
+    }
+    if (this.state.subPhotosSliceEndIndex === this.state.subPhotosArray.length || newEndIndex === this.state.subPhotosArray.length) {
+      this.setState({
+        arrayTopEnd: false,
+        arrayBottomEnd: true
+      })
+    }
+    this.setState({
+      subPhotosSliceStartIndex: newStartIndex,
+      subPhotosSliceEndIndex: newEndIndex
+    })
+  }
+
   expandClick(e) {
     if (!this.state.expanded) {
       this.setState({
@@ -109,16 +151,22 @@ class Photos extends React.Component {
     let mainPhotoIndex = this.state.mainPhotoIndex;
     let mainPhotoURL = this.state.mainPhotoURL;
     let subPhotosArray = this.state.subPhotosArray;
+    let subPhotosSliceStartIndex = this.state.subPhotosSliceStartIndex;
+    let subPhotosSliceEndIndex = this.state.subPhotosSliceEndIndex;
     let arrayLeftEnd = this.state.arrayLeftEnd;
     let arrayRightEnd = this.state.arrayRightEnd;
+    let arrayTopEnd = this.state.arrayTopEnd;
+    let arrayBottomEnd = this.state.arrayBottomEnd;
     let expanded = this.state.expanded;
     if (!expanded) {
       return (
         <div>
           <div class="styles-item-1-2">
-            {subPhotosArray.map((photo) =>
-              <img class="styles-item-1-2-1" src={photo.url} width="50" height="70" onClick={this.photoClick}></img>
+            {arrayTopEnd ? <div id="collapsed-up-end">end</div> : <div id="collapsed-up-arrow" onClick={this.upClick}>up</div>}
+            {subPhotosArray.slice(subPhotosSliceStartIndex, subPhotosSliceEndIndex).map((photo) =>
+              <img class="styles-item-1-2-1" src={photo.url} onClick={this.photoClick}></img>
             )}
+            {arrayBottomEnd ? <div id="collapsed-down-end">end</div> : <div id="collapsed-down-arrow" onClick={this.downClick}>down</div>}
             <div class="styles-item-1-1 collapsed-magnifying-glass" onClick={this.expandClick}>🔍</div>
             {/* <img class="styles-item-1-1 collapsed-magnifying-glass" src={zoomIcon} onclick={this.expandClick}></img> */}
           </div>
@@ -135,7 +183,7 @@ class Photos extends React.Component {
           <div class="expanded-subPhoto">
             {subPhotosArray.map((photo) =>
               <div>
-                <img class="styles-item-1-2-1" src={photo.url} width="50" height="70" onClick={this.photoClick}></img>
+                <img class="styles-item-1-2-1" src={photo.url} onClick={this.photoClick}></img>
               </div>
             )}
           </div>

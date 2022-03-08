@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ProductOverview from './components/ProductOverview/index.jsx';
 import RatingsReviews from './components/RatingsReviews/RatingsReviews.jsx';
 import QuestionsAnswers from './components/QuestionsAnswers/index.jsx';
@@ -97,7 +98,7 @@ class App extends React.Component {
           <RelatedProducts id={this.state.id} yourOutfitArray={this.state.yourOutfitArray} yourOutfitHandleClick={this.yourOutfitHandleClick} handleProductChange={this.handleProductChange} />
           <QuestionsAnswers id={this.state.id} />
           <RatingsReviews id={this.state.id} handleRating={this.handleRating} handleGetRating={this.getRating} />
-          <div id="footer">Hack Reactor® Front End Capstone 2022 Project Atelier by Team Orange</div>
+          <div id="footer">Hack Reactor® Front End Capstone 2022 by Team Orange. All Rights Reserved. </div>
         </div>
       )
     } else {
