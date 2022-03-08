@@ -25,13 +25,13 @@ class ProductOverview extends React.Component {
       type: 'GET',
       url: `/products/${this.state.id}`,
       success: function (success) {
-        console.log('productHandler ajax GET success:');
+        console.log('product overview productHandler ajax GET success');
         this.setState({
           productById: success,
         })
       },
       error: function (error) {
-        console.log('productHandler ajax GET error: ', error);
+        console.log('product overviewnproductHandler ajax GET error: ', error);
       },
       contentType: "application/json",
     })
@@ -43,7 +43,7 @@ class ProductOverview extends React.Component {
       type: 'GET',
       url: `/products/${this.state.id}/styles`,
       success: function (success) {
-        console.log('productHandler ajax GET success:');
+        console.log('product overview productHandler ajax GET success');
         this.setState({
           productStylesById: success,
           styles: success.results,
@@ -51,7 +51,7 @@ class ProductOverview extends React.Component {
         })
       },
       error: function (error) {
-        console.log('productHandler ajax GET error: ', error);
+        console.log('product overview productHandler ajax GET error: ', error);
       },
       contentType: "application/json",
     })
@@ -64,10 +64,10 @@ class ProductOverview extends React.Component {
       url: '/search',
       data: JSON.stringify({ keyword }),
       success: function (success) {
-        console.log('searchHandler ajax POST success');
+        console.log('product overview searchHandler ajax POST success');
       },
       error: function (error) {
-        console.log('searchHandler ajax POST error: ', error);
+        console.log('product overview searchHandler ajax POST error: ', error);
       },
       contentType: "application/json",
     })
@@ -88,7 +88,7 @@ class ProductOverview extends React.Component {
           </div>
           <div id="message">Hack Reactor Sale! ---Extra 40% off on selected items--- Free shipping for orders over $50!</div>
           <div class="index-item index-item-2">
-            <Styles data-testid="styles?" productById={this.state.productById} productStylesById={this.state.productStylesById} rating={this.props.rating} currentStyleHandler = {this.props.currentStyleHandler} yourOutfitHandleClick = {this.props.yourOutfitHandleClick}/>
+            <Styles data-testid="styles?" productById={this.state.productById} productStylesById={this.state.productStylesById} rating={this.props.rating} currentStyleHandler={this.props.currentStyleHandler} yourOutfitHandleClick={this.props.yourOutfitHandleClick} />
           </div>
           <div class="index-item index-item-2">
             <Info data-testid="descriptions?" productById={this.state.productById} />

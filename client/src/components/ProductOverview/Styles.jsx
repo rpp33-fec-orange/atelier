@@ -67,18 +67,19 @@ class Styles extends React.Component {
         currentSku: '',
         skuId: '',
         sizeStatus: '',
-        quantitySeletedBool: false
+        quantitySelectedBool: false
       });
-    }
-    for (let i = 0; i < skuKeys.length; i++) {
-      if (e.target.value === this.state.currentStyleSkus[skuKeys[i]].size) {
-        let selectedSku = this.state.currentStyleSkus[skuKeys[i]];
-        this.setState({
-          currentSku: selectedSku,
-          skuId: skuKeys[i],
-          sizeStatus: e.target.value,
-          quantitySeletedBool: false
-        });
+    } else {
+      for (let i = 0; i < skuKeys.length; i++) {
+        if (e.target.value === this.state.currentStyleSkus[skuKeys[i]].size) {
+          let selectedSku = this.state.currentStyleSkus[skuKeys[i]];
+          this.setState({
+            currentSku: selectedSku,
+            skuId: skuKeys[i],
+            sizeStatus: e.target.value,
+            quantitySeletedBool: false
+          });
+        }
       }
     }
   }
@@ -121,12 +122,11 @@ class Styles extends React.Component {
   }
 
   outfitClick() {
-    console.log('add to outfit clicked!');
     this.props.yourOutfitHandleClick();
   }
 
   reviewsClick() {
-    console.log('read all reviews clicked!');
+    window.scrollTo(0, 1885);
   }
 
   quantityChange(e) {
@@ -173,11 +173,11 @@ class Styles extends React.Component {
           </div>
           <div class="styles-item styles-item-2" id="styles">
             <div class="styles-item-2-1-container">
-              <div class="styles-item-2-1" id="rating" onClick={this.reviewsClick}>
+              <div class="styles-item-2-1" id="rating">
                 {/* <StarRating num={this.props.rating}/> */}
                 {rating}
               </div>
-              <div class="styles-item-2-2" id="read-all-reviews-button">Read all reviews</div>
+              <div class="styles-item-2-2" id="read-all-reviews-button" onClick={this.reviewsClick}>Read all reviews</div>
             </div>
             <div class="styles-item-2-3" id="category">{productById.category}</div>
             <div class="styles-item-2-4" id="name">{productById.name}</div>

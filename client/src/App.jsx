@@ -90,7 +90,6 @@ class App extends React.Component {
   }
 
   render() {
-
     if (this.state.initialized) {
       return (
         <div id="container">
@@ -98,6 +97,7 @@ class App extends React.Component {
           <RelatedProducts id={this.state.id} yourOutfitArray={this.state.yourOutfitArray} yourOutfitHandleClick={this.yourOutfitHandleClick} handleProductChange={this.handleProductChange} />
           <QuestionsAnswers id={this.state.id} />
           <RatingsReviews id={this.state.id} handleRating={this.handleRating} handleGetRating={this.getRating} />
+          <div id="footer">Hack Reactor® Front End Capstone 2022 Project Atelier by Team Orange</div>
         </div>
       )
     } else {

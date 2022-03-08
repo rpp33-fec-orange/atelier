@@ -92,8 +92,8 @@
   /* background-color: yellow; */
   cursor: pointer;
   object-fit: cover;
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
 }
 
 .styles-item-2 {
@@ -512,4 +512,8 @@
   z-index: 3;
   background-color: white;
   border-radius: 50%;
+}
+
+#footer {
+  text-align: right;
 }
