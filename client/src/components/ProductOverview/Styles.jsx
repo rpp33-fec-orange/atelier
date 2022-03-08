@@ -176,6 +176,7 @@ class Styles extends React.Component {
               {styles.map((style) =>
                 <div class="styles-item-2-7-1">
                   <img id="styleThumbnail" name={style.name} src={style.photos[0].url} width="50" height="50" onClick={this.styleChange}></img>
+                  <div class="styles-popup">{style.name}</div>
                 </div>
               )}
             </div>
@@ -197,10 +198,8 @@ class Styles extends React.Component {
               <button class="styles-item-2-11" id="save-outfit-button" onClick={this.outfitClick}>SAVE OUTFIT</button>
             </div>
           </div >
-
         </div >
       </div>
-
     )
   }
 }
