@@ -181,11 +181,13 @@ class Photos extends React.Component {
       return (
         <div class="expanded-view">
           <div class="expanded-subPhoto">
-            {subPhotosArray.map((photo) =>
+            {arrayTopEnd ? <div id="collapsed-up-end">end</div> : <div id="collapsed-up-arrow" onClick={this.upClick}>up</div>}
+            {subPhotosArray.slice(subPhotosSliceStartIndex, subPhotosSliceEndIndex).map((photo) =>
               <div>
                 <img class="styles-item-1-2-1" src={photo.url} onClick={this.photoClick}></img>
               </div>
             )}
+            {arrayBottomEnd ? <div id="collapsed-down-end">end</div> : <div id="collapsed-down-arrow" onClick={this.downClick}>down</div>}
           </div>
           <img class="expanded-mainPhoto" src={mainPhotoArray[mainPhotoIndex].url} width="575" height="700"></img>
           <div class="expanded-magnifying-glass" onClick={this.expandClick}>🔍</div>
