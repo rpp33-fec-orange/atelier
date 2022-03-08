@@ -1,5 +1,6 @@
 import React from 'react';
 import ReviewItem from './ReviewItem.jsx';
+import Dashboard from './Dashboard.jsx';
 
 class ReviewList extends React.Component {
 	constructor(props) {
@@ -9,12 +10,14 @@ class ReviewList extends React.Component {
 			renderedReviews: [],
 			holdingReviews: [],
 			reviewsPerClick: 2,
-			currentIndex: 0
+			currentIndex: 0,
+			showMore: 'more-reviews-btn'
 		}
 		this.mappingReviews = this.mappingReviews.bind(this);
 		this.handleShowMoreReviews = this.handleShowMoreReviews.bind(this);
 		// this.handleShowInitialReviews = this.handleShowInitialReviews.bind(this);
 		this.slicedReviewList = this.slicedReviewList.bind(this);
+		this.setShowMore = this.setShowMore.bind(this);
 	}
 
 	componentDidMount() {
@@ -39,7 +42,18 @@ class ReviewList extends React.Component {
 		);
 		this.setState({
 			renderedReviews: renderedReviews
-		});
+		}, this.setShowMore);
+	}
+
+	setShowMore() {
+		var index = this.state.reviewsPerClick;
+		var length = this.state.reviewList.length;
+		if (index >= length) {
+			this.setState({
+				showMore: 'more-reviews-btn-hide'
+			});
+		}
+		console.log('showMore is : ', this.state.showMore);
 	}
 
 	slicedReviewList() {
@@ -79,12 +93,17 @@ class ReviewList extends React.Component {
 		console.log('finally, this.state.reviewList under render() in ReviewList is: ', this.state.reviewList);
 
 		console.log('finally, this.state.renderedReviews in ReviewList is: ', this.state.renderedReviews);
+		var showMore = this.state.showMore;
+		console.log('showMore variable inside render() is: ', showMore);
 		return (
-			<div id="list">
-				{this.state.renderedReviews}
-				<div className="five" id="buttons">
-					<button onClick={this.handleShowMoreReviews}>MORE REVIEWS</button>
+			<div id="review-list-container">
+				<div className="scroller">
+					{this.state.renderedReviews}
+				</div>
+				<div className="buttons" id="buttons">
+					<button className={showMore} onClick={this.handleShowMoreReviews}>MORE REVIEWS</button>
 					{/* <button>ADD A REVIEW</button> */}
+					<Dashboard />
 				</div>
 			</div>
 		)

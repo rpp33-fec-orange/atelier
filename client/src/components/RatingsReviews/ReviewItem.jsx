@@ -60,16 +60,21 @@ class ReviewItem extends React.Component {
 
 			<div className="wrapper">
 				<div className="one" id="review-list">
-					<div><StarRating num={this.props.review.rating} />  {this.state.review.reviewer_name}, {this.state.review.date}</div>
-					<h3>{this.state.review.summary}</h3>
-					<p>{this.state.review.body}</p>
-					<sub>Helpful?  Yes ({this.state.review.helpfulness})  |  Report</sub>
+					<div className="star-review-container">
+						<StarRating num={this.props.review.rating} />
+						<div className="user-and-date">
+						{this.state.review.reviewer_name}, {this.state.review.date}
+						</div>
+					</div>
+					<h3 className="review-summary">{this.state.review.summary}</h3>
+					<p className="review-body">{this.state.review.body}</p>
+					<div className="helpful">Helpful?  <span className="yes">Yes</span> ({this.state.review.helpfulness})  | <span className="report">Report</span> </div>
 					{this.state.review.recommend &&
 						<div>
 							✔ I recommend this product
 						</div>
 					}
-					<p>Do you recommend this product?</p>
+					{/* <p>Do you recommend this product?</p>
 					<div className="modal-recommended" >
 						<div>
 								<input type="radio" id="yes" name="recommended" value="yes" />
@@ -79,7 +84,7 @@ class ReviewItem extends React.Component {
 								<input type="radio" id="no" name="recommended" value="no" />
 							  <label htmlFor="no">No</label>
 						</div>
-					</div>
+					</div> */}
 					<div className="productPhoto">
 						<sub>Product Photo: </sub>
 						{this.state.review.photos.length > 0

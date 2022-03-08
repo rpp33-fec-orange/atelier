@@ -38,7 +38,7 @@ class StarList extends React.Component {
 		console.log('five is: ', this.state.five);
 
 		return (
-			<div className="two" id="two">
+			<div className="star-list" id="star-list">
 				<table>
 					<tbody>
 						<tr>

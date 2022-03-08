@@ -11,7 +11,7 @@ class SizeSlider extends React.Component {
 	render() {
 		var size = this.props.size.Fit.value;
 		return (
-			<div className="three" id="three">
+			<div className="size-slider" id="size-slider">
 				<p>Size</p>
 				<div>Too Small     |     {size}      |      Too Large</div>
 			</div>

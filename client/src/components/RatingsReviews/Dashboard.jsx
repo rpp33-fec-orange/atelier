@@ -34,8 +34,8 @@ class Dashboard extends React.Component {
 
 			<div>
 				<Modal show={this.state.show} handleClose={this.hideModal} />
-				<button type="button" onClick={this.showModal} >
-					ADD A REVIEW
+				<button className="add-review" type="button" onClick={this.showModal} >
+					ADD A REVIEW +
 				</button>
 			</div>
 		);
