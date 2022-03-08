@@ -19,6 +19,13 @@
   transform: translate(-50%, -50%);
 }
 
+.modal-rr-container {
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
 .display-block {
   display: block;
 }
@@ -287,7 +294,7 @@
     font-size: 12px;
   }
 
-  .more-reviews-btn, .add-review {
+  .more-reviews-btn, .add-review, .submit, .close, .upload {
     display: block;
     width: fit-content;
     background-color: #04AA6D;

@@ -219,7 +219,7 @@ class RatingsReviews extends React.Component {
             <ComfortSlider comfort={meta_characteristics} />
           </div>
           <div className="review-breakdown">
-            <h3 className="review-header">{count} reviews, sorted by <div className="sort">{sort}</div></h3>
+            <h3 className="review-header">{count} reviews, sorted by <div className="sort">{sort} &#9660;</div></h3>
             <ReviewList reviews={list} />
             {/* <Dashboard /> */}
           </div>
