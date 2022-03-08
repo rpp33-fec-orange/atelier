@@ -126,7 +126,11 @@ class Styles extends React.Component {
   }
 
   reviewsClick() {
-    window.scrollTo(0, 1885);
+    window.scrollTo({
+      top: 1885,
+      left: 0,
+      behavior: 'smooth'
+    });
   }
 
   quantityChange(e) {
