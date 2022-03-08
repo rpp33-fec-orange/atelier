@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 class QuestionSearch extends React.Component {
   constructor(props) {
@@ -32,13 +34,16 @@ class QuestionSearch extends React.Component {
   render() {
     return (
       <div id="questionSearch">
-        <input
-          type="search"
-          name="query"
-          value={this.state.query}
-          onChange={this.handleChange}
-          placeholder="Have a question? Search for answers...">
-        </input>
+        <div id="questionSearchBox-container">
+          <input
+            type="search"
+            name="query"
+            value={this.state.query}
+            onChange={this.handleChange}
+            placeholder="Have a question? Search for answers...">
+          </input>
+          <FontAwesomeIcon type="submit" icon={faMagnifyingGlass} />
+        </div>
       </div>
     );
   }
