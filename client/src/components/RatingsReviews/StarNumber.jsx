@@ -76,9 +76,11 @@ class StarNumber extends React.Component {
 
 	render() {
 		return (
-			<div className="one" id="one">
-				<h1 className="rating-summary">{this.state.ratingSummary}</h1>
-				<StarRating num={this.state.ratingSummary} handleRating={this.props.handleRating} />
+			<div className="star-number" id="star-number">
+				<div className="rating-summary-container">
+					<h1 className="rating-summary">{this.state.ratingSummary}</h1>
+					<StarRating num={this.state.ratingSummary} handleRating={this.props.handleRating} />
+				</div>
 				<div>{this.state.percentage}% of reviews recommend this product</div>
 			</div>
 

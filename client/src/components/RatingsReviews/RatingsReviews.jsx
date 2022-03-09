@@ -125,7 +125,7 @@ class RatingsReviews extends React.Component {
       });
   }
 
-  postReviewHandler(product_id, rating, summary, body, recommend, name, email, photos, characteristics ) {
+  postReviewHandler(product_id, rating, summary, body, recommend, name, email, photos, characteristics) {
     // var url = `/reviews/${this.state.id}`;
     // product_id=64620
     // var sort = this.state.sort;
@@ -189,41 +189,44 @@ class RatingsReviews extends React.Component {
 
 
 
-render() {
-  console.log('this.state.reviews: ', this.state.reviews);
-  console.log('this.state.meta is: ', this.state.meta);
-  var list = this.state.reviews;
-  var count = this.state.count;
-  var sort = this.state.sort;
-  var meta_characteristics = this.state.meta_characteristics;
-  var meta_recommended = this.state.meta_recommended;
-  var meta_ratings = this.state.meta_ratings;
-  console.log('this.state.meta_characteristics is: ', this.state.meta_characteristics);
+  render() {
+    console.log('this.state.reviews: ', this.state.reviews);
+    console.log('this.state.meta is: ', this.state.meta);
+    var list = this.state.reviews;
+    var count = this.state.count;
+    var sort = this.state.sort;
+    var meta_characteristics = this.state.meta_characteristics;
+    var meta_recommended = this.state.meta_recommended;
+    var meta_ratings = this.state.meta_ratings;
+    console.log('this.state.meta_characteristics is: ', this.state.meta_characteristics);
 
-  if (!this.state.dataReady) {
-    return (
-      <div>
-        Loading Ratings and Reviews...
-      </div>
-    )
+    if (!this.state.dataReady) {
+      return (
+        <div>
+          Loading Ratings and Reviews...
+        </div>
+      )
+    }
+    if (this.state.dataReady) {
+      console.log('meta_characteristics is: ', meta_characteristics);
+      return (
+        <div className="ratings-reviews" id="flex-container">
+          <div className="rating-breakdown">
+            <h3 id='ratings-reviews' id="zero">RATINGS AND REVIEWS</h3>
+            <StarNumber recommended={meta_recommended} ratings={meta_ratings} handleRating={this.props.handleRating} handleGetRating={this.props.handleGetRating} />
+            <StarList ratings={meta_ratings} />
+            <SizeSlider size={meta_characteristics} />
+            <ComfortSlider comfort={meta_characteristics} />
+          </div>
+          <div className="review-breakdown">
+            <h3 className="review-header">{count} reviews, sorted by <div className="sort">{sort} &#9660;</div></h3>
+            <ReviewList reviews={list} />
+            {/* <Dashboard /> */}
+          </div>
+        </div>
+      );
+    }
   }
-  if (this.state.dataReady) {
-    console.log('meta_characteristics is: ', meta_characteristics);
-    return (
-      <div className="wrapper" id="flex-container">
-        <h1 id='ratings-reviews' id="zero">RATINGS AND REVIEWS</h1>
-        <StarNumber recommended={meta_recommended} ratings={meta_ratings} handleRating = {this.props.handleRating} handleGetRating={this.props.handleGetRating} />
-        <StarList ratings={meta_ratings} />
-        <SizeSlider size={meta_characteristics} />
-        <ComfortSlider comfort={meta_characteristics} />
-        <h3>{count} reviews, sorted by {sort}</h3>
-        <ReviewList reviews={list} />
-				<Dashboard />
-        {/* <StarRating /> */}
-      </div>
-    );
-  }
-}
 }
 
 export default RatingsReviews;

@@ -41,7 +41,7 @@ class ComfortSlider extends React.Component {
 		} else {
 			var comfort = this.props.comfort.Comfort.value;
 			return (
-				<div className="four" id="four">
+				<div className="comfort-slider" id="comfort-slider">
 					<p>Comfort</p>
 					{/* <div>comfort value: {comfort}</div> */}
 					{/* <div>{JSON.stringify(comfort)}</div> */}
