@@ -12,6 +12,7 @@ class QuestionsAnswers extends React.Component {
     let { id, productName } = this.props;
     this.state = {
       productId: id,
+      initialized: false,
       productName: productName,
       showMoreQuestions: true,
       allQuestions: [],
@@ -48,7 +49,8 @@ class QuestionsAnswers extends React.Component {
 
         this.setState({
           allQuestions: fullSet,
-          renderedQuestions: this.initialRender(data)
+          renderedQuestions: this.initialRender(data),
+          initialized: true
         });
       },
       dataType: 'json'
@@ -307,39 +309,44 @@ class QuestionsAnswers extends React.Component {
       questions = this.state.renderedSearch;
     }
 
-    return (
-      <div id="questionsAndAnswers">
-        <h4>Questions and Answers</h4>
-        <QuestionSearch
-          searchQuestion={this.search}
-          hideSearchResults={this.hideSearchResults}
-        />
-        <div id="questionList">
-          {
-            questions.map(questionObject => {
-              return (
-                <QuestionItem
-                  question={questionObject}
-                  loadMore={this.getMoreAnswers}
-                  helpfulQuestion={this.markQuestionHelpful}
-                  helpfulAnswer={this.markAnswerHelpful}
-                  reportQuestion={this.reportQuestion}
-                  reportAnswer={this.reportAnswer}
-                  addAnswer={this.submitAnswer}
-                  prompt={answerPrompt}
-                />
-              )
-            })
-          }
+    if (this.state.initialized) {
+      return (
+        <div id="questionsAndAnswers">
+          <h4>Questions and Answers</h4>
+          <QuestionSearch
+            searchQuestion={this.search}
+            hideSearchResults={this.hideSearchResults}
+          />
+          <div id="questionList">
+            {
+              questions.map(questionObject => {
+                return (
+                  <QuestionItem
+                    question={questionObject}
+                    loadMore={this.getMoreAnswers}
+                    helpfulQuestion={this.markQuestionHelpful}
+                    helpfulAnswer={this.markAnswerHelpful}
+                    reportQuestion={this.reportQuestion}
+                    reportAnswer={this.reportAnswer}
+                    addAnswer={this.submitAnswer}
+                    prompt={answerPrompt}
+                  />
+                )
+              })
+            }
+          </div>
+          <QuestionAddons
+            canShowMore={this.state.showMoreQuestions}
+            loadMore={this.getMoreQuestions}
+            addQuestion={this.submitQuestion}
+            prompt={questionPrompt}
+          />
         </div>
-        <QuestionAddons
-          canShowMore={this.state.showMoreQuestions}
-          loadMore={this.getMoreQuestions}
-          addQuestion={this.submitQuestion}
-          prompt={questionPrompt}
-        />
-      </div>
-    );
+      );
+    } else {
+      return null;
+    }
+
   }
 }
 

@@ -121,6 +121,7 @@ class QuestionAnswerModal extends React.Component {
                 required
               >
               </input>
+              <h5>For privacy reasons, do not use your full name or email address</h5>
               <label
                 htmlFor="email"
                 style={{ display: 'block' }}
@@ -139,6 +140,14 @@ class QuestionAnswerModal extends React.Component {
                 required
               >
               </input>
+              <h5>For authentication reasons, you will not be emailed</h5>
+              {
+                prompt.type === 'Answer'
+                &&
+                <button>
+                  UPLOAD PHOTOS
+                </button>
+              }
               <br></br>
               <button>
                 {`Submit ${prompt.type}`}
