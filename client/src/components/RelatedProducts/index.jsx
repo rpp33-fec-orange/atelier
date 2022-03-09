@@ -31,7 +31,6 @@ class RelatedProducts extends React.Component {
       url: `/products/${this.props.id}`,
       contentType: "application/json",
       success: function (data) {
-        // console.log('parent product data received by client', data)
         var tempArray = [];
         tempArray.push(data)
         this.setState({
@@ -52,9 +51,6 @@ class RelatedProducts extends React.Component {
       url: `/products/${this.props.id}/styles`,
       contentType: "application/json",
       success: function (data) {
-        // console.log('parent product styles data received by client', data)
-        // console.log('parent product with styles', parentProduct)
-        // console.log('state in component did mount', this.state)
         const parentProduct = this.state.parentProduct[0];
         parentProduct['styles'] = data.results;
         this.setState({
@@ -75,7 +71,6 @@ class RelatedProducts extends React.Component {
       url: `/products/${this.props.id}/related`,
       contentType: "application/json",
       success: function (data) {
-        // console.log('product data received by client', data)
         var relatedProductsIds = data.shift();
           this.setState({
             relatedProductsInfo: data,
@@ -99,9 +94,6 @@ class RelatedProducts extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log('previous props', prevProps.id);
-    console.log('new props', this.props.id);
-
     if (this.props.id !== prevProps.id) {
         this.setState({
           product_id: this.props.id,
@@ -112,25 +104,6 @@ class RelatedProducts extends React.Component {
         this.fetchRelatedProductsData();
     }
   }
-
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   if (this.props.id !== nextProps.id) {
-  //     return true;
-  //   }
-  //   return false;
-  // }
-
-  // handleStateChange(newProductId) {
-  //   this.setState({...this.state,
-  //     relatedProducts: [],
-  //     relatedProductsInfo: [],
-  //     relatedStylesInfo: [],
-  //     parentProduct: [],
-  //     relatedProductsIds: []}, () => {
-  //       console.log('product id updated');
-  //       this.props.handleProductChange(newProductId);
-  //     });
-  // }
 
   render() {
 

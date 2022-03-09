@@ -42,7 +42,6 @@ class StarRating extends React.PureComponent {
 		if (mainNum < 5) {
 			stars.push(<img className="rp-star" src={this.state[leftoverNumStr]} key={mainNum} />);
 		}
-		console.log('this is stars: ', stars);
 		return stars;
 	}
 

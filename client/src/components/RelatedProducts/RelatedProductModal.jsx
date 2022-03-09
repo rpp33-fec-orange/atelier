@@ -45,7 +45,6 @@ class RelatedProductModal extends React.Component {
         if (combinedFeatures[i].parentProductValue === undefined) {
           combinedFeatures[i].parentProductValue = '';
         }
-
         if (combinedFeatures[i].feature === relatedProductFeatures[j].feature) {
           if (combinedFeatures[i].value === null) {
             combinedFeatures[i].relatedProductValue = '';
@@ -57,15 +56,11 @@ class RelatedProductModal extends React.Component {
         }
       }
     }
-
     return combinedFeatures;
-
   }
 
   render() {
-
     const combinedFeatures = this.combinedFeatures();
-
     const  {parentProduct, relatedProduct, show} = this.props;
 
     if (show) {

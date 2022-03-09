@@ -14,7 +14,7 @@ class RelatedProductCard extends React.Component {
       showModal: false
     }
     this.showModal = this.showModal.bind(this);
-    // this.handleclick = this.handleclick.bind(this);
+    this.handleclick = this.handleclick.bind(this);
   }
 
   showModal(e) {
@@ -24,7 +24,6 @@ class RelatedProductCard extends React.Component {
   }
 
   handleclick(newProductId) {
-    console.log('all props in card', this.props)
     this.props.handleProductChange(newProductId);
   }
 
@@ -32,8 +31,6 @@ class RelatedProductCard extends React.Component {
 
   render() {
     const  { parentProduct, relatedProduct, currentPosition, handleProductChange } = this.props;
-    // console.log('relatedProduct', relatedProduct)
-    console.log('props in card', this.props)
 
     if (this.props.initialized) {
       return (
