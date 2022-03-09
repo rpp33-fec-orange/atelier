@@ -62,19 +62,27 @@ class Styles extends React.Component {
 
   skuChange(e) {
     let skuKeys = Object.keys(this.state.currentStyleSkus);
-    for (let i = 0; i < skuKeys.length; i++) {
-      if (e.target.value === this.state.currentStyleSkus[skuKeys[i]].size) {
-        let selectedSku = this.state.currentStyleSkus[skuKeys[i]];
-        this.setState({
-          currentSku: selectedSku,
-          skuId: skuKeys[i],
-          sizeStatus: e.target.value,
-          quantitySeletedBool: false
-        });
+    if (e.target.value === 'SELECT SIZE') {
+      this.setState({
+        currentSku: '',
+        skuId: '',
+        sizeStatus: '',
+        quantitySelectedBool: false
+      });
+    } else {
+      for (let i = 0; i < skuKeys.length; i++) {
+        if (e.target.value === this.state.currentStyleSkus[skuKeys[i]].size) {
+          let selectedSku = this.state.currentStyleSkus[skuKeys[i]];
+          this.setState({
+            currentSku: selectedSku,
+            skuId: skuKeys[i],
+            sizeStatus: e.target.value,
+            quantitySeletedBool: false
+          });
+        }
       }
     }
   }
-
 
   postCart() {
     let skuId = this.state.skuId;
@@ -114,19 +122,29 @@ class Styles extends React.Component {
   }
 
   outfitClick() {
-    console.log('add to outfit clicked!');
     this.props.yourOutfitHandleClick();
   }
 
   reviewsClick() {
-    console.log('read all reviews clicked!');
+    window.scrollTo({
+      top: 1882,
+      left: 0,
+      behavior: 'smooth'
+    });
   }
 
   quantityChange(e) {
-    this.setState({
-      quantitySelected: e.target.value,
-      quantitySelectedBool: true
-    })
+    if (e.target.value === '-') {
+      this.setState({
+        quantitySelected: 0,
+        quantitySelectedBool: false
+      })
+    } else {
+      this.setState({
+        quantitySelected: e.target.value,
+        quantitySelectedBool: true
+      })
+    }
   }
 
   componentDidMount() {
@@ -159,11 +177,11 @@ class Styles extends React.Component {
           </div>
           <div class="styles-item styles-item-2" id="styles">
             <div class="styles-item-2-1-container">
-              <div class="styles-item-2-1" id="rating" onClick={this.reviewsClick}>
+              <div class="styles-item-2-1" id="rating">
                 {/* <StarRating num={this.props.rating}/> */}
                 {rating}
               </div>
-              <div class="styles-item-2-2" id="read-all-reviews-button">Read all reviews</div>
+              <div class="styles-item-2-2" id="read-all-reviews-button" onClick={this.reviewsClick}>Read all reviews</div>
             </div>
             <div class="styles-item-2-3" id="category">{productById.category}</div>
             <div class="styles-item-2-4" id="name">{productById.name}</div>
@@ -176,18 +194,19 @@ class Styles extends React.Component {
               {styles.map((style) =>
                 <div class="styles-item-2-7-1">
                   <img id="styleThumbnail" name={style.name} src={style.photos[0].url} width="50" height="50" onClick={this.styleChange}></img>
+                  <div class="styles-popup">{style.name}</div>
                 </div>
               )}
             </div>
             <div class="styles-item-2-8-container">
               <select class="styles-item-2-8" value={sizeStatus} id="size-selector" onChange={this.skuChange} >
-                <option class="styles-item-2-8-1" value="nullSize">SELECT SIZE</option>
+                <option class="styles-item-2-8-1" value="SELECT SIZE">SELECT SIZE</option>
                 {Object.keys(currentStyleSkus).map((sku) =>
                   <option id="size-option" value={currentStyleSkus[sku].size} >{currentStyleSkus[sku].size}</option>
                 )}
               </select>
               <select class="styles-item-2-9" id="quantity-selector" onChange={this.quantityChange}>
-                < option value="nullQuantity" >-</option>
+                < option value="-" >-</option>
                 {quantityArray && quantityArray.map((quantityItem) =>
                   <option value={quantityItem} >{quantityItem}</option>
                 )}
@@ -197,10 +216,8 @@ class Styles extends React.Component {
               <button class="styles-item-2-11" id="save-outfit-button" onClick={this.outfitClick}>SAVE OUTFIT</button>
             </div>
           </div >
-
         </div >
       </div>
-
     )
   }
 }
