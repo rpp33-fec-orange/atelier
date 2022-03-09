@@ -23,7 +23,6 @@ class Styles extends React.Component {
       quantityArray: [],
       cart: []
     }
-    this.photoClick = this.photoClick.bind(this);
     this.styleChange = this.styleChange.bind(this);
     this.skuChange = this.skuChange.bind(this);
     this.postCart = this.postCart.bind(this);
@@ -31,12 +30,6 @@ class Styles extends React.Component {
     this.outfitClick = this.outfitClick.bind(this);
     this.quantityChange = this.quantityChange.bind(this);
     this.reviewsClick = this.reviewsClick.bind(this);
-  }
-
-  photoClick(e) {
-    this.setState({
-      mainPhotoURL: e.target.src
-    })
   }
 
   styleChange(e) {
@@ -93,10 +86,10 @@ class Styles extends React.Component {
       data: JSON.stringify({ skuId }),
       contentType: 'application/json',
       success: function (successAjax) {
-        console.log('postCart ajax POST Success!');
+        // console.log('postCart ajax POST Success!');
       },
-      error: function (errorAjax) {
-        console.log('postCart ajax POST Error!');
+      error: function (error) {
+        console.log('postCart ajax POST error!', error);
       },
     })
     alert('Added item to cart!');
@@ -108,7 +101,7 @@ class Styles extends React.Component {
       type: 'GET',
       url: '/cart',
       success: function (success) {
-        console.log('getCart ajax GET success');
+        // console.log('getCart ajax GET success');
         this.setState({
           cart: success,
         })

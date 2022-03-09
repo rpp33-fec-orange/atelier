@@ -29,7 +29,7 @@ class App extends React.Component {
       type: 'GET',
       url: '/products',
       success: function (success) {
-        console.log('app ajax GET success');
+        // console.log('app ajax GET success');
         this.setState({
           id: success[0].id,
           initialized: true
@@ -68,25 +68,25 @@ class App extends React.Component {
     })
   }
 
-  yourOutfitHandleClick () {
+  yourOutfitHandleClick() {
     console.log('currentStyle', this.state.currentStyle)
-    var currentStyle =  this.state.currentStyle;
+    var currentStyle = this.state.currentStyle;
     currentStyle['num_Rating'] = this.state.rating;
     var yourOutfit = this.state.yourOutfitArray;
     const styleExists = yourOutfit.findIndex(element => element.style_id === currentStyle.style_id)
-      if (styleExists === -1) {
-        yourOutfit.push(currentStyle);
-      }
-      this.setState({
-        yourOutfitArray: yourOutfit
-      }, () => {
-        console.log('outfit updated')
-      })
+    if (styleExists === -1) {
+      yourOutfit.push(currentStyle);
+    }
+    this.setState({
+      yourOutfitArray: yourOutfit
+    }, () => {
+      console.log('outfit updated')
+    })
   }
 
   handleProductChange(productId) {
     // console.log('id in app', productId)
-    this.setState({...this.state, id: productId}, () => {console.log('product id updated')})
+    this.setState({ ...this.state, id: productId }, () => { console.log('product id updated') })
   }
 
   render() {
@@ -95,8 +95,8 @@ class App extends React.Component {
       return (
         <div id="container">
           <ProductOverview id={this.state.id} rating={this.state.rating} currentStyleHandler={this.currentStyleHandler} yourOutfitHandleClick={this.yourOutfitHandleClick} />
-          <RelatedProducts id={this.state.id} yourOutfitArray={this.state.yourOutfitArray} yourOutfitHandleClick={this.yourOutfitHandleClick} handleProductChange={this.handleProductChange} />
-          <QuestionsAnswers id={this.state.id} />
+          {/* <RelatedProducts id={this.state.id} yourOutfitArray={this.state.yourOutfitArray} yourOutfitHandleClick={this.yourOutfitHandleClick} handleProductChange={this.handleProductChange} />
+          <QuestionsAnswers id={this.state.id} /> */}
           <RatingsReviews id={this.state.id} handleRating={this.handleRating} handleGetRating={this.getRating} />
         </div>
       )

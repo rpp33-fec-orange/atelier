@@ -8,7 +8,7 @@
   margin: 5px;
   margin-left: 12.5%;
   margin-right: 12.5%;
-  background-color: turquoise;
+  /* background-color: turquoise; */
 }
 
 .index-item-1 {
@@ -50,7 +50,7 @@
 }
 
 .styles-item {
-  background-color: rgb(235, 93, 235);
+  /* background-color: rgb(235, 93, 235); */
 }
 
 .styles-item-1 {
@@ -116,7 +116,7 @@
 }
 
 .styles-item-2-1 {
-  background-color: yellow;
+  /* background-color: yellow; */
   /* height: 20px;
   font-size: 10px;
   margin-top: 10px;
@@ -310,9 +310,18 @@
   width: 100%;
 }
 
+.expanded-mainPhoto-container {
+  width: 920px;
+  height: 620px;
+  background-color: red;
+  display: flex;
+  /* object-fit: cover; */
+}
+
 .expanded-mainPhoto {
   position: absolute;
   object-fit: cover;
+  overflow: scroll;
   top: 4%;
   left: 14%;
   width: 920px;
@@ -326,7 +335,13 @@
 }
 
 .selected-photo {
-  border: 2px solid turquoise;
+  border: 2px solid white;
+  margin: 5px;
+  /* background-color: yellow; */
+  cursor: pointer;
+  object-fit: cover;
+  width: 52px;
+  height: 52px;
 }
 
 .expanded-magnifying-glass {
@@ -345,7 +360,7 @@
 }
 
 .star {
-  background-color: red;
+  /* background-color: red; */
 }
 
 .stars-container {
