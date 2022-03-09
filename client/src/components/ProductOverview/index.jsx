@@ -79,16 +79,16 @@ class ProductOverview extends React.Component {
     this.stylesHandler();
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.id !== prevProps.id) {
-      this.setState({
-        id: this.props.id,
-      })
-    }
-    this.productHandler();
-    this.stylesHandler()
-    // this.searchHandler();
-  }
+  // componentDidUpdate(prevProps) {
+  //   if (this.props.id !== prevProps.id) {
+  //     this.setState({
+  //       id: this.props.id,
+  //     })
+  //   }
+  //   this.productHandler();
+  //   this.stylesHandler()
+  //   // this.searchHandler();
+  // }
 
   render() {
     if (this.state.initialized) {

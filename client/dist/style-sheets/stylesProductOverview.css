@@ -330,39 +330,37 @@
 
 .expanded-magnifying-glass {
   position: absolute;
-  right: 200px;
-  top: 45px;
+  right: 195px;
+  top: 40px;
   cursor: pointer;
 }
 
 .collapsed-magnifying-glass {
   position: absolute;
-  top: 8px;
-  left: 535px;
+  top: 3px;
+  left: 540px;
   cursor: pointer;
   z-index: 3;
 }
 
 #collapsed-up-end{
   color: transparent;
-  font-size: 10px;
+  margin-left: 40%;
 }
 
 #collapsed-down-end{
   color: transparent;
-  font-size: 10px;
+  margin-left: 40%;
 }
 
 #collapsed-up-arrow {
   cursor: pointer;
-  text-align: center;
-  font-size: 10px;
+  margin-left: 40%;
 }
 
 #collapsed-down-arrow {
   cursor: pointer;
-  text-align: center;
-  font-size: 10px;
+  margin-left: 40%;
 }
 
 #slogan {
@@ -480,7 +478,7 @@
 #collapsed-left-arrow {
   cursor: pointer;
   position: absolute;
-  top: 542px;
+  top: 547px;
   left: 188px;
   z-index: 3;
   background-color: white;
@@ -490,8 +488,8 @@
 #collapsed-right-arrow {
   cursor: pointer;
   position: absolute;
-  top: 538px;
-  left: 717px;
+  top: 543px;
+  left: 715px;
   z-index: 3;
   background-color: white;
   border-radius: 50%;
@@ -510,8 +508,8 @@
 #expanded-right-arrow {
   cursor: pointer;
   position: absolute;
-  top: 325px;
-  left: 1065px;
+  top: 320px;
+  left: 1070px;
   z-index: 3;
   background-color: white;
   border-radius: 50%;

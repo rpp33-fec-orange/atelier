@@ -1,5 +1,10 @@
 import React from 'react';
-// import zoomIcon from '../../../dist/zoomIcon.png';
+import { BsArrowsAngleContract } from 'react-icons/Bs';
+import { BsArrowsAngleExpand } from 'react-icons/Bs';
+import { IoIosArrowDropright } from 'react-icons/Io';
+import { IoIosArrowDropleft } from 'react-icons/Io';
+import { IoIosArrowDown } from 'react-icons/Io';
+import { IoIosArrowUp } from 'react-icons/Io';
 
 class Photos extends React.Component {
   constructor(props) {
@@ -90,6 +95,12 @@ class Photos extends React.Component {
   upClick() {
     let newStartIndex = this.state.subPhotosSliceStartIndex - 1;
     let newEndIndex = this.state.subPhotosSliceEndIndex - 1;
+    if (newEndIndex < this.state.subPhotosArray.length && newStartIndex > 0) {
+      this.setState({
+        arrayTopEnd: false,
+        arrayBottomEnd: false
+      })
+    }
     if (this.state.subPhotosSliceStartIndex === 0 || newStartIndex === 0) {
       this.setState({
         arrayTopEnd: true,
@@ -162,18 +173,17 @@ class Photos extends React.Component {
       return (
         <div>
           <div class="styles-item-1-2">
-            {arrayTopEnd ? <div id="collapsed-up-end">end</div> : <div id="collapsed-up-arrow" onClick={this.upClick}>up</div>}
+            {arrayTopEnd ? <div id="collapsed-up-end">end</div> : <IoIosArrowUp id="collapsed-up-arrow" onClick={this.upClick} />}
             {subPhotosArray.slice(subPhotosSliceStartIndex, subPhotosSliceEndIndex).map((photo) =>
               <img class="styles-item-1-2-1" src={photo.url} onClick={this.photoClick}></img>
             )}
-            {arrayBottomEnd ? <div id="collapsed-down-end">end</div> : <div id="collapsed-down-arrow" onClick={this.downClick}>down</div>}
-            <div class="styles-item-1-1 collapsed-magnifying-glass" onClick={this.expandClick}>🔍</div>
-            {/* <img class="styles-item-1-1 collapsed-magnifying-glass" src={zoomIcon} onclick={this.expandClick}></img> */}
+            {arrayBottomEnd ? <div id="collapsed-down-end">end</div> : <IoIosArrowDown id="collapsed-down-arrow" onClick={this.downClick} />}
+            <BsArrowsAngleExpand class="styles-item-1-1 collapsed-magnifying-glass" onClick={this.expandClick} />
           </div>
           <div class="styles-item-1-1">
             <img class="styles-item-1-1-1" id="mainPhoto" src={mainPhotoArray[mainPhotoIndex].url} width="360" height="480"></img>
-            {arrayLeftEnd ? <div></div> : <div id="collapsed-left-arrow" onClick={this.leftClick}>≪</div>}
-            {arrayRightEnd ? <div></div> : <div id="collapsed-right-arrow" onClick={this.rightClick}>≫</div>}
+            {arrayLeftEnd ? <div></div> : <IoIosArrowDropleft id="collapsed-left-arrow" onClick={this.leftClick} />}
+            {arrayRightEnd ? <div></div> : <IoIosArrowDropright id="collapsed-right-arrow" onClick={this.rightClick} />}
           </div>
         </div>
       )
@@ -181,19 +191,18 @@ class Photos extends React.Component {
       return (
         <div class="expanded-view">
           <div class="expanded-subPhoto">
-            {arrayTopEnd ? <div id="collapsed-up-end">end</div> : <div id="collapsed-up-arrow" onClick={this.upClick}>up</div>}
+            {arrayTopEnd ? <div id="collapsed-up-end">end</div> : <IoIosArrowUp id="collapsed-up-arrow" onClick={this.upClick} />}
             {subPhotosArray.slice(subPhotosSliceStartIndex, subPhotosSliceEndIndex).map((photo) =>
               <div>
                 <img class="styles-item-1-2-1" src={photo.url} onClick={this.photoClick}></img>
               </div>
             )}
-            {arrayBottomEnd ? <div id="collapsed-down-end">end</div> : <div id="collapsed-down-arrow" onClick={this.downClick}>down</div>}
+            {arrayBottomEnd ? <div id="collapsed-down-end">end</div> : <IoIosArrowDown id="collapsed-down-arrow" onClick={this.downClick} />}
           </div>
           <img class="expanded-mainPhoto" src={mainPhotoArray[mainPhotoIndex].url} width="575" height="700"></img>
-          <div class="expanded-magnifying-glass" onClick={this.expandClick}>🔍</div>
-          {/* <img class="expanded-magnifying-glass" src={zoomIcon} onclick={this.expandClick}></img> */}
-          {arrayLeftEnd ? <div></div> : <div id="expanded-left-arrow" onClick={this.leftClick}>≪</div>}
-          {arrayRightEnd ? <div></div> : <div id="expanded-right-arrow" onClick={this.rightClick}>≫</div>}
+          <BsArrowsAngleContract class="expanded-magnifying-glass" onClick={this.expandClick} />
+          {arrayLeftEnd ? <div></div> : <IoIosArrowDropleft id="expanded-left-arrow" onClick={this.leftClick} />}
+          {arrayRightEnd ? <div></div> : <IoIosArrowDropright id="expanded-right-arrow" onClick={this.rightClick} />}
         </div>
       )
     }
