@@ -17,9 +17,7 @@ class YourOutfitRow extends React.Component {
 
   handleAddOutfit () {
     this.props.yourOutfitHandleClick();
-    // console.log('add outfit button was clicked. state updated in App.jsx')
     var yourOutfitArray = this.props.yourOutfitArray;
-    // console.log('outfit array props recevied at component ')
     this.setState({
       yourOutfit: yourOutfitArray
     }, () => {

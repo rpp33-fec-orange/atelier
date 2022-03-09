@@ -14,7 +14,7 @@ class RelatedProductCard extends React.Component {
       showModal: false
     }
     this.showModal = this.showModal.bind(this);
-    // this.handleclick = this.handleclick.bind(this);
+    this.handleclick = this.handleclick.bind(this);
   }
 
   showModal(e) {
@@ -23,22 +23,21 @@ class RelatedProductCard extends React.Component {
     })
   }
 
-  // handleclick(newProductId) {
-  //   console.log('all props in card', this.props)
-  //   this.props.handleStateChange(newProductId);
-  // }
+  handleclick(newProductId) {
+    this.props.handleProductChange(newProductId);
+  }
 
 
 
   render() {
     const  { parentProduct, relatedProduct, currentPosition, handleProductChange } = this.props;
-    // console.log('relatedProduct', relatedProduct)
-    // console.log('parentProduct', parentProduct)
-    return (
-        <div className = "related-product-card" onClick = {() => {this.handleProductChange(relatedProduct.id)}}>
+
+    if (this.props.initialized) {
+      return (
+        <div className = "related-product-card">
             <AiOutlineStar className = 'toggle-button' onClick = {(e) => {this.showModal()}}/>
-            <RelatedProductModal parentProduct = {parentProduct} relatedProduct = {relatedProduct} onClose = {this.showModal} show = {this.state.showModal}/>
-            <img className = 'related-product-image' src = {relatedProduct.photos[0].url || photoUnavailable} alt = {relatedProduct.name}/>
+            <RelatedProductModal parentProduct = {parentProduct} relatedProduct = {relatedProduct} onClose = {this.showModal} show = {this.state.showModal} initialized = {this.props.initialized}/>
+            <img className = 'related-product-image' src = {relatedProduct.photos[0].url || photoUnavailable} alt = {relatedProduct.name} onClick = {() => {this.handleclick(relatedProduct.id)}}/>
             <div className = 'related-product-category'>{relatedProduct.category}</div>
             <div className = 'related-product-name'>{relatedProduct.name}</div>
             <div className = 'related-product-price'>${relatedProduct.default_price}</div>
@@ -46,7 +45,14 @@ class RelatedProductCard extends React.Component {
               <StarRating num = {relatedProduct.num_Rating}/>
             </div>
         </div>
-    )
+      )
+    } else {
+      return (
+        <div id="loading">
+          ⇆ Loading...
+        </div>
+       )
+    }
   }
 
 }
