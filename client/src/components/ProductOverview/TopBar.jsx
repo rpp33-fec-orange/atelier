@@ -1,4 +1,5 @@
 import React from 'react';
+import { BsSearch } from 'react-icons/Bs';
 
 class TopBar extends React.Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class TopBar extends React.Component {
       <div class="topbar-container" id="TopBar">
         <div class="topbar-item topbar-item-1" data-testid="logo" id="logo">Atelier</div>
         <div class="topbar-item topbar-item-2">
-          <input id="seach-box" placeholder="keyword" onChange={this.onChange}></input><button id="search-button" onClick={this.clickHandler}>Search</button>
+          <BsSearch id="search-button" onClick={this.clickHandler} />
         </div>
       </div >
     )
