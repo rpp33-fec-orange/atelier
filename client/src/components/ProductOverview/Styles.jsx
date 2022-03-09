@@ -1,6 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
-import StarRating from '../RatingsReviews/StarRating.jsx';
+import Rating from './Rating.jsx';
 import Photos from './Photos.jsx';
 
 class Styles extends React.Component {
@@ -177,9 +177,9 @@ class Styles extends React.Component {
           </div>
           <div class="styles-item styles-item-2" id="styles">
             <div class="styles-item-2-1-container">
-              <div class="styles-item-2-1" id="rating">
-                {/* <StarRating num={this.props.rating}/> */}
-                {rating}
+              <div class="styles-item-2-1">
+                <Rating num={this.props.rating} />
+                {/* {rating} */}
               </div>
               <div class="styles-item-2-2" id="read-all-reviews-button" onClick={this.reviewsClick}>Read all reviews</div>
             </div>
