@@ -96,7 +96,7 @@ class RatingsReviews extends React.Component {
       }
     })
       .done(function () {
-        console.log('get reviews meta request is done');
+        // console.log('get reviews meta request is done');
       });
   }
 

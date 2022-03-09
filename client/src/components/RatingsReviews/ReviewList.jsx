@@ -20,16 +20,16 @@ class ReviewList extends React.Component {
 	}
 
 	componentDidMount() {
-		console.log('finally, this.props.reviews is: ', this.props.reviews);
+		// console.log('finally, this.props.reviews is: ', this.props.reviews);
 		var reviewList = this.props.reviews;
 		this.setState({
 			reviewList: reviewList,
 		}, this.slicedReviewList);
-		console.log('finally, this.state.reviewList is: ', this.state.reviewList);
+		// console.log('finally, this.state.reviewList is: ', this.state.reviewList);
 	}
 
 	mappingReviews() {
-		console.log('props.reviews in Reviewlist: ', this.props.reviews);
+		// console.log('props.reviews in Reviewlist: ', this.props.reviews);
 		var reviews = this.state.holdingReviews;
 		var renderedReviews = reviews.map((review) =>
 			<ReviewItem key={review.review_id.toString()} review={review} />
@@ -60,7 +60,7 @@ class ReviewList extends React.Component {
 	}
 
 	handleShowMoreReviews() {
-		console.log('write logic for showing more reviews here!');
+		// console.log('write logic for showing more reviews here!');
 		var currentReviewsPerClick = this.state.reviewsPerClick;
 		currentReviewsPerClick += 2;
 		this.setState({

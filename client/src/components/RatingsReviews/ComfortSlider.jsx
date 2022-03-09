@@ -10,7 +10,6 @@ class ComfortSlider extends React.Component {
 	}
 
 	render() {
-		console.log('props in ComfortSlider are: ', JSON.stringify(this.props.comfort));
 		// var comfort = this.props.comfort;
 		// if (this.state.hasError) {
 		// 	return <h1>Something went wrong.</h1>

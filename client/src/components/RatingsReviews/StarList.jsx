@@ -20,7 +20,6 @@ class StarList extends React.Component {
 	}
 
 	componentDidMount() {
-		console.log('this is ratings: ', this.props.ratings);
 		var one = (this.props.ratings[1] === undefined) ? 0 : this.props.ratings[1];
 		var two = (this.props.ratings[2] === undefined) ? 0 : this.props.ratings[2];
 		var three = (this.props.ratings[3] === undefined) ? 0 : this.props.ratings[3];
