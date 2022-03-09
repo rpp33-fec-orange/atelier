@@ -13,7 +13,8 @@ class RelatedProducts extends React.Component {
       relatedProductsInfo: [],
       relatedStylesInfo: [],
       parentProduct: [],
-      relatedProductsIds: []
+      relatedProductsIds: [],
+      initialized: false
     };
     this.fetchParentProductData = this.fetchParentProductData.bind(this);
     this.fetchParentProductStyles = this.fetchParentProductStyles.bind(this);
@@ -78,7 +79,8 @@ class RelatedProducts extends React.Component {
         var relatedProductsIds = data.shift();
           this.setState({
             relatedProductsInfo: data,
-            relatedProductsIds: relatedProductsIds
+            relatedProductsIds: relatedProductsIds,
+            initialized: true
           })
       },
       error: function (error) {
@@ -96,12 +98,20 @@ class RelatedProducts extends React.Component {
     this.fetchRelatedProductsData();
   }
 
-  // componentDidUpdate(prevProps) {
-  //   // this.setState({
-  //   //   product_id: this.props.id,
-  //   // })
-  //   if (this.props.id !== prevProps.id) {
-  // }
+  componentDidUpdate(prevProps) {
+    console.log('previous props', prevProps.id);
+    console.log('new props', this.props.id);
+
+    if (this.props.id !== prevProps.id) {
+        this.setState({
+          product_id: this.props.id,
+          initialized: false
+        });
+        this.fetchParentProductData();
+        this.fetchParentProductStyles();
+        this.fetchRelatedProductsData();
+    }
+  }
 
   // shouldComponentUpdate(nextProps, nextState) {
   //   if (this.props.id !== nextProps.id) {
@@ -123,18 +133,27 @@ class RelatedProducts extends React.Component {
   // }
 
   render() {
-    return (
-      <div className = 'related-products-and-items'>
-        <div className = "related-products-row">
-          <div className = 'heading'>Related Products</div>
-          <RelatedProductsRow relatedProductsIds = {this.state.relatedProductsIds} parentProduct = {this.state.parentProduct} relatedProductsInfo = {this.state.relatedProductsInfo} handleProductChange = {this.props.handleProductChange} />
+
+    if (this.state.initialized) {
+      return (
+        <div className = 'related-products-and-items'>
+          <div className = "related-products-row">
+            <div className = 'heading'>Related Products</div>
+            <RelatedProductsRow relatedProductsIds = {this.state.relatedProductsIds} parentProduct = {this.state.parentProduct} relatedProductsInfo = {this.state.relatedProductsInfo} handleProductChange = {this.props.handleProductChange} initialized = {this.state.initialized}/>
+          </div>
+          <div className = "your-outfit-row">
+            <div className = 'heading'>Your Outfit</div>
+            <YourOutfitRow currentStyle = {this.props.currentStyle} yourOutfitArray = {this.props.yourOutfitArray} yourOutfitHandleClick = {this.props.yourOutfitHandleClick}/>
+          </div>
         </div>
-        <div className = "your-outfit-row">
-          <div className = 'heading'>Your Outfit</div>
-          <YourOutfitRow currentStyle = {this.props.currentStyle} yourOutfitArray = {this.props.yourOutfitArray} yourOutfitHandleClick = {this.props.yourOutfitHandleClick}/>
+      )
+    } else {
+      return (
+        <div id="loading">
+          ⇆ Loading...
         </div>
-      </div>
-    )
+       )
+    }
   }
 }
 
