@@ -271,7 +271,7 @@
   flex-direction: row;
   align-items: flex-end;
   z-index: 2;
-  position: absolute;
+  /* position: absolute; */
 }
 
 .your-outfit-price,
@@ -294,7 +294,7 @@
   width: 250px;
   display: inline-block;
   line-height: 100px;
-  z-index: 2;
+  z-index: 1;
 }
 
 
