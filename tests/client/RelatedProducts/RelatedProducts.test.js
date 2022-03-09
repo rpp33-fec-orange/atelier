@@ -4,7 +4,7 @@ import RelatedProducts from '../../../client/src/components/RelatedProducts/inde
 import {render, screen} from '@testing-library/react'
 import App from '../../../client/src/App.jsx';
 import { shallow } from 'enzyme';
-import RelatedProductsRow from '../../../client/src/components/RelatedProducts/RelatedProdcutsRow.jsx';
+import RelatedProductsRow from '../../../client/src/components/RelatedProducts/RelatedProductsRow.jsx';
 import Enzyme from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 

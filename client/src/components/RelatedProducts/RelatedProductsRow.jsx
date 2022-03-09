@@ -39,19 +39,12 @@ class RelatedProductsRow extends React.Component {
 
     var relatedProductsWithRatings = this.relatedProductsRatingSummary(relatedProductsInfo);
 
-    if (this.props.relatedProductsInfo === null) {
-      return (
-        <div id="loading">
-          ⇆ Loading...
-        </div>
-       )
-    } else {
+    if (this.props.initialized) {
       var DOMarray = relatedProductsWithRatings.map((relatedProduct) => {
         return (
-            <RelatedProductCard parentProduct = {parentProduct} relatedProduct = {relatedProduct} currentPosition = {this.state.currentPosition} handleProductChange = {handleProductChange} handleStateChange = {handleStateChange}/>
+            <RelatedProductCard parentProduct = {parentProduct} relatedProduct = {relatedProduct} currentPosition = {this.state.currentPosition} handleProductChange = {handleProductChange} handleStateChange = {handleStateChange} initialized = {this.props.initialized}/>
         );
       });
-
       return (
         <div className = 'related-products-container'>
           <a className ='prev' onClick = {this.scroll.bind(null, -1)}>&#10094;</a>
@@ -61,6 +54,12 @@ class RelatedProductsRow extends React.Component {
           <a className ='next' onClick = {this.scroll.bind(null, 1)}>&#10095;</a>
         </div>
       )
+    } else {
+      return (
+        <div id="loading">
+          ⇆ Loading...
+        </div>
+       )
     }
   }
 }

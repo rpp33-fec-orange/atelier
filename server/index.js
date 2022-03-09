@@ -167,17 +167,17 @@ app.get('/products/:product_id/related', function (req, res) {
             })
             .catch((error) => {
               console.log('server getRelatedProductsReviewMeta error', error);
-              res.status(400).send(error);
+              res.status(500).send(error);
             })
         })
         .catch((error) => {
           console.log('server getProductStylesById error', error);
-          res.status(400).send(error);
+          res.status(500).send(error);
         })
     })
     .catch((error) => {
       console.log('server getProductStylesById error', error);
-      res.status(400).send(error);
+      res.status(500).send(error);
     })
 });
 

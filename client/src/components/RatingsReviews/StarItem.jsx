@@ -21,7 +21,6 @@ class StarItem extends React.Component {
       position: 'absolute',
       top: 0,
       left: 0,
-      // white-space: 'nowrap';
       overflow: 'hidden',
       width: 50,
     };
