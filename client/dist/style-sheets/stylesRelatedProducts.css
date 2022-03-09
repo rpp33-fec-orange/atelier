@@ -168,9 +168,9 @@
 .related-product-image {
   height: 300px;
   width: 250px;
-  display: inline-block;
+  /* display: inline-block; */
   line-height: 100px;
-  z-index: 2;
+  z-index: 1;
 }
 
 .rp-rating-container {
@@ -231,22 +231,22 @@
   display: flex;
   width: 100%;
   flex-direction: row;
-  vertical-align: middle;
+  /* vertical-align: middle; */
   white-space: nowrap;
   overflow-x: auto;
   overflow-y: hidden;
-  justify-content: space-around;
-  align-items: flex-end;
+  /* justify-content: space-around; */
+  /* align-items: flex-end; */
 }
 
 .outfit-only-container {
   display: flex;
   flex-direction: row;
-  vertical-align: middle;
+  /* vertical-align: middle; */
   white-space: nowrap;
   overflow-x: auto;
   overflow-y: hidden;
-  justify-content: space-around;
+  /* justify-content: space-around; */
 }
 
 .your-outfit-card {
@@ -270,8 +270,8 @@
 .toggle-button {
   flex-direction: row;
   align-items: flex-end;
-  z-index: 1;
-  position: relative;
+  z-index: 2;
+  position: absolute;
 }
 
 .your-outfit-price,
