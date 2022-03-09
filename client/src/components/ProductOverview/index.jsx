@@ -16,7 +16,7 @@ class ProductOverview extends React.Component {
     }
     this.productHandler = this.productHandler.bind(this);
     this.stylesHandler = this.stylesHandler.bind(this);
-    this.searcHHandler = this.searchHandler.bind(this);
+    this.searchHandler = this.searchHandler.bind(this);
   }
 
   productHandler() {
@@ -77,6 +77,17 @@ class ProductOverview extends React.Component {
   componentDidMount() {
     this.productHandler();
     this.stylesHandler();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.id !== prevProps.id) {
+      this.setState({
+        id: this.props.id,
+      })
+    }
+    this.productHandler();
+    this.stylesHandler()
+    // this.searchHandler();
   }
 
   render() {
