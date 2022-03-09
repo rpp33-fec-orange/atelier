@@ -9,16 +9,11 @@ class QuestionItem extends React.Component {
     this.state = {
       showModal: false
     };
-    this.addAnswer = this.addAnswer.bind(this);
     this.handleModal = this.handleModal.bind(this);
     this.markQuestionHelpful = this.markQuestionHelpful.bind(this);
     this.markAnswerHelpful = this.markAnswerHelpful.bind(this);
     this.reportQuestion = this.reportQuestion.bind(this);
     this.reportAnswer = this.reportAnswer.bind(this);
-  }
-
-  addAnswer() {
-    // this.props.addAnswer();
   }
 
   handleModal(e) {
@@ -49,7 +44,7 @@ class QuestionItem extends React.Component {
   render() {
     let { question, prompt } = this.props;
 
-    prompt.questionId = question.question_id;
+    prompt.questionId = parseInt(question.question_id);
     prompt.questionBody = question.question_body;
 
 
@@ -87,6 +82,7 @@ class QuestionItem extends React.Component {
               prompt={prompt}
               toggleModal={this.handleModal}
               showModal={this.state.showModal}
+              addAnswer={this.props.addAnswer}
             />
             {'  |  '}
             {

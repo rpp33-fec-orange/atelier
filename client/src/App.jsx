@@ -10,6 +10,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       id: '',
+      productName: '',
       initialized: false,
       rating: 0,
       currentStyle: null,
@@ -32,6 +33,7 @@ class App extends React.Component {
         console.log('app ajax GET success');
         this.setState({
           id: success[0].id,
+          productName: success[0].name,
           initialized: true
         });
       },
@@ -96,7 +98,7 @@ class App extends React.Component {
         <div id="container">
           <ProductOverview id={this.state.id} rating={this.state.rating} currentStyleHandler={this.currentStyleHandler} yourOutfitHandleClick={this.yourOutfitHandleClick} />
           <RelatedProducts id={this.state.id} yourOutfitArray={this.state.yourOutfitArray} yourOutfitHandleClick={this.yourOutfitHandleClick} handleProductChange={this.handleProductChange} />
-          <QuestionsAnswers id={this.state.id} />
+          <QuestionsAnswers id={this.state.id} productName={this.state.productName} />
           <RatingsReviews id={this.state.id} handleRating={this.handleRating} handleGetRating={this.getRating} />
         </div>
       )

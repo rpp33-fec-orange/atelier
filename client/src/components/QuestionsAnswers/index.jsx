@@ -113,9 +113,34 @@ class QuestionsAnswers extends React.Component {
 
   }
 
-  submitQuestion() {}
+  submitQuestion(formDetails) {
+    $.ajax({
+      context: this,
+      type: 'POST',
+      url: `qa/questions`,
+      data: formDetails,
+      success: () => {
+        console.log('question POST successful');
+        // refresh page
+      },
+      dataType: 'json'
+    });
 
-  submitAnswer() {}
+  }
+
+  submitAnswer(questionId, formDetails) {
+    $.ajax({
+      context: this,
+      type: 'POST',
+      url: `qa/questions/${questionId}/answers`,
+      data: formDetails,
+      success: () => {
+        console.log('answer POST successful');
+      },
+      dataType: 'json'
+    });
+
+  }
 
   markQuestionHelpful(questionId) {
     $.ajax({
@@ -267,7 +292,7 @@ class QuestionsAnswers extends React.Component {
 
     let questionPrompt = {
       type: 'Question',
-      product_id: this.state.productId,
+      product_id: parseInt(this.state.productId),
       productName: this.state.productName
     };
 
