@@ -6,8 +6,11 @@ import QuestionAnswerModal from './QuestionAnswerModal.jsx';
 class QuestionItem extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      showModal: false
+    };
     this.addAnswer = this.addAnswer.bind(this);
+    this.handleModal = this.handleModal.bind(this);
     this.markQuestionHelpful = this.markQuestionHelpful.bind(this);
     this.markAnswerHelpful = this.markAnswerHelpful.bind(this);
     this.reportQuestion = this.reportQuestion.bind(this);
@@ -16,6 +19,12 @@ class QuestionItem extends React.Component {
 
   addAnswer() {
     // this.props.addAnswer();
+  }
+
+  handleModal(e) {
+    this.setState({
+      showModal: !this.state.showModal
+    });
   }
 
   markQuestionHelpful(questionId) {
@@ -71,13 +80,13 @@ class QuestionItem extends React.Component {
               <span className="markQuestionHelpful-marked">Yes</span>
             }
             {`(${question.question_helpfulness})  |  `}
-            <span className="addAnswer" onClick={() => this.props.toggleModal()}>
+            <span className="addAnswer" onClick={() => this.handleModal()}>
               Add Answer
             </span>
             <QuestionAnswerModal
               prompt={prompt}
-              toggleModal={this.props.toggleModal}
-              showModal={this.props.showModal}
+              toggleModal={this.handleModal}
+              showModal={this.state.showModal}
             />
             {'  |  '}
             {

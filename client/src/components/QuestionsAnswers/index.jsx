@@ -18,14 +18,12 @@ class QuestionsAnswers extends React.Component {
       renderedQuestions: [],
       searchedQuestions: [],
       renderedSearch: [],
-      renderSearch: false,
-      showModal: false
+      renderSearch: false
     };
     this.search = this.search.bind(this);
     this.initialRender =  this.initialRender.bind(this);
     this.getMoreQuestions = this.getMoreQuestions.bind(this);
     this.getMoreAnswers = this.getMoreAnswers.bind(this);
-    this.handleModal = this.handleModal.bind(this);
     this.submitQuestion = this.submitQuestion.bind(this);
     this.submitAnswer = this.submitAnswer.bind(this);
     this.reportQuestion = this.reportQuestion.bind(this);
@@ -113,12 +111,6 @@ class QuestionsAnswers extends React.Component {
       renderedQuestions: renderedQuestions
     });
 
-  }
-
-  handleModal(e) {
-    this.setState({
-      showModal: !this.state.showModal
-    });
   }
 
   submitQuestion() {}
@@ -308,8 +300,6 @@ class QuestionsAnswers extends React.Component {
                   helpfulAnswer={this.markAnswerHelpful}
                   reportQuestion={this.reportQuestion}
                   reportAnswer={this.reportAnswer}
-                  showModal={this.state.showModal}
-                  toggleModal={this.handleModal}
                   addAnswer={this.submitAnswer}
                   prompt={answerPrompt}
                 />
@@ -320,8 +310,6 @@ class QuestionsAnswers extends React.Component {
         <QuestionAddons
           canShowMore={this.state.showMoreQuestions}
           loadMore={this.getMoreQuestions}
-          showModal={this.state.showModal}
-          toggleModal={this.handleModal}
           addQuestion={this.submitQuestion}
           prompt={questionPrompt}
         />
