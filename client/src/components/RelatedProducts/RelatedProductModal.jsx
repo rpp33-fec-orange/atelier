@@ -18,16 +18,8 @@ class RelatedProductModal extends React.Component {
   combinedFeatures() {
 
     const {parentProduct, relatedProduct} = this.props;
-
-    // console.log('props in modal ', this.props)
-    // console.log('parent product in modal', parentProduct)
-    // console.log('related products in modal', relatedProduct)
-
     var parentProductFeatures = parentProduct.features;
     var relatedProductFeatures = relatedProduct.features;
-
-    // console.log('parent product features', parentProductFeatures)
-    // console.log('related products features', relatedProductFeatures)
     var combinedFeatures = parentProductFeatures.concat(relatedProductFeatures);
 
     for (var i = 0; i < combinedFeatures.length; i++) {
@@ -95,8 +87,8 @@ class RelatedProductModal extends React.Component {
             <div className = 'related-product-modal-table-body'>
               <table>
                 <tfoot className = 'related-product-modal-table-footer'>
-                  <tr align = 'left'>
-                    <button className = 'modal-close-button' onClick = {(e) => {this.onClose()}}>Close</button>
+                  <tr align = 'left' rowspan="1">
+                    <button className = 'related-product-modal-close-button' onClick = {(e) => {this.onClose()}}>Close</button>
                   </tr>
                 </tfoot>
                 <tbody>
