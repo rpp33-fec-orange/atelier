@@ -152,6 +152,8 @@
     flex: 1;
     /* background-color: green; */
     text-decoration: underline;
+    margin-top: 40px;
+    margin-bottom: 60px;
   }
 
   .star-number {
@@ -282,13 +284,93 @@
   }
 
   .progress-bar {
-    background-color: grey;
+    background-color: lightgray;
     width: 200px;
     /* padding: 3px; */
   }
 
   .progress-bar > div {
-    background-color: orange;
+    background-color: green;
     /* width: 40%; */
     height: 20px;
   }
+
+  .size-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+    gap: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  .comfort-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+    gap: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  .size-bar {
+    background-color: lightgray;
+    width: 100px;
+    height: 20px;
+    flex-grow: 1;
+  }
+
+  .comfort-side {
+    background-color: lightgray;
+    height: 20px;
+    flex-grow: 1;
+  }
+
+  .comfort-middle {
+    background-color: lightgray;
+    height: 20px;
+    flex-grow: 2;
+  }
+
+  .size-marker {
+    color: green;
+    width: 10px;
+    height: 20px;
+    position: absolute;
+    font-size: 25px;
+    /* margin-left: 50px; */
+  }
+
+  .size-explanation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .comfort-marker {
+    color: green;
+    width: 10px;
+    height: 20px;
+    position: absolute;
+    font-size: 25px;
+  }
+
+  .comfort-explanation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .size-slider {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .comfort-slider {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+
