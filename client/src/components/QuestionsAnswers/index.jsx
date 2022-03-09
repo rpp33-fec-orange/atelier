@@ -9,9 +9,10 @@ import QuestionAddons from './QuestionAddons.jsx';
 class QuestionsAnswers extends React.Component {
   constructor(props) {
     super(props);
-    let id = this.props.id;
+    let { id, productName } = this.props;
     this.state = {
       productId: id,
+      productName: productName,
       showMoreQuestions: true,
       allQuestions: [],
       renderedQuestions: [],
@@ -23,6 +24,8 @@ class QuestionsAnswers extends React.Component {
     this.initialRender =  this.initialRender.bind(this);
     this.getMoreQuestions = this.getMoreQuestions.bind(this);
     this.getMoreAnswers = this.getMoreAnswers.bind(this);
+    this.submitQuestion = this.submitQuestion.bind(this);
+    this.submitAnswer = this.submitAnswer.bind(this);
     this.reportQuestion = this.reportQuestion.bind(this);
     this.reportAnswer = this.reportAnswer.bind(this);
     this.markQuestionHelpful = this.markQuestionHelpful.bind(this);
@@ -262,6 +265,17 @@ class QuestionsAnswers extends React.Component {
   render() {
     let questions = [];
 
+    let questionPrompt = {
+      type: 'Question',
+      product_id: this.state.productId,
+      productName: this.state.productName
+    };
+
+    let answerPrompt = {
+      type: 'Answer',
+      productName: this.state.productName
+    };
+
     if (!this.state.renderSearch) {
       questions = this.state.renderedQuestions;
     } else {
@@ -286,14 +300,18 @@ class QuestionsAnswers extends React.Component {
                   helpfulAnswer={this.markAnswerHelpful}
                   reportQuestion={this.reportQuestion}
                   reportAnswer={this.reportAnswer}
+                  addAnswer={this.submitAnswer}
+                  prompt={answerPrompt}
                 />
-                )
+              )
             })
           }
         </div>
         <QuestionAddons
           canShowMore={this.state.showMoreQuestions}
           loadMore={this.getMoreQuestions}
+          addQuestion={this.submitQuestion}
+          prompt={questionPrompt}
         />
       </div>
     );

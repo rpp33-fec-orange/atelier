@@ -1,11 +1,16 @@
 import React from 'react';
 import AnswerList from './AnswerList.jsx';
+import QuestionAnswerModal from './QuestionAnswerModal.jsx';
+
 
 class QuestionItem extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      showModal: false
+    };
     this.addAnswer = this.addAnswer.bind(this);
+    this.handleModal = this.handleModal.bind(this);
     this.markQuestionHelpful = this.markQuestionHelpful.bind(this);
     this.markAnswerHelpful = this.markAnswerHelpful.bind(this);
     this.reportQuestion = this.reportQuestion.bind(this);
@@ -14,6 +19,12 @@ class QuestionItem extends React.Component {
 
   addAnswer() {
     // this.props.addAnswer();
+  }
+
+  handleModal(e) {
+    this.setState({
+      showModal: !this.state.showModal
+    });
   }
 
   markQuestionHelpful(questionId) {
@@ -36,7 +47,12 @@ class QuestionItem extends React.Component {
 
 
   render() {
-    let question = this.props.question;
+    let { question, prompt } = this.props;
+
+    prompt.questionId = question.question_id;
+    prompt.questionBody = question.question_body;
+
+
     return (
       <div className="questionItem" key={question.question_id}>
         <div className="questionMain" style={{display: 'inline-block'}}>
@@ -64,7 +80,14 @@ class QuestionItem extends React.Component {
               <span className="markQuestionHelpful-marked">Yes</span>
             }
             {`(${question.question_helpfulness})  |  `}
-            <span className="addAnswer" onClick={this.addAnswer}>Add Answer</span>
+            <span className="addAnswer" onClick={() => this.handleModal()}>
+              Add Answer
+            </span>
+            <QuestionAnswerModal
+              prompt={prompt}
+              toggleModal={this.handleModal}
+              showModal={this.state.showModal}
+            />
             {'  |  '}
             {
               !question.reported
