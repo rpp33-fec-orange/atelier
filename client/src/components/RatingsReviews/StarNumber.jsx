@@ -21,12 +21,8 @@ class StarNumber extends React.Component {
 
 	percentRecommended() {
 		var recommended = parseInt(this.props.recommended.true);
-		console.log('recommended is: ', recommended);
 		var notRecommended = parseInt(this.props.recommended.false);
-		console.log('notRecommended is: ', notRecommended);
-		console.log('sum is: ', recommended + notRecommended);
 		var result = (recommended * 100) / (recommended + notRecommended);
-
 		return Math.round(result * 100) / 100;
 	}
 
@@ -48,7 +44,6 @@ class StarNumber extends React.Component {
 	}
 
 	setRatingSummary() {
-		console.log('this function will fill your stars!');
 		// round stars number up to a quarter of a review point.
 		// We have : 0.00, 0.25, 0.50, 0.75, and 1.00
 		var results = [];
@@ -56,17 +51,11 @@ class StarNumber extends React.Component {
 		this.setState({
 			percentage: percentage
 		});
-		console.log('this is ratings inside StarNumber: ', this.props.ratings);
 		var one = parseInt((this.props.ratings[1] === undefined) ? 0 : this.props.ratings[1]);
 		var two = parseInt((this.props.ratings[2] === undefined) ? 0 : this.props.ratings[2]);
 		var three = parseInt((this.props.ratings[3] === undefined) ? 0 : this.props.ratings[3]);
 		var four = parseInt((this.props.ratings[4] === undefined) ? 0 : this.props.ratings[4]);
 		var five = parseInt((this.props.ratings[5] === undefined) ? 0 : this.props.ratings[5]);
-		console.log('one in StarNumber is: ', one);
-		console.log('two in StarNumber is: ', two);
-		console.log('three in StarNumber is: ', three);
-		console.log('four in StarNumber is: ', four);
-		console.log('five in StarNumber is: ', five);
 		var sum = one + two + three + four + five;
 		var ratingSummary = (1 * one + 2 * two + 3 * three + 4 * four + 5 * five) / sum;
 		ratingSummary = Math.round(ratingSummary * 100) / 100;

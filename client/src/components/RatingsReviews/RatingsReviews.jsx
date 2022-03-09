@@ -25,43 +25,18 @@ class RatingsReviews extends React.Component {
       meta_recommended: {},
       meta_characteristics: {}
     }
-    // this.getReviewsHandler = this.getReviewsHandler.bind(this);
     this.getReviewsByIDHandler = this.getReviewsByIDHandler.bind(this);
     this.getReviewsMetaHandler = this.getReviewsMetaHandler.bind(this);
     this.postReviewHandler = this.postReviewHandler.bind(this);
     this.putHelpfulHandler = this.putHelpfulHandler.bind(this);
   }
 
-  // getReviewsHandler() {
-  //   // var url = `/reviews/${this.state.id}`;
-  //   var url = '/reviews';
-  //   console.log('review product id is: ', this.state.id);
-  //   // var url = `/reviews/${this.state.id}`;
-  //   $.ajax({
-  //     context: this,
-  //     type: "GET",
-  //     url: url,
-  //     success: (reviews) => {
-  //       console.log('review ajax success! reviews are: ', reviews);
-  //       this.setState({
-  //         reviews: reviews
-  //       });
-  //     },
-  //     error: (error) => {
-  //       console.log('error from get reviews request: ', error);
-  //     }
-  //   })
-  //     .done(function () {
-  //       console.log('get reviews request is done');
-  //     });
-  // }
-
   componentDidMount() {
     this.getReviewsByIDHandler(this.state.id);
     try {
       this.getReviewsMetaHandler(this.state.id);
     } catch (error) {
-      console.log('meta error in RatingsReviews is: ', error);
+      // console.log('meta error in RatingsReviews is: ', error);
     }
   }
 
@@ -71,7 +46,7 @@ class RatingsReviews extends React.Component {
     var sort = this.state.sort;
     var id = this.state.id;
     var url = `/reviews/?sort=${sort}&product_id=${id}`;
-    console.log('review product id is: ', this.state.id);
+    // console.log('review product id is: ', this.state.id);
     // var url = `/reviews/${this.state.id}`;
     $.ajax({
       context: this,
@@ -85,11 +60,11 @@ class RatingsReviews extends React.Component {
         });
       },
       error: (error) => {
-        console.log('error from get reviews request: ', error);
+        // console.log('error from get reviews request: ', error);
       }
     })
       .done(function () {
-        console.log('get reviews request is done');
+        // console.log('get reviews request is done');
       });
   }
 
@@ -99,14 +74,14 @@ class RatingsReviews extends React.Component {
     // var sort = this.state.sort;
     var id = this.state.id;
     var url = `/reviews/meta?product_id=${id}`;
-    console.log('review product id in getReviewsMetaHandler is: ', this.state.id);
+    // console.log('review product id in getReviewsMetaHandler is: ', this.state.id);
     // var url = `/reviews/${this.state.id}`;
     $.ajax({
       context: this,
       type: "GET",
       url: url,
       success: (data) => {
-        console.log('review meta ajax success! reviews are: ', data);
+        // console.log('review meta ajax success! reviews are: ', data);
         this.setState({
           meta: data,
           meta_ratings: data.ratings,
@@ -117,7 +92,7 @@ class RatingsReviews extends React.Component {
         });
       },
       error: (error) => {
-        console.log('error from get reviews meta request: ', error);
+        // console.log('error from get reviews meta request: ', error);
       }
     })
       .done(function () {
@@ -131,7 +106,7 @@ class RatingsReviews extends React.Component {
     // var sort = this.state.sort;
     var id = this.state.id;
     var url = '/reviews';
-    console.log('review product id in postReview is: ', this.state.id);
+    // console.log('review product id in postReview is: ', this.state.id);
     // var url = `/reviews/${this.state.id}`;
     $.ajax({
       context: this,
@@ -149,14 +124,14 @@ class RatingsReviews extends React.Component {
         characteristics: characteristics
       },
       success: (data) => {
-        console.log('review POST ajax success!');
+        // console.log('review POST ajax success!');
       },
       error: (error) => {
-        console.log('error from POST review request: ', error);
+        // console.log('error from POST review request: ', error);
       }
     })
       .done(function () {
-        console.log('post reviews request is done');
+        // console.log('post reviews request is done');
       });
   }
 
@@ -173,32 +148,30 @@ class RatingsReviews extends React.Component {
       type: "PUT",
       url: url,
       success: (data) => {
-        console.log('PUT review ajax success!');
+        // console.log('PUT review ajax success!');
         // this.setState({
         //   meta: data
         // });
       },
       error: (error) => {
-        console.log('error from PUT review request: ', error);
+        // console.log('error from PUT review request: ', error);
       }
     })
       .done(function () {
-        console.log('PUT reviews request is done');
+        // console.log('PUT reviews request is done');
       });
   }
 
-
-
   render() {
-    console.log('this.state.reviews: ', this.state.reviews);
-    console.log('this.state.meta is: ', this.state.meta);
+    // console.log('this.state.reviews: ', this.state.reviews);
+    // console.log('this.state.meta is: ', this.state.meta);
     var list = this.state.reviews;
     var count = this.state.count;
     var sort = this.state.sort;
     var meta_characteristics = this.state.meta_characteristics;
     var meta_recommended = this.state.meta_recommended;
     var meta_ratings = this.state.meta_ratings;
-    console.log('this.state.meta_characteristics is: ', this.state.meta_characteristics);
+    // console.log('this.state.meta_characteristics is: ', this.state.meta_characteristics);
 
     if (!this.state.dataReady) {
       return (
@@ -208,7 +181,7 @@ class RatingsReviews extends React.Component {
       )
     }
     if (this.state.dataReady) {
-      console.log('meta_characteristics is: ', meta_characteristics);
+      // console.log('meta_characteristics is: ', meta_characteristics);
       return (
         <div className="ratings-reviews" id="flex-container">
           <div className="rating-breakdown">

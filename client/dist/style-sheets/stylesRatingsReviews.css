@@ -34,51 +34,6 @@
   display: none;
 }
 
-.star-rating input {
-  display: none;
-}
-
-.star-rating label {
-  width: 30px;
-  height: 30px;
-  font-family: Verdana;
-  font-size: 30px;
-  color: orange;
-}
-
-.star-rating label::before {
-  content: '\2606';
-  color: red;
-  position: absolute;
-  top: 0px;
-  line-height: 26px;
-}
-
-:root {
-  --star-size: 60px;
-  --star-color: #fff;
-  --star-background: #fc0;
-}
-
-
-.star-ratings-sprite {
-  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
-  font-size: 0;
-  height: 21px;
-  line-height: 0;
-  overflow: hidden;
-  text-indent: -999em;
-  width: 110px;
-  margin: 0 auto;
-}
-.star-ratings-sprite-rating {
-    background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
-    background-position: 0 100%;
-    float: left;
-    height: 21px;
-    display:block;
-  }
-
   .star-rating {
     display: inline-flex;
     align-items: center;
@@ -271,7 +226,7 @@
     margin-top: 20px;
       overflow-y: scroll;
       width: 600px;
-      max-height: 1200px;
+      max-height: 1100px;
       /* overflow-y: scroll; */
       overflow-y: auto;
       overflow-x: auto;

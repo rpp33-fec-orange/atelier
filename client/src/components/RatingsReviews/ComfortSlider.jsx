@@ -6,24 +6,7 @@ class ComfortSlider extends React.Component {
 		super(props);
 		this.state = {
 			comfort: props.comfort,
-			hasError: false
 		}
-	}
-
-	static getDerivedStateFromError(error) {
-		return { hasError: true };
-	}
-
-	// componentDidMount() {
-	// 	this.setState(
-	// 		{
-	// 			comfort: this.props.comfort
-	// 		})
-	// 		console.log('comfort state is: ', this.state.comfort);
-	// }
-
-	componentDidCatch(error, errorInfo) {
-		logErrorToMyService(error, errorInfo);
 	}
 
 	render() {
@@ -42,10 +25,6 @@ class ComfortSlider extends React.Component {
 			var comfort = this.props.comfort.Comfort.value;
 			var percentComfort = Math.round((comfort / 5) * 100);
 			return (
-				// <div className="comfort-slider" id="comfort-slider">
-				// 	<p>Comfort</p>
-				// 	<div>Poor     | {comfort}|     Perfect</div>
-				// </div>
 				<div className="comfort-slider" id="comfort-slider">
 					<p>Comfort</p>
 					<div className="comfort-container">
@@ -60,7 +39,6 @@ class ComfortSlider extends React.Component {
 						<div className="side">Perfect</div>
 					</div>
 				</div>
-
 			);
 		}
 	}

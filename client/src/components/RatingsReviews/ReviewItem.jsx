@@ -37,29 +37,7 @@ class ReviewItem extends React.Component {
 
 
 	render() {
-		console.log('can i get props in ReviewItem: ', this.props);
-		console.log('review.rating in ReviewItem is: ', this.props.review.rating);
 		return (
-			// <div className="wrapper">
-			// 	<div className="one" id="review-list">
-			// 		<p>&#9734;&#9734;&#9734;&#9734;                    User1234, January 1, 2019</p>
-			// 		<h3>I'm enjoying wearing these shades</h3>
-			// 		<p>Comfortable and practical.</p>
-			// 		<sub>Helpful?  Yes (10)  |  Report</sub>
-			// 		<hr></hr>
-			// 		<p>&#9734;&#9734;&#9734;&#9734;                     Cognito, April 2, 2019</p>
-			// 		<h3>I am liking these glasses</h3>
-			// 		<p>Comfortable and practical.</p>
-			// 		<img className="photo" id="photo" src="https://cdni.llbean.net/is/image/wim/224547_1_41?hei=764&wid=665&resMode=sharp2&defaultImage=llbprod/A0211793_2" alt="photo missing!"></img>
-			// 		<sub>Helpful?  Yes (10) | Report</sub>
-			// 		<hr></hr>
-			// 	</div>
-			// 	<div className="two" id="buttons">
-			// 		<button>MORE REVIEWS</button>
-			// 		<button>ADD A REVIEW</button>
-			// 	</div>
-			// </div>
-
 			<div className="wrapper">
 				<div className="one" id="review-list">
 					<div className="star-review-container">
@@ -81,17 +59,6 @@ class ReviewItem extends React.Component {
 							✔ I recommend this product
 						</div>
 					}
-					{/* <p>Do you recommend this product?</p>
-					<div className="modal-recommended" >
-						<div>
-								<input type="radio" id="yes" name="recommended" value="yes" />
-							  <label htmlFor="yes">Yes</label>
-						</div>
-						<div>
-								<input type="radio" id="no" name="recommended" value="no" />
-							  <label htmlFor="no">No</label>
-						</div>
-					</div> */}
 					<div className="productPhoto">
 						<sub>Product Photo: </sub>
 						{this.state.review.photos.length > 0
@@ -102,7 +69,6 @@ class ReviewItem extends React.Component {
 						<img src = 'https://i.vimeocdn.com/portrait/1274237_300x300.jpg' />
 								</div>
 						}
-						{/* <img src = 'https://i.vimeocdn.com/portrait/1274237_300x300.jpg' /> */}
 					</div>
 					<hr></hr>
 				</div>
