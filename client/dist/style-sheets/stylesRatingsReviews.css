@@ -126,7 +126,7 @@
   .ratings-reviews {
     display: flex;
     flex-direction: row;
-    background-color: lightblue;
+    /* background-color: lightblue; */
     justify-content: center;
     align-items: flex-start;
     align-content: flex-start;
@@ -137,26 +137,26 @@
 
   .comfort-slider {
     flex: 1;
-    background-color: pink;
+    /* background-color: pink; */
     margin-top: 15px;
     margin-bottom: 15px;
   }
 
   .size-slider {
     flex: 1;
-    background-color: yellow;
+    /* background-color: yellow; */
     margin-top: 20px;
   }
 
   .star-list {
     flex: 1;
-    background-color: green;
+    /* background-color: green; */
     text-decoration: underline;
   }
 
   .star-number {
     flex: 1;
-    background-color: purple;
+    /* background-color: purple; */
   }
 
   .container {
@@ -256,7 +256,7 @@
   .more-reviews-btn, .add-review, .submit, .close, .upload {
     display: block;
     width: fit-content;
-    background-color: #04AA6D;
+    /* background-color: #04AA6D; */
     padding: 14px 28px;
     font-size: 16px;
     cursor: pointer;

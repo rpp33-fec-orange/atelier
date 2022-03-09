@@ -10,7 +10,9 @@ class ReviewItem extends React.Component {
 			review: props.review,
 			recommend: true,
 			ready: false,
-			ratingReview: 0
+			ratingReview: 0,
+			helpful: false,
+			reported: false
 		}
 		this.getRecommendation = this.getRecommendation.bind(this);
 	}
@@ -68,7 +70,12 @@ class ReviewItem extends React.Component {
 					</div>
 					<h3 className="review-summary">{this.state.review.summary}</h3>
 					<p className="review-body">{this.state.review.body}</p>
-					<div className="helpful">Helpful?  <span className="yes">Yes</span> ({this.state.review.helpfulness})  | <span className="report">Report</span> </div>
+					<div className="helpful">Helpful?
+					{
+
+					}
+				Ï	 <span className="yes">Yes</span> ({this.state.review.helpfulness})  | <span className="report">Report</span>
+					</div>
 					{this.state.review.recommend &&
 						<div>
 							✔ I recommend this product
