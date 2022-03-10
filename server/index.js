@@ -219,6 +219,7 @@ app.post('/reviews', function (req, res) {
 
 app.put('/reviews/:review_id/helpful', function (req, res) {
   var id = req.params.review_id;
+  console.log('id in app.put is: ', id);
   putReview(id)
     .then((success) => {
       console.log('server putReview Review was found helpful success!');

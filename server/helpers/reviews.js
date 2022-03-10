@@ -84,6 +84,7 @@ let postReview = (product_id, rating, summary, body, recommend, name, email, pho
 let putReview = (review_id) => {
 	var reviewID = review_id;
 	var url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${reviewID}/helpful`;
+	console.log('putReview url: ', url);
 	return axios ({
 		method: 'PUT',
 		url: url,

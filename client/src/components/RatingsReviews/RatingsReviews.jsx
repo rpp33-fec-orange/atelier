@@ -65,6 +65,12 @@ class RatingsReviews extends React.Component {
     // }
   }
 
+  setSort(sort) {
+    this.setState({
+      sort: sort
+    });
+  }
+
   getReviewsByIDHandler(id, sort) {
     // var url = `/reviews/${this.state.id}`;
     // product_id=64620
@@ -78,11 +84,12 @@ class RatingsReviews extends React.Component {
       type: "GET",
       url: url,
       success: (data) => {
-        // console.log('review ajax success! reviews are: ', reviews);
+        console.log('review ajax success! data.results is: ', data.results);
         this.setState({
           reviews: data.results,
           count: data.count,
-          reviewReady: true
+          reviewReady: true,
+          review_id: data.results.review_id
         });
       },
       error: (error) => {
@@ -161,11 +168,13 @@ class RatingsReviews extends React.Component {
       });
   }
 
-  putHelpfulHandler() {
+  putHelpfulHandler(id) {
     // var url = `/reviews/${this.state.id}`;
     // product_id=64620
     // var sort = this.state.sort;
-    var review_id = this.props.review_id;
+    // var review_id = this.state.review_id;
+    var review_id = id;
+    console.log('review_id inside RatingsReviews.jsx: ', review_id);
     var url = `/reviews/${review_id}/helpful`;
     // console.log('review product id in getReviewsMetaHandler is: ', this.state.id);
     // var url = `/reviews/${this.state.id}`;
@@ -216,7 +225,7 @@ class RatingsReviews extends React.Component {
         </div>
       )
     }
-    if(reviewReady && metaReady) {
+    if (reviewReady && metaReady) {
       return (
         <div className="ratings-reviews" id="flex-container">
           <div className="rating-breakdown">
@@ -227,7 +236,13 @@ class RatingsReviews extends React.Component {
             <ComfortSlider comfort={meta_characteristics} />
           </div>
           <div className="review-breakdown">
-            <h3 className="review-header">{count} reviews, sorted by <div className="sort">{sort} &#9660;</div></h3>
+            <div className="review-header">{count} reviews, sorted by
+            <select class="dropdown-sort">
+              <option>newest</option>
+              <option>helpful</option>
+              <option>relevant</option>
+            </select>
+            </div>
             <ReviewList reviews={list} onMarkedHelpful={this.putHelpfulHandler} />
             {/* <Dashboard /> */}
           </div>

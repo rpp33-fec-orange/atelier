@@ -150,14 +150,19 @@
     font-size: 100px;
   }
 
-  .sort {
-    text-decoration: underline;
-  }
-
   .review-header {
     display: flex;
     flex-direction: row;
     gap: 5px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .dropdown-sort {
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    text-decoration: underline;
   }
 
   .star-review-container {
@@ -347,3 +352,5 @@
     margin-right: 10px;
     margin-bottom: 10px;
   }
+
+

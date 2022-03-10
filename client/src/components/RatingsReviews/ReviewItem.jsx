@@ -35,11 +35,12 @@ class ReviewItem extends React.Component {
 	}
 
 	markReviewHelpful() {
+		var reviewID = this.state.reviewID;
 		var helpfulness = this.state.helpfulness + 1;
 		this.setState({
 			helpfulness: helpfulness,
 			markedHelpful: true
-		}, this.props.onMarkedHelpful);
+		}, this.props.onMarkedHelpful(reviewID));
 	}
 
 	reportReview() {
