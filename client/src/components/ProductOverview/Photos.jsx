@@ -35,15 +35,15 @@ class Photos extends React.Component {
 
   subPhotoSelectedInitial() {
     // initialize first sub photo with css border before user input
-    document.getElementById(this.state.subPhotoSelectedId).classList.add('selected-photo');
+    document.getElementById(this.state.subPhotoSelectedId).classList.add('selected-photo-border');
   }
 
   photoClick(e) {
     // highlight selected sub photo with css border
     if (this.state.subPhotoSelectedId !== e.target.id) {
-      document.getElementById(this.state.subPhotoSelectedId).classList.remove('selected-photo');
+      document.getElementById(this.state.subPhotoSelectedId).classList.remove('selected-photo-border');
       this.state.subPhotoSelectedId = e.target.id;
-      document.getElementById(e.target.id).classList.add('selected-photo');
+      document.getElementById(e.target.id).classList.add('selected-photo-border');
     }
 
     // replacing main photo with selected sub photo
@@ -195,7 +195,10 @@ class Photos extends React.Component {
           <div class="styles-item-1-2">
             {arrayTopEnd ? <div id="collapsed-up-end">end</div> : <IoIosArrowUp id="collapsed-up-arrow" onClick={this.upClick} />}
             {subPhotosArray.slice(subPhotosSliceStartIndex, subPhotosSliceEndIndex).map((photo, index) =>
-              <img class="styles-item-1-2-1" id={index} src={photo.url} onClick={this.photoClick}></img>
+              <div>
+                <img class="styles-item-1-2-1" id={index} src={photo.url} onClick={this.photoClick}></img>
+                {/* {subPhotoSelected ? <div class="subPhoto-white-box"></div> : <div></div>} */}
+              </div>
             )}
             {arrayBottomEnd ? <div id="collapsed-down-end">end</div> : <IoIosArrowDown id="collapsed-down-arrow" onClick={this.downClick} />}
             <BsArrowsAngleExpand class="styles-item-1-1 collapsed-magnifying-glass" onClick={this.expandClick} />

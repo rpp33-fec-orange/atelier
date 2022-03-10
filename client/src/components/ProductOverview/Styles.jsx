@@ -11,6 +11,7 @@ class Styles extends React.Component {
       rating: '★★★★☆',
       productStylesById: props.productStylesById,
       styles: props.productStylesById.results,
+      styleSelectedId: 0,
       currentStyle: props.productStylesById.results[0],
       currentStyleSkus: props.productStylesById.results[0].skus,
       currentSku: '',
@@ -33,6 +34,12 @@ class Styles extends React.Component {
   }
 
   styleChange(e) {
+    if (this.state.styleSelectedId !== e.target.id) {
+      document.getElementById(this.state.styleSelectedId).classList.remove('selected-style-border');
+      this.state.styleSelectedId = e.target.id;
+      document.getElementById(e.target.id).classList.add('selected-style-border');
+    }
+
     for (let i = 0; i < this.state.styles.length; i++) {
       if (this.state.styles[i].name === e.target.name) {
         let selectedStyle = this.state.styles[i];
@@ -184,9 +191,9 @@ class Styles extends React.Component {
               <div class="styles-item-2-6-2">{currentStyle.name}</div>
             </div>
             <div class="styles-item-2-7-container" id="style">
-              {styles.map((style) =>
+              {styles.map((style, index) =>
                 <div class="styles-item-2-7-1">
-                  <img id="styleThumbnail" name={style.name} src={style.photos[0].url} width="50" height="50" onClick={this.styleChange}></img>
+                  <img class="style-thumbnail" id={(index + 1) * 10} name={style.name} src={style.photos[0].url} width="50" height="50" onClick={this.styleChange}></img>
                   <div class="styles-popup">{style.name}</div>
                 </div>
               )}
