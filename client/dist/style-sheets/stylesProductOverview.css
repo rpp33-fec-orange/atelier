@@ -314,13 +314,14 @@
 }
 
 .selected-style-border {
-  border: 2px solid rgb(243, 189, 41);
+  border: 3px solid rgb(243, 189, 41);
 }
 
-.expanded-mainPhoto-zoom {
+.zoomed-mainPhoto {
   cursor: -webkit-zoom-out;
   position: absolute;
   object-fit: cover;
+  border: 2px solid red;
   top: 0.5%;
   left: 12.5%;
   width: 75%;
@@ -334,6 +335,12 @@
   object-fit: cover;
   width: 52px;
   height: 52px; */
+}
+
+.collapse-button {
+  top: 0%;
+  right: 0%;
+  cursor: pointer;
 }
 
 .subPhoto-white-box {
@@ -364,7 +371,7 @@
 }
 
 .selected-photo-border {
-  border: 2px solid rgb(243, 189, 41);
+  border: 3px solid white;
   margin: 5px;
   /* background-color: yellow; */
   cursor: pointer;

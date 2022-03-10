@@ -30,6 +30,7 @@ class Photos extends React.Component {
     this.downClick = this.downClick.bind(this);
     this.expandClick = this.expandClick.bind(this);
     this.collapseClick = this.collapseClick.bind(this);
+    this.zoomHandler = this.zoomHandler.bind(this);
     this.zoomClick = this.zoomClick.bind(this);
     this.subPhotoSelectedInitial = this.subPhotoSelectedInitial.bind(this);
   }
@@ -158,18 +159,23 @@ class Photos extends React.Component {
 
   collapseClick() {
     this.setState({
-      expanded: false
+      expanded: false,
+      zoomed: false
     })
   }
 
   zoomClick() {
     this.setState({
       zoomed: true
-    })
+    });
   }
 
-  zoomLogic() {
-    let zoomObj = document.getElementById('main-photo-zoomed');
+  zoomHandler(e) {
+    let zoomObj = document.getElementById('zoomed-mainPhoto');
+    alert('wahoo!');
+    // zoomObj.onMouseMove = (e) => {
+    //   console.log(e);
+    // }
     // more coordinate math here with onmousemove to re-style this view's css dimensions
   }
 
@@ -201,6 +207,7 @@ class Photos extends React.Component {
     let arrayTopEnd = this.state.arrayTopEnd;
     let arrayBottomEnd = this.state.arrayBottomEnd;
     let expanded = this.state.expanded;
+    let zoomed = this.state.zoomed;
     if (!expanded) {
       return (
         <div>
@@ -233,12 +240,13 @@ class Photos extends React.Component {
             )}
             {arrayBottomEnd ? <div id="collapsed-down-end">end</div> : <IoIosArrowDown id="collapsed-down-arrow" onClick={this.downClick} />}
           </div>
+          <img class={zoomed ? "zoomed-mainPhoto" : "expanded-mainPhoto"} src={mainPhotoArray[mainPhotoIndex].url} width="575" height="700" onClick={this.zoomClick}></img>
+          {arrayLeftEnd ? <div></div> : <IoIosArrowDropleft id="expanded-left-arrow" onClick={this.leftClick} />}
+          {arrayRightEnd ? <div></div> : <IoIosArrowDropright id="expanded-right-arrow" onClick={this.rightClick} />}
           <div>
-            <img class="expanded-mainPhoto" src={mainPhotoArray[mainPhotoIndex].url} width="575" height="700" onClick={this.collapseClick}></img>
-            {arrayLeftEnd ? <div></div> : <IoIosArrowDropleft id="expanded-left-arrow" onClick={this.leftClick} />}
-            {arrayRightEnd ? <div></div> : <IoIosArrowDropright id="expanded-right-arrow" onClick={this.rightClick} />}
+            <div class="collapse-button" onClick={this.collapseClick}>X</div>
           </div>
-        </div>
+        </div >
       )
     }
   }
