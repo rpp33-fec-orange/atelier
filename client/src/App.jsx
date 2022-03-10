@@ -95,8 +95,8 @@ class App extends React.Component {
       return (
         <div id="container">
           <ProductOverview id={this.state.id} rating={this.state.rating} currentStyleHandler={this.currentStyleHandler} yourOutfitHandleClick={this.yourOutfitHandleClick} />
-          <RelatedProducts id={this.state.id} yourOutfitArray={this.state.yourOutfitArray} yourOutfitHandleClick={this.yourOutfitHandleClick} handleProductChange={this.handleProductChange} />
-          <QuestionsAnswers id={this.state.id} />
+          {/* <RelatedProducts id={this.state.id} yourOutfitArray={this.state.yourOutfitArray} yourOutfitHandleClick={this.yourOutfitHandleClick} handleProductChange={this.handleProductChange} />
+          <QuestionsAnswers id={this.state.id} /> */}
           <RatingsReviews id={this.state.id} handleRating={this.handleRating} handleGetRating={this.getRating} />
         </div>
       )

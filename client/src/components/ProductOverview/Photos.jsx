@@ -29,9 +29,9 @@ class Photos extends React.Component {
     this.upClick = this.upClick.bind(this);
     this.downClick = this.downClick.bind(this);
     this.expandClick = this.expandClick.bind(this);
-    this.collapseClick = this.collapseClick.bind(this);
     this.zoomHandler = this.zoomHandler.bind(this);
     this.zoomClick = this.zoomClick.bind(this);
+    this.collapseClick = this.collapseClick.bind(this);
     this.subPhotoSelectedInitial = this.subPhotoSelectedInitial.bind(this);
   }
 
@@ -157,25 +157,42 @@ class Photos extends React.Component {
     });
   }
 
-  collapseClick() {
-    this.setState({
-      expanded: false,
-      zoomed: false
-    })
-  }
-
   zoomClick() {
     this.setState({
       zoomed: true
     });
   }
 
+  collapseClick() {
+    this.setState({
+      expanded: false,
+      zoomed: false
+    });
+  }
+
   zoomHandler(e) {
+
     let zoomObj = document.getElementById('zoomed-mainPhoto');
-    var x = e.clientX;
-    var y = e.clientY;
-    var coor = "Coordinates: (" + x + "," + y + ")";
-    console.log(coor);
+
+    let mouseX = e.clientX;
+    let mouseY = e.clientY;
+
+    let mouse = "Mouse: (" + mouseX + ", " + mouseY + ")";
+    console.log(mouse);
+
+    let percentX = Math.round((mouseX / 1276) * 100);
+    let percentY = Math.round((mouseY / 660) * 100);
+    console.log('percentX %', percentX);
+    console.log('percentY %', percentY);
+    console.log('HELLO: ', zoomObj.clientX); //how to access
+    let aimX = -1 * percentX * zoomObj.clientX;
+    let aimY = -1 * percentY * zoomObj.clientY;
+
+    zoomObj.style.left = aimX + "px";
+    zoomObj.style.top = aimY + "px";
+
+    zoomObj.style.width = aimX + "px";
+    zoomObj.style.height = aimY + "px";
     // zoomObj.onMouseMove = (e) => {
     //   console.log(e);
     // }
@@ -225,7 +242,7 @@ class Photos extends React.Component {
             {arrayBottomEnd ? <div id="collapsed-down-end">end</div> : <IoIosArrowDown id="collapsed-down-arrow" onClick={this.downClick} />}
           </div>
           <div class="styles-item-1-1">
-            <img class="styles-item-1-1-1" id="mainPhoto" src={mainPhotoArray[mainPhotoIndex].url} width="360" height="480" onClick={this.expandClick}></img>
+            <img class="styles-item-1-1-1" id="mainPhoto" src={mainPhotoArray[mainPhotoIndex].url} onClick={this.expandClick}></img>
             {arrayLeftEnd ? <div></div> : <IoIosArrowDropleft id="collapsed-left-arrow" onClick={this.leftClick} />}
             {arrayRightEnd ? <div></div> : <IoIosArrowDropright id="collapsed-right-arrow" onClick={this.rightClick} />}
           </div>
@@ -243,12 +260,20 @@ class Photos extends React.Component {
             )}
             {arrayBottomEnd ? <div id="collapsed-down-end">end</div> : <IoIosArrowDown id="collapsed-down-arrow" onClick={this.downClick} />}
           </div>
-          <img class={zoomed ? "zoomed-mainPhoto" : "expanded-mainPhoto"} src={mainPhotoArray[mainPhotoIndex].url} width="575" height="700" onClick={this.zoomClick} onMouseMove={this.zoomHandler}></img>
+          {/* {zoomed ? <div class="zoomed-container">
+            <img id="zoomed-mainPhoto" src={mainPhotoArray[mainPhotoIndex].url} onClick={this.collapseClick} onMouseMove={this.zoomHandler}></img>
+            {arrayLeftEnd ? <div></div> : <IoIosArrowDropleft id="expanded-left-arrow" onClick={this.leftClick} />}
+            {arrayRightEnd ? <div></div> : <IoIosArrowDropright id="expanded-right-arrow" onClick={this.rightClick} />}
+          </div> : <div class="expanded-container">
+            <img id="expanded-mainPhoto"} src={mainPhotoArray[mainPhotoIndex].url} onClick={this.zoomClick}></img>
+            {arrayLeftEnd ? <div></div> : <IoIosArrowDropleft id="expanded-left-arrow" onClick={this.leftClick} />}
+          {arrayRightEnd ? <div></div> : <IoIosArrowDropright id="expanded-right-arrow" onClick={this.rightClick} />}
+        </div>} */}
+
+          <img id={zoomed ? "zoomed-mainPhoto" : "expanded-mainPhoto"} src={mainPhotoArray[mainPhotoIndex].url} onClick={this.zoomClick} onMouseMove={this.zoomHandler}></img>
           {arrayLeftEnd ? <div></div> : <IoIosArrowDropleft id="expanded-left-arrow" onClick={this.leftClick} />}
           {arrayRightEnd ? <div></div> : <IoIosArrowDropright id="expanded-right-arrow" onClick={this.rightClick} />}
-          <div>
-            <div class="collapse-button" onClick={this.collapseClick}>X</div>
-          </div>
+
         </div >
       )
     }
