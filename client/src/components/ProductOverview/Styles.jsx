@@ -11,7 +11,7 @@ class Styles extends React.Component {
       rating: '★★★★☆',
       productStylesById: props.productStylesById,
       styles: props.productStylesById.results,
-      styleSelectedId: 0,
+      styleSelectedId: ((0 + 1) * 10),
       currentStyle: props.productStylesById.results[0],
       currentStyleSkus: props.productStylesById.results[0].skus,
       currentSku: '',
@@ -31,6 +31,11 @@ class Styles extends React.Component {
     this.outfitClick = this.outfitClick.bind(this);
     this.quantityChange = this.quantityChange.bind(this);
     this.reviewsClick = this.reviewsClick.bind(this);
+    this.styleSelectedInitial = this.styleSelectedInitial.bind(this);
+  }
+
+  styleSelectedInitial() {
+    document.getElementById(this.state.styleSelectedId).classList.add('selected-style-border');
   }
 
   styleChange(e) {
@@ -149,6 +154,7 @@ class Styles extends React.Component {
 
   componentDidMount() {
     this.props.currentStyleHandler(this.state.currentStyle);
+    this.styleSelectedInitial();
   }
 
   render() {

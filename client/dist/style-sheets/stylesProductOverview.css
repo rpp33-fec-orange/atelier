@@ -66,6 +66,7 @@
 }
 
 .styles-item-1-1-1 {
+  cursor: -webkit-zoom-in;
   object-fit: cover;
   width: 580px;
   height: 450px;
@@ -343,6 +344,7 @@
 }
 
 .expanded-mainPhoto {
+  cursor: -webkit-zoom-out;
   position: absolute;
   object-fit: cover;
   overflow: scroll;

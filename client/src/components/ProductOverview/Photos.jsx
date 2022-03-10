@@ -1,6 +1,4 @@
 import React from 'react';
-import { BsArrowsAngleContract } from 'react-icons/Bs';
-import { BsArrowsAngleExpand } from 'react-icons/Bs';
 import { IoIosArrowDropright } from 'react-icons/Io';
 import { IoIosArrowDropleft } from 'react-icons/Io';
 import { IoIosArrowDown } from 'react-icons/Io';
@@ -201,10 +199,9 @@ class Photos extends React.Component {
               </div>
             )}
             {arrayBottomEnd ? <div id="collapsed-down-end">end</div> : <IoIosArrowDown id="collapsed-down-arrow" onClick={this.downClick} />}
-            <BsArrowsAngleExpand class="styles-item-1-1 collapsed-magnifying-glass" onClick={this.expandClick} />
           </div>
           <div class="styles-item-1-1">
-            <img class="styles-item-1-1-1" id="mainPhoto" src={mainPhotoArray[mainPhotoIndex].url} width="360" height="480"></img>
+            <img class="styles-item-1-1-1" id="mainPhoto" src={mainPhotoArray[mainPhotoIndex].url} width="360" height="480" onClick={this.expandClick}></img>
             {arrayLeftEnd ? <div></div> : <IoIosArrowDropleft id="collapsed-left-arrow" onClick={this.leftClick} />}
             {arrayRightEnd ? <div></div> : <IoIosArrowDropright id="collapsed-right-arrow" onClick={this.rightClick} />}
           </div>
@@ -223,8 +220,7 @@ class Photos extends React.Component {
             {arrayBottomEnd ? <div id="collapsed-down-end">end</div> : <IoIosArrowDown id="collapsed-down-arrow" onClick={this.downClick} />}
           </div>
           <div class="expanded-mainPhoto-container">
-            <img class="expanded-mainPhoto" src={mainPhotoArray[mainPhotoIndex].url} width="575" height="700"></img>
-            <BsArrowsAngleContract class="expanded-magnifying-glass" onClick={this.expandClick} />
+            <img class="expanded-mainPhoto" src={mainPhotoArray[mainPhotoIndex].url} width="575" height="700" onClick={this.expandClick}></img>
             {arrayLeftEnd ? <div></div> : <IoIosArrowDropleft id="expanded-left-arrow" onClick={this.leftClick} />}
             {arrayRightEnd ? <div></div> : <IoIosArrowDropright id="expanded-right-arrow" onClick={this.rightClick} />}
           </div>
