@@ -14,6 +14,9 @@ class RatingsReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      getReviewsByIDHandlerSuccess: false,
+      getReviewsMetaHandlerSuccess: false,
+      initialized: false,
       dataReady: false,
       reviews: [],
       meta: {},
@@ -32,12 +35,21 @@ class RatingsReviews extends React.Component {
   }
 
   componentDidMount() {
+    this.setState({
+      initialized: this.props.initialized
+    });
     this.getReviewsByIDHandler(this.state.id);
-    try {
-      this.getReviewsMetaHandler(this.state.id);
-    } catch (error) {
-      // console.log('meta error in RatingsReviews is: ', error);
+    this.getReviewsMetaHandler(this.state.id);
+    if(this.state.getReviewsByIDHandlerSuccess && getReviewsMetaHandlerSuccess) {
+      this.setState({
+        initialized: true
+      });
     }
+    // try {
+    //   this.getReviewsMetaHandler(this.state.id);
+    // } catch (error) {
+    //   // console.log('meta error in RatingsReviews is: ', error);
+    // }
   }
 
   getReviewsByIDHandler(id) {
@@ -56,10 +68,12 @@ class RatingsReviews extends React.Component {
         // console.log('review ajax success! reviews are: ', reviews);
         this.setState({
           reviews: data.results,
-          count: data.count
+          count: data.count,
+          getReviewsByIDHandlerSuccess: true
         });
       },
       error: (error) => {
+        console.log('getReviewsByIDHandler ajax error!');
         // console.log('error from get reviews request: ', error);
       }
     })
@@ -87,12 +101,14 @@ class RatingsReviews extends React.Component {
           meta_ratings: data.ratings,
           meta_recommended: data.recommended,
           meta_characteristics: data.characteristics,
-          dataReady: true
+          dataReady: true,
+          getReviewsMetaHandlerSuccess: true
           // count: data.count
         });
       },
       error: (error) => {
         // console.log('error from get reviews meta request: ', error);
+        console.log('getReviewsMetaHandler ajax error!')
       }
     })
       .done(function () {
@@ -128,6 +144,7 @@ class RatingsReviews extends React.Component {
       },
       error: (error) => {
         // console.log('error from POST review request: ', error);
+        console.log('postReviewHandler ajax error!')
       }
     })
       .done(function () {
@@ -155,6 +172,7 @@ class RatingsReviews extends React.Component {
       },
       error: (error) => {
         // console.log('error from PUT review request: ', error);
+        console.log('putHelpfulHandler ajax error!');
       }
     })
       .done(function () {
@@ -173,7 +191,7 @@ class RatingsReviews extends React.Component {
     var meta_ratings = this.state.meta_ratings;
     // console.log('this.state.meta_characteristics is: ', this.state.meta_characteristics);
 
-    if (!this.state.dataReady) {
+    if (!this.state.initialized) {
       return (
         <div>
           Loading Ratings and Reviews...

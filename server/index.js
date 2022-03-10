@@ -189,6 +189,7 @@ app.get('/reviews/', function (req, res) {
     })
     .catch((error) => {
       console.log('error getting reviews!');
+      res.status(500).send(error);
     })
 });
 
@@ -200,6 +201,7 @@ app.get('/reviews/meta', function (req, res) {
     })
     .catch((error) => {
       console.log('error getting reviews!');
+      res.status(500).send(error);
     })
 });
 
@@ -211,6 +213,7 @@ app.post('/reviews', function (req, res) {
     })
     .catch((error) => {
       console.log('error getting reviews!');
+      res.status(500).send(error);
     })
 });
 
@@ -222,6 +225,7 @@ app.put('/reviews/:review_id/helpful', function (req, res) {
     })
     .catch((error) => {
       console.log('error getting reviews!');
+      res.status(500).send(error);
     })
 });
 
