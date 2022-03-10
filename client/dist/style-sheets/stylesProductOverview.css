@@ -311,11 +311,25 @@
 }
 
 .expanded-mainPhoto-container {
-  width: 920px;
+  /* width: 920px;
   height: 620px;
   background-color: red;
   display: flex;
-  /* object-fit: cover; */
+  object-fit: cover; */
+}
+
+.subPhoto-tumbnail {
+  /* margin: 5px;
+  cursor: pointer;
+  object-fit: cover;
+  width: 52px;
+  height: 52px; */
+}
+
+.subPhoto-white-box {
+  height: 10px;
+  width: 100%;
+  background-color: white;
 }
 
 .expanded-mainPhoto {
