@@ -14,7 +14,8 @@ class ReviewItem extends React.Component {
 			ratingReview: 0,
 			helpfulness: 0,
 			markedHelpful: false,
-			reported: false
+			reported: false,
+			photos: []
 		}
 		this.getRecommendation = this.getRecommendation.bind(this);
 		this.markReviewHelpful = this.markReviewHelpful.bind(this);
@@ -46,7 +47,8 @@ class ReviewItem extends React.Component {
 			review: this.props.review,
 			ratingReview: this.props.review.rating,
 			helpfulness: this.props.review.helpfulness,
-			reviewID: this.props.review - id
+			reviewID: this.props.review.review_id,
+			photos: this.props.review.photos
 		});
 	}
 
@@ -90,12 +92,14 @@ class ReviewItem extends React.Component {
 					}
 					<div className="productPhoto">
 						<sub>Product Photo: </sub>
-						{this.state.review.photos.length > 0
+						{this.state.photos.length > 0
 							? <div>
 								{this.state.review.photos}
 							</div>
 							: <div>
-								<img src='https://i.vimeocdn.com/portrait/1274237_300x300.jpg' />
+								<br/>
+								{/* <img src='https://i.vimeocdn.com/portrait/1274237_300x300.jpg' /> */}
+								<button>Submit Photos</button>
 							</div>
 						}
 					</div>
