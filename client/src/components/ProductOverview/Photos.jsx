@@ -131,6 +131,11 @@ class Photos extends React.Component {
   }
 
   downClick() {
+    // this.setState({
+    //   subPhotoSelectedId: ''
+    // })
+    // console.log(this.state.subPhotoSelectedId)
+    // // document.getElementById(this.state.subPhotoSelectedId).classList.remove('selected-photo-border');
     let newStartIndex = this.state.subPhotosSliceStartIndex + 1;
     let newEndIndex = this.state.subPhotosSliceEndIndex + 1;
     if (newStartIndex > 0 && newEndIndex < this.state.subPhotosArray.length) {
@@ -158,9 +163,20 @@ class Photos extends React.Component {
   }
 
   zoomClick() {
-    this.setState({
-      zoomed: true
-    });
+    // this.setState({
+    //   zoomed: true
+    // });
+
+    if (!this.state.zoomed) {
+      this.setState({
+        zoomed: true
+      })
+    } else {
+      this.setState({
+        expanded: false,
+        zoomed: false
+      });
+    }
   }
 
   collapseClick() {
