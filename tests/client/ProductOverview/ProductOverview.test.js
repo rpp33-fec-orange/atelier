@@ -6,7 +6,6 @@ import { shallow } from 'enzyme';
 import { render, screen, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom'
 import ProductOverview from '../../../client/src/components/ProductOverview/index.jsx';
-import Descriptions from '../../../client/src/components/ProductOverview/Descriptions.jsx';
 import Styles from '../../../client/src/components/ProductOverview/Styles.jsx';
 import TopBar from '../../../client/src/components/ProductOverview/TopBar.jsx';
 
@@ -41,11 +40,6 @@ describe('ProductOverview component tests', () => {
 
   it("it should render index.jsx component", () => {
     const component = shallow(<ProductOverview />);
-    expect(component.exists()).toBe(true);
-  });
-
-  it("it should render Descriptions component", () => {
-    const component = shallow(<Descriptions />);
     expect(component.exists()).toBe(true);
   });
 
