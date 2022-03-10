@@ -352,6 +352,7 @@
   left: 14%;
   width: 920px;
   height: 620px;
+  z-index: 600;
 }
 
 .expanded-subPhoto {
@@ -385,15 +386,16 @@
   z-index: 3;
 }
 
-.star {
+.po-star {
   /* background-color: red; */
 }
 
-.stars-container {
+.po-stars-container {
   display: flex;
   flex-direction: row;
   margin-top: 8px;
   margin-right: 5px;
+  z-index: 500;
 }
 
 #collapsed-up-end{
@@ -534,7 +536,7 @@
   position: absolute;
   top: 530px;
   left: 183px;
-  z-index: 3;
+  z-index: 600;
   background-color: white;
   border-radius: 50%;
 }
@@ -544,7 +546,7 @@
   position: absolute;
   top: 530px;
   left: 720px;
-  z-index: 3;
+  z-index: 600;
   background-color: white;
   border-radius: 50%;
 }
@@ -554,7 +556,7 @@
   position: absolute;
   top: 325px;
   left: 200px;
-  z-index: 3;
+  z-index: 600;
   background-color: white;
   border-radius: 50%;
 }
@@ -564,7 +566,7 @@
   position: absolute;
   top: 320px;
   left: 1070px;
-  z-index: 3;
+  z-index: 600;
   background-color: white;
   border-radius: 50%;
 }

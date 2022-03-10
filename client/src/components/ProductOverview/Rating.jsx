@@ -46,7 +46,7 @@ class Rating extends React.PureComponent {
   }
 
   renderOneStar(source) {
-    return <img class="star" src={source} />
+    return <img class="po-star" src={source} />
   }
 
   render() {
@@ -58,7 +58,7 @@ class Rating extends React.PureComponent {
 				<img class="star" src={this.state[0]} />
 				<img class="star" src={this.state[0]} />
 				<img class="star" src={this.state[0]} /> */}
-        <div class="stars-container">{stars}</div>
+        <div class="po-stars-container">{stars}</div>
       </div>
     );
   }
