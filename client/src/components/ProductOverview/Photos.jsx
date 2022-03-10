@@ -1,8 +1,8 @@
 import React from 'react';
-import { IoIosArrowDropright } from 'react-icons/Io';
-import { IoIosArrowDropleft } from 'react-icons/Io';
-import { IoIosArrowDown } from 'react-icons/Io';
-import { IoIosArrowUp } from 'react-icons/Io';
+import { IoIosArrowDropright } from 'react-icons/io';
+import { IoIosArrowDropleft } from 'react-icons/io';
+import { IoIosArrowDown } from 'react-icons/io';
+import { IoIosArrowUp } from 'react-icons/io';
 
 class Photos extends React.Component {
   constructor(props) {
