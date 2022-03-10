@@ -41,10 +41,9 @@ class YourOutfitRow extends React.Component {
   }
 
   render() {
-    const {yourOutfit} = this.state;
     var DOMarray = '';
-    if (yourOutfit.length > 0) {
-      DOMarray = yourOutfit.map((product) => {
+    if (this.props.yourOutfitArray.length > 0) {
+      DOMarray = this.props.yourOutfitArray.map((product) => {
         return (
           <YourOutfitCard product = {product} handleDelete = {this.handleDeleteOutfit}/>
         )
