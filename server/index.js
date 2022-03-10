@@ -86,9 +86,13 @@ app.put('/qa/answers/:answer_id/helpful', (req, res) => {
 });
 
 app.post('/qa/questions', (req, res) => {
-  let formDetails = req.body;
+  let questionFormDetails = req.body;
 
-  submitQuestion(formDetails)
+  // product_id type changes between client and server. refactor client to use axios?
+  questionFormDetails.product_id = parseInt(questionFormDetails.product_id);
+  // console.log(`in server the product_id is: ${typeof questionFormDetails.product_id}`);
+
+  submitQuestion(questionFormDetails)
     .then(() => {
       res.status(201).end();
     })
@@ -99,9 +103,9 @@ app.post('/qa/questions', (req, res) => {
 
 app.post('/qa/questions/:question_id/answers', (req, res) => {
   let question_id = req.params.question_id;
-  let formDetails = req.body;
+  let answerFormDetails = req.body;
 
-  submitAnswer(question_id, formDetails)
+  submitAnswer(question_id, answerFormDetails)
     .then(() => {
       res.status(201).end();
     })

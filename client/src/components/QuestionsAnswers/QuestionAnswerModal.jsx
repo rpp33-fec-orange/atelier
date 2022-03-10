@@ -7,9 +7,9 @@ class QuestionAnswerModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      body: '',
-      nickname: '',
-      email: ''
+      body: "",
+      nickname: "",
+      email: ""
     };
     this.closeModal = this.closeModal.bind(this);
     this.formHandler = this.formHandler.bind(this);
@@ -33,8 +33,10 @@ class QuestionAnswerModal extends React.Component {
 
     if (prompt.type === 'Question') {
 
+      // console.log(`the product_id is: ${typeof prompt.product_id}`);
+
       this.props.addQuestion({
-        question_body: this.state.body,
+        body: this.state.body,
         name: this.state.nickname,
         email: this.state.email,
         product_id: prompt.product_id

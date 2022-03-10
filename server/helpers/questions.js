@@ -67,10 +67,13 @@ const getQuestionsByProductId = (id) => {
 
 const submitQuestion = (formDetails) => {
 
+  // console.log(`in helper product_id type: ${typeof formDetails.product_id}.`);
+
   return axios({
     method: 'post',
     url: `${options.baseUrl}/qa/questions`,
     data: formDetails,
+    contentType: 'application/json',
     responseType: 'json',
     headers: options.auth,
     validateStatus: (status) => {

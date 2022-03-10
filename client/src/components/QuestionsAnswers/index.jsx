@@ -116,6 +116,8 @@ class QuestionsAnswers extends React.Component {
   }
 
   submitQuestion(formDetails) {
+    // console.log(`before leaving client the product_id is: ${typeof formDetails.product_id}`);s
+
     $.ajax({
       context: this,
       type: 'POST',
@@ -125,6 +127,7 @@ class QuestionsAnswers extends React.Component {
         console.log('question POST successful');
         // refresh page
       },
+      // contentType: 'application/json',
       dataType: 'json'
     });
 
@@ -294,7 +297,7 @@ class QuestionsAnswers extends React.Component {
 
     let questionPrompt = {
       type: 'Question',
-      product_id: parseInt(this.state.productId),
+      product_id: this.state.productId,
       productName: this.state.productName
     };
 
