@@ -74,6 +74,7 @@ class Styles extends React.Component {
         sizeStatus: '',
         quantitySelectedBool: false
       });
+      alert('Please select a size.')
     } else {
       for (let i = 0; i < skuKeys.length; i++) {
         if (e.target.value === this.state.currentStyleSkus[skuKeys[i]].size) {
@@ -104,7 +105,7 @@ class Styles extends React.Component {
         console.log('postCart ajax POST error!', error);
       },
     })
-    alert('Added item to cart!');
+    alert('Added item to cart.');
   }
 
   getCart() {
@@ -143,7 +144,8 @@ class Styles extends React.Component {
       this.setState({
         quantitySelected: 0,
         quantitySelectedBool: false
-      })
+      });
+      alert('Please select a quantity.')
     } else {
       this.setState({
         quantitySelected: e.target.value,

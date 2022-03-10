@@ -71,7 +71,8 @@ class ProductOverview extends React.Component {
       },
       contentType: "application/json",
     })
-    alert(`${keyword} was searched!`);
+    // alert(`${keyword} was searched!`);
+    alert('Search feature coming in next update.')
   }
 
   componentDidMount() {
