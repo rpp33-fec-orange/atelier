@@ -172,7 +172,10 @@ class Photos extends React.Component {
 
   zoomHandler(e) {
     let zoomObj = document.getElementById('zoomed-mainPhoto');
-    alert('wahoo!');
+    var x = e.clientX;
+    var y = e.clientY;
+    var coor = "Coordinates: (" + x + "," + y + ")";
+    console.log(coor);
     // zoomObj.onMouseMove = (e) => {
     //   console.log(e);
     // }
@@ -240,7 +243,7 @@ class Photos extends React.Component {
             )}
             {arrayBottomEnd ? <div id="collapsed-down-end">end</div> : <IoIosArrowDown id="collapsed-down-arrow" onClick={this.downClick} />}
           </div>
-          <img class={zoomed ? "zoomed-mainPhoto" : "expanded-mainPhoto"} src={mainPhotoArray[mainPhotoIndex].url} width="575" height="700" onClick={this.zoomClick}></img>
+          <img class={zoomed ? "zoomed-mainPhoto" : "expanded-mainPhoto"} src={mainPhotoArray[mainPhotoIndex].url} width="575" height="700" onClick={this.zoomClick} onMouseMove={this.zoomHandler}></img>
           {arrayLeftEnd ? <div></div> : <IoIosArrowDropleft id="expanded-left-arrow" onClick={this.leftClick} />}
           {arrayRightEnd ? <div></div> : <IoIosArrowDropright id="expanded-right-arrow" onClick={this.rightClick} />}
           <div>
