@@ -73,21 +73,46 @@ class QuestionsAnswers extends React.Component {
   };
 
   getMoreQuestions() {
-    let { renderedQuestions, allQuestions } = this.state;
+    if (!this.state.renderSearch) {
 
-    let grabbed = allQuestions.slice(renderedQuestions.length, renderedQuestions.length + 2);
-    let parsed = this.initialRender(grabbed);
-    let rendered = [...renderedQuestions, ...parsed];
+      let { renderedQuestions, allQuestions } = this.state;
 
-    if (allQuestions.length > rendered.length) {
-      this.setState({
-        renderedQuestions: rendered
-      });
+      let grabbed = allQuestions.slice(renderedQuestions.length, renderedQuestions.length + 2);
+      let parsed = this.initialRender(grabbed);
+      let rendered = [...renderedQuestions, ...parsed];
+
+      if (allQuestions.length > rendered.length) {
+        this.setState({
+          showMoreQuestions: true,
+          renderedQuestions: rendered
+        });
+      } else {
+        this.setState({
+          showMoreQuestions: false,
+          renderedQuestions: rendered
+        });
+      }
+
     } else {
-      this.setState({
-        showMoreQuestions: false,
-        renderedQuestions: rendered
-      });
+
+      let { searchedQuestions, renderedSearch } = this.state;
+
+      let grabbed = searchedQuestions.slice(renderedSearch.length, renderedSearch.length + 2);
+      let parsed = this.initialRender(grabbed);
+      let rendered = [...renderedSearch, ...parsed];
+
+      if (searchedQuestions.length > rendered.length) {
+        this.setState({
+          showMoreQuestions: true,
+          renderedSearch: rendered
+        });
+      } else {
+        this.setState({
+          showMoreQuestions: false,
+          renderedSearch: rendered
+        });
+      }
+
     }
 
   }
@@ -116,7 +141,7 @@ class QuestionsAnswers extends React.Component {
   }
 
   submitQuestion(formDetails) {
-    // console.log(`before leaving client the product_id is: ${typeof formDetails.product_id}`);s
+    // console.log(`before leaving client the product_id is: ${typeof formDetails.product_id}`);
 
     $.ajax({
       context: this,
@@ -124,10 +149,8 @@ class QuestionsAnswers extends React.Component {
       url: `qa/questions`,
       data: formDetails,
       success: () => {
-        console.log('question POST successful');
-        // refresh page
+        this.loadQuestions();
       },
-      // contentType: 'application/json',
       dataType: 'json'
     });
 
@@ -140,7 +163,7 @@ class QuestionsAnswers extends React.Component {
       url: `qa/questions/${questionId}/answers`,
       data: formDetails,
       success: () => {
-        console.log('answer POST successful');
+        this.loadQuestions();
       },
       dataType: 'json'
     });
@@ -153,7 +176,7 @@ class QuestionsAnswers extends React.Component {
       type: 'PUT',
       url: `qa/questions/${questionId}/helpful`,
       success: () => {
-        let { allQuestions, renderedQuestions } = this.state;
+        let { allQuestions, renderedQuestions, searchedQuestions, renderedSearch } = this.state;
 
         let questionIndex = allQuestions.findIndex(question => {
           return question.question_id === questionId;
@@ -169,6 +192,24 @@ class QuestionsAnswers extends React.Component {
           allQuestions: allQuestions,
           renderedQuestions: renderedQuestions
         });
+
+        if (renderSearch) {
+          let questionIndexSearch = searchedQuestions.findIndex(question => {
+            return question.question_id === questionId;
+          });
+
+          searchedQuestions[questionIndexSearch].marked_helpful = true;
+          renderedSearch[questionIndexSearch].marked_helpful = true;
+
+          searchedQuestions[questionIndexSearch].question_helpfulness++;
+          renderedSearch[questionIndexSearch].question_helpfulness++;
+
+          this.setState({
+            searchedQuestions: searchedQuestions,
+            renderedSearch: renderedSearch
+          });
+        }
+
       },
       dataType: 'json'
     });
@@ -180,7 +221,7 @@ class QuestionsAnswers extends React.Component {
       type: 'PUT',
       url: `qa/answers/${answerId}/helpful`,
       success: () => {
-        let { allQuestions, renderedQuestions } = this.state;
+        let { allQuestions, renderedQuestions, searchedQuestions, renderedSearch } = this.state;
 
         let questionIndex = allQuestions.findIndex(question => {
           return question.question_id === questionId;
@@ -200,6 +241,28 @@ class QuestionsAnswers extends React.Component {
           allQuestions: allQuestions,
           renderedQuestions: renderedQuestions
         });
+
+        if (renderSearch) {
+          let questionIndexSearch = searchedQuestions.findIndex(question => {
+            return question.question_id === questionId;
+          });
+
+          let answerIndexSearch = searchedQuestions[questionIndexSearch].answers.findIndex(answer => {
+            return answer.id === answerId;
+          });
+
+          searchedQuestions[questionIndexSearch].answers[answerIndexSearch].marked_helpful = true;
+          renderedSearch[questionIndexSearch].answers[answerIndexSearch].marked_helpful = true;
+
+          searchedQuestions[questionIndexSearch].answers[answerIndexSearch].helpfulness++;
+          renderedSearch[questionIndexSearch].answers[answerIndexSearch].helpfulness++;
+
+          this.setState({
+            searchedQuestions: searchedQuestions,
+            renderedSearch: renderedSearch
+          });
+        }
+
       },
       dataType: 'json'
     });
@@ -211,7 +274,7 @@ class QuestionsAnswers extends React.Component {
       type: 'PUT',
       url: `qa/questions/${questionId}/report`,
       success: () => {
-        let { allQuestions, renderedQuestions } = this.state;
+        let { allQuestions, renderedQuestions, searchedQuestions, renderedSearch } = this.state;
 
         let questionIndex = allQuestions.findIndex(question => {
           return question.question_id === questionId;
@@ -224,6 +287,21 @@ class QuestionsAnswers extends React.Component {
           allQuestions: allQuestions,
           renderedQuestions: renderedQuestions
         });
+
+        if (renderSearch) {
+          let questionIndexSearch = searchedQuestions.findIndex(question => {
+            return question.question_id === questionId;
+          });
+
+          searchedQuestions[questionIndexSearch].reported = true;
+          renderedSearch[questionIndexSearch].reported = true;
+
+          this.setState({
+            searchedQuestions: searchedQuestions,
+            renderedSearch: renderedSearch
+          });
+        }
+
       },
       dataType: 'json'
     });
@@ -235,7 +313,7 @@ class QuestionsAnswers extends React.Component {
       type: 'PUT',
       url: `qa/answers/${answerId}/report`,
       success: () => {
-        let { allQuestions, renderedQuestions } = this.state;
+        let { allQuestions, renderedQuestions, searchedQuestions, renderedSearch } = this.state;
 
         let questionIndex = allQuestions.findIndex(question => {
           return question.question_id === questionId;
@@ -252,6 +330,25 @@ class QuestionsAnswers extends React.Component {
           allQuestions: allQuestions,
           renderedQuestions: renderedQuestions
         });
+
+        if (renderSearch) {
+          let questionIndexSearch = searchedQuestions.findIndex(question => {
+            return question.question_id === questionId;
+          });
+
+          let answerIndexSearch = searchedQuestions[questionIndexSearch].answers.findIndex(answer => {
+            return answer.id === answerId;
+          });
+
+          searchedQuestions[questionIndexSearch].answers[answerIndexSearch].reported = true;
+          renderedSearch[questionIndexSearch].answers[answerIndexSearch].reported = true;
+
+          this.setState({
+            searchedQuestions: searchedQuestions,
+            renderedSearch: renderedSearch
+          });
+        }
+
       },
       dataType: 'json'
     });
@@ -275,8 +372,6 @@ class QuestionsAnswers extends React.Component {
 
     searchedQuestions = searchQuestions(query);
     toRender = JSON.parse(JSON.stringify(searchedQuestions));
-
-    // add search to show moreAnswers/Questions
 
     this.setState({
       searchedQuestions: searchedQuestions,
