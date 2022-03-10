@@ -14,10 +14,10 @@ class RatingsReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      dataReady: false,
+      reviewReady: false,
       reviews: [],
       meta: {},
-      id: props.id,
+      id: 0,
       sort: 'newest',
       count: 0,
       review_id: 0,
@@ -32,12 +32,31 @@ class RatingsReviews extends React.Component {
   }
 
   componentDidMount() {
-    this.getReviewsByIDHandler(this.state.id);
-    try {
-      this.getReviewsMetaHandler(this.state.id);
-    } catch (error) {
-      // console.log('meta error in RatingsReviews is: ', error);
-    }
+    this.setState({
+      id: this.props.id
+    });
+    var id = this.props.id;
+    const ajaxPromise = new Promise((resolve, reject) => {
+      this.getReviewsByIDHandler(id);
+      this.getReviewsMetaHandler(id);
+      resolve('foo');
+      reject('bar');
+    });
+
+    ajaxPromise.then((data) => {
+      this.setState({
+        reviewReady: true,
+      });
+    })
+    .catch((error) => {
+      console.log('ajax Promise error in ReviewsRatings.jsx is: ', error);
+    })
+
+
+    // try {
+    //   this.getReviewsMetaHandler(this.state.id);
+    // } catch (error) {
+    // }
   }
 
   getReviewsByIDHandler(id) {
@@ -87,7 +106,7 @@ class RatingsReviews extends React.Component {
           meta_ratings: data.ratings,
           meta_recommended: data.recommended,
           meta_characteristics: data.characteristics,
-          dataReady: true
+          // reviewReady: true
           // count: data.count
         });
       },
@@ -147,8 +166,13 @@ class RatingsReviews extends React.Component {
       context: this,
       type: "PUT",
       url: url,
+      statusCode: {
+        204: function() {
+          console.log('client ajax mark review helpful success code 204!');
+        }
+      },
       success: (data) => {
-        // console.log('PUT review ajax success!');
+        console.log('Review was found helpful ajax success!');
         // this.setState({
         //   meta: data
         // });
@@ -165,6 +189,7 @@ class RatingsReviews extends React.Component {
   render() {
     // console.log('this.state.reviews: ', this.state.reviews);
     // console.log('this.state.meta is: ', this.state.meta);
+    var reviewReady = this.state.reviewReady;
     var list = this.state.reviews;
     var count = this.state.count;
     var sort = this.state.sort;
@@ -173,15 +198,15 @@ class RatingsReviews extends React.Component {
     var meta_ratings = this.state.meta_ratings;
     // console.log('this.state.meta_characteristics is: ', this.state.meta_characteristics);
 
-    if (!this.state.dataReady) {
+    if (!reviewReady) {
       return (
         <div>
           Loading Ratings and Reviews...
         </div>
       )
     }
-    if (this.state.dataReady) {
-      // console.log('meta_characteristics is: ', meta_characteristics);
+    if (reviewReady) {
+      console.log('meta_characteristics.size is: ', meta_characteristics.size);
       return (
         <div className="ratings-reviews" id="flex-container">
           <div className="rating-breakdown">
@@ -193,7 +218,7 @@ class RatingsReviews extends React.Component {
           </div>
           <div className="review-breakdown">
             <h3 className="review-header">{count} reviews, sorted by <div className="sort">{sort} &#9660;</div></h3>
-            <ReviewList reviews={list} />
+            <ReviewList reviews={list} onMarkedHelpful={this.putHelpfulHandler}/>
             {/* <Dashboard /> */}
           </div>
         </div>

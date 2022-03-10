@@ -180,12 +180,20 @@
     justify-content: flex-end;
   }
 
-  .helpful-marked, .helpful-unmarked {
+  .helpful-unmarked {
     text-decoration: underline;
+    color: blue;
+    margin-left: 5px;
   }
 
-  .report {
+  .helpful-marked {
     text-decoration: underline;
+    margin-left: 5px;
+  }
+
+  .report-unmarked {
+    text-decoration: underline;
+    color: blue;
   }
 
   .buttons {
@@ -208,6 +216,8 @@
   .helpful {
     margin-bottom: 15px;
     font-size: 12px;
+    margin-right: 10px;
+    padding-right: 5px;
   }
 
   .more-reviews-btn, .add-review, .submit, .close, .upload {
@@ -328,4 +338,11 @@
     margin-bottom: 10px;
   }
 
-
+  .submit-btn {
+    display: block;
+    width: fit-content;
+    padding: 8px 16px;
+    text-align: center;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }

@@ -12,6 +12,7 @@ class SizeSlider extends React.Component {
 	render() {
 		var size = this.props.size.Fit.value;
 		var percentSize = Math.round((size / 5) * 100);
+
 		return (
 			<div className="size-slider" id="size-slider">
 				<p>Size</p>

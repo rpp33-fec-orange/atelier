@@ -35,11 +35,17 @@ class ReviewItem extends React.Component {
 	}
 
 	markReviewHelpful() {
-
+		var helpfulness = this.state.helpfulness + 1;
+		this.setState({
+			helpfulness: helpfulness,
+			markedHelpful: true
+		}, this.props.onMarkedHelpful);
 	}
 
 	reportReview() {
-
+		this.setState({
+			reported: true
+		});
 	}
 
 	componentDidMount() {
@@ -72,17 +78,17 @@ class ReviewItem extends React.Component {
 								?
 								<span className="helpful-unmarked" onClick={this.markReviewHelpful}>Yes</span>
 								:
-								<span className="helpful-marked">Yes</span>
+								<span className="helpful-marked">   Yes   </span>
 						}
 						{
-							`${this.state.helpfulness}   |   `
+							`(${this.state.helpfulness})   |   `
 						}
 						{
 							!this.state.reported
-							?
-							<span className="report-unmarked" onClick={this.reportReview}>Report</span>
-							:
-							<span className="report-marked">Report</span>
+								?
+								<span className="report-unmarked" onClick={this.reportReview}>   Report   </span>
+								:
+								<span className="report-marked">Reported</span>
 						}
 					</div>
 					{this.state.review.recommend &&
@@ -91,15 +97,19 @@ class ReviewItem extends React.Component {
 						</div>
 					}
 					<div className="productPhoto">
-						<sub>Product Photo: </sub>
+						<sub>Product Photos: </sub>
 						{this.state.photos.length > 0
 							? <div>
-								{this.state.review.photos}
+								{
+									this.state.review.photos.map((photo) =>
+										<img src={photo.url} key={photo.id}></img>
+									)
+								}
 							</div>
 							: <div>
-								<br/>
+								<br />
 								{/* <img src='https://i.vimeocdn.com/portrait/1274237_300x300.jpg' /> */}
-								<button>Submit Photos</button>
+								<button className="submit-btn">Submit Photos</button>
 							</div>
 						}
 					</div>

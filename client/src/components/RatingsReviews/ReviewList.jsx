@@ -32,7 +32,7 @@ class ReviewList extends React.Component {
 		// console.log('props.reviews in Reviewlist: ', this.props.reviews);
 		var reviews = this.state.holdingReviews;
 		var renderedReviews = reviews.map((review) =>
-			<ReviewItem key={review.review_id.toString()} review={review} />
+			<ReviewItem key={review.review_id.toString()} review={review} onMarkedHelpful={this.props.onMarkedHelpful} />
 		);
 		this.setState({
 			renderedReviews: renderedReviews

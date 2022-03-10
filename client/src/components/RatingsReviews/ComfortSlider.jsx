@@ -5,24 +5,34 @@ class ComfortSlider extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			comfort: props.comfort,
+			comfort: 0,
+			percentComfort: 0
 		}
 	}
+
+	// componentDidMount() {
+	// 	var comfort = this.props.comfort.Comfort.value;
+	// 	var percentComfort = Math.round((comfort / 5) * 100);
+	// 	this.setState({
+	// 		comfort: comfort,
+	// 		percentComfort: percentComfort
+	// 	})
+	// }
 
 	render() {
 		// var comfort = this.props.comfort;
 		// if (this.state.hasError) {
 		// 	return <h1>Something went wrong.</h1>
 		// }
-		if (!this.state.comfort) {
+		var comfort = this.props.comfort.Comfort.value;
+		var percentComfort = Math.round((comfort / 5) * 100);
+		if (!comfort) {
 			return (
 				<div>
 					Loading.....
 				</div>
 			)
 		} else {
-			var comfort = this.props.comfort.Comfort.value;
-			var percentComfort = Math.round((comfort / 5) * 100);
 			return (
 				<div className="comfort-slider" id="comfort-slider">
 					<p>Comfort</p>

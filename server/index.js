@@ -218,13 +218,14 @@ app.post('/reviews', function (req, res) {
 });
 
 app.put('/reviews/:review_id/helpful', function (req, res) {
-  putReview(req.body.review_id)
+  var id = req.params.review_id;
+  putReview(id)
     .then((success) => {
-      // console.log('getting reviews meta success! data is: ', success.data);
+      console.log('server putReview Review was found helpful success!');
       res.status(204).send(success.data);
     })
     .catch((error) => {
-      console.log('error getting reviews!');
+      console.log('server putReview Review was found helpful error!');
       res.status(500).send(error);
     })
 });
