@@ -24,7 +24,10 @@ class RatingsReviews extends React.Component {
       review_id: 0,
       meta_ratings: {},
       meta_recommended: {},
-      meta_characteristics: {}
+      meta_characteristics: {},
+      newestReviews: [],
+      helpfulReviews: [],
+      relevantReviews: []
     }
     this.getReviewsByIDHandler = this.getReviewsByIDHandler.bind(this);
     this.getReviewsMetaHandler = this.getReviewsMetaHandler.bind(this);
@@ -53,7 +56,7 @@ class RatingsReviews extends React.Component {
     //   console.log('ajax Promise error in ReviewsRatings.jsx is: ', error);
     // })
     var id = this.props.id;
-    this.getReviewsByIDHandler(id);
+    this.getReviewsByIDHandler(id, this.state.sort);
     this.getReviewsMetaHandler(id);
 
     // try {
@@ -62,10 +65,10 @@ class RatingsReviews extends React.Component {
     // }
   }
 
-  getReviewsByIDHandler(id) {
+  getReviewsByIDHandler(id, sort) {
     // var url = `/reviews/${this.state.id}`;
     // product_id=64620
-    var sort = this.state.sort;
+    // var sort = this.state.sort;
     var id = this.props.id;
     var url = `/reviews/?sort=${sort}&product_id=${id}`;
     // console.log('review product id is: ', this.state.id);
@@ -162,7 +165,7 @@ class RatingsReviews extends React.Component {
     // var url = `/reviews/${this.state.id}`;
     // product_id=64620
     // var sort = this.state.sort;
-    var review_id = this.state.review_id;
+    var review_id = this.props.review_id;
     var url = `/reviews/${review_id}/helpful`;
     // console.log('review product id in getReviewsMetaHandler is: ', this.state.id);
     // var url = `/reviews/${this.state.id}`;
@@ -182,7 +185,7 @@ class RatingsReviews extends React.Component {
         // });
       },
       error: (error) => {
-        // console.log('error from PUT review request: ', error);
+        console.log('Helpful ajax error from PUT review request: ', error);
       }
     })
       .done(function () {

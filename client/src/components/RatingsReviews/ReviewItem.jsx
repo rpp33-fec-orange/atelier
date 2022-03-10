@@ -60,7 +60,7 @@ class ReviewItem extends React.Component {
 
 
 	render() {
-		console.log('this is this.state.review: ', this.state.review);
+		// console.log('this is this.state.review: ', this.state.review);
 		return (
 			<div className="wrapper">
 				<div className="one" id="review-list">
