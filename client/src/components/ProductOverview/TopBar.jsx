@@ -29,7 +29,8 @@ class TopBar extends React.Component {
       <div class="topbar-container" id="TopBar">
         <div class="topbar-item topbar-item-1" data-testid="logo" id="logo">Atelier</div>
         <div class="topbar-item topbar-item-2">
-          <BsSearch id="search-button" onClick={this.clickHandler} />
+          <input id="search-box" placeholder="keyword"></input><button id="search-button" onClick={this.clickHandler}>Search</button>
+          {/* <BsSearch id="search-button" onClick={this.clickHandler} /> */}
         </div>
       </div >
     )
