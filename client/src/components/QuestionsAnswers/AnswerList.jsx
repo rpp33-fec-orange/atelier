@@ -10,6 +10,7 @@ class AnswerList extends React.Component {
     this.markAnswerHelpful = this.markAnswerHelpful.bind(this);
     this.renderAnswerItem = this.renderAnswerItem.bind(this);
     this.loadMoreAnswers = this.loadMoreAnswers.bind(this);
+    this.collapseAnswers = this.collapseAnswers.bind(this);
   }
 
   reportAnswer(id) {
@@ -23,6 +24,11 @@ class AnswerList extends React.Component {
   loadMoreAnswers() {
     let id = this.props.questionId;
     this.props.loadMore(id);
+  }
+
+  collapseAnswers() {
+    let id = this.props.questionId;
+    this.props.collapse(id);
   }
 
   renderAnswerItem(answer) {
@@ -74,16 +80,33 @@ class AnswerList extends React.Component {
   render() {
     let answers = this.props.answers;
     let answerItems = answers.map(this.renderAnswerItem);
+    let canCollapseAnswers = false;
+
+    if (!answers.canShowMore && answers.length > 0) {
+      canCollapseAnswers = true;
+    }
+
     return (
       <div className="answers-container">
         <div className="answerFlag" style={{ display: 'inline-block'}}>{'A:'}</div>
         <div className="answerList" style={{ display: 'inline-block'}}>
-          {answerItems}
+          {
+            answers.length > 0
+            &&
+            answerItems
+          }
           {
             answers.canShowMore
             &&
-            <span className="loadMore" onClick={this.loadMoreAnswers}>
+            <span className="loadMoreAnswers" onClick={this.loadMoreAnswers}>
               LOAD MORE ANSWERS
+            </span>
+          }
+          {
+            canCollapseAnswers
+            &&
+            <span className="collapseAnswers" onClick={this.collapseAnswers}>
+              COLLAPSE ANSWERS
             </span>
           }
         </div>

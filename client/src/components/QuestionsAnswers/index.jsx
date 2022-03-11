@@ -14,7 +14,7 @@ class QuestionsAnswers extends React.Component {
       productId: id,
       initialized: false,
       productName: productName,
-      showMoreQuestions: true,
+      showMoreQuestions: false,
       allQuestions: [],
       renderedQuestions: [],
       searchedQuestions: [],
@@ -25,6 +25,7 @@ class QuestionsAnswers extends React.Component {
     this.initialRender =  this.initialRender.bind(this);
     this.getMoreQuestions = this.getMoreQuestions.bind(this);
     this.getMoreAnswers = this.getMoreAnswers.bind(this);
+    this.collapseAnswers = this.collapseAnswers.bind(this);
     this.submitQuestion = this.submitQuestion.bind(this);
     this.submitAnswer = this.submitAnswer.bind(this);
     this.reportQuestion = this.reportQuestion.bind(this);
@@ -46,9 +47,11 @@ class QuestionsAnswers extends React.Component {
       url: `qa/questions/${this.state.productId}`,
       success: (data) => {
         let fullSet = JSON.parse(JSON.stringify(data));
+        let canShowMore = fullSet.length > 2;
 
         this.setState({
           allQuestions: fullSet,
+          showMoreQuestions: canShowMore,
           renderedQuestions: this.initialRender(data),
           initialized: true
         });
@@ -62,11 +65,11 @@ class QuestionsAnswers extends React.Component {
       data.length = 2;
       data.map(question => {
         if (question.answers.length > 2) {
+          question.answers.length = 2;
           question.answers['canShowMore'] = true;
         } else if (question.answers.length <= 2) {
           question.answers['canShowMore'] = false;
         }
-        question.answers.length = 2;
       });
     }
     return data;
@@ -118,26 +121,82 @@ class QuestionsAnswers extends React.Component {
   }
 
   getMoreAnswers(questionId) {
-    let { renderedQuestions, allQuestions } = this.state;
+    if (!this.state.renderSearch) {
 
-    let questionObj = allQuestions.find(question => question.question_id === questionId );
-    let renderedQuestionIndex = renderedQuestions.findIndex(question => question.question_id === questionId );
-    let renderedAnswers = renderedQuestions[renderedQuestionIndex].answers;
+      let { renderedQuestions, allQuestions } = this.state;
 
-    let grabbedAnswers = questionObj.answers.slice(renderedAnswers.length, renderedAnswers.length + 2);
+      let questionObj = allQuestions.find(question => question.question_id === questionId );
+      let renderedQuestionIndex = renderedQuestions.findIndex(question => question.question_id === questionId );
 
-    renderedQuestions[renderedQuestionIndex].answers = [...renderedAnswers, ...grabbedAnswers];
+      renderedQuestions[renderedQuestionIndex].answers = JSON.parse(JSON.stringify(questionObj.answers));
 
-    if (questionObj.answers.length > renderedQuestions[renderedQuestionIndex].answers.length) {
-      renderedQuestions[renderedQuestionIndex].answers['canShowMore'] = true;
-    } else if (questionObj.answers.length === renderedQuestions[renderedQuestionIndex].answers.length) {
-      renderedQuestions[renderedQuestionIndex].answers['canShowMore'] = false;
+      if (questionObj.answers.length === renderedQuestions[renderedQuestionIndex].answers.length) {
+        renderedQuestions[renderedQuestionIndex].answers['canShowMore'] = false;
+      }
+
+      this.setState({
+        renderedQuestions: renderedQuestions
+      });
+
+    } else {
+
+      let { renderedSearch, searchedQuestions } = this.state;
+
+      let questionObj = searchedQuestions.find(question => question.question_id === questionId );
+      let renderedQuestionIndex = renderedSearch.findIndex(question => question.question_id === questionId );
+
+      renderedSearch[renderedQuestionIndex].answers = JSON.parse(JSON.stringify(questionObj.answers));
+
+      if (questionObj.answers.length === renderedSearch[renderedQuestionIndex].answers.length) {
+        renderedSearch[renderedQuestionIndex].answers['canShowMore'] = false;
+      }
+
+      this.setState({
+        renderedSearch: renderedSearch
+      });
+
     }
 
-    this.setState({
-      renderedQuestions: renderedQuestions
-    });
+  }
 
+  collapseAnswers(questionId) {
+    if (!this.state.renderSearch) {
+
+      let { renderedQuestions, allQuestions } = this.state;
+
+      let questionObj = allQuestions.find(question => question.question_id === questionId );
+      let renderedQuestionIndex = renderedQuestions.findIndex(question => question.question_id === questionId );
+
+      if (questionObj.answers.length > 2) {
+        renderedQuestions[renderedQuestionIndex].answers.length = 2;
+        renderedQuestions[renderedQuestionIndex].answers['canShowMore'] = true;
+      } else {
+        renderedQuestions[renderedQuestionIndex].answers['canShowMore'] = false;
+      }
+
+      this.setState({
+        renderedQuestions: renderedQuestions
+      });
+
+    } else {
+
+      let { renderedSearch, searchedQuestions } = this.state;
+
+      let questionObj = searchedQuestions.find(question => question.question_id === questionId );
+      let renderedQuestionIndex = renderedSearch.findIndex(question => question.question_id === questionId );
+
+      if (questionObj.answers.length > 2) {
+        renderedSearch[renderedQuestionIndex].answers.length = 2;
+        renderedSearch[renderedQuestionIndex].answers['canShowMore'] = true;
+      } else {
+        renderedSearch[renderedQuestionIndex].answers['canShowMore'] = true;
+      }
+
+      this.setState({
+        renderedSearch: renderedSearch
+      });
+
+    }
   }
 
   submitQuestion(formDetails) {
@@ -422,6 +481,7 @@ class QuestionsAnswers extends React.Component {
                   <QuestionItem
                     question={questionObject}
                     loadMore={this.getMoreAnswers}
+                    collapse={this.collapseAnswers}
                     helpfulQuestion={this.markQuestionHelpful}
                     helpfulAnswer={this.markAnswerHelpful}
                     reportQuestion={this.reportQuestion}

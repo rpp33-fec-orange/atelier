@@ -54,13 +54,20 @@ class QuestionItem extends React.Component {
           <span className="questionText">
             Q: {question.question_body}
           </span>
-          <AnswerList
-            answers={question.answers}
-            questionId={question.question_id}
-            loadMore={this.props.loadMore}
-            markAnswerHelpful={this.markAnswerHelpful}
-            reportAnswer={this.reportAnswer}
-          />
+          {
+            question.answers.length > 0
+            ?
+            <AnswerList
+              answers={question.answers}
+              questionId={question.question_id}
+              loadMore={this.props.loadMore}
+              collapse={this.props.collapse}
+              markAnswerHelpful={this.markAnswerHelpful}
+              reportAnswer={this.reportAnswer}
+            />
+            :
+            <span className="questionDetails">{`by ${question.asker_name}, ${question.question_date}`}</span>
+          }
         </div>
         <div className="questionAction" style={{display: 'inline-block'}}>
           <span className="questionHelpfulness">
