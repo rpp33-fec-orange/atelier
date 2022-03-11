@@ -104,7 +104,7 @@ class ProductOverview extends React.Component {
             <Styles data-testid="styles?" productById={this.state.productById} productStylesById={this.state.productStylesById} rating={this.props.rating} currentStyleHandler={this.props.currentStyleHandler} yourOutfitHandleClick={this.props.yourOutfitHandleClick} />
           </div>
           <div class="index-item index-item-2">
-            {/* <Info data-testid="descriptions?" productById={this.state.productById} /> */}
+            <Info data-testid="descriptions?" productById={this.state.productById} />
           </div>
         </div>
       )
