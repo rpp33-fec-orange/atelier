@@ -9,18 +9,11 @@ class QuestionAddons extends React.Component {
       showModal: false
     };
     this.getMoreQuestions = this.getMoreQuestions.bind(this);
-    this.addQuestion = this.addQuestion.bind(this);
     this.handleModal = this.handleModal.bind(this);
   }
 
   getMoreQuestions() {
     this.props.loadMore();
-  }
-
-  addQuestion() {
-    // create form element
-    // invoke modal
-    // handle question entry in form element
   }
 
   handleModal(e) {
@@ -57,6 +50,7 @@ class QuestionAddons extends React.Component {
           prompt={this.props.prompt}
           toggleModal={this.handleModal}
           showModal={this.state.showModal}
+          addQuestion={this.props.addQuestion}
         />
       </div>
     );

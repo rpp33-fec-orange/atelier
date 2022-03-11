@@ -2,7 +2,7 @@ const express = require('express');
 const { getProducts, getProductById, getProductStylesById } = require('./helpers/products.js');
 const { addToCart, getCart } = require('./helpers/cart.js');
 const { getRelatedStylesById, getRelatedProductsById, getRelatedProductsReviewMeta} = require('./helpers/relatedItems.js');
-const { getQuestionsByProductId, markQuestionHelpful, markAnswerHelpful, reportQuestion, reportAnswer } = require('./helpers/questions.js');
+const { getQuestionsByProductId, submitQuestion, submitAnswer, markQuestionHelpful, markAnswerHelpful, reportQuestion, reportAnswer } = require('./helpers/questions.js');
 // const getReviewsByID = require('./helpers/reviews.js').getReviewsByID;
 const { getReviewsByID, getReviewsMeta, postReview, putReview } = require('./helpers/reviews.js');
 
@@ -79,6 +79,35 @@ app.put('/qa/answers/:answer_id/helpful', (req, res) => {
   markAnswerHelpful(id)
     .then(() => {
       res.status(204).end();
+    })
+    .catch(() => {
+      res.status(400).end();
+    });
+});
+
+app.post('/qa/questions', (req, res) => {
+  let questionFormDetails = req.body;
+
+  // product_id type changes between client and server. refactor client to use axios?
+  questionFormDetails.product_id = parseInt(questionFormDetails.product_id);
+  // console.log(`in server the product_id is: ${typeof questionFormDetails.product_id}`);
+
+  submitQuestion(questionFormDetails)
+    .then(() => {
+      res.status(201).end();
+    })
+    .catch(() => {
+      res.status(400).end();
+    });
+});
+
+app.post('/qa/questions/:question_id/answers', (req, res) => {
+  let question_id = req.params.question_id;
+  let answerFormDetails = req.body;
+
+  submitAnswer(question_id, answerFormDetails)
+    .then(() => {
+      res.status(201).end();
     })
     .catch(() => {
       res.status(400).end();

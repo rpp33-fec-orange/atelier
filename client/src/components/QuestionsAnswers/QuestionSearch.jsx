@@ -38,6 +38,7 @@ class QuestionSearch extends React.Component {
           <input
             type="search"
             name="query"
+            size="100"
             value={this.state.query}
             onChange={this.handleChange}
             placeholder="Have a question? Search for answers...">
