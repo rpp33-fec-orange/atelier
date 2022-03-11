@@ -19,7 +19,7 @@ class RatingsReviews extends React.Component {
       reviews: [],
       meta: {},
       id: 0,
-      sort: 'newest',
+      sort: '',
       count: 0,
       review_id: 0,
       meta_ratings: {},
@@ -33,36 +33,31 @@ class RatingsReviews extends React.Component {
     this.getReviewsMetaHandler = this.getReviewsMetaHandler.bind(this);
     this.postReviewHandler = this.postReviewHandler.bind(this);
     this.putHelpfulHandler = this.putHelpfulHandler.bind(this);
+    this.sortReviews = this.sortReviews.bind(this);
   }
 
   componentDidMount() {
-    // this.setState({
-    //   id: this.props.id
-    // });
-    // var id = this.props.id;
-    // const ajaxPromise = new Promise((resolve, reject) => {
-    //   this.getReviewsByIDHandler(id);
-    //   this.getReviewsMetaHandler(id);
-    //   resolve('foo');
-    //   reject('bar');
-    // });
-
-    // ajaxPromise.then((data) => {
-    //   this.setState({
-    //     reviewReady: true,
-    //   });
-    // })
-    // .catch((error) => {
-    //   console.log('ajax Promise error in ReviewsRatings.jsx is: ', error);
-    // })
     var id = this.props.id;
-    this.getReviewsByIDHandler(id, this.state.sort);
+    this.setState({
+      id: id
+    });
+    this.getReviewsByIDHandler(id, 'newest');
+    this.getReviewsByIDHandler(id, 'helpful');
+    this.getReviewsByIDHandler(id, 'relevant');
     this.getReviewsMetaHandler(id);
+  }
 
-    // try {
-    //   this.getReviewsMetaHandler(this.state.id);
-    // } catch (error) {
-    // }
+  componentDidUpdate(prevProps) {
+    if (this.props.id !== prevProps.id) {
+      var id = this.props.id;
+      this.setState({
+        id: id
+      });
+      this.getReviewsByIDHandler(id, 'newest');
+      this.getReviewsByIDHandler(id, 'helpful');
+      this.getReviewsByIDHandler(id, 'relevant');
+      this.getReviewsMetaHandler(id);
+    }
   }
 
   setSort(sort) {
@@ -75,8 +70,10 @@ class RatingsReviews extends React.Component {
     // var url = `/reviews/${this.state.id}`;
     // product_id=64620
     // var sort = this.state.sort;
+    var count = 10;
     var id = this.props.id;
-    var url = `/reviews/?sort=${sort}&product_id=${id}`;
+    var url = `/reviews/?sort=${sort}&count=${count}&product_id=${id}`;
+    console.log('ajax url is: ', url);
     // console.log('review product id is: ', this.state.id);
     // var url = `/reviews/${this.state.id}`;
     $.ajax({
@@ -85,12 +82,35 @@ class RatingsReviews extends React.Component {
       url: url,
       success: (data) => {
         console.log('review ajax success! data.results is: ', data.results);
-        this.setState({
-          reviews: data.results,
-          count: data.count,
-          reviewReady: true,
-          review_id: data.results.review_id
-        });
+        if (sort === 'newest') {
+          this.setState({
+            // reviews: data.results,
+            count: data.count,
+            reviewReady: true,
+            newestReviews: data.results
+          });
+        } else if (sort === 'helpful') {
+          this.setState({
+            // reviews: data.results,
+            count: data.count,
+            reviewReady: true,
+            helpfulReviews: data.results
+          });
+        } else if (sort === 'relevant') {
+          this.setState({
+            reviews: data.results,
+            count: data.count,
+            reviewReady: true,
+            relevantReviews: data.results
+          });
+        }
+        //  else {
+        //   this.setState({
+        //     reviews: data.results,
+        //     count: data.count,
+        //     reviewReady: true,
+        //   });
+        // }
       },
       error: (error) => {
         // console.log('error from get reviews request: ', error);
@@ -218,20 +238,45 @@ class RatingsReviews extends React.Component {
       });
   }
 
+  sortReviews(e) {
+    // var select = document.getElementById('dropdown-sort');
+    // var value = select.options[select.selectIndex].value;
+    // console.log('dropdown-sort is: ', value);
+    var sortValue = e.target.value;
+    console.log('this is sortValue: ', sortValue);
+    this.setState({
+      sort: sortValue
+    });
+  }
+
   render() {
     // console.log('this.state.reviews: ', this.state.reviews);
     // console.log('this.state.meta is: ', this.state.meta);
     var reviewReady = this.state.reviewReady;
     var metaReady = this.state.metaReady;
-    var list = this.state.reviews;
-    var count = this.state.count;
+    // var list = this.state.reviews;
     var sort = this.state.sort;
+    var list = [];
+    if (sort === 'newest') {
+      list = this.state.newestReviews;
+    } else if (sort === 'helpful') {
+      list = this.state.newestReviews;
+    } else if (sort === 'relevant') {
+      list = this.state.relevantReviews;
+    } else {
+      list = this.state.newestReviews;
+    }
+    var count = this.state.count;
     var meta_characteristics = this.state.meta_characteristics;
     var meta_recommended = this.state.meta_recommended;
     var meta_ratings = this.state.meta_ratings;
     console.log('meta_characteristics is: ', meta_characteristics);
     console.log('reviewReady is: ', reviewReady);
     console.log('metaReady is: ', metaReady);
+    console.log('this.state.newestReviews: ', this.state.newestReviews);
+    console.log('this.state.helpfulReviews: ', this.state.helpfulReviews);
+    console.log('this.state.relevantReviews: ', this.state.relevantReviews);
+    console.log('list becomes ', list);
 
 
     if (!(reviewReady && metaReady)) {
@@ -253,11 +298,11 @@ class RatingsReviews extends React.Component {
           </div>
           <div className="review-breakdown">
             <div className="review-header">{count} reviews, sorted by
-            <select class="dropdown-sort">
-              <option>newest</option>
-              <option>helpful</option>
-              <option>relevant</option>
-            </select>
+              <select className="dropdown-sort" id="dropdown-sort" onChange={this.sortReviews} >
+                <option value="newest">newest</option>
+                <option value="helpful">helpful</option>
+                <option value="relevant">relevant</option>
+              </select>
             </div>
             <ReviewList reviews={list} onMarkedHelpful={this.putHelpfulHandler} onMarkedReported={this.putReportedHandler} />
             {/* <Dashboard /> */}

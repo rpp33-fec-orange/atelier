@@ -60,6 +60,17 @@ class ReviewItem extends React.Component {
 		});
 	}
 
+	componentDidUpdate(prevProps) {
+		if (this.props.review !== prevProps.review) {
+			this.setState({
+				review: this.props.review,
+				ratingReview: this.props.review.rating,
+				helpfulness: this.props.review.helpfulness,
+				reviewID: this.props.review.review_id,
+				photos: this.props.review.photos
+			});
+		}
+	}
 
 	render() {
 		// console.log('this is this.state.review: ', this.state.review);
