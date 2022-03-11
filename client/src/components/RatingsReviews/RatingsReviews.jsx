@@ -169,15 +169,9 @@ class RatingsReviews extends React.Component {
   }
 
   putHelpfulHandler(id) {
-    // var url = `/reviews/${this.state.id}`;
-    // product_id=64620
-    // var sort = this.state.sort;
-    // var review_id = this.state.review_id;
     var review_id = id;
     console.log('review_id inside RatingsReviews.jsx: ', review_id);
     var url = `/reviews/${review_id}/helpful`;
-    // console.log('review product id in getReviewsMetaHandler is: ', this.state.id);
-    // var url = `/reviews/${this.state.id}`;
     $.ajax({
       context: this,
       type: "PUT",
@@ -189,12 +183,34 @@ class RatingsReviews extends React.Component {
       },
       success: (data) => {
         console.log('Review was found helpful ajax success!');
-        // this.setState({
-        //   meta: data
-        // });
       },
       error: (error) => {
         console.log('Helpful ajax error from PUT review request: ', error);
+      }
+    })
+      .done(function () {
+        // console.log('PUT reviews request is done');
+      });
+  }
+
+  putReportedHandler(id) {
+    var review_id = id;
+    console.log('review_id inside putReportedHandler: ', review_id);
+    var url = `/reviews/${review_id}/report`;
+    $.ajax({
+      context: this,
+      type: "PUT",
+      url: url,
+      statusCode: {
+        204: function () {
+          console.log('client ajax mark review reported success code 204!');
+        }
+      },
+      success: (data) => {
+        console.log('Review was reported ajax success!');
+      },
+      error: (error) => {
+        console.log('Reported Review ajax error from PUT review request: ', error);
       }
     })
       .done(function () {
@@ -243,7 +259,7 @@ class RatingsReviews extends React.Component {
               <option>relevant</option>
             </select>
             </div>
-            <ReviewList reviews={list} onMarkedHelpful={this.putHelpfulHandler} />
+            <ReviewList reviews={list} onMarkedHelpful={this.putHelpfulHandler} onMarkedReported={this.putReportedHandler} />
             {/* <Dashboard /> */}
           </div>
         </div>

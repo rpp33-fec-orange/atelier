@@ -44,9 +44,10 @@ class ReviewItem extends React.Component {
 	}
 
 	reportReview() {
+		var reviewID = this.state.reviewID;
 		this.setState({
 			reported: true
-		});
+		}, this.props.onMarkedReported(reviewID));
 	}
 
 	componentDidMount() {
@@ -98,12 +99,12 @@ class ReviewItem extends React.Component {
 						</div>
 					}
 					<div className="productPhoto">
-						<sub>Product Photos: </sub>
+						<sub>Review Photos: </sub>
 						{this.state.photos.length > 0
-							? <div>
+							? <div className="review-photo-container">
 								{
 									this.state.review.photos.map((photo) =>
-										<img src={photo.url} key={photo.id}></img>
+										<img className="review-photo" src={photo.url} key={photo.id}></img>
 									)
 								}
 							</div>

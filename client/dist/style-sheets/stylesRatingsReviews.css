@@ -353,4 +353,11 @@
     margin-bottom: 10px;
   }
 
+  .review-photo {
+    max-width: 90px;
+    max-height: 60px;
+  }
 
+  .review-photo-container {
+    padding: 5px;
+  }
