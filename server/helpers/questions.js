@@ -65,6 +65,40 @@ const getQuestionsByProductId = (id) => {
     });
 };
 
+const submitQuestion = (formDetails) => {
+
+  // console.log(`in helper product_id type: ${typeof formDetails.product_id}.`);
+
+  return axios({
+    method: 'post',
+    url: `${options.baseUrl}/qa/questions`,
+    data: formDetails,
+    contentType: 'application/json',
+    responseType: 'json',
+    headers: options.auth,
+    validateStatus: (status) => {
+      return status === 201;
+    }
+  })
+    .catch(err => {
+      console.log(`the error is ${err.response.data}`);
+    });
+};
+
+const submitAnswer = (question_id, formDetails) => {
+
+  return axios({
+    method: 'post',
+    url: `${options.baseUrl}/qa/questions/${question_id}/answers`,
+    data: formDetails,
+    responseType: 'json',
+    headers: options.auth,
+    validateStatus: (status) => {
+      return status === 201;
+    }
+  });
+};
+
 const markQuestionHelpful = (question_id) => {
 
   return axios({
@@ -121,6 +155,8 @@ const reportAnswer = (answer_id) => {
 
 module.exports = {
   getQuestionsByProductId,
+  submitQuestion,
+  submitAnswer,
   markQuestionHelpful,
   markAnswerHelpful,
   reportQuestion,
