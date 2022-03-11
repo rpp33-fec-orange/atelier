@@ -110,20 +110,22 @@ class ReviewItem extends React.Component {
 						</div>
 					}
 					<div className="productPhoto">
-						<sub>Review Photos: </sub>
 						{this.state.photos.length > 0
 							? <div className="review-photo-container">
+								<sub>Review Photos: </sub>
+								<br></br><br></br>
 								{
 									this.state.review.photos.map((photo) =>
 										<img className="review-photo" src={photo.url} key={photo.id}></img>
 									)
 								}
 							</div>
-							: <div>
-								<br />
-								{/* <img src='https://i.vimeocdn.com/portrait/1274237_300x300.jpg' /> */}
-								<button className="submit-btn">Submit Photos</button>
-							</div>
+							:
+							<div></div>
+							//  <div>
+							// 	<br />
+							// 	<button className="submit-btn">Submit Photos</button>
+							// </div>
 						}
 					</div>
 					<hr></hr>
