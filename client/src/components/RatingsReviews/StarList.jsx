@@ -20,7 +20,6 @@ class StarList extends React.Component {
 	}
 
 	componentDidMount() {
-		console.log('this is ratings: ', this.props.ratings);
 		var one = (this.props.ratings[1] === undefined) ? 0 : this.props.ratings[1];
 		var two = (this.props.ratings[2] === undefined) ? 0 : this.props.ratings[2];
 		var three = (this.props.ratings[3] === undefined) ? 0 : this.props.ratings[3];
@@ -43,7 +42,6 @@ class StarList extends React.Component {
 		var four = parseInt(this.state.four);
 		var five = parseInt(this.state.five);
 		var sum = one + two + three + four + five;
-		console.log('sum in calPercentWidth is: ', sum);
 		var percentOne = Math.round((one / sum) * 100);
 		var percentTwo = Math.round((two / sum) * 100);
 		var percentThree = Math.round((three / sum) * 100);
@@ -59,16 +57,6 @@ class StarList extends React.Component {
 	}
 
 	render() {
-		console.log('1 is: ', this.state.one);
-		console.log('2 is: ', this.state.two);
-		console.log('3 is: ', this.state.three);
-		console.log('4 is: ', this.state.four);
-		console.log('5 is: ', this.state.five);
-		console.log('percentOne is: ', this.state.percentOne);
-		console.log('percentTwo is: ', this.state.percentTwo);
-		console.log('percentThree is: ', this.state.percentThree);
-		console.log('percentFour is: ', this.state.percentFour);
-		console.log('percentFive is: ', this.state.percentFive);
 
 		return (
 			<div className="star-list" id="star-list">
@@ -122,10 +110,8 @@ class StarList extends React.Component {
 					</tbody>
 				</table>
 			</div>
-
 		);
 	}
-
 }
 
 export default StarList;

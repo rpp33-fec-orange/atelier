@@ -15,30 +15,24 @@ class ReviewList extends React.Component {
 		}
 		this.mappingReviews = this.mappingReviews.bind(this);
 		this.handleShowMoreReviews = this.handleShowMoreReviews.bind(this);
-		// this.handleShowInitialReviews = this.handleShowInitialReviews.bind(this);
 		this.slicedReviewList = this.slicedReviewList.bind(this);
 		this.setShowMore = this.setShowMore.bind(this);
 	}
 
 	componentDidMount() {
-		console.log('finally, this.props.reviews is: ', this.props.reviews);
+		// console.log('finally, this.props.reviews is: ', this.props.reviews);
 		var reviewList = this.props.reviews;
 		this.setState({
 			reviewList: reviewList,
 		}, this.slicedReviewList);
-		console.log('finally, this.state.reviewList is: ', this.state.reviewList);
+		// console.log('finally, this.state.reviewList is: ', this.state.reviewList);
 	}
 
-	// componentDidUpdate() {
-	// 	this.handleShowInitialReviews();
-	// }
-
 	mappingReviews() {
-		console.log('props.reviews in Reviewlist: ', this.props.reviews);
-		// var reviews = this.props.reviews;
+		// console.log('props.reviews in Reviewlist: ', this.props.reviews);
 		var reviews = this.state.holdingReviews;
 		var renderedReviews = reviews.map((review) =>
-			<ReviewItem key={review.review_id.toString()} review={review} />
+			<ReviewItem key={review.review_id.toString()} review={review} onMarkedHelpful={this.props.onMarkedHelpful} onMarkedReported={this.props.onMarkedReported} />
 		);
 		this.setState({
 			renderedReviews: renderedReviews
@@ -53,30 +47,20 @@ class ReviewList extends React.Component {
 				showMore: 'more-reviews-btn-hide'
 			});
 		}
-		console.log('showMore is : ', this.state.showMore);
 	}
 
 	slicedReviewList() {
 		var currentIndex = this.state.currentIndex;
 		var reviewsPerClick = this.state.reviewsPerClick;
-		console.log('finally, this.state.reviewList is: ', this.state.reviewList);
 		const slicedReviewList = this.state.reviewList.slice(currentIndex, reviewsPerClick);
-		console.log('finally, slicedReviewList is: ', slicedReviewList);
 		this.setState({
 			holdingReviews: slicedReviewList
 		}, this.mappingReviews);
 
 	}
 
-	// handleShowInitialReviews() {
-	// 	console.log('write logic for showing initial reviews here!');
-	// 	this.slicedReviewList(function(){this.mappingReviews();});
-	// 	// this.mappingReviews();
-	// 	console.log('finally, this.state.renderedReviews are: ', this.state.renderedReviews);
-	// }
-
 	handleShowMoreReviews() {
-		console.log('write logic for showing more reviews here!');
+		// console.log('write logic for showing more reviews here!');
 		var currentReviewsPerClick = this.state.reviewsPerClick;
 		currentReviewsPerClick += 2;
 		this.setState({
@@ -89,12 +73,7 @@ class ReviewList extends React.Component {
 	// When no more reviews can be added, such as when length of this.state.reviews is reached, hide the Add More button.
 
 	render() {
-		console.log('finally, this.state.holdingReviews in ReviewList is: ', this.state.holdingReviews);
-		console.log('finally, this.state.reviewList under render() in ReviewList is: ', this.state.reviewList);
-
-		console.log('finally, this.state.renderedReviews in ReviewList is: ', this.state.renderedReviews);
 		var showMore = this.state.showMore;
-		console.log('showMore variable inside render() is: ', showMore);
 		return (
 			<div id="review-list-container">
 				<div className="scroller">
@@ -102,7 +81,6 @@ class ReviewList extends React.Component {
 				</div>
 				<div className="buttons" id="buttons">
 					<button className={showMore} onClick={this.handleShowMoreReviews}>MORE REVIEWS</button>
-					{/* <button>ADD A REVIEW</button> */}
 					<Dashboard />
 				</div>
 			</div>

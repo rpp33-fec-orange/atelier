@@ -14,82 +14,90 @@ class RatingsReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      dataReady: false,
+      reviewReady: false,
+      metaReady: false,
       reviews: [],
       meta: {},
-      id: props.id,
+      id: 0,
       sort: 'newest',
       count: 0,
       review_id: 0,
       meta_ratings: {},
       meta_recommended: {},
-      meta_characteristics: {}
+      meta_characteristics: {},
+      newestReviews: [],
+      helpfulReviews: [],
+      relevantReviews: []
     }
-    // this.getReviewsHandler = this.getReviewsHandler.bind(this);
     this.getReviewsByIDHandler = this.getReviewsByIDHandler.bind(this);
     this.getReviewsMetaHandler = this.getReviewsMetaHandler.bind(this);
     this.postReviewHandler = this.postReviewHandler.bind(this);
     this.putHelpfulHandler = this.putHelpfulHandler.bind(this);
   }
 
-  // getReviewsHandler() {
-  //   // var url = `/reviews/${this.state.id}`;
-  //   var url = '/reviews';
-  //   console.log('review product id is: ', this.state.id);
-  //   // var url = `/reviews/${this.state.id}`;
-  //   $.ajax({
-  //     context: this,
-  //     type: "GET",
-  //     url: url,
-  //     success: (reviews) => {
-  //       console.log('review ajax success! reviews are: ', reviews);
-  //       this.setState({
-  //         reviews: reviews
-  //       });
-  //     },
-  //     error: (error) => {
-  //       console.log('error from get reviews request: ', error);
-  //     }
-  //   })
-  //     .done(function () {
-  //       console.log('get reviews request is done');
-  //     });
-  // }
-
   componentDidMount() {
-    this.getReviewsByIDHandler(this.state.id);
-    try {
-      this.getReviewsMetaHandler(this.state.id);
-    } catch (error) {
-      console.log('meta error in RatingsReviews is: ', error);
-    }
+    // this.setState({
+    //   id: this.props.id
+    // });
+    // var id = this.props.id;
+    // const ajaxPromise = new Promise((resolve, reject) => {
+    //   this.getReviewsByIDHandler(id);
+    //   this.getReviewsMetaHandler(id);
+    //   resolve('foo');
+    //   reject('bar');
+    // });
+
+    // ajaxPromise.then((data) => {
+    //   this.setState({
+    //     reviewReady: true,
+    //   });
+    // })
+    // .catch((error) => {
+    //   console.log('ajax Promise error in ReviewsRatings.jsx is: ', error);
+    // })
+    var id = this.props.id;
+    this.getReviewsByIDHandler(id, this.state.sort);
+    this.getReviewsMetaHandler(id);
+
+    // try {
+    //   this.getReviewsMetaHandler(this.state.id);
+    // } catch (error) {
+    // }
   }
 
-  getReviewsByIDHandler(id) {
+  setSort(sort) {
+    this.setState({
+      sort: sort
+    });
+  }
+
+  getReviewsByIDHandler(id, sort) {
     // var url = `/reviews/${this.state.id}`;
     // product_id=64620
-    var sort = this.state.sort;
-    var id = this.state.id;
+    // var sort = this.state.sort;
+    var id = this.props.id;
     var url = `/reviews/?sort=${sort}&product_id=${id}`;
-    console.log('review product id is: ', this.state.id);
+    // console.log('review product id is: ', this.state.id);
     // var url = `/reviews/${this.state.id}`;
     $.ajax({
       context: this,
       type: "GET",
       url: url,
       success: (data) => {
-        // console.log('review ajax success! reviews are: ', reviews);
+        console.log('review ajax success! data.results is: ', data.results);
         this.setState({
           reviews: data.results,
-          count: data.count
+          count: data.count,
+          reviewReady: true,
+          review_id: data.results.review_id
         });
       },
       error: (error) => {
-        console.log('error from get reviews request: ', error);
+        // console.log('error from get reviews request: ', error);
       }
     })
       .done(function () {
-        console.log('get reviews request is done');
+        // console.log('get reviews request is done');
       });
   }
 
@@ -97,31 +105,31 @@ class RatingsReviews extends React.Component {
     // var url = `/reviews/${this.state.id}`;
     // product_id=64620
     // var sort = this.state.sort;
-    var id = this.state.id;
+    var id = this.props.id;
     var url = `/reviews/meta?product_id=${id}`;
-    console.log('review product id in getReviewsMetaHandler is: ', this.state.id);
+    // console.log('review product id in getReviewsMetaHandler is: ', this.state.id);
     // var url = `/reviews/${this.state.id}`;
     $.ajax({
       context: this,
       type: "GET",
       url: url,
       success: (data) => {
-        console.log('review meta ajax success! reviews are: ', data);
+        // console.log('review meta ajax success! reviews are: ', data);
         this.setState({
           meta: data,
           meta_ratings: data.ratings,
           meta_recommended: data.recommended,
           meta_characteristics: data.characteristics,
-          dataReady: true
+          metaReady: true
           // count: data.count
         });
       },
       error: (error) => {
-        console.log('error from get reviews meta request: ', error);
+        // console.log('error from get reviews meta request: ', error);
       }
     })
       .done(function () {
-        console.log('get reviews meta request is done');
+        // console.log('get reviews meta request is done');
       });
   }
 
@@ -131,7 +139,7 @@ class RatingsReviews extends React.Component {
     // var sort = this.state.sort;
     var id = this.state.id;
     var url = '/reviews';
-    console.log('review product id in postReview is: ', this.state.id);
+    // console.log('review product id in postReview is: ', this.state.id);
     // var url = `/reviews/${this.state.id}`;
     $.ajax({
       context: this,
@@ -149,66 +157,91 @@ class RatingsReviews extends React.Component {
         characteristics: characteristics
       },
       success: (data) => {
-        console.log('review POST ajax success!');
+        // console.log('review POST ajax success!');
       },
       error: (error) => {
-        console.log('error from POST review request: ', error);
+        // console.log('error from POST review request: ', error);
       }
     })
       .done(function () {
-        console.log('post reviews request is done');
+        // console.log('post reviews request is done');
       });
   }
 
-  putHelpfulHandler() {
-    // var url = `/reviews/${this.state.id}`;
-    // product_id=64620
-    // var sort = this.state.sort;
-    var review_id = this.state.review_id;
+  putHelpfulHandler(id) {
+    var review_id = id;
+    console.log('review_id inside RatingsReviews.jsx: ', review_id);
     var url = `/reviews/${review_id}/helpful`;
-    // console.log('review product id in getReviewsMetaHandler is: ', this.state.id);
-    // var url = `/reviews/${this.state.id}`;
     $.ajax({
       context: this,
       type: "PUT",
       url: url,
+      statusCode: {
+        204: function () {
+          console.log('client ajax mark review helpful success code 204!');
+        }
+      },
       success: (data) => {
-        console.log('PUT review ajax success!');
-        // this.setState({
-        //   meta: data
-        // });
+        console.log('Review was found helpful ajax success!');
       },
       error: (error) => {
-        console.log('error from PUT review request: ', error);
+        console.log('Helpful ajax error from PUT review request: ', error);
       }
     })
       .done(function () {
-        console.log('PUT reviews request is done');
+        // console.log('PUT reviews request is done');
       });
   }
 
-
+  putReportedHandler(id) {
+    var review_id = id;
+    console.log('review_id inside putReportedHandler: ', review_id);
+    var url = `/reviews/${review_id}/report`;
+    $.ajax({
+      context: this,
+      type: "PUT",
+      url: url,
+      statusCode: {
+        204: function () {
+          console.log('client ajax mark review reported success code 204!');
+        }
+      },
+      success: (data) => {
+        console.log('Review was reported ajax success!');
+      },
+      error: (error) => {
+        console.log('Reported Review ajax error from PUT review request: ', error);
+      }
+    })
+      .done(function () {
+        // console.log('PUT reviews request is done');
+      });
+  }
 
   render() {
-    console.log('this.state.reviews: ', this.state.reviews);
-    console.log('this.state.meta is: ', this.state.meta);
+    // console.log('this.state.reviews: ', this.state.reviews);
+    // console.log('this.state.meta is: ', this.state.meta);
+    var reviewReady = this.state.reviewReady;
+    var metaReady = this.state.metaReady;
     var list = this.state.reviews;
     var count = this.state.count;
     var sort = this.state.sort;
     var meta_characteristics = this.state.meta_characteristics;
     var meta_recommended = this.state.meta_recommended;
     var meta_ratings = this.state.meta_ratings;
-    console.log('this.state.meta_characteristics is: ', this.state.meta_characteristics);
+    console.log('meta_characteristics is: ', meta_characteristics);
+    console.log('reviewReady is: ', reviewReady);
+    console.log('metaReady is: ', metaReady);
 
-    if (!this.state.dataReady) {
+
+    if (!(reviewReady && metaReady)) {
       return (
         <div>
           Loading Ratings and Reviews...
         </div>
       )
     }
-    if (this.state.dataReady) {
-      console.log('meta_characteristics is: ', meta_characteristics);
+    if (reviewReady && metaReady) {
       return (
         <div className="ratings-reviews" id="flex-container">
           <div className="rating-breakdown">
@@ -219,8 +252,14 @@ class RatingsReviews extends React.Component {
             <ComfortSlider comfort={meta_characteristics} />
           </div>
           <div className="review-breakdown">
-            <h3 className="review-header">{count} reviews, sorted by <div className="sort">{sort} &#9660;</div></h3>
-            <ReviewList reviews={list} />
+            <div className="review-header">{count} reviews, sorted by
+            <select class="dropdown-sort">
+              <option>newest</option>
+              <option>helpful</option>
+              <option>relevant</option>
+            </select>
+            </div>
+            <ReviewList reviews={list} onMarkedHelpful={this.putHelpfulHandler} onMarkedReported={this.putReportedHandler} />
             {/* <Dashboard /> */}
           </div>
         </div>

@@ -1,5 +1,4 @@
 import React from 'react';
-// import stylesRatingsReviews from '../../../../client/dist/style-sheets/stylesRatingsReviews.css';
 
 const Modal = (props) => {
 	const showHideClassName = props.show ? "modal-rr display-block" : "modal-rr display-none";

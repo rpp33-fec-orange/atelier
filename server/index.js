@@ -4,7 +4,7 @@ const { addToCart, getCart } = require('./helpers/cart.js');
 const { getRelatedStylesById, getRelatedProductsById, getRelatedProductsReviewMeta} = require('./helpers/relatedItems.js');
 const { getQuestionsByProductId, submitQuestion, submitAnswer, markQuestionHelpful, markAnswerHelpful, reportQuestion, reportAnswer } = require('./helpers/questions.js');
 // const getReviewsByID = require('./helpers/reviews.js').getReviewsByID;
-const { getReviewsByID, getReviewsMeta, postReview, putReview } = require('./helpers/reviews.js');
+const { getReviewsByID, getReviewsMeta, postReview, putReview, putReviewReported } = require('./helpers/reviews.js');
 
 let app = express();
 
@@ -217,6 +217,7 @@ app.get('/reviews/', function (req, res) {
     })
     .catch((error) => {
       console.log('error getting reviews!');
+      res.status(500).send(error);
     })
 });
 
@@ -228,6 +229,7 @@ app.get('/reviews/meta', function (req, res) {
     })
     .catch((error) => {
       console.log('error getting reviews!');
+      res.status(500).send(error);
     })
 });
 
@@ -239,17 +241,33 @@ app.post('/reviews', function (req, res) {
     })
     .catch((error) => {
       console.log('error getting reviews!');
+      res.status(500).send(error);
     })
 });
 
 app.put('/reviews/:review_id/helpful', function (req, res) {
-  putReview(req.body.review_id)
+  var id = req.params.review_id;
+  putReview(id)
     .then((success) => {
-      // console.log('getting reviews meta success! data is: ', success.data);
+      console.log('server putReview Review was found helpful success!');
       res.status(204).send(success.data);
     })
     .catch((error) => {
-      console.log('error getting reviews!');
+      console.log('server putReview Review was found helpful error!');
+      res.status(500).send(error);
+    })
+});
+
+app.put('/reviews/:review_id/report', function (req, res) {
+  var id = req.params.review_id;
+  putReviewReported(id)
+    .then((success) => {
+      console.log('server putReviewReported Review was reported: success!');
+      res.status(204).send(success.data);
+    })
+    .catch((error) => {
+      console.log('server putReviewReported: error!');
+      res.status(500).send(error);
     })
 });
 

@@ -1,53 +1,53 @@
-	import React from 'react';
-	import RatingsReviews from './RatingsReviews.jsx';
+import React from 'react';
+import RatingsReviews from './RatingsReviews.jsx';
 
 class ComfortSlider extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			comfort: props.comfort,
-			hasError: false
+			comfort: 0,
+			percentComfort: 0
 		}
 	}
 
-	static getDerivedStateFromError(error) {
-		return {hasError: true};
-	}
-
 	// componentDidMount() {
-	// 	this.setState(
-	// 		{
-	// 			comfort: this.props.comfort
-	// 		})
-	// 		console.log('comfort state is: ', this.state.comfort);
+	// 	var comfort = this.props.comfort.Comfort.value;
+	// 	var percentComfort = Math.round((comfort / 5) * 100);
+	// 	this.setState({
+	// 		comfort: comfort,
+	// 		percentComfort: percentComfort
+	// 	})
 	// }
 
-	componentDidCatch(error, errorInfo) {
-		logErrorToMyService(error, errorInfo);
-	}
-
 	render() {
-		console.log('props in ComfortSlider are: ',  JSON.stringify(this.props.comfort));
 		// var comfort = this.props.comfort;
 		// if (this.state.hasError) {
 		// 	return <h1>Something went wrong.</h1>
 		// }
-		if (!this.state.comfort){
+		var comfort = this.props.comfort.Comfort.value;
+		var percentComfort = Math.round((comfort / 5) * 100);
+		if (!comfort) {
 			return (
 				<div>
 					Loading.....
 				</div>
 			)
 		} else {
-			var comfort = this.props.comfort.Comfort.value;
 			return (
 				<div className="comfort-slider" id="comfort-slider">
 					<p>Comfort</p>
-					{/* <div>comfort value: {comfort}</div> */}
-					{/* <div>{JSON.stringify(comfort)}</div> */}
-					<div>Poor     | {comfort}|     Perfect</div>
+					<div className="comfort-container">
+						<div className="comfort-side"></div>
+						<div className="comfort-middle"></div>
+						<div className="comfort-side"></div>
+						<div className="comfort-marker" style={{ marginLeft: `${percentComfort}%` }}>&#9660;</div>
+					</div>
+					<div className="comfort-explanation">
+						<div className="side">Too Small</div>
+						<div className="middle"></div>
+						<div className="side">Perfect</div>
+					</div>
 				</div>
-
 			);
 		}
 	}

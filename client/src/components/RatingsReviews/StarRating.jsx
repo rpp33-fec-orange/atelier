@@ -35,7 +35,6 @@ class StarRating extends React.Component {
 			return allGrey;
 		} else {
 			// Do everything else just like before
-			console.log('props.num is: ', this.props.num);
 			var roundedNum = 0;
 			if (this.props.num != 0) {
 				var roundedNum = this.roundToQuater(this.props.num);  // e.g: 3.25
@@ -73,16 +72,12 @@ class StarRating extends React.Component {
 					stars.push(<img className="star" src={this.state.greyStar} key={mainNum + 1 + k} />);
 				}
 			}
-
-			console.log('this is stars: ', stars);
 			return stars;
 		}
 	}
 
 	render() {
 		var stars = this.renderStars();
-		console.log('props in StarRating: ', this.props);
-
 		return (
 			<div className="container">
 				<div className="filledStars" >{stars}</div>

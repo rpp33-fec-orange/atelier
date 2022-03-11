@@ -18,13 +18,13 @@ const { options } = require('./options.js');
 
 
 
-let getReviewsByID = (id) => {
+let getReviewsByID = (id, sort) => {
 	var url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/';
 	return axios ({
 		method: 'get',
 		url: url,
 		params: {
-			sort: 'newest',
+			sort: sort,
 			product_id: id
 		},
 		headers: {
@@ -82,7 +82,7 @@ let postReview = (product_id, rating, summary, body, recommend, name, email, pho
 }
 
 let putReview = (review_id) => {
-	var reviewID = review_id
+	var reviewID = review_id;
 	var url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${reviewID}/helpful`;
 	return axios ({
 		method: 'PUT',
@@ -100,11 +100,31 @@ let putReview = (review_id) => {
 	});
 }
 
+let putReviewReported = (review_id) => {
+	var reviewID = review_id;
+	var url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${reviewID}/report`;
+	return axios ({
+		method: 'PUT',
+		url: url,
+		params: {
+			review_id: review_id
+		},
+		headers: {
+			'User-Agent': 'request',
+			'Authorization': `${options.auth.Authorization}`
+		}
+	})
+	.catch(function(error) {
+		console.log('axios putReviewReported error!: ', JSON.stringify(error).slice(0, 200));
+	});
+}
+
 module.exports = {
 	getReviewsByID,
 	getReviewsMeta,
 	postReview,
-	putReview
+	putReview,
+	putReviewReported
 };
 
 

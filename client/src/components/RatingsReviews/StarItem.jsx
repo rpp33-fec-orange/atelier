@@ -1,12 +1,10 @@
 import React from 'react';
-// import IconStar from './star.svg';
 
 class StarItem extends React.Component {
   constructor(props) {
     super(props);
     this.roundToQuater = this.roundToQuater.bind(this);
   }
-  // {value, max, className} is the props
   roundToQuater(n) {
     var number = n;
     if (number >= 0 && number <= 5) {
@@ -31,11 +29,6 @@ class StarItem extends React.Component {
       fontFamily: 'FontAwesome',
     }
 
-    // const divStyle = {
-    //   color: 'blue',
-    //   backgroundImage: 'https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png',
-    // };
-
     return (
       <div></div>
     )
@@ -44,24 +37,5 @@ class StarItem extends React.Component {
 
 export default StarItem;
 
-// const Rating = ({ value, max, className }) => {
-// 	/* Calculate how much of the stars should be "filled" */
-//   const percentage = Math.round((value / max) * 100);
-
-//   return (
-//     <div className={styles.container}>
-//     {
-//       /* Create an array based on the max rating, render a star for each */
-//     }
-//       {Array.from(Array(max).keys()).map((_, i) => (
-//         <IconStar key={i} className={styles.star} />
-//       ))}
-//     {
-//       /* Render a div overlayed on top of the stars that should not be not filled */
-//     }
-//       <div className={styles.overlay} style={{ width: `${100 - percentage}%` }} />
-//     </div>
-//   );
-// }
 
 
