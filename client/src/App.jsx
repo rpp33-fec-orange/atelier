@@ -10,6 +10,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       id: '',
+      productName: '',
       initialized: false,
       rating: 0,
       currentStyle: null,
@@ -32,6 +33,7 @@ class App extends React.Component {
         // console.log('app ajax GET success');
         this.setState({
           id: success[0].id,
+          productName: success[0].name,
           initialized: true
         });
       },
@@ -48,6 +50,12 @@ class App extends React.Component {
 
   componentDidMount() {
     this.productsHandler();
+    window.addEventListener('popstate', (e) => {
+      // var state = e.state;
+      if (e.state !== null) {
+        this.setState({...this.state, id: e.state})
+      }
+  });
   }
 
   componentWillMount() {
@@ -85,18 +93,18 @@ class App extends React.Component {
   }
 
   handleProductChange(productId) {
-    // console.log('id in app', productId)
-    this.setState({ ...this.state, id: productId }, () => { console.log('product id updated') })
+    this.setState({...this.state, id: productId}, () => {console.log('product id updated')})
   }
 
   render() {
 
     if (this.state.initialized) {
+      history.pushState(`${this.state.id}`, '', `/${this.state.id}`);
       return (
         <div id="container">
           <ProductOverview id={this.state.id} rating={this.state.rating} currentStyleHandler={this.currentStyleHandler} yourOutfitHandleClick={this.yourOutfitHandleClick} />
           <RelatedProducts id={this.state.id} yourOutfitArray={this.state.yourOutfitArray} yourOutfitHandleClick={this.yourOutfitHandleClick} handleProductChange={this.handleProductChange} />
-          <QuestionsAnswers id={this.state.id} />
+          <QuestionsAnswers id={this.state.id} productName={this.state.productName} />
           <RatingsReviews id={this.state.id} handleRating={this.handleRating} handleGetRating={this.getRating} />
         </div>
       )

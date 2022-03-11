@@ -2,10 +2,9 @@ const express = require('express');
 const { getProducts, getProductById, getProductStylesById } = require('./helpers/products.js');
 const { addToCart, getCart } = require('./helpers/cart.js');
 const { getRelatedStylesById, getRelatedProductsById, getRelatedProductsReviewMeta} = require('./helpers/relatedItems.js');
-const { getQuestionsByProductId, markQuestionHelpful, markAnswerHelpful, reportQuestion, reportAnswer } = require('./helpers/questions.js');
+const { getQuestionsByProductId, submitQuestion, submitAnswer, markQuestionHelpful, markAnswerHelpful, reportQuestion, reportAnswer } = require('./helpers/questions.js');
 // const getReviewsByID = require('./helpers/reviews.js').getReviewsByID;
 const { getReviewsByID, getReviewsMeta, postReview, putReview, putReviewReported } = require('./helpers/reviews.js');
-
 
 let app = express();
 
@@ -79,6 +78,35 @@ app.put('/qa/answers/:answer_id/helpful', (req, res) => {
   markAnswerHelpful(id)
     .then(() => {
       res.status(204).end();
+    })
+    .catch(() => {
+      res.status(400).end();
+    });
+});
+
+app.post('/qa/questions', (req, res) => {
+  let questionFormDetails = req.body;
+
+  // product_id type changes between client and server. refactor client to use axios?
+  questionFormDetails.product_id = parseInt(questionFormDetails.product_id);
+  // console.log(`in server the product_id is: ${typeof questionFormDetails.product_id}`);
+
+  submitQuestion(questionFormDetails)
+    .then(() => {
+      res.status(201).end();
+    })
+    .catch(() => {
+      res.status(400).end();
+    });
+});
+
+app.post('/qa/questions/:question_id/answers', (req, res) => {
+  let question_id = req.params.question_id;
+  let answerFormDetails = req.body;
+
+  submitAnswer(question_id, answerFormDetails)
+    .then(() => {
+      res.status(201).end();
     })
     .catch(() => {
       res.status(400).end();
@@ -241,6 +269,37 @@ app.put('/reviews/:review_id/report', function (req, res) {
       console.log('server putReviewReported: error!');
       res.status(500).send(error);
     })
+});
+
+app.get('*', function (req, res) {
+  res.end(`
+  <!DOCTYPE html>
+<html>
+
+<head>
+	<title>Atelier</title>
+	<link rel="stylesheet" href="./style-sheets/stylesApp.css">
+	<link rel="stylesheet" href="./style-sheets/stylesRelatedProducts.css">
+	<link rel="stylesheet" href="./style-sheets/stylesProductOverview.css">
+	<link rel="stylesheet" href="./style-sheets/stylesRatingsReviews.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Arimo:wght@700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="./style-sheets/stylesStarRating.css">
+	<script src="https://kit.fontawesome.com/5290ec3ec6.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<div id="app"></div>
+	<script type="text/javascript" src="bundle.js"></script>
+</body>
+
+</html>`);
 });
 
 
