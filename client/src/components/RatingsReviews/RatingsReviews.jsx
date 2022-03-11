@@ -34,6 +34,7 @@ class RatingsReviews extends React.Component {
     this.postReviewHandler = this.postReviewHandler.bind(this);
     this.putHelpfulHandler = this.putHelpfulHandler.bind(this);
     this.sortReviews = this.sortReviews.bind(this);
+    this.setReviews = this.setReviews.bind(this);
   }
 
   componentDidMount() {
@@ -246,7 +247,26 @@ class RatingsReviews extends React.Component {
     console.log('this is sortValue: ', sortValue);
     this.setState({
       sort: sortValue
-    });
+    }, this.setReviews);
+  }
+
+  setReviews() {
+    var newestReviews = this.state.newestReviews;
+    var helpfulReviews = this.state.helpfulReviews;
+    var relevantReviews = this.state.relevantReviews;
+    if (this.state.sort === 'newest') {
+      this.setState({
+        reviews: newestReviews
+      });
+    } else if (this.state.sort === 'helpful') {
+      this.setState({
+        reviews: helpfulReviews
+      });
+    } else if (this.state.sort === 'relevant') {
+      this.setState({
+        reviews: relevantReviews
+      });
+    }
   }
 
   render() {
@@ -256,16 +276,17 @@ class RatingsReviews extends React.Component {
     var metaReady = this.state.metaReady;
     // var list = this.state.reviews;
     var sort = this.state.sort;
-    var list = [];
-    if (sort === 'newest') {
-      list = this.state.newestReviews;
-    } else if (sort === 'helpful') {
-      list = this.state.newestReviews;
-    } else if (sort === 'relevant') {
-      list = this.state.relevantReviews;
-    } else {
-      list = this.state.newestReviews;
-    }
+    var list = this.state.reviews;
+    // var list = [];
+    // if (sort === 'newest') {
+    //   list = this.state.newestReviews;
+    // } else if (sort === 'helpful') {
+    //   list = this.state.newestReviews;
+    // } else if (sort === 'relevant') {
+    //   list = this.state.relevantReviews;
+    // } else {
+    //   list = this.state.newestReviews;
+    // }
     var count = this.state.count;
     var meta_characteristics = this.state.meta_characteristics;
     var meta_recommended = this.state.meta_recommended;
