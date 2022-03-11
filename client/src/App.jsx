@@ -50,6 +50,12 @@ class App extends React.Component {
 
   componentDidMount() {
     this.productsHandler();
+    window.addEventListener('popstate', (e) => {
+      // var state = e.state;
+      if (e.state !== null) {
+        this.setState({...this.state, id: e.state})
+      }
+  });
   }
 
   componentWillMount() {
@@ -87,13 +93,13 @@ class App extends React.Component {
   }
 
   handleProductChange(productId) {
-    // console.log('id in app', productId)
-    this.setState({ ...this.state, id: productId }, () => { console.log('product id updated') })
+    this.setState({...this.state, id: productId}, () => {console.log('product id updated')})
   }
 
   render() {
 
     if (this.state.initialized) {
+      history.pushState(`${this.state.id}`, '', `/${this.state.id}`);
       return (
         <div id="container">
           <ProductOverview id={this.state.id} rating={this.state.rating} currentStyleHandler={this.currentStyleHandler} yourOutfitHandleClick={this.yourOutfitHandleClick} />

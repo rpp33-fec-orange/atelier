@@ -19,8 +19,6 @@ class RelatedProducts extends React.Component {
     this.fetchParentProductData = this.fetchParentProductData.bind(this);
     this.fetchParentProductStyles = this.fetchParentProductStyles.bind(this);
     this.fetchRelatedProductsData = this.fetchRelatedProductsData.bind(this);
-    // this.handleStateChange = this.handleStateChange.bind(this)
-    // this.fetchRelatedProductsReviewMeta = this.fetchRelatedProductsReviewMeta.bind(this);
   }
 
   fetchParentProductData () {
@@ -35,6 +33,8 @@ class RelatedProducts extends React.Component {
         tempArray.push(data)
         this.setState({
           parentProduct: JSON.parse(JSON.stringify(tempArray))
+        }, () => {
+          this.fetchParentProductStyles();
         })
       },
       error: function (error) {
@@ -55,6 +55,8 @@ class RelatedProducts extends React.Component {
         parentProduct['styles'] = data.results;
         this.setState({
           parentProduct: parentProduct
+        }, () => {
+          this.fetchRelatedProductsData();
         })
       },
       error: function (error) {
@@ -87,10 +89,9 @@ class RelatedProducts extends React.Component {
   componentDidMount () {
     this.setState({
       product_id: this.props.id,
+    }, () => {
+      this.fetchParentProductData();
     });
-    this.fetchParentProductData();
-    this.fetchParentProductStyles();
-    this.fetchRelatedProductsData();
   }
 
   componentDidUpdate(prevProps) {
@@ -98,10 +99,9 @@ class RelatedProducts extends React.Component {
         this.setState({
           product_id: this.props.id,
           initialized: false
+        }, () => {
+          this.fetchParentProductData();
         });
-        this.fetchParentProductData();
-        this.fetchParentProductStyles();
-        this.fetchRelatedProductsData();
     }
   }
 
@@ -127,6 +127,7 @@ class RelatedProducts extends React.Component {
         </div>
        )
     }
+
   }
 }
 

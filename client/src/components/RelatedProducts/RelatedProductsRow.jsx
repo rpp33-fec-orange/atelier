@@ -12,18 +12,25 @@ class RelatedProductsRow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentPosition: 0,
-      currentPositionIndex: 0
-    }
-    this.scroll = this.scroll.bind(this);
-    this.relatedProductsRatingSummary = this.relatedProductsRatingSummary.bind(this)
+      prevDisable: true,
+      nextDisable: this.refs && this.refs.offsetWidth >= this.refs.scrollWidth ? true : false
+     }
+    // this.scroll = this.scroll.bind(this);
+    this.relatedProductsRatingSummary = this.relatedProductsRatingSummary.bind(this);
+    this.checkButtons = this.checkButtons.bind(this);
   }
 
-  scroll(direction) {
-    let far = $( '.related-product-container' ).width()/4*direction;
-    let pos = $('.related-product-container').scrollLeft() + far;
-    $('.related-product-container').animate( { scrollLeft: pos }, 1000)
+  componentDidMount() {
+    this.checkButtons(this.refs.offsetWidth, this.refs.scrollWidth);
   }
+
+  checkButtons = (offsetWidthValue, scrollWidthValue) => {
+    this.setState({
+     prevDisable: this.refs.scrollLeft <= 0 ? true : false,
+     nextDisable:
+     this.refs.scrollLeft + offsetWidthValue >= scrollWidthValue ? true : false
+    });
+   };
 
   relatedProductsRatingSummary (relatedProducts) {
     for (var i = 0; i < relatedProducts.length; i++) {
@@ -36,6 +43,8 @@ class RelatedProductsRow extends React.Component {
   render () {
 
     const {relatedProductsIds, parentProduct, handleProductChange, relatedProductsInfo, handleStateChange} = this.props;
+    const offsetWidthValue = this.refs.offsetWidth,
+          scrollWidthValue = this.refs.scrollWidth;
 
     var relatedProductsWithRatings = this.relatedProductsRatingSummary(relatedProductsInfo);
 
@@ -46,12 +55,20 @@ class RelatedProductsRow extends React.Component {
         );
       });
       return (
-        <div className = 'related-products-container'>
-          <a className ='prev' onClick = {this.scroll.bind(null, -1)}>&#10094;</a>
-          <div className = 'products-only-container'>
+        <div className = 'related-products-container' ref = {(el) => {this.refs  = el; console.log('el', el);}}>
+                <div className={`btn prev ${this.state.prevDisable ? "disable" : ""}`} disabled={this.state.prevDisable}
+        onClick={() => {
+          this.refs.scrollLeft -= offsetWidthValue / 2;
+          this.checkButtons(offsetWidthValue, scrollWidthValue);
+        }}>{'<'}</div>
+          <div className = 'products-only-container' >
             {DOMarray}
           </div>
-          <a className ='next' onClick = {this.scroll.bind(null, 1)}>&#10095;</a>
+          <div className={`btn next ${this.state.nextDisable ? "disable" : ""}`} disabled={this.state.nextDisable}
+            onClick={() => {
+              this.refs.scrollLeft += offsetWidthValue / 2;
+              this.checkButtons(offsetWidthValue, scrollWidthValue);
+            }}>{'>'}</div>
         </div>
       )
     } else {

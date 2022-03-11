@@ -26,11 +26,11 @@ class YourOutfitRow extends React.Component {
   }
 
   handleDeleteOutfit(styleId) {
-    var yourOutfitArray = this.state.yourOutfit;
-    var deleteOutfitAtIndex = yourOutfitArray.findIndex(element => element.style_id === styleId);
-    yourOutfitArray.splice(deleteOutfitAtIndex, 1);
+    var currentOutfitArray = this.state.yourOutfit;
+    var deleteOutfitAtIndex = currentOutfitArray.findIndex(element => element.style_id === styleId);
+    currentOutfitArray.splice(deleteOutfitAtIndex, 1);
     this.setState({
-      yourOutfit: yourOutfitArray
+      yourOutfit: currentOutfitArray
     });
   }
 
