@@ -1,6 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
-import StarRating from '../RatingsReviews/StarRating.jsx';
+import Rating from './Rating.jsx';
 import Photos from './Photos.jsx';
 
 class Styles extends React.Component {
@@ -11,6 +11,7 @@ class Styles extends React.Component {
       rating: '★★★★☆',
       productStylesById: props.productStylesById,
       styles: props.productStylesById.results,
+      styleSelectedId: ((0 + 1) * 10),
       currentStyle: props.productStylesById.results[0],
       currentStyleSkus: props.productStylesById.results[0].skus,
       currentSku: '',
@@ -23,7 +24,6 @@ class Styles extends React.Component {
       quantityArray: [],
       cart: []
     }
-    this.photoClick = this.photoClick.bind(this);
     this.styleChange = this.styleChange.bind(this);
     this.skuChange = this.skuChange.bind(this);
     this.postCart = this.postCart.bind(this);
@@ -31,15 +31,20 @@ class Styles extends React.Component {
     this.outfitClick = this.outfitClick.bind(this);
     this.quantityChange = this.quantityChange.bind(this);
     this.reviewsClick = this.reviewsClick.bind(this);
+    this.styleSelectedInitial = this.styleSelectedInitial.bind(this);
   }
 
-  photoClick(e) {
-    this.setState({
-      mainPhotoURL: e.target.src
-    })
+  styleSelectedInitial() {
+    document.getElementById(this.state.styleSelectedId).classList.add('selected-style-border');
   }
 
   styleChange(e) {
+    if (this.state.styleSelectedId !== e.target.id) {
+      document.getElementById(this.state.styleSelectedId).classList.remove('selected-style-border');
+      this.state.styleSelectedId = e.target.id;
+      document.getElementById(e.target.id).classList.add('selected-style-border');
+    }
+
     for (let i = 0; i < this.state.styles.length; i++) {
       if (this.state.styles[i].name === e.target.name) {
         let selectedStyle = this.state.styles[i];
@@ -69,6 +74,7 @@ class Styles extends React.Component {
         sizeStatus: '',
         quantitySelectedBool: false
       });
+      alert('Please select a size.')
     } else {
       for (let i = 0; i < skuKeys.length; i++) {
         if (e.target.value === this.state.currentStyleSkus[skuKeys[i]].size) {
@@ -93,13 +99,13 @@ class Styles extends React.Component {
       data: JSON.stringify({ skuId }),
       contentType: 'application/json',
       success: function (successAjax) {
-        console.log('postCart ajax POST Success!');
+        // console.log('postCart ajax POST Success!');
       },
-      error: function (errorAjax) {
-        console.log('postCart ajax POST Error!');
+      error: function (error) {
+        console.log('postCart ajax POST error!', error);
       },
     })
-    alert('Added item to cart!');
+    alert('Added item to cart.');
   }
 
   getCart() {
@@ -108,7 +114,7 @@ class Styles extends React.Component {
       type: 'GET',
       url: '/cart',
       success: function (success) {
-        console.log('getCart ajax GET success');
+        // console.log('getCart ajax GET success');
         this.setState({
           cart: success,
         })
@@ -138,7 +144,8 @@ class Styles extends React.Component {
       this.setState({
         quantitySelected: 0,
         quantitySelectedBool: false
-      })
+      });
+      alert('Please select a quantity.')
     } else {
       this.setState({
         quantitySelected: e.target.value,
@@ -149,6 +156,7 @@ class Styles extends React.Component {
 
   componentDidMount() {
     this.props.currentStyleHandler(this.state.currentStyle);
+    this.styleSelectedInitial();
   }
 
   render() {
@@ -177,9 +185,9 @@ class Styles extends React.Component {
           </div>
           <div class="styles-item styles-item-2" id="styles">
             <div class="styles-item-2-1-container">
-              <div class="styles-item-2-1" id="rating">
-                {/* <StarRating num={this.props.rating}/> */}
-                {rating}
+              <div class="styles-item-2-1">
+                <Rating num={this.props.rating} />
+                {/* {rating} */}
               </div>
               <div class="styles-item-2-2" id="read-all-reviews-button" onClick={this.reviewsClick}>Read all reviews</div>
             </div>
@@ -191,9 +199,9 @@ class Styles extends React.Component {
               <div class="styles-item-2-6-2">{currentStyle.name}</div>
             </div>
             <div class="styles-item-2-7-container" id="style">
-              {styles.map((style) =>
+              {styles.map((style, index) =>
                 <div class="styles-item-2-7-1">
-                  <img id="styleThumbnail" name={style.name} src={style.photos[0].url} width="50" height="50" onClick={this.styleChange}></img>
+                  <img class="style-thumbnail" id={(index + 1) * 10} name={style.name} src={style.photos[0].url} width="50" height="50" onClick={this.styleChange}></img>
                   <div class="styles-popup">{style.name}</div>
                 </div>
               )}

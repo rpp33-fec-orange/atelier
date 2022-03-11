@@ -25,7 +25,7 @@ class ProductOverview extends React.Component {
       type: 'GET',
       url: `/products/${this.state.id}`,
       success: function (success) {
-        console.log('product overview productHandler ajax GET success');
+        // console.log('product overview productHandler ajax GET success');
         this.setState({
           productById: success,
         })
@@ -43,7 +43,7 @@ class ProductOverview extends React.Component {
       type: 'GET',
       url: `/products/${this.state.id}/styles`,
       success: function (success) {
-        console.log('product overview productHandler ajax GET success');
+        // console.log('product overview productHandler ajax GET success');
         this.setState({
           productStylesById: success,
           styles: success.results,
@@ -64,14 +64,15 @@ class ProductOverview extends React.Component {
       url: '/search',
       data: JSON.stringify({ keyword }),
       success: function (success) {
-        console.log('product overview searchHandler ajax POST success');
+        // console.log('product overview searchHandler ajax POST success');
       },
       error: function (error) {
         console.log('product overview searchHandler ajax POST error: ', error);
       },
       contentType: "application/json",
     })
-    alert(`${keyword} was searched!`);
+    // alert(`${keyword} was searched!`);
+    alert('Search feature coming in next update.')
   }
 
   componentDidMount() {
@@ -83,6 +84,7 @@ class ProductOverview extends React.Component {
   //   if (this.props.id !== prevProps.id) {
   //     this.setState({
   //       id: this.props.id,
+  //       initialized: false
   //     })
   //   }
   //   this.productHandler();

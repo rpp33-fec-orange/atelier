@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Related Products RelatedProducts should render and match snapshot 1`] = `
+<div
+  id="loading"
+>
+  ⇆ Loading...
+</div>
+`;
