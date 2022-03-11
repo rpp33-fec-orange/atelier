@@ -79,10 +79,10 @@ class AnswerList extends React.Component {
 
   render() {
     let answers = this.props.answers;
-    let answerItems = answers.map(this.renderAnswerItem);
+    let renderedAnswerItems = answers.map(this.renderAnswerItem);
     let canCollapseAnswers = false;
 
-    if (!answers.canShowMore && answers.length > 0) {
+    if (!answers.canShowMore && answers.length > 2) {
       canCollapseAnswers = true;
     }
 
@@ -93,7 +93,7 @@ class AnswerList extends React.Component {
           {
             answers.length > 0
             &&
-            answerItems
+            renderedAnswerItems
           }
           {
             answers.canShowMore

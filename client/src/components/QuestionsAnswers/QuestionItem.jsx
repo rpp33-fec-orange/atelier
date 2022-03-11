@@ -54,6 +54,7 @@ class QuestionItem extends React.Component {
           <span className="questionText">
             Q: {question.question_body}
           </span>
+          <br></br>
           {
             question.answers.length > 0
             ?
