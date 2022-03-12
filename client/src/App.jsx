@@ -23,6 +23,7 @@ class App extends React.Component {
     this.currentStyleHandler = this.currentStyleHandler.bind(this);
     this.yourOutfitHandleClick = this.yourOutfitHandleClick.bind(this);
     this.handleProductChange = this.handleProductChange.bind(this);
+    this.recordInteractions = this.recordInteractions.bind(this);
   }
 
   productsHandler() {
@@ -97,16 +98,33 @@ class App extends React.Component {
     this.setState({...this.state, id: productId}, () => {console.log('product id updated')})
   }
 
+  recordInteractions(interactionsObject) {
+
+    $.ajax({
+      type: 'POST',
+      url: `/interactions`,
+      data: interactionsObject,
+      success : () => {
+        console.log('Interactions POST request successful')
+      },
+      error: (err) => {
+        console.log('err', err)
+      }
+    })
+
+    // console.log(‘ProductOverview’, e.target.nodeName, new Date().toISOString());
+  }
+
   render() {
 
     if (this.state.initialized) {
       history.pushState(`${this.state.id}`, '', `/${this.state.id}`);
       return (
         <div id="container">
-          <ProductOverview id={this.state.id} rating={this.state.rating} currentStyleHandler={this.currentStyleHandler} yourOutfitHandleClick={this.yourOutfitHandleClick} />
-          <RelatedProducts id={this.state.id} yourOutfitArray={this.state.yourOutfitArray} yourOutfitHandleClick={this.yourOutfitHandleClick} handleProductChange={this.handleProductChange} />
-          <QuestionsAnswers id={this.state.id} productName={this.state.productName} />
-          <RatingsReviews id={this.state.id} handleRating={this.handleRating} handleGetRating={this.getRating} />
+          <ProductOverview id={this.state.id} rating={this.state.rating} currentStyleHandler={this.currentStyleHandler} yourOutfitHandleClick={this.yourOutfitHandleClick} interactions = {this.recordInteractions}/>
+          <RelatedProducts id={this.state.id} yourOutfitArray={this.state.yourOutfitArray} yourOutfitHandleClick={this.yourOutfitHandleClick} handleProductChange={this.handleProductChange} interactions = {this.recordInteractions}/>
+          <QuestionsAnswers id={this.state.id} productName={this.state.productName} interactions={this.recordInteractions}/>
+          <RatingsReviews id={this.state.id} handleRating={this.handleRating} handleGetRating={this.getRating} interactions = {this.recordInteractions}/>
         </div>
       )
     } else {
