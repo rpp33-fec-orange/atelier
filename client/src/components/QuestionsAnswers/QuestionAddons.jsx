@@ -31,21 +31,19 @@ class QuestionAddons extends React.Component {
         {
           showMoreQuestions
           &&
-          <button
+          <div
             id="moreAnsweredQuestions"
-            type="button"
             onClick={this.getMoreQuestions}
           >
-            More Answered Questions
-          </button>
+            {`MORE ANSWERED QUESTIONS`}
+          </div>
         }
-        <button
+        <div
           id="addQuestion"
-          type="button"
           onClick={() => this.handleModal()}
         >
-          Add A Question
-        </button>
+          {`ADD A QUESTION +`}
+        </div>
         <QuestionAnswerModal
           prompt={this.props.prompt}
           toggleModal={this.handleModal}

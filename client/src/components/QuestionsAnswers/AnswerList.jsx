@@ -50,7 +50,19 @@ class AnswerList extends React.Component {
           </div>
         </div>
         <span className="answerActions">
-          {`by ${answer.answerer_name}, ${answer.date}  |  Helpful? `}
+          {`by `}
+          {
+            (answer.answerer_name === 'Seller' || answer.answerer_name === 'seller')
+            ?
+            <span className="answererName-seller">
+              {`${answer.answerer_name}`}
+            </span>
+            :
+            <span className="answererName">
+              {`${answer.answerer_name}`}
+            </span>
+          }
+          {`, ${answer.date} | Helpful? `}
           {
             !answer.marked_helpful
             ?
@@ -60,7 +72,7 @@ class AnswerList extends React.Component {
             :
             <span className="markAnswerHelpful-marked">Yes</span>
           }
-          {`(${answer.helpfulness})  |  `}
+          {` (${answer.helpfulness}) | `}
           {
             !answer.reported
             ?
@@ -88,7 +100,7 @@ class AnswerList extends React.Component {
 
     return (
       <div className="answers-container">
-        <div className="answerFlag" style={{ display: 'inline-block'}}>{'A:'}</div>
+        <div className="answerFlag" style={{ display: 'inline-block'}}>{'A: '}</div>
         <div className="answerList" style={{ display: 'inline-block'}}>
           {
             answers.length > 0
@@ -98,16 +110,20 @@ class AnswerList extends React.Component {
           {
             answers.canShowMore
             &&
-            <span className="loadMoreAnswers" onClick={this.loadMoreAnswers}>
-              LOAD MORE ANSWERS
-            </span>
+            <div className="loadMoreAnswers">
+              <span className="loadMoreAnswers-text" onClick={this.loadMoreAnswers}>
+                LOAD MORE ANSWERS
+              </span>
+            </div>
           }
           {
             canCollapseAnswers
             &&
-            <span className="collapseAnswers" onClick={this.collapseAnswers}>
-              COLLAPSE ANSWERS
-            </span>
+            <div className="collapseAnswers">
+              <span className="collapseAnswers-text" onClick={this.collapseAnswers}>
+                COLLAPSE ANSWERS
+              </span>
+            </div>
           }
         </div>
       </div>
