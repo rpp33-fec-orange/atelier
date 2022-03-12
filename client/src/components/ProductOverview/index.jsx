@@ -81,20 +81,20 @@ class ProductOverview extends React.Component {
     this.productHandler();
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.id !== prevProps.id) {
-      this.setState({
-        id: this.props.id,
-        initialized: false
-      })
-    }
-    this.productHandler();
-  }
+  // componentDidUpdate(prevProps) {
+  //   if (this.props.id !== prevProps.id) {
+  //     this.setState({
+  //       id: this.props.id,
+  //       initialized: false
+  //     })
+  //   }
+  //   this.productHandler();
+  // }
 
   render() {
     if (this.state.initialized) {
       return (
-        <div class="index-container" id="productOverview">
+        <div class="index-container" id="productOverview" onClick={this.props.poClick}>
           <div class="index-item index-item-1">
             <TopBar data-testid="topbar?" searchHandler={this.searchHandler} />
           </div>
@@ -103,7 +103,20 @@ class ProductOverview extends React.Component {
             <Styles data-testid="styles?" productById={this.state.productById} productStylesById={this.state.productStylesById} rating={this.props.rating} currentStyleHandler={this.props.currentStyleHandler} yourOutfitHandleClick={this.props.yourOutfitHandleClick} />
           </div>
           <div class="index-item index-item-2">
-            <Info data-testid="descriptions?" productById={this.state.productById} />
+            <div class="info-container" id="Info">
+              <div class="info-item info-item-1-container">
+                <div class="info-item-1-1" id="slogan">{this.state.productById.slogan}.</div>
+                <div class="info-item-1-2" id="description">{this.state.productById.description}</div>
+              </div>
+              <div class="info-item info-item-2" id="features">
+                {this.state.productById.features.map((singleData) =>
+                  <div>
+                    ✔ {singleData.feature}: {singleData.value}
+                  </div>
+                )}
+              </div >
+            </div >
+            {/* <Info data-testid="info?" productById={this.state.productById} /> */}
           </div>
         </div>
       )
