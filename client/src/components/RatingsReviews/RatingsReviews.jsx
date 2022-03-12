@@ -350,13 +350,13 @@ class RatingsReviews extends React.Component {
     var metaReady = this.state.metaReady;
     var sort = this.state.sort;
     var list = this.state.reviews;
-    console.log('list is: ', list);
+    // console.log('list is: ', list);
 
     var count = list.length;
     var meta_characteristics = this.state.meta_characteristics;
     var meta_recommended = this.state.meta_recommended;
     var meta_ratings = this.state.meta_ratings;
-    console.log('characteristics are: ', meta_characteristics);
+    // console.log('characteristics are: ', meta_characteristics);
 
     if (!(reviewReady && metaReady)) {
       return (
