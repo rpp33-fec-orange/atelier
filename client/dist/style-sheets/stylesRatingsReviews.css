@@ -40,24 +40,23 @@
     position: relative;
   }
 
-  table {
+  .table-rr {
     display: flex;
     flex-direction: row;
     margin: 0 auto;
-    /* text-align: center; */
     border-collapse: collapse;
     border: 1px solid #d4d4d4;
     font-size: 20px;
     background: #fff;
   }
 
-  table th,
-  table td {
+  .table-rr > th,
+  .table-rr > td {
     padding: 20px 10px;
     max-width: 100px;
   }
 
-  table th {
+  .table-rr > th {
     border-bottom: 1px solid #d4d4d4;
   }
 

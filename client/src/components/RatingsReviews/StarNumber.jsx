@@ -40,9 +40,6 @@ class StarNumber extends React.Component {
 	}
 
 	componentDidUpdate(prevProps) {
-		console.log('preProps is: ', prevProps);
-		console.log('Json recomended is: ', JSON.stringify(this.props.recommended));
-		console.log('Json preProps recommended is: ', JSON.stringify(prevProps.recommended));
 			// if (JSON.stringify(this.props.ratings) !== JSON.stringify(prevProps.ratings) && JSON(this.props.recommended) !== JSON(prevProps.recommended)) {
 			if (this.props.id !== prevProps.id) {
 
@@ -93,7 +90,6 @@ class StarNumber extends React.Component {
 		if (this.state.hasError) {
 			return <h1>Star Number goes wrong!</h1>
 		}
-		console.log('props in StarNumber: ', this.props);
 		return (
 			<div className="star-number" id="star-number">
 				<div className="rating-summary-container">
