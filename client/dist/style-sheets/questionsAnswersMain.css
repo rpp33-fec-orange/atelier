@@ -127,15 +127,16 @@
   cursor: pointer;
 }
 
+/* Internal Scroll */
+
 #questionList {
-  max-height: 700px;
+  max-height: 600px;
+  overflow-y: auto;
 }
 
 .answerList {
   max-height: 350px;
-}
-
-.questionItem, .answerItem {
+  width: 90%;
   overflow-y: auto;
 }
 
@@ -178,7 +179,7 @@
   margin: 2%
 } */
 
-.questionsAnswers-container .addQuestionFormModal, .addAnswerFormModal {
+/* .questionsAnswers-container .addQuestionFormModal, .addAnswerFormModal {
   vertical-align: middle;
   z-index: 1000;
   position: absolute;
@@ -186,7 +187,7 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-}
+} */
 
 .questionsAnswers-container #questionAddons #QnAModalForm-subheader {
   font-size: 16px;
@@ -200,11 +201,28 @@
 
 /* .questionsAnswers-container .addQuestionFormModal form, .addAnswerFormModal form  */
 
-#QnAModalForm {
+#modalLayer {
   vertical-align: middle;
-  /* margin: auto; */
-  position: relative;
+  z-index: 900;
+  left: 0%;
+  top: 0%;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  /* margin: 5% 5% 5% 5%; */
+}
+
+#questionAddons .addQuestionForm-modal,
+.addAnswerForm-modal {
+  vertical-align: middle;
+  z-index: 1000;
+  left: 20%;
+  top: 20%;
+  position: fixed;
   margin: 5% 5% 5% 5%;
+  border-color: #ffffff;
 }
 
 #questionAddons #escapeModal{
@@ -214,11 +232,46 @@
   border-color: #fff;
   outline:  #fff;
   box-shadow: none;
-  width: 50px;
-  height: 50px;
+  width: 20px;
+  height: 20px;
   vertical-align: middle;
   margin: auto;
   position: relative;
 }
 
+.addAnswerForm-modal #QnAModalForm button {
+  font-family: Lato;
+  font-weight: 700;
+  font-size: 18px;
+  background-color: white;
+  border: 1.5px solid;
+  border-color: rgb(104, 99, 99);
+}
 
+.addAnswerForm-modal #escapeModal {
+  background: #ffffff;
+  color: rgb(0, 0, 0);
+  border: 0px none;
+  border-color: #fff;
+  outline:  #fff;
+  box-shadow: none;
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  margin: auto;
+  position: relative;
+}
+
+.addAnswerForm-modal #escapeModal svg {
+  width: 20px;
+  height: 20px;
+}
+
+#QnAModalForm label {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+#QnAModalForm button {
+  padding: 1% 1% 1% 1%;
+}

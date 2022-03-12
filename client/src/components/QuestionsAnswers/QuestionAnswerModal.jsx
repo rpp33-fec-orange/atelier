@@ -71,6 +71,8 @@ class QuestionAnswerModal extends React.Component {
             <button id="escapeModal" onClick={() => this.closeModal()}>
               <FontAwesomeIcon icon={faCircleXmark} />
             </button>
+            <br></br>
+            <br></br>
             <h3 id="QnAModalForm-header">{`Add Your ${prompt.type}`}</h3>
             <h4 id="QnAModalForm-subheader">
               {
@@ -84,6 +86,7 @@ class QuestionAnswerModal extends React.Component {
                 `${prompt.productName}: ${prompt.questionBody}`
               }
             </h4>
+            <br></br>
             <form id="QnAModalForm" onSubmit={this.addQuestionAnswer}>
               <label
                 htmlFor="body"
@@ -97,7 +100,7 @@ class QuestionAnswerModal extends React.Component {
                 onChange={this.formHandler}
                 type="text"
                 rows="5"
-                cols="52"
+                cols="60"
                 maxLength="1000"
                 wrap="hard"
                 style={{ display: 'block' }}
@@ -105,6 +108,7 @@ class QuestionAnswerModal extends React.Component {
                 required
               >
               </textarea>
+              <br></br>
               <label
                 htmlFor="nickname"
                 style={{ display: 'block' }}
@@ -124,6 +128,7 @@ class QuestionAnswerModal extends React.Component {
               >
               </input>
               <h5>For privacy reasons, do not use your full name or email address</h5>
+              <br></br>
               <label
                 htmlFor="email"
                 style={{ display: 'block' }}
@@ -146,12 +151,15 @@ class QuestionAnswerModal extends React.Component {
               {
                 prompt.type === 'Answer'
                 &&
-                <button disabled>
-                  UPLOAD PHOTOS
-                </button>
+                <div>
+                  <br></br>
+                  <button disabled>
+                    UPLOAD PHOTOS
+                  </button>
+                </div>
               }
               <br></br>
-              <button>
+              <button id="submitModalForm">
                 {`Submit ${prompt.type}`}
               </button>
             </form>

@@ -432,9 +432,11 @@ class QuestionsAnswers extends React.Component {
     let toRender = [];
 
     const searchQuestions = (string) => {
+      let caseInsensitiveString = string.toLowerCase();
       let results = [];
       allQuestions.forEach(question => {
-        if (question.question_body.includes(string)) {
+        let questionBody = question.question_body.toLowerCase();
+        if (questionBody.includes(caseInsensitiveString)) {
           results.push(question);
         }
       });
