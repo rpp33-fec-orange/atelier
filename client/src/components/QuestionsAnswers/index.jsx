@@ -33,10 +33,23 @@ class QuestionsAnswers extends React.Component {
     this.markQuestionHelpful = this.markQuestionHelpful.bind(this);
     this.markAnswerHelpful = this.markAnswerHelpful.bind(this);
     this.hideSearchResults = this.hideSearchResults.bind(this);
+    this.recordInteraction = this.recordInteraction.bind(this);
   }
 
   componentDidMount() {
     this.loadQuestions();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.id !== prevProps.id) {
+        this.setState({
+          productId: this.props.id,
+          productName: this.props.productName,
+          initialized: false
+        }, () => {
+          this.loadQuestions();
+        });
+    }
   }
 
   loadQuestions() {
@@ -446,6 +459,14 @@ class QuestionsAnswers extends React.Component {
     });
   }
 
+  recordInteraction(e) {
+    this.props.interactions({
+      element: e.target.nodeName,
+      widget: 'Questions & Answers',
+      time: new Date().toISOString()
+    });
+  }
+
   render() {
     let questions = [];
 
@@ -468,12 +489,14 @@ class QuestionsAnswers extends React.Component {
 
     if (this.state.initialized) {
       return (
-        <div id="questionsAndAnswers">
-          <h4>Questions and Answers</h4>
+        <div className="questionsAnswers-container" onClick={this.recordInteraction}>
+          <h4>{`QUESTIONS & ANSWERS`}</h4>
+          <br></br>
           <QuestionSearch
             searchQuestion={this.search}
             hideSearchResults={this.hideSearchResults}
           />
+          <br></br>
           <div id="questionList">
             {
               questions.map(questionObject => {

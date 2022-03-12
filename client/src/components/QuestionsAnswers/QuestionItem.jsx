@@ -52,7 +52,7 @@ class QuestionItem extends React.Component {
       <div className="questionItem" key={question.question_id}>
         <div className="questionMain" style={{display: 'inline-block'}}>
           <span className="questionText">
-            Q: {question.question_body}
+            {`Q: ${question.question_body}`}
           </span>
           <br></br>
           {
@@ -67,12 +67,12 @@ class QuestionItem extends React.Component {
               reportAnswer={this.reportAnswer}
             />
             :
-            <span className="questionDetails">{`by ${question.asker_name}, ${question.question_date}`}</span>
+            <span className="questionDetails">{`     by ${question.asker_name}, ${question.question_date}`}</span>
           }
         </div>
         <div className="questionAction" style={{display: 'inline-block'}}>
           <span className="questionHelpfulness">
-            Helpful?
+            {`Helpful? `}
             {
               !question.marked_helpful
               ?
@@ -82,7 +82,7 @@ class QuestionItem extends React.Component {
               :
               <span className="markQuestionHelpful-marked">Yes</span>
             }
-            {`(${question.question_helpfulness})  |  `}
+            {`(${question.question_helpfulness}) | `}
             <span className="addAnswer" onClick={() => this.handleModal()}>
               Add Answer
             </span>
@@ -92,7 +92,7 @@ class QuestionItem extends React.Component {
               showModal={this.state.showModal}
               addAnswer={this.props.addAnswer}
             />
-            {'  |  '}
+            {' | '}
             {
               !question.reported
               ?

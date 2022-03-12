@@ -41,7 +41,7 @@ class QuestionSearch extends React.Component {
             size="100"
             value={this.state.query}
             onChange={this.handleChange}
-            placeholder="Have a question? Search for answers...">
+            placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS...">
           </input>
           <FontAwesomeIcon type="submit" icon={faMagnifyingGlass} />
         </div>
