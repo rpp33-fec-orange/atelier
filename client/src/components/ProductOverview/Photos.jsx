@@ -265,8 +265,6 @@ class Photos extends React.Component {
     // zoomObj.style.width = aimX + "px";
     // zoomObj.style.height = aimY + "px";
 
-    // 3/10
-
     if (this.state.zoomed) {
       let zoomObj = document.getElementById('zoomed-mainPhoto');
       let mouseX = e.clientX;
@@ -275,9 +273,11 @@ class Photos extends React.Component {
       console.log(mouse);
       console.log('WINDOW INNERWIDTH', window.innerWidth);
       console.log('WINDOW INNERHEIGHT', window.innerHeight);
-      let trim = (window.innerWidth - 1280) / 2;
-      zoomObj.style.left = -mouseX + 'px';
-      zoomObj.style.top = -mouseY + 'px';
+      let trim = (window.innerWidth - 1280);
+      let x = mouseX;
+      let y = mouseY;
+      zoomObj.style.left = -x + 'px';
+      zoomObj.style.top = -y + 'px';
     }
   }
 
