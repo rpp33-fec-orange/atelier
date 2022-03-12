@@ -52,7 +52,6 @@ class YourOutfitRow extends React.Component {
 
     const offsetWidthValue = this.refs.offsetWidth,
     scrollWidthValue = this.refs.scrollWidth;
-    console.log('yourOutfitArray', this.props.yourOutfitArray)
 
     var DOMarray = '';
     if (this.props.yourOutfitArray.length > 0) {

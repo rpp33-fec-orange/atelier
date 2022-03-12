@@ -94,7 +94,7 @@ class App extends React.Component {
   }
 
   handleProductChange(product) {
-    this.setState({ ...this.state, id: product.id, productName: product.name }, () => { console.log('product id updated',product.name ) })
+    this.setState({ ...this.state, id: product.id, productName: product.name }, () => { console.log('product id updated') })
   }
 
   recordInteractions(interactionsObject) {
