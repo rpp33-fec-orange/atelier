@@ -8,7 +8,7 @@ class ProductOverview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: props.id,
+      id: null,
       productById: {},
       productStylesById: {},
       styles: [],
@@ -17,6 +17,7 @@ class ProductOverview extends React.Component {
     this.productHandler = this.productHandler.bind(this);
     this.stylesHandler = this.stylesHandler.bind(this);
     this.searchHandler = this.searchHandler.bind(this);
+    this.recordInteractions = this.recordInteractions.bind(this);
   }
 
   productHandler() {
@@ -59,42 +60,72 @@ class ProductOverview extends React.Component {
     })
   }
 
-  searchHandler(keyword) {
+  searchHandler(id) {
+    // $.ajax({
+    //   context: this,
+    //   type: 'POST',
+    //   url: '/search',
+    //   data: JSON.stringify({ keyword }),
+    //   success: function (success) {
+    //     // console.log('product overview searchHandler ajax POST success');
+    //   },
+    //   error: function (error) {
+    //     console.log('product overview searchHandler ajax POST error: ', error);
+    //   },
+    //   contentType: "application/json",
+    // })
     $.ajax({
       context: this,
-      type: 'POST',
-      url: '/search',
-      data: JSON.stringify({ keyword }),
+      type: 'GET',
+      url: `/products/${id}`,
       success: function (success) {
-        // console.log('product overview searchHandler ajax POST success');
+        // console.log('product overview productHandler ajax GET success');
+        this.setState({
+          productById: success,
+        }, () => {
+          this.stylesHandler();
+        })
       },
       error: function (error) {
-        console.log('product overview searchHandler ajax POST error: ', error);
+        console.log('product overviewnproductHandler ajax GET error: ', error);
       },
       contentType: "application/json",
     })
     // alert(`${keyword} was searched!`);
-    alert('Search feature coming in next update.')
+    // alert('Search feature coming in next update.');
+  }
+
+  recordInteractions(e) {
+    this.props.interactions({
+      element: e.target.nodeName,
+      widget: 'Product Overview',
+      time: new Date().toISOString()
+    });
   }
 
   componentDidMount() {
-    this.productHandler();
+    this.setState({
+      id: this.props.id
+    }, () => {
+      this.productHandler();
+    });
   }
 
-  // componentDidUpdate(prevProps) {
-  //   if (this.props.id !== prevProps.id) {
-  //     this.setState({
-  //       id: this.props.id,
-  //       initialized: false
-  //     })
-  //   }
-  //   this.productHandler();
-  // }
+  componentDidUpdate(prevProps) {
+    if (this.props.id !== prevProps.id) {
+      this.setState({
+        id: this.props.id,
+        initialized: false
+      }, () => {
+        this.productHandler();
+      })
+    }
+  }
 
   render() {
     if (this.state.initialized) {
       return (
-        <div class="index-container" id="productOverview" onClick={this.props.poClick}>
+        <div class="index-container" id="productOverview" onClick={this.recordInteractions}>
           <div class="index-item index-item-1">
             <TopBar data-testid="topbar?" searchHandler={this.searchHandler} />
           </div>

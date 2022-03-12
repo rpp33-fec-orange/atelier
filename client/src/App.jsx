@@ -93,8 +93,8 @@ class App extends React.Component {
     })
   }
 
-  handleProductChange(productId) {
-    this.setState({ ...this.state, id: productId }, () => { console.log('product id updated') })
+  handleProductChange(product) {
+    this.setState({ ...this.state, id: product.id, productName: product.name }, () => { console.log('product id updated') })
   }
 
   recordInteractions(interactionsObject) {
@@ -103,7 +103,7 @@ class App extends React.Component {
       type: 'POST',
       url: `/interactions`,
       data: interactionsObject,
-      success : () => {
+      success: () => {
         console.log('Interactions POST request successful')
       },
       error: (err) => {
@@ -111,7 +111,6 @@ class App extends React.Component {
       }
     })
 
-    // console.log(‘ProductOverview’, e.target.nodeName, new Date().toISOString());
   }
 
   render() {

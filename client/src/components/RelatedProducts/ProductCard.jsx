@@ -37,7 +37,7 @@ class RelatedProductCard extends React.Component {
         <div className = "related-product-card">
             <AiOutlineStar className = 'toggle-button' onClick = {(e) => {this.showModal()}}/>
             <RelatedProductModal parentProduct = {parentProduct} relatedProduct = {relatedProduct} onClose = {this.showModal} show = {this.state.showModal} initialized = {this.props.initialized}/>
-            <img className = 'related-product-image' src = {relatedProduct.photos[0].url || photoUnavailable} alt = {relatedProduct.name} onClick = {() => {this.handleclick(relatedProduct.id)}}/>
+            <img className = 'related-product-image' src = {relatedProduct.photos[0].url || photoUnavailable} alt = {relatedProduct.name} onClick = {() => {this.handleclick(relatedProduct)}}/>
             <div className = 'related-product-category'>{relatedProduct.category}</div>
             <div className = 'related-product-name'>{relatedProduct.name}</div>
             <div className = 'related-product-price'>${relatedProduct.default_price}</div>
