@@ -141,7 +141,7 @@ class Styles extends React.Component {
 
   reviewsClick() {
     window.scrollTo({
-      top: 1882,
+      top: 2000,
       left: 0,
       behavior: 'smooth'
     });
