@@ -1,10 +1,11 @@
 const express = require('express');
 const { getProducts, getProductById, getProductStylesById } = require('./helpers/products.js');
 const { addToCart, getCart } = require('./helpers/cart.js');
-const { getRelatedStylesById, getRelatedProductsById, getRelatedProductsReviewMeta} = require('./helpers/relatedItems.js');
+const { getRelatedStylesById, getRelatedProductsById, getRelatedProductsReviewMeta } = require('./helpers/relatedItems.js');
 const { getQuestionsByProductId, submitQuestion, submitAnswer, markQuestionHelpful, markAnswerHelpful, reportQuestion, reportAnswer } = require('./helpers/questions.js');
 // const getReviewsByID = require('./helpers/reviews.js').getReviewsByID;
 const { getReviewsByID, getReviewsMeta, postReview, putReview, putReviewReported } = require('./helpers/reviews.js');
+const { recordInteractions } = require('./helpers/interactions.js');
 
 let app = express();
 
@@ -270,6 +271,17 @@ app.put('/reviews/:review_id/report', function (req, res) {
       res.status(500).send(error);
     })
 });
+
+app.post('/interactions', function (req, res) {
+  let interactionsObj = req.body;
+  recordInteractions(interactionsObj)
+    .then((success) => {
+      res.status(201).end();
+    })
+    .catch((error) => {
+      res.status(500).end();
+    })
+})
 
 app.get('*', function (req, res) {
   res.end(`
