@@ -29,7 +29,6 @@ class Rating extends React.PureComponent {
 
   renderStars() {
     var roundedNum = this.roundToQuater(this.props.num);  // e.g: 3.25
-    console.log('props.num is: ', this.props.num);
     var mainNum = Math.floor(roundedNum);
     var leftoverNum = roundedNum - mainNum;
     var leftoverNumStr = JSON.stringify(leftoverNum);
