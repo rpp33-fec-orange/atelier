@@ -50,7 +50,19 @@ class AnswerList extends React.Component {
           </div>
         </div>
         <span className="answerActions">
-          {`by ${answer.answerer_name}, ${answer.date} | Helpful? `}
+          {`by `}
+          {
+            (answer.answerer_name === 'Seller' || answer.answerer_name === 'seller')
+            ?
+            <span className="answererName-seller">
+              {`${answer.answerer_name}`}
+            </span>
+            :
+            <span className="answererName">
+              {`${answer.answerer_name}`}
+            </span>
+          }
+          {`, ${answer.date} | Helpful? `}
           {
             !answer.marked_helpful
             ?
@@ -60,7 +72,7 @@ class AnswerList extends React.Component {
             :
             <span className="markAnswerHelpful-marked">Yes</span>
           }
-          {`(${answer.helpfulness}) | `}
+          {` (${answer.helpfulness}) | `}
           {
             !answer.reported
             ?

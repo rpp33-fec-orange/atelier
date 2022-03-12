@@ -67,7 +67,9 @@ class QuestionItem extends React.Component {
               reportAnswer={this.reportAnswer}
             />
             :
-            <span className="questionDetails">{`     by ${question.asker_name}, ${question.question_date}`}</span>
+            <span className="questionDetails">
+              {`     by ${question.asker_name}, ${question.question_date}`}
+            </span>
           }
         </div>
         <div className="questionAction" style={{display: 'inline-block'}}>
@@ -82,7 +84,7 @@ class QuestionItem extends React.Component {
               :
               <span className="markQuestionHelpful-marked">Yes</span>
             }
-            {`(${question.question_helpfulness}) | `}
+            {` (${question.question_helpfulness}) | `}
             <span className="addAnswer" onClick={() => this.handleModal()}>
               Add Answer
             </span>

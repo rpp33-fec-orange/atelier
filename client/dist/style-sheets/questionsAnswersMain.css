@@ -7,7 +7,7 @@
   padding-right: 12.5%;
 }
 
-.questionsAnswers-container input {
+.questionsAnswers-container input, textarea {
   font-family: Lato;
   font-weight: 700;
   font-size: 18px;
@@ -15,6 +15,7 @@
 
 /* Title */
 
+.questionsAnswers-container h3,
 .questionsAnswers-container h4 {
   font-size: 22px;
 }
@@ -74,7 +75,15 @@
   width: 79%;
 }
 
-.questionItem, .answerItem, .answers-container {
+.questionMain {
+  padding-bottom: 1%;
+  vertical-align: top;
+}
+
+.answerItem,
+.answers-container,
+.collapseAnswers,
+.loadMoreAnswers {
   padding-top: 1%;
   padding-bottom: 1%;
   vertical-align: top;
@@ -84,9 +93,15 @@
   width: 21%;
 }
 
+.answererName-seller {
+  font-weight: 700;
+  color:rgb(104, 99, 99);
+}
+
 /* Answers Container */
 
-.answerFlag, .answerList {
+.answerFlag,
+.answerList {
   vertical-align: top;
 }
 
@@ -100,17 +115,40 @@
   font-size: 12px;
 }
 
-.collapseAnswers, .loadMoreAnswers {
+.collapseAnswers,
+.loadMoreAnswers {
   font-weight: 700;
   font-size: 12px;
   color:rgb(104, 99, 99);
 }
 
-.collapseAnswers :hover, .loadMoreAnswers :hover {
+.collapseAnswers :hover,
+.loadMoreAnswers :hover {
   cursor: pointer;
 }
 
+#questionList {
+  max-height: 700px;
+}
+
+.answerList {
+  max-height: 350px;
+}
+
+.questionItem, .answerItem {
+  overflow-y: auto;
+}
+
 /* Question Addons */
+
+.addAnswer,
+.markQuestionHelpful-unmarked,
+.reportQuestion-unreported,
+.markAnswerHelpful-unmarked,
+.reportAnswer-unreported {
+  text-decoration: underline;
+  cursor: pointer;
+}
 
 #questionAddons button,
 #questionAddons div {
@@ -132,3 +170,55 @@
 #questionAddons :hover {
   cursor: pointer;
 }
+
+/* Modal */
+
+
+/* .modalLayer .addQuestionFormModal {
+  margin: 2%
+} */
+
+.questionsAnswers-container .addQuestionFormModal, .addAnswerFormModal {
+  vertical-align: middle;
+  z-index: 1000;
+  position: absolute;
+  float: left;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.questionsAnswers-container #questionAddons #QnAModalForm-subheader {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.questionsAnswers-container .questionAction #QnAModalForm-subheader {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+/* .questionsAnswers-container .addQuestionFormModal form, .addAnswerFormModal form  */
+
+#QnAModalForm {
+  vertical-align: middle;
+  /* margin: auto; */
+  position: relative;
+  margin: 5% 5% 5% 5%;
+}
+
+#questionAddons #escapeModal{
+  background: #ffffff;
+  color: rgb(0, 0, 0);
+  border: 0px none;
+  border-color: #fff;
+  outline:  #fff;
+  box-shadow: none;
+  width: 50px;
+  height: 50px;
+  vertical-align: middle;
+  margin: auto;
+  position: relative;
+}
+
+

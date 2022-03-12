@@ -67,12 +67,12 @@ class QuestionAnswerModal extends React.Component {
     if (showModal) {
       return (
         <div id="modalLayer">
-          <div id={`add${prompt.type}Form-modal`}>
+          <div className={`add${prompt.type}Form-modal`}>
             <button id="escapeModal" onClick={() => this.closeModal()}>
               <FontAwesomeIcon icon={faCircleXmark} />
             </button>
-            <h3>{`Add Your ${prompt.type}`}</h3>
-            <h4>
+            <h3 id="QnAModalForm-header">{`Add Your ${prompt.type}`}</h3>
+            <h4 id="QnAModalForm-subheader">
               {
                 prompt.type === 'Question'
                 &&
@@ -84,7 +84,7 @@ class QuestionAnswerModal extends React.Component {
                 `${prompt.productName}: ${prompt.questionBody}`
               }
             </h4>
-            <form onSubmit={this.addQuestionAnswer}>
+            <form id="QnAModalForm" onSubmit={this.addQuestionAnswer}>
               <label
                 htmlFor="body"
                 style={{ display: 'block' }}
@@ -146,7 +146,7 @@ class QuestionAnswerModal extends React.Component {
               {
                 prompt.type === 'Answer'
                 &&
-                <button>
+                <button disabled>
                   UPLOAD PHOTOS
                 </button>
               }
