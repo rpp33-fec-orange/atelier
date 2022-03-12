@@ -282,12 +282,12 @@
   right: 1rem;
   }
   .disable {
-  opacity: 0.5;
+   opacity: 0;
    pointer-events: none;
   }
 
   .disabled {
-    opacity: 0.5;
+    opacity: 0;
     pointer-events: none;
   }
 
@@ -365,6 +365,46 @@
   left: 0px;
   display: flex;
 }
+
+.your-outfit-card {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: 5px;
+  text-align: center;
+  border: 1px solid #5b5b5e;
+  align-content: space-between;
+  font-family: Poppins;
+}
+
+.add-button-text {
+  display: flex;
+  flex-direction: row;
+  color: grey;
+  font-size: 15px;
+  margin: 2px;
+  align-items: flex-
+}
+
+.add-button-image {
+  height: 380px;
+  width: 250px;
+  /* display: inline-block; */
+  line-height: 100px;
+  z-index: 1;
+  align-items: flex-start
+}
+
+.addOutfit .disable {
+  opacity: 0;
+  pointer-events: none;
+ }
+
+ .addOutfit .disabled {
+   opacity: 0;
+   pointer-events: none;
+ }
 
 
 

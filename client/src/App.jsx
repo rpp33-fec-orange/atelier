@@ -93,8 +93,8 @@ class App extends React.Component {
     })
   }
 
-  handleProductChange(productId) {
-    this.setState({ ...this.state, id: productId }, () => { console.log('product id updated') })
+  handleProductChange(product) {
+    this.setState({ ...this.state, id: product.id, productName: product.name }, () => { console.log('product id updated',product.name ) })
   }
 
   recordInteractions(interactionsObject) {
@@ -110,8 +110,6 @@ class App extends React.Component {
         console.log('err', err)
       }
     })
-
-    // console.log(‘ProductOverview’, e.target.nodeName, new Date().toISOString());
   }
 
   render() {

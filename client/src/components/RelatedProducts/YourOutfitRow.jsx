@@ -52,6 +52,7 @@ class YourOutfitRow extends React.Component {
 
     const offsetWidthValue = this.refs.offsetWidth,
     scrollWidthValue = this.refs.scrollWidth;
+    console.log('yourOutfitArray', this.props.yourOutfitArray)
 
     var DOMarray = '';
     if (this.props.yourOutfitArray.length > 0) {
@@ -67,7 +68,7 @@ class YourOutfitRow extends React.Component {
           <div className = 'addOutfit-card'>
             <AddtoOutfitCard handleClick = {this.handleAddOutfit}/>
           </div>
-          <div className={`btn prev ${this.state.prevDisable ? "disable" : ""}`} disabled={this.state.prevDisable}
+          <div className={`btn addOutfit prev ${this.state.prevDisable ? "disable" : ""}`} disabled={this.state.prevDisable}
             onClick={() => {
               this.refs.scrollLeft -= offsetWidthValue / 2;
               this.checkButtons(offsetWidthValue, scrollWidthValue);
@@ -76,7 +77,7 @@ class YourOutfitRow extends React.Component {
           <div className = 'outfit-only-container'>
           {DOMarray}
           </div>
-          <div className={`btn next ${this.state.nextDisable ? "disable" : ""}`} disabled={this.state.nextDisable}
+          <div className={`btn addOutfit next ${this.state.nextDisable ? "disable" : ""}`} disabled={this.state.nextDisable}
             onClick={() => {
               this.refs.scrollLeft += offsetWidthValue / 2;
               this.checkButtons(offsetWidthValue, scrollWidthValue);
