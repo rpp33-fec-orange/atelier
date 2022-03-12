@@ -35,6 +35,24 @@ class StarList extends React.Component {
 		}, this.calPercentWidth);
 	}
 
+	componentDidUpdate(preProps) {
+		if (this.props.ratings !== preProps.ratings) {
+			var one = (this.props.ratings[1] === undefined) ? 0 : this.props.ratings[1];
+		var two = (this.props.ratings[2] === undefined) ? 0 : this.props.ratings[2];
+		var three = (this.props.ratings[3] === undefined) ? 0 : this.props.ratings[3];
+		var four = (this.props.ratings[4] === undefined) ? 0 : this.props.ratings[4];
+		var five = (this.props.ratings[5] === undefined) ? 0 : this.props.ratings[5];
+
+		this.setState({
+			one: one,
+			two: two,
+			three: three,
+			four: four,
+			five: five
+		}, this.calPercentWidth);
+		}
+	}
+
 	calPercentWidth() {
 		var one = parseInt(this.state.one);
 		var two = parseInt(this.state.two);

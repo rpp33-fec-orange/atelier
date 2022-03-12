@@ -42,22 +42,19 @@ class RatingsReviews extends React.Component {
     this.setState({
       id: id
     });
-    this.getReviewsByIDHandler(id, 'newest');
-    this.getReviewsByIDHandler(id, 'helpful');
-    this.getReviewsByIDHandler(id, 'relevant');
-    this.getReviewsMetaHandler(id);
+    this.getReviewsByIDHandler(id);
   }
 
   componentDidUpdate(prevProps) {
+    console.log('previous product ID inside RatingsReviews componentDidUpdate is: ', prevProps.id);
+    console.log('current product ID inside RatingsReviews componentDidUpdate is: ', this.props.id)
+
     if (this.props.id !== prevProps.id) {
       var id = this.props.id;
       this.setState({
         id: id
       });
-      this.getReviewsByIDHandler(id, 'newest');
-      this.getReviewsByIDHandler(id, 'helpful');
-      this.getReviewsByIDHandler(id, 'relevant');
-      this.getReviewsMetaHandler(id);
+      this.getReviewsByIDHandler(id);
     }
   }
 
@@ -67,11 +64,12 @@ class RatingsReviews extends React.Component {
     });
   }
 
-  getReviewsByIDHandler(id, sort) {
+  getReviewsByIDHandler(id) {
     // var url = `/reviews/${this.state.id}`;
     // product_id=64620
     // var sort = this.state.sort;
     var count = 10;
+    var sort = 'newest'
     var id = this.props.id;
     var url = `/reviews/?sort=${sort}&count=${count}&product_id=${id}`;
     console.log('ajax url is: ', url);
@@ -82,29 +80,53 @@ class RatingsReviews extends React.Component {
       type: "GET",
       url: url,
       success: (data) => {
-        console.log('review ajax success! data.results is: ', data.results);
-        if (sort === 'newest') {
-          this.setState({
-            // reviews: data.results,
-            count: data.count,
-            reviewReady: true,
-            newestReviews: data.results
-          });
-        } else if (sort === 'helpful') {
-          this.setState({
-            // reviews: data.results,
-            count: data.count,
-            reviewReady: true,
-            helpfulReviews: data.results
-          });
-        } else if (sort === 'relevant') {
-          this.setState({
-            reviews: data.results,
-            count: data.count,
-            reviewReady: true,
-            relevantReviews: data.results
-          });
-        }
+        console.log('review ajax newest success! data.results is: ', data.results);
+        this.setState({
+          // reviews: data.results,
+          count: data.count,
+          newestReviews: data.results
+        });
+        sort = 'helpful';
+        url = `/reviews/?sort=${sort}&count=${count}&product_id=${id}`;
+        console.log('helpful ajax url is: ', url);
+        $.ajax({
+          context: this,
+          type: "GET",
+          url: url,
+          success: (data) => {
+            console.log('review ajax helplful success! data.results is: ', data.results);
+            this.setState({
+              // reviews: data.results,
+              count: data.count,
+              helpfulReviews: data.results
+            });
+            sort = 'relevant';
+            url = `/reviews/?sort=${sort}&count=${count}&product_id=${id}`;
+            console.log('relevant ajax url is: ', url);
+            $.ajax({
+              context: this,
+              type: "GET",
+              url: url,
+              success: (data) => {
+                console.log('review ajax relevant success! data.results is: ', data.results);
+                this.setState({
+                  // reviews: data.results,
+                  count: data.count,
+                  relevantReviews: data.results,
+                  reviews: data.results,
+                  reviewReady: true
+                });
+              },
+              error: (error) => {
+                console.log('relevant reviews ajax error!');
+              }
+            });
+          },
+          error: (error) => {
+            console.log('helpful reviews ajax error!');
+          }
+        })
+
         //  else {
         //   this.setState({
         //     reviews: data.results,
@@ -112,13 +134,13 @@ class RatingsReviews extends React.Component {
         //     reviewReady: true,
         //   });
         // }
-      },
-      error: (error) => {
-        // console.log('error from get reviews request: ', error);
-      }
-    })
+
+          // console.log('error from get reviews request: ', error);
+        }
+      })
       .done(function () {
         // console.log('get reviews request is done');
+        this.getReviewsMetaHandler(this.state.id);
       });
   }
 
@@ -287,7 +309,8 @@ class RatingsReviews extends React.Component {
     // } else {
     //   list = this.state.newestReviews;
     // }
-    var count = this.state.count;
+    // var count = this.state.count;
+    var count = list.length;
     var meta_characteristics = this.state.meta_characteristics;
     var meta_recommended = this.state.meta_recommended;
     var meta_ratings = this.state.meta_ratings;
