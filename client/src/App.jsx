@@ -98,7 +98,7 @@ class App extends React.Component {
   }
 
   recordInteractions(interactionsObject) {
-
+    console.log('interaction obj: ', interactionsObject);
     $.ajax({
       type: 'POST',
       url: `/interactions`,

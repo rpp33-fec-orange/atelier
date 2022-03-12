@@ -27,7 +27,7 @@ class StarRating extends React.Component {
 	}
 
 	renderStars() {
-		if (this.props.num === 0) {
+		if (this.props.num === 0 || this.props.num === undefined) {
 			var allGrey = [];    // store all 5 grey stars just in case
 			for (var j = 0; j < 5; j++) {
 				allGrey.push(<img className="star" src={this.state.greyStar} key={j} />);

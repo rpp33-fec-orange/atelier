@@ -9,9 +9,24 @@ class SizeSlider extends React.Component {
 		};
 	}
 
-	render() {
+	componentDidMount() {
 		var size = this.props.size.Fit.value;
-		var percentSize = Math.round((size / 5) * 100);
+		this.setState({
+			size: size
+		}, () => {
+			var percentSize = Math.round((size / 5) * 100);
+			this.setState({
+				percentSize: percentSize
+			});
+		});
+		// var percentSize = Math.round((size / 5) * 100);
+	}
+	render() {
+		// var size = this.props.size.Fit.value;
+		// var percentSize = Math.round((size / 5) * 100);
+
+		var size = this.state.size;
+		var percentSize = this.state.percentSize;
 
 		return (
 			<div className="size-slider" id="size-slider">
