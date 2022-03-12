@@ -50,13 +50,13 @@
     background: #fff;
   }
 
-  .table-rr > th,
-  .table-rr > td {
+  .table-rr th,
+  .table-rr td {
     padding: 20px 10px;
     max-width: 100px;
   }
 
-  .table-rr > th {
+  .table-rr th {
     border-bottom: 1px solid #d4d4d4;
   }
 
