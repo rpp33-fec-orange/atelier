@@ -55,6 +55,7 @@ class App extends React.Component {
       // var state = e.state;
       if (e.state !== null) {
         this.setState({ ...this.state, id: e.state })
+
       }
     });
   }

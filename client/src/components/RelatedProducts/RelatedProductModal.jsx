@@ -68,24 +68,19 @@ class RelatedProductModal extends React.Component {
         <div className = 'related-product-modal'>
           <div className = 'comparing' >Comparing</div>
           <div className = 'related-product-modal-content'>
-            <div className = 'related-product-modal-table-header'>
-              <table>
-                <tbody>
-                  <tr >
+            <div >
+              <table className = 'rp-modal-table'>
+                <tbody className = 'rp-modal-table'>
+                  <tr className = 'rp-modal-table'>
                     <th className="related-product-modal-col related-product-modal-col-1">{parentProduct.name}</th>
                     <th className="related-product-modal-col related-product-modal-col-2"></th>
                     <th className="related-product-modal-col related-product-modal-col-3">{relatedProduct.name}</th>
                   </tr>
                 </tbody>
-              </table>
+              </table >
             </div>
-            <div className = 'related-product-modal-table-body'>
+            <div className = 'related-product-modal-table-body' font-weight= 'bold'>
               <table>
-                <tfoot className = 'related-product-modal-table-footer'>
-                  <tr >
-                    <button className = 'related-product-modal-close-button' onClick = {(e) => {this.onClose()}}>Close</button>
-                  </tr>
-                </tfoot>
                 <tbody>
                   {combinedFeatures.map((feature) => {
                     return (<tr key = {feature.feature} >
@@ -95,6 +90,11 @@ class RelatedProductModal extends React.Component {
                     </tr>)
                   })}
                 </tbody>
+                <tfoot className = 'related-product-modal-table-footer'>
+                  <tr >
+                    <button className = 'related-product-modal-close-button' onClick = {(e) => {this.onClose()}}>Close</button>
+                  </tr>
+                </tfoot>
               </table>
             </div>
           </div>
