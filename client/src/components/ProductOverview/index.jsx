@@ -28,6 +28,8 @@ class ProductOverview extends React.Component {
         // console.log('product overview productHandler ajax GET success');
         this.setState({
           productById: success,
+        }, () => {
+          this.stylesHandler();
         })
       },
       error: function (error) {
@@ -77,20 +79,17 @@ class ProductOverview extends React.Component {
 
   componentDidMount() {
     this.productHandler();
-    this.stylesHandler();
   }
 
-  // componentDidUpdate(prevProps) {
-  //   if (this.props.id !== prevProps.id) {
-  //     this.setState({
-  //       id: this.props.id,
-  //       initialized: false
-  //     })
-  //   }
-  //   this.productHandler();
-  //   this.stylesHandler()
-  //   // this.searchHandler();
-  // }
+  componentDidUpdate(prevProps) {
+    if (this.props.id !== prevProps.id) {
+      this.setState({
+        id: this.props.id,
+        initialized: false
+      })
+    }
+    this.productHandler();
+  }
 
   render() {
     if (this.state.initialized) {

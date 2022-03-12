@@ -14,7 +14,8 @@ class App extends React.Component {
       initialized: false,
       rating: 0,
       currentStyle: null,
-      yourOutfitArray: []
+      yourOutfitArray: [],
+      count: 0
     }
     this.productsHandler = this.productsHandler.bind(this);
     this.handleRating = this.handleRating.bind(this);
