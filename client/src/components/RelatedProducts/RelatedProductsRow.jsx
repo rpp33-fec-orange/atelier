@@ -55,21 +55,25 @@ class RelatedProductsRow extends React.Component {
         );
       });
       return (
-        <div className = 'related-products-container' ref = {(el) => {this.refs  = el; console.log('el', el);}}>
-                <div className={`btn prev ${this.state.prevDisable ? "disable" : ""}`} disabled={this.state.prevDisable}
-        onClick={() => {
-          this.refs.scrollLeft -= offsetWidthValue / 2;
-          this.checkButtons(offsetWidthValue, scrollWidthValue);
-        }}>{'<'}</div>
-          <div className = 'products-only-container' >
-            {DOMarray}
+        // <div className = 'slider'>
+          <div className = 'related-products-container' ref = {(el) => {this.refs  = el;}}>
+            <div className={`btn prev ${this.state.prevDisable ? "disable" : ""}`} disabled={this.state.prevDisable}
+              onClick={() => {
+                this.refs.scrollLeft -= offsetWidthValue / 2;
+                this.checkButtons(offsetWidthValue, scrollWidthValue);
+              }}>&#10094;
+            </div>
+            <div className = 'products-only-container' >
+              {DOMarray}
+            </div>
+            <div className={`btn next ${this.state.nextDisable ? "disable" : ""}`} disabled={this.state.nextDisable}
+              onClick={() => {
+                this.refs.scrollLeft += offsetWidthValue / 2;
+                this.checkButtons(offsetWidthValue, scrollWidthValue);
+              }}>&#10095;
+            </div>
           </div>
-          <div className={`btn next ${this.state.nextDisable ? "disable" : ""}`} disabled={this.state.nextDisable}
-            onClick={() => {
-              this.refs.scrollLeft += offsetWidthValue / 2;
-              this.checkButtons(offsetWidthValue, scrollWidthValue);
-            }}>{'>'}</div>
-        </div>
+        // </div>
       )
     } else {
       return (
