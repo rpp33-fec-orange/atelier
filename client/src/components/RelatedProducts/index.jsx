@@ -19,6 +19,7 @@ class RelatedProducts extends React.Component {
     this.fetchParentProductData = this.fetchParentProductData.bind(this);
     this.fetchParentProductStyles = this.fetchParentProductStyles.bind(this);
     this.fetchRelatedProductsData = this.fetchRelatedProductsData.bind(this);
+    this.recordInteraction = this.recordInteraction.bind(this);
   }
 
   fetchParentProductData () {
@@ -105,11 +106,13 @@ class RelatedProducts extends React.Component {
     }
   }
 
+
+
   render() {
 
     if (this.state.initialized) {
       return (
-        <div className = 'related-products-and-items'>
+        <div className = 'related-products-and-items' onClick = {(e) => {this.props.interactions}}>
           <div className = "related-products-row">
             <div className = 'heading'>Related Products</div>
             <RelatedProductsRow relatedProductsIds = {this.state.relatedProductsIds} parentProduct = {this.state.parentProduct} relatedProductsInfo = {this.state.relatedProductsInfo} handleProductChange = {this.props.handleProductChange} initialized = {this.state.initialized}/>

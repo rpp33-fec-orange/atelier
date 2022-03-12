@@ -1,4 +1,4 @@
-.related-product-modal-actions {
+ .related-product-modal-actions {
   border-top: 1px solid #ccc;
   background: #eee;
   padding: 0.5rem 1rem;
@@ -15,12 +15,11 @@
 
 .related-product-modal {
   position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50% -50%);
-  width: 650px;
-  height: 300px;
-  background-color: grey;
+  left: 30%;
+  top: 30%;
+  width: 500px;
+  height: 250px;
+  background-color: white;
   z-index: 1000;
   border: 1px solid #1e1d51;
 
@@ -44,14 +43,15 @@
   position: relative;
   font-family: Poppins;
   font-weight: bold;
-  font-size: 12px;
+  font-size: 20px;
 }
 
 .related-product-modal-table-body {
   grid-area: 2/1/3/2;
   overflow: auto;
   font-family: Poppins;
-  /* font-size: 8px; */
+  font-size: 15px;
+  text-align: center;
   color: black;
 }
 
@@ -63,6 +63,7 @@
   line-height: 1;
   font-family: Arimo;
   cursor: pointer;
+  text-align: center;
 }
 
 .related-product-modal-table-body::-webkit-scrollbar {
@@ -74,14 +75,17 @@
 }
 
 .related-product-modal-col-1 {
+  text-align: center;
   width: 175px;
 }
 
 .related-product-modal-col-2 {
+  text-align: center;
   width: 150px;
 }
 
 .related-product-modal-col-3 {
+  text-align: center;
   width: 175px;
 }
 
@@ -100,47 +104,6 @@
 .related-products-and-items {
   display: flex;
   flex-direction: column;
-}
-
-.related-product-price,
-.related-product-category {
-  color: grey;
-  font-size: 15px;
-  margin: 2px;
-}
-
-.related-product-name {
-  color: black;
-  font-size: 20px;
-  margin: 2px;
-  /* font-weight: bold; */
-}
-
-.related-product-image {
-  height: 300px;
-  width: 250px;
-  /* display: inline-block; */
-  line-height: 100px;
-  z-index: 1;
-}
-
-.rp-rating-container {
-	width: 100px;
-	height: 25px;
-  position: relative;
-	display: flex;
-}
-
-.rp-star {
-	width: 100%;
-	height: 15px;
-}
-
-.rp-filledStars {
-	position: absolute;
-    top: 5px;
-    left: 0px;
-		display: flex;
 }
 
 .your-outfit-row {
@@ -165,14 +128,43 @@
   justify-content: space-around;
 }
 
+.btn {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  box-shadow: 0 0 6.1px 0.9px grey;
+  padding: 5px;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  background: grey;
+  text-align: center;
+  color: white;
+  border-radius: 50%;
+  align-self: center;
+  }
+  .prev {
+  left: 1rem;
+  }
+  .next {
+  right: 1rem;
+  }
+  .disable {
+  opacity: 0.5;
+   pointer-events: none;
+  }
+
+  .disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
 .outfit-only-container {
   display: flex;
   flex-direction: row;
   vertical-align: middle;
-  white-space: nowrap;
-  overflow-x: auto;
-  overflow-y: hidden;
-  justify-content: space-around;
+  align-items: center;
+  width: 100%;
 }
 
 .your-outfit-card {
@@ -202,15 +194,21 @@
 
 .your-outfit-price,
 .your-outfit-category {
+  display: flex;
+  flex-direction: row;
   color: grey;
   font-size: 15px;
   margin: 2px;
+  align-items: flex-start
 }
 
 .your-outfit-name {
+  display: flex;
+  flex-direction: row;
   color: black;
   font-size: 20px;
   margin: 2px;
+  align-items: flex-start
   /* font-weight: bold; */
 }
 
@@ -218,42 +216,11 @@
 .add-button-image {
   height: 300px;
   width: 250px;
-  display: inline-block;
+  /* display: inline-block; */
   line-height: 100px;
   z-index: 1;
+  align-items: flex-start
 }
-
-/* .prev, .next {
-  flex-direction: column;
-  align-self: center;
-  vertical-align: middle;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  height: 100%;
-  margin: 5px auto;
-  cursor: pointer;
-  color: black;
-  transition: 0.6s ease;
-}
-.next {
-  margin-left: 5px;
-}
-.prev {
-  margin-right: 5px;
-}
-.prev:hover, .next:hover {
-  color: white;
-  height: 100%;
-  background-color: rgba(0,0,0,0.8);
-} */
-
-
-
-
-
-
-
-
 
 /* OVERALL WIDGET STYLINGS */
 
@@ -264,7 +231,7 @@
 
 .related-products-row {
   display: flex;
-  width: 75%;
+  width: 72.5%;
   margin: 5px;
   margin-left: 12.5%;
   margin-right: 12.5%;
@@ -277,7 +244,7 @@
 .related-products-container {
   display: flex;
   width: 100%;
-  flex-direction: row;
+  flex-direction: column;
   vertical-align: middle;
   white-space: nowrap;
   overflow-x: auto;
@@ -289,8 +256,40 @@
   display: flex;
   flex-direction: row;
   width: 100%;
-  margin-left: 20px;
+  margin-left: 5px;
+  font-family: Poppins;
+  font-size: 25px;
 }
+
+.btn {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  box-shadow: 0 0 6.1px 0.9px grey;
+  padding: 5px;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  background: grey;
+  text-align: center;
+  color: white;
+  border-radius: 50%;
+  }
+  .prev {
+  left: 1rem;
+  }
+  .next {
+  right: 1rem;
+  }
+  .disable {
+  opacity: 0.5;
+   pointer-events: none;
+  }
+
+  .disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 
 .products-only-container {
   display: flex;
@@ -314,16 +313,22 @@
 
 .related-product-price,
 .related-product-category {
+  display: flex;
+  flex-direction: row;
   color: grey;
   font-size: 15px;
   margin: 2px;
+  align-items: flex-start
 }
 
 .related-product-name {
+  display: flex;
+  flex-direction: row;
   color: black;
   font-size: 20px;
   margin: 2px;
-  /* font-weight: bold; */
+  align-items: flex-start;
+  font-weight: bold;
 }
 
 .related-product-image {
@@ -332,6 +337,14 @@
   /* display: inline-block; */
   line-height: 100px;
   z-index: 1;
+  align-items: flex-start
+}
+
+.rp-rating-container {
+	width: 100px;
+	height: 25px;
+  position: relative;
+	display: flex;
 }
 
 .rp-rating-container {
@@ -348,62 +361,13 @@
 
 .rp-filledStars {
 	position: absolute;
-    top: 5px;
-    left: 0px;
-		display: flex;
+  top: 5px;
+  left: 0px;
+  display: flex;
 }
 
-/* .prev, .next {
-  position: absolute;
-  box-shadow: 0 0 6.1px 0.9px grey;
-  padding: 5px;
-  cursor: pointer;
-  width: 20px;
-  height: 20px;
-  background: grey;
-  text-align: center;
-  color: white;
-  border-radius: 50%;
-}
-.next {
-  margin-left: 5px;
-}
-.prev {
-  margin-right: 5px;
-}
-.prev:hover, .next:hover {
-  color: white;
-  height: 100%;
-  background-color: rgba(0,0,0,0.8);
-} */
 
-.disabled {
-  opacity: 0.5;
-  pointer-events: none;
-}
 
-.btn {
-  position: absolute;
-  box-shadow: 0 0 6.1px 0.9px grey;
-  padding: 5px;
-  cursor: pointer;
-  width: 20px;
-  height: 20px;
-  background: grey;
-  text-align: center;
-  color: white;
-  border-radius: 50%;
-  }
-  .prev {
-  left: 1rem;
-  }
-  .next {
-  right: 1rem;
-  }
-  .disable {
-  opacity: 0.5;
-   pointer-events: none;
-  }
 
 
 
