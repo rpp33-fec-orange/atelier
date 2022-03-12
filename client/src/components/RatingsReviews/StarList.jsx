@@ -78,7 +78,7 @@ class StarList extends React.Component {
 
 		return (
 			<div className="star-list" id="star-list">
-				<table>
+				<table className="table-rr">
 					<tbody>
 						<tr>
 							<td>5 stars:</td>

@@ -7,6 +7,7 @@ class SizeSlider extends React.Component {
 			size: 0,
 			percentSize: 0
 		};
+		this.calPercentSize = this.calPercentSize.bind(this);
 	}
 
 	componentDidMount() {
@@ -14,20 +15,29 @@ class SizeSlider extends React.Component {
 		this.setState({
 			size: size
 		}, () => {
-			var percentSize = Math.round((size / 5) * 100);
-			this.setState({
-				percentSize: percentSize
-			});
+			this.calPercentSize();
 		});
-		// var percentSize = Math.round((size / 5) * 100);
 	}
+
+  calPercentSize() {
+		var size = this.state.size;
+		var percentSize = Math.round((size / 5) * 100);
+		this.setState({
+			percentSize: percentSize
+		});
+	}
+
 	render() {
-		// var size = this.props.size.Fit.value;
-		// var percentSize = Math.round((size / 5) * 100);
 
 		var size = this.state.size;
 		var percentSize = this.state.percentSize;
-
+		if (!size) {
+			return (
+				<div>
+					Loading.....
+				</div>
+			)
+		}
 		return (
 			<div className="size-slider" id="size-slider">
 				<p>Size</p>
