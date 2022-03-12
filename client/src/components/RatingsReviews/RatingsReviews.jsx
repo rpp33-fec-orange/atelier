@@ -35,6 +35,7 @@ class RatingsReviews extends React.Component {
     this.putHelpfulHandler = this.putHelpfulHandler.bind(this);
     this.sortReviews = this.sortReviews.bind(this);
     this.setReviews = this.setReviews.bind(this);
+    this.recordInteraction = this.recordInteraction.bind(this);
   }
 
   componentDidMount() {
@@ -291,6 +292,17 @@ class RatingsReviews extends React.Component {
     }
   }
 
+  recordInteraction(e) {
+    this.props.interactions({
+      element: e.target.nodeName,
+      widget: 'Ratings and Reviews',
+      time: new Date().toISOString()
+    });
+    console.log()
+  }
+
+
+
   render() {
     // console.log('this.state.reviews: ', this.state.reviews);
     // console.log('this.state.meta is: ', this.state.meta);
@@ -299,29 +311,11 @@ class RatingsReviews extends React.Component {
     // var list = this.state.reviews;
     var sort = this.state.sort;
     var list = this.state.reviews;
-    // var list = [];
-    // if (sort === 'newest') {
-    //   list = this.state.newestReviews;
-    // } else if (sort === 'helpful') {
-    //   list = this.state.newestReviews;
-    // } else if (sort === 'relevant') {
-    //   list = this.state.relevantReviews;
-    // } else {
-    //   list = this.state.newestReviews;
-    // }
-    // var count = this.state.count;
+
     var count = list.length;
     var meta_characteristics = this.state.meta_characteristics;
     var meta_recommended = this.state.meta_recommended;
     var meta_ratings = this.state.meta_ratings;
-    console.log('meta_characteristics is: ', meta_characteristics);
-    console.log('reviewReady is: ', reviewReady);
-    console.log('metaReady is: ', metaReady);
-    console.log('this.state.newestReviews: ', this.state.newestReviews);
-    console.log('this.state.helpfulReviews: ', this.state.helpfulReviews);
-    console.log('this.state.relevantReviews: ', this.state.relevantReviews);
-    console.log('list becomes ', list);
-
 
     if (!(reviewReady && metaReady)) {
       return (
@@ -332,7 +326,7 @@ class RatingsReviews extends React.Component {
     }
     if (reviewReady && metaReady) {
       return (
-        <div className="ratings-reviews" id="flex-container">
+        <div className="ratings-reviews" id="flex-container" onClick={this.recordInteraction}>
           <div className="rating-breakdown">
             <h3 id='ratings-reviews' id="zero">RATINGS AND REVIEWS</h3>
             <StarNumber recommended={meta_recommended} ratings={meta_ratings} handleRating={this.props.handleRating} handleGetRating={this.props.handleGetRating} />
