@@ -28,6 +28,15 @@ class ReviewList extends React.Component {
 		// console.log('finally, this.state.reviewList is: ', this.state.reviewList);
 	}
 
+	componentDidUpdate(prevProps) {
+		if (this.props.reviews !== prevProps.reviews) {
+			var reviewList = this.props.reviews;
+			this.setState({
+				reviewList: reviewList,
+			}, this.slicedReviewList);
+		}
+	}
+
 	mappingReviews() {
 		// console.log('props.reviews in Reviewlist: ', this.props.reviews);
 		var reviews = this.state.holdingReviews;

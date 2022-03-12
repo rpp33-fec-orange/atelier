@@ -18,14 +18,15 @@ const { options } = require('./options.js');
 
 
 
-let getReviewsByID = (id, sort) => {
+let getReviewsByID = (id, sort, count) => {
 	var url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/';
 	return axios ({
 		method: 'get',
 		url: url,
 		params: {
 			sort: sort,
-			product_id: id
+			product_id: id,
+			count: count
 		},
 		headers: {
 			'User-Agent': 'request',

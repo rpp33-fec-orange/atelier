@@ -7,7 +7,8 @@ class StarNumber extends React.Component {
 		this.state = {
 			percentage: 0,
 			ratingSummary: 0,
-			ratings: props.ratings,
+			ratings: {},
+			recommended: {},
 			one: 0,
 			two: 0,
 			three: 0,
@@ -38,6 +39,27 @@ class StarNumber extends React.Component {
 		}, this.giveRating);
 	}
 
+	componentDidUpdate(prevProps) {
+		console.log('preProps is: ', prevProps);
+		console.log('Json recomended is: ', JSON.stringify(this.props.recommended));
+		console.log('Json preProps recommended is: ', JSON.stringify(prevProps.recommended));
+			// if (JSON.stringify(this.props.ratings) !== JSON.stringify(prevProps.ratings) && JSON(this.props.recommended) !== JSON(prevProps.recommended)) {
+			if (this.props.id !== prevProps.id) {
+
+				var results = this.setRatingSummary();
+				this.setState({
+					one: results[1],
+					two: results[2],
+					three: results[3],
+					four: results[4],
+					five: results[5],
+					ratingSummary: results[0]
+				}, this.giveRating);
+
+		}
+
+	}
+
 	giveRating() {
 		var ratingSummary = this.state.ratingSummary;
 		this.props.handleGetRating(ratingSummary);
@@ -63,7 +85,15 @@ class StarNumber extends React.Component {
 		return results;
 	}
 
+	componentDidCatch(error, errorInfo) {
+		logErrorToMyService(error, errorInfo);
+	}
+
 	render() {
+		if (this.state.hasError) {
+			return <h1>Star Number goes wrong!</h1>
+		}
+		console.log('props in StarNumber: ', this.props);
 		return (
 			<div className="star-number" id="star-number">
 				<div className="rating-summary-container">
