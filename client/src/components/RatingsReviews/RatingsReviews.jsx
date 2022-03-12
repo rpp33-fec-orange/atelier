@@ -285,10 +285,10 @@ class RatingsReviews extends React.Component {
           </div>
           <div className="review-breakdown">
             <div className="review-header">{count} reviews, sorted by
-              <select className="dropdown-sort" id="dropdown-sort" onChange={this.sortReviews} >
+              <select className="dropdown-sort" id="dropdown-sort" defaultValue={'relevant'} onChange={this.sortReviews} >
                 <option value="newest">newest</option>
                 <option value="helpful">helpful</option>
-                <option value="relevant" defaultValue>relevant</option>
+                <option value="relevant">relevant</option>
               </select>
             </div>
             <ReviewList reviews={list} onMarkedHelpful={this.putHelpfulHandler} onMarkedReported={this.putReportedHandler} />
