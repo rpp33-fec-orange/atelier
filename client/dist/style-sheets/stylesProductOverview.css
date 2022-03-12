@@ -327,8 +327,8 @@
   left: 0px; */
   /* width: 1276px;
   height: 660px; */
-  width: 3000px;
-  height: 2000px;
+  width: 2600px;
+  height: 2500px;
   z-index: 1000;
 }
 
@@ -346,7 +346,7 @@
   z-index: 600;
 }
 
-.zoom-container {
+#zoom-container {
   position: relative;
   /* margin: 0 auto; */
   top: 0px;
@@ -357,13 +357,13 @@
 }
 
 
-.zoom-view {
+#zoom-view {
   position: relative;
   top: 0px;
   left: 0px;
   width: 1280px;
   height: 660px;
-  /* overflow: scroll; */
+  overflow: hidden;
 }
 
 .subPhoto-tumbnail {
@@ -604,7 +604,7 @@
   position: absolute;
   top: 50%;
   left: 2%;
-  z-index: 600;
+  z-index: 1000;
   background-color: white;
   border-radius: 50%;
 }
@@ -614,7 +614,7 @@
   position: absolute;
   top: 50%;
   right: 2%;
-  z-index: 600;
+  z-index: 1000;
   background-color: white;
   border-radius: 50%;
 }

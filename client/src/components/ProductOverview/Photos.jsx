@@ -266,7 +266,8 @@ class Photos extends React.Component {
 
     if (this.state.zoomed) {
       let zoomObj = document.getElementById('zoomed-mainPhoto');
-      let zoomView = document.getElementById('zoom-view')
+      let zoomView = document.getElementById('zoom-view');
+      let zoomContainer = document.getElementById('zoom-container');
       let mouseX = e.clientX;
       let mouseY = e.clientY;
       let mouse = "Mouse: (" + mouseX + ", " + mouseY + ")";
@@ -274,10 +275,12 @@ class Photos extends React.Component {
       console.log('WINDOW INNERWIDTH', window.innerWidth);
       console.log('WINDOW INNERHEIGHT', window.innerHeight);
       let trim = (window.innerWidth - 1280);
-      let x = mouseX;
+      let x = mouseX - trim;
       let y = mouseY;
-      zoomObj.style.left = -x * 1.2 + 'px';
+      zoomObj.style.left = -x + 'px';
       zoomObj.style.top = -y * 2 + 'px';
+      // zoomView.style.left = -x  + 'px';
+      // zoomView.style.top = -y  + 'px';
     }
   }
 
@@ -353,8 +356,8 @@ class Photos extends React.Component {
           {arrayRightEnd ? <div></div> : <IoIosArrowDropright id="expanded-right-arrow" onClick={this.rightClick} />}
         </div>} */}
 
-          <div class="zoom-container">
-            <div class="zoom-view">
+          <div id="zoom-container">
+            <div id="zoom-view">
               <img id={zoomed ? "zoomed-mainPhoto" : "expanded-mainPhoto"} src={mainPhotoArray[mainPhotoIndex].url} onClick={this.zoomClick} onMouseMove={this.zoomHandler}></img>
               {/* <img id={zoomed ? "zoomed-mainPhoto" : "expanded-mainPhoto"} src={mainPhotoArray[mainPhotoIndex].url} ref={this.myRef} onClick={this.zoomClick} onMouseMove={this.onMouseMove} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}></img> */}
               {arrayLeftEnd ? <div></div> : <IoIosArrowDropleft id="expanded-left-arrow" onClick={this.leftClick} />}
