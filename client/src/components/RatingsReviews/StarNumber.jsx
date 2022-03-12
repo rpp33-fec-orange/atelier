@@ -8,7 +8,8 @@ class StarNumber extends React.Component {
 			percentage: 0,
 			ratingSummary: 0,
 			ratings: {},
-			recommended: {},
+			recommended: 0,
+			notRecommended: 0,
 			one: 0,
 			two: 0,
 			three: 0,
@@ -21,40 +22,43 @@ class StarNumber extends React.Component {
 	}
 
 	percentRecommended() {
-		var recommended = parseInt(this.props.recommended.true);
-		var notRecommended = parseInt(this.props.recommended.false);
+		var recommended = parseInt(this.state.recommended);
+		var notRecommended = parseInt(this.state.notRecommended);
 		var result = (recommended * 100) / (recommended + notRecommended);
-		return Math.round(result * 100) / 100;
+		result = Math.round(result * 100) / 100;
+		this.setState({
+			percentage: result
+		}, () => {
+			this.setRatingSummary();
+		});
 	}
 
 	componentDidMount() {
-		var results = this.setRatingSummary();
+		var recommended = parseInt(this.props.recommended.true);
+		var notRecommended = parseInt(this.props.recommended.false);
+		var ratings = this.props.ratings;
 		this.setState({
-			one: results[1],
-			two: results[2],
-			three: results[3],
-			four: results[4],
-			five: results[5],
-			ratingSummary: results[0]
-		}, this.giveRating);
+			recommended: recommended,
+			notRecommended: notRecommended,
+			ratings: ratings
+		}, () => {
+			this.percentRecommended();
+		});
 	}
 
 	componentDidUpdate(prevProps) {
-			// if (JSON.stringify(this.props.ratings) !== JSON.stringify(prevProps.ratings) && JSON(this.props.recommended) !== JSON(prevProps.recommended)) {
-			if (this.props.id !== prevProps.id) {
-
-				var results = this.setRatingSummary();
-				this.setState({
-					one: results[1],
-					two: results[2],
-					three: results[3],
-					four: results[4],
-					five: results[5],
-					ratingSummary: results[0]
-				}, this.giveRating);
-
+		if (this.props.recommended !== prevProps.recommended) {
+			var recommended = parseInt(this.props.recommended.true);
+			var notRecommended = parseInt(this.props.recommended.false);
+			var ratings = this.props.ratings;
+			this.setState({
+				recommended: recommended,
+				notRecommended: notRecommended,
+				ratings: ratings
+			}, () => {
+				this.percentRecommended();
+			});
 		}
-
 	}
 
 	giveRating() {
@@ -66,10 +70,7 @@ class StarNumber extends React.Component {
 		// round stars number up to a quarter of a review point.
 		// We have : 0.00, 0.25, 0.50, 0.75, and 1.00
 		var results = [];
-		var percentage = this.percentRecommended();
-		this.setState({
-			percentage: percentage
-		});
+		var percentage = this.percentage;
 		var one = parseInt((this.props.ratings[1] === undefined) ? 0 : this.props.ratings[1]);
 		var two = parseInt((this.props.ratings[2] === undefined) ? 0 : this.props.ratings[2]);
 		var three = parseInt((this.props.ratings[3] === undefined) ? 0 : this.props.ratings[3]);
@@ -79,7 +80,17 @@ class StarNumber extends React.Component {
 		var ratingSummary = (1 * one + 2 * two + 3 * three + 4 * four + 5 * five) / sum;
 		ratingSummary = Math.round(ratingSummary * 100) / 100;
 		results.push(ratingSummary, one, two, three, four, five);
-		return results;
+		this.setState({
+			one: results[1],
+			two: results[2],
+			three: results[3],
+			four: results[4],
+			five: results[5],
+			ratingSummary: results[0]
+		}, () => {
+			this.giveRating();
+		});
+		// return results;
 	}
 
 	componentDidCatch(error, errorInfo) {
