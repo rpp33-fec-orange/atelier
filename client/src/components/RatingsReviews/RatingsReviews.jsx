@@ -63,7 +63,7 @@ class RatingsReviews extends React.Component {
   }
 
   getReviewsByIDHandler(id) {
-    var count = 10;
+    var count = 100;
     var sort = 'newest'
     var id = this.props.id;
     var url = `/reviews/?sort=${sort}&count=${count}&product_id=${id}`;
