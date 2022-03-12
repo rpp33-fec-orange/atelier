@@ -123,7 +123,7 @@ class App extends React.Component {
           <ProductOverview id={this.state.id} rating={this.state.rating} currentStyleHandler={this.currentStyleHandler} yourOutfitHandleClick={this.yourOutfitHandleClick} interactions = {this.recordInteractions}/>
           <RelatedProducts id={this.state.id} yourOutfitArray={this.state.yourOutfitArray} yourOutfitHandleClick={this.yourOutfitHandleClick} handleProductChange={this.handleProductChange} interactions = {this.recordInteractions}/>
           <QuestionsAnswers id={this.state.id} productName={this.state.productName} interactions={this.recordInteractions}/>
-          <RatingsReviews id={this.state.id} handleRating={this.handleRating} handleGetRating={this.getRating} interactions = {this.recordInteractions}/>
+          <RatingsReviews id={this.state.id} handleRating={this.handleRating} handleGetRating={this.getRating} interactions = {this.recordInteractions} productName={this.state.productName} />
         </div>
       )
     } else {

@@ -22,7 +22,7 @@ class Dashboard extends React.Component {
 	render() {
 		return (
 			<div>
-				<Modal show={this.state.show} handleClose={this.hideModal} />
+				<Modal show={this.state.show} handleClose={this.hideModal} productName={this.props.productName}/>
 				<button className="add-review" type="button" onClick={this.showModal} >
 					ADD A REVIEW +
 				</button>

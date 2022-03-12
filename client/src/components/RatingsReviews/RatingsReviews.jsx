@@ -27,7 +27,19 @@ class RatingsReviews extends React.Component {
       meta_characteristics: {},
       newestReviews: [],
       helpfulReviews: [],
-      relevantReviews: []
+      relevantReviews: [],
+      write_recommended: false,
+      write_characteristic_size: 0,
+      write_characteristic_width: 0,
+      write_characteristic_comfort: 0,
+      write_characteristic_fit: 0,
+      write_characteristic_length: 0,
+      write_characteristic_quality: 0,
+      write_review_summary: '',
+      write_review_body: '',
+      write_review_photos: [],
+      write_name: '',
+      write_email: ''
     }
     this.getReviewsByIDHandler = this.getReviewsByIDHandler.bind(this);
     this.getReviewsMetaHandler = this.getReviewsMetaHandler.bind(this);
@@ -36,7 +48,85 @@ class RatingsReviews extends React.Component {
     this.sortReviews = this.sortReviews.bind(this);
     this.setReviews = this.setReviews.bind(this);
     this.recordInteraction = this.recordInteraction.bind(this);
+
+    this.writeRecommended = this.writeRecommended.bind(this);
+    this.writeSize = this.writeSize.bind(this);
+    this.writeWidth = this.writeWidth.bind(this);
+    this.writeComfort = this.writeComfort.bind(this);
+    this.writeQuality = this.writeQuality.bind(this);
+    this.writeLength = this.writeLength.bind(this);
+    this.writeFit = this.writeFit.bind(this);
+    this.writeReviewSummary = this.writeReviewSummary.bind(this);
+    this.writeReviewBody = this.writeReviewBody.bind(this);
+    this.writeUploadPhotos = this.writeUploadPhotos.bind(this);
+    this.writeNickname = this.writeNickname.bind(this);
+    this.writeEmail = this.writeEmail.bind(this);
+
   }
+
+  writeRecommended(e) {
+    this.setState({
+      write_recommended: e.target.value
+    });
+  }
+
+  writeSize(e) {
+    this.setState({
+      write_recomwrite_size: e.target.value
+    });
+  }
+
+  writeWidth(e) {
+    this.setState({
+      write_characteristic_width: e.target.value
+    });
+  }
+  writeComfort(e) {
+    this.setState({
+      write_characteristic_comfort: e.target.value
+    });
+  }
+  writeQuality(e) {
+    this.setState({
+      write_characteristic_quality: e.target.value
+    });
+  }
+  writeLength(e) {
+    this.setState({
+      write_characteristic_length: e.target.value
+    });
+  }
+  writeFit(e) {
+    this.setState({
+      write_characteristic_fit: e.target.value
+    });
+  }
+  writeReviewSummary(e) {
+    this.setState({
+      write_review_summary: e.target.value
+    });
+  }
+  writeReviewBody(e) {
+    this.setState({
+      write_review_body: e.target.value
+    });
+  }
+  writeUploadPhotos(e) {
+    this.setState({
+      write_review_photos: e.target.value
+    });
+  }
+  writeNickname(e) {
+    this.setState({
+      write_name: e.target.value
+    });
+  }
+  writeEmail(e) {
+    this.setState({
+      write_email: e.target.value
+    });
+  }
+
 
   componentDidMount() {
     var id = this.props.id;
@@ -260,11 +350,13 @@ class RatingsReviews extends React.Component {
     var metaReady = this.state.metaReady;
     var sort = this.state.sort;
     var list = this.state.reviews;
+    console.log('list is: ', list);
 
     var count = list.length;
     var meta_characteristics = this.state.meta_characteristics;
     var meta_recommended = this.state.meta_recommended;
     var meta_ratings = this.state.meta_ratings;
+    console.log('characteristics are: ', meta_characteristics);
 
     if (!(reviewReady && metaReady)) {
       return (
@@ -291,7 +383,7 @@ class RatingsReviews extends React.Component {
                 <option value="relevant">relevant</option>
               </select>
             </div>
-            <ReviewList reviews={list} onMarkedHelpful={this.putHelpfulHandler} onMarkedReported={this.putReportedHandler} />
+            <ReviewList reviews={list} onMarkedHelpful={this.putHelpfulHandler} onMarkedReported={this.putReportedHandler} productName={this.props.productName} />
             {/* <Dashboard /> */}
           </div>
         </div>

@@ -90,7 +90,7 @@ class ReviewList extends React.Component {
 				</div>
 				<div className="buttons" id="buttons">
 					<button className={showMore} onClick={this.handleShowMoreReviews}>MORE REVIEWS</button>
-					<Dashboard />
+					<Dashboard productName={this.props.productName}/>
 				</div>
 			</div>
 		)
