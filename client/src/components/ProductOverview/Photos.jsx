@@ -141,12 +141,7 @@ class Photos extends React.Component {
   }
 
   downClick() {
-    // this.setState({
-    //   subPhotoSelectedId: ''
-    // })
-    // console.log(this.state.subPhotoSelectedId)
     console.log(document.getElementById(this.state.subPhotoSelectedId), 'index ', this.state.subPhotoSelectedId)
-    // console.log(document.getElementsByClassName('selected-phoo-border'));
     document.getElementById(this.state.subPhotoSelectedId).classList.remove('selected-photo-border');
     let newStartIndex = this.state.subPhotosSliceStartIndex + 1;
     let newEndIndex = this.state.subPhotosSliceEndIndex + 1;
@@ -198,71 +193,50 @@ class Photos extends React.Component {
     });
   }
 
-  onMouseEnter(e) {
-    console.log('mouse enter')
-    this.setState({ ...this.state, isScrolling: true, clientX: e.clientX });
-  }
+  // onMouseEnter(e) {
+  //   console.log('mouse enter')
+  //   this.setState({ ...this.state, isScrolling: true, clientX: e.clientX });
+  // }
 
-  onMouseLeave(e) {
-    console.log('mouse leave')
-    this.setState({ ...this.state, isScrolling: false });
-  }
+  // onMouseLeave(e) {
+  //   console.log('mouse leave')
+  //   this.setState({ ...this.state, isScrolling: false });
+  // }
 
-  onMouseMove(e) {
-    const { clientX, scrollX } = this.state;
-    if (this.state.isScrolling) {
-      console.log('THIS REF', this.myRef)
-      this.myRef.current.scrollRight += 50;
-      console.log({ calc: scrollX + e.clientX - clientX });
-      this.setState({
-        scrollX: scrollX - e.clientX + clientX,
-        clientX: e.clientX
-      });
-    }
+  // onMouseMove(e) {
 
-    // const { scrollLeft, scrollTop } = this.myRef;
-    // this.setState({
-    //   clientX: event.clientX,
-    //   clientY: event.clientY
-    // })
-    // const { clientX, scrollLeft, scrollTop, clientY } = this.state;
-    // this.myRef.scrollLeft = scrollLeft - clientX + event.clientX;
-    // this.myRef.scrollTop = scrollTop - clientY + event.clientY;
+  //   const { clientX, scrollX } = this.state;
+  //   if (this.state.isScrolling) {
+  //     console.log('THIS REF', this.myRef)
+  //     this.myRef.current.scrollRight += 50;
+  //     console.log({ calc: scrollX + e.clientX - clientX });
+  //     this.setState({
+  //       scrollX: scrollX - e.clientX + clientX,
+  //       clientX: e.clientX
+  //     });
+  //   }
 
-    console.log('hello!')
-    // let zoomObj = document.getElementById('zoomed-mainPhoto');
-    // let zoomView = document.getElementById('zoomed-view');
-    // console.log('zoomObj', zoomObj);
-    // console.log('rect size: ', zoomObj.getBoundingClientRect())
-    // console.log('scroll right', zoomObj.scrollRight, 'scrool left', zoomObj.scrollLeft)
-    // zoomObj.scrollLeft += 20;
-    // zoomObj.scrollRight += 20;
-    // zoomObj.scrollLeft -= 20;
-    // zoomObj.scrollRight -= 20;
-  }
+  //   const { scrollLeft, scrollTop } = this.myRef;
+  //   this.setState({
+  //     clientX: event.clientX,
+  //     clientY: event.clientY
+  //   })
+  //   const { clientX, scrollLeft, scrollTop, clientY } = this.state;
+  //   this.myRef.scrollLeft = scrollLeft - clientX + event.clientX;
+  //   this.myRef.scrollTop = scrollTop - clientY + event.clientY;
+
+  //   let zoomObj = document.getElementById('zoomed-mainPhoto');
+  //   let zoomView = document.getElementById('zoomed-view');
+  //   console.log('zoomObj', zoomObj);
+  //   console.log('rect size: ', zoomObj.getBoundingClientRect())
+  //   console.log('scroll right', zoomObj.scrollRight, 'scrool left', zoomObj.scrollLeft)
+  //   zoomObj.scrollLeft += 20;
+  //   zoomObj.scrollRight += 20;
+  //   zoomObj.scrollLeft -= 20;
+  //   zoomObj.scrollRight -= 20;
+  // }
 
   zoomHandler(e) {
-
-    // let mouseX = e.clientX;
-    // let mouseY = e.clientY;
-
-    // let mouse = "Mouse: (" + mouseX + ", " + mouseY + ")";
-    // console.log(mouse);
-
-    // let percentX = Math.round((mouseX / 1276) * 100);
-    // let percentY = Math.round((mouseY / 660) * 100);
-    // console.log('percentX %', percentX);
-    // console.log('percentY %', percentY);
-    // console.log('DOES THIS EVEN SHOW? ', zoomObj.clientX); //how to access element style properties??
-
-    // let aimX = -1 * percentX * zoomObj.clientX;
-    // let aimY = -1 * percentY * zoomObj.clientY;
-
-    // zoomObj.style.left = aimX + "px"; //.style.anything is not working
-    // zoomObj.style.top = aimY + "px";
-
-    // zoomObj.style.width = aimX + "px";
-    // zoomObj.style.height = aimY + "px";
 
     if (this.state.zoomed) {
       let zoomObj = document.getElementById('zoomed-mainPhoto');
@@ -271,16 +245,11 @@ class Photos extends React.Component {
       let mouseX = e.clientX;
       let mouseY = e.clientY;
       let mouse = "Mouse: (" + mouseX + ", " + mouseY + ")";
-      console.log(mouse);
-      console.log('WINDOW INNERWIDTH', window.innerWidth);
-      console.log('WINDOW INNERHEIGHT', window.innerHeight);
       let trim = (window.innerWidth - 1280);
       let x = mouseX - trim;
       let y = mouseY;
       zoomObj.style.left = -x + 'px';
       zoomObj.style.top = -y * 2 + 'px';
-      // zoomView.style.left = -x  + 'px';
-      // zoomView.style.top = -y  + 'px';
     }
   }
 
@@ -345,17 +314,6 @@ class Photos extends React.Component {
             )}
             {arrayBottomEnd ? <div id="collapsed-down-end">end</div> : <IoIosArrowDown id="collapsed-down-arrow" onClick={this.downClick} />}
           </div>
-
-          {/* {zoomed ? <div class="zoomed-container">
-            <img id="zoomed-mainPhoto" src={mainPhotoArray[mainPhotoIndex].url} onClick={this.collapseClick} onMouseMove={this.zoomHandler}></img>
-            {arrayLeftEnd ? <div></div> : <IoIosArrowDropleft id="expanded-left-arrow" onClick={this.leftClick} />}
-            {arrayRightEnd ? <div></div> : <IoIosArrowDropright id="expanded-right-arrow" onClick={this.rightClick} />}
-          </div> : <div class="expanded-container">
-            <img id="expanded-mainPhoto"} src={mainPhotoArray[mainPhotoIndex].url} onClick={this.zoomClick}></img>
-            {arrayLeftEnd ? <div></div> : <IoIosArrowDropleft id="expanded-left-arrow" onClick={this.leftClick} />}
-          {arrayRightEnd ? <div></div> : <IoIosArrowDropright id="expanded-right-arrow" onClick={this.rightClick} />}
-        </div>} */}
-
           <div id="zoom-container">
             <div id="zoom-view">
               <img id={zoomed ? "zoomed-mainPhoto" : "expanded-mainPhoto"} src={mainPhotoArray[mainPhotoIndex].url} onClick={this.zoomClick} onMouseMove={this.zoomHandler}></img>

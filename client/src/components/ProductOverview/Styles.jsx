@@ -32,6 +32,7 @@ class Styles extends React.Component {
     this.quantityChange = this.quantityChange.bind(this);
     this.reviewsClick = this.reviewsClick.bind(this);
     this.styleSelectedInitial = this.styleSelectedInitial.bind(this);
+    this.showCart = this.showCart.bind(this);
   }
 
   styleSelectedInitial() {
@@ -117,6 +118,8 @@ class Styles extends React.Component {
         // console.log('getCart ajax GET success');
         this.setState({
           cart: success,
+        }, () => {
+          this.showCart();
         })
         console.log('CART', this.state.cart);
       },
@@ -125,6 +128,11 @@ class Styles extends React.Component {
       },
       contentType: "application/json",
     })
+
+  }
+
+  showCart() {
+    alert(JSON.stringify(this.state.cart));
   }
 
   outfitClick() {
