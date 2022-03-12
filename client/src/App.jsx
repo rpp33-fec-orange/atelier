@@ -14,8 +14,7 @@ class App extends React.Component {
       initialized: false,
       rating: 0,
       currentStyle: null,
-      yourOutfitArray: [],
-      count: 0
+      yourOutfitArray: []
     }
     this.productsHandler = this.productsHandler.bind(this);
     this.handleRating = this.handleRating.bind(this);
@@ -54,9 +53,9 @@ class App extends React.Component {
     window.addEventListener('popstate', (e) => {
       // var state = e.state;
       if (e.state !== null) {
-        this.setState({...this.state, id: e.state})
+        this.setState({ ...this.state, id: e.state })
       }
-  });
+    });
   }
 
   componentWillMount() {
@@ -94,7 +93,7 @@ class App extends React.Component {
   }
 
   handleProductChange(productId) {
-    this.setState({...this.state, id: productId}, () => {console.log('product id updated')})
+    this.setState({ ...this.state, id: productId }, () => { console.log('product id updated') })
   }
 
   render() {
