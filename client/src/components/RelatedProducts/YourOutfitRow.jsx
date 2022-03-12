@@ -8,11 +8,13 @@ class YourOutfitRow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      yourOutfit: []
+      yourOutfit: [],
+      prevDisable: true,
+      nextDisable: this.refs && this.refs.offsetWidth >= this.refs.scrollWidth ? true : false
     }
     this.handleAddOutfit = this.handleAddOutfit.bind(this);
     this.handleDeleteOutfit = this.handleDeleteOutfit.bind(this);
-    this.scroll = this.scroll.bind(this);
+    this.checkButtons = this.checkButtons.bind(this);
   }
 
   handleAddOutfit () {
@@ -34,13 +36,23 @@ class YourOutfitRow extends React.Component {
     });
   }
 
-  scroll(direction) {
-    let far = $( '.related-product-container' ).width()/4*direction;
-    let pos = $('.related-product-container').scrollLeft() + far;
-    $('.related-product-container').animate( { scrollLeft: pos }, 1000)
+  componentDidMount() {
+    this.checkButtons(this.refs.offsetWidth, this.refs.scrollWidth);
   }
 
+  checkButtons = (offsetWidthValue, scrollWidthValue) => {
+    this.setState({
+     prevDisable: this.refs.scrollLeft <= 0 ? true : false,
+     nextDisable:
+     this.refs.scrollLeft + offsetWidthValue >= scrollWidthValue ? true : false
+    });
+   };
+
   render() {
+
+    const offsetWidthValue = this.refs.offsetWidth,
+    scrollWidthValue = this.refs.scrollWidth;
+
     var DOMarray = '';
     if (this.props.yourOutfitArray.length > 0) {
       DOMarray = this.props.yourOutfitArray.map((product) => {
@@ -51,14 +63,26 @@ class YourOutfitRow extends React.Component {
     }
 
     return (
-      <div className = "your-outfit-container">
-        <a className ='prev' onClick = {this.scroll.bind(null, -1)}>&#10094;</a>
-        <div className = 'outfit-only-container'>
-          <AddtoOutfitCard handleClick = {this.handleAddOutfit}/>
+        <div className = "your-outfit-container" ref = {(el) => {this.refs  = el;}}>
+          <div className = 'addOutfit-card'>
+            <AddtoOutfitCard handleClick = {this.handleAddOutfit}/>
+          </div>
+          <div className={`btn addOutfit prev ${this.state.prevDisable ? "disable" : ""}`} disabled={this.state.prevDisable}
+            onClick={() => {
+              this.refs.scrollLeft -= offsetWidthValue / 2;
+              this.checkButtons(offsetWidthValue, scrollWidthValue);
+            }}>&#10094;
+          </div>
+          <div className = 'outfit-only-container'>
           {DOMarray}
+          </div>
+          <div className={`btn addOutfit next ${this.state.nextDisable ? "disable" : ""}`} disabled={this.state.nextDisable}
+            onClick={() => {
+              this.refs.scrollLeft += offsetWidthValue / 2;
+              this.checkButtons(offsetWidthValue, scrollWidthValue);
+            }}>&#10095;
+          </div>
         </div>
-        <a className ='next' onClick = {this.scroll.bind(null, 1)}>&#10095;</a>
-      </div>
     )
   }
 }
