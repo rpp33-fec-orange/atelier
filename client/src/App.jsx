@@ -99,13 +99,13 @@ class App extends React.Component {
   }
 
   recordInteractions(interactionsObject) {
-    console.log('interaction obj: ', interactionsObject);
+    // console.log('interaction obj: ', interactionsObject);
     $.ajax({
       type: 'POST',
       url: `/interactions`,
       data: interactionsObject,
       success: () => {
-        console.log('Interactions POST request successful')
+        // console.log('Interactions POST request successful')
       },
       error: (err) => {
         console.log('err', err)

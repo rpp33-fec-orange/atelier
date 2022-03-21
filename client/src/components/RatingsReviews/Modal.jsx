@@ -137,7 +137,9 @@ class Modal extends React.Component {
 						</div>
 						<br></br>
 						<div className="upload-photo">Upload your photos:
-							<button className="upload" type="button" onChange={this.props.writeUploadPhotos}>
+							<button className="upload" type="button"
+							// onChange={this.props.writeUploadPhotos}
+							>
 								Upload
 							</button>
 						</div>
@@ -157,7 +159,7 @@ class Modal extends React.Component {
 						</div>
 						<br></br>
 						<div>
-							<button className="submit" type="button">
+							<button className="submit" type="button" onClick={this.props.postReviewHandler}>
 								Submit
 							</button>
 						</div>

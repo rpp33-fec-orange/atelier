@@ -90,7 +90,22 @@ class ReviewList extends React.Component {
 				</div>
 				<div className="buttons" id="buttons">
 					<button className={showMore} onClick={this.handleShowMoreReviews}>MORE REVIEWS</button>
-					<Dashboard productName={this.props.productName}/>
+					<Dashboard productName={this.props.productName}
+					postReviewHandler={this.props.postReviewHandler}
+					writeRecommended={this.props.writeRecommended}
+					writeSize={this.props.writeSize}
+					writeWidth={this.props.writeWidth}
+					writeComfort={this.props.writeComfort}
+					writeQuality={this.props.writeQuality}
+					writeLength={this.props.writeLength}
+					writeFit={this.props.writeFit}
+					writeReviewSummary={this.props.writeReviewSummary}
+					writeReviewBody={this.props.writeReviewBody}
+					writeUploadPhotos={this.props.writeUploadPhotos}
+					writeNickname={this.props.writeNickname}
+					writeEmail={this.props.writeEmail}
+
+					/>
 				</div>
 			</div>
 		)

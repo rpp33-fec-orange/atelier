@@ -235,14 +235,19 @@ app.get('/reviews/meta', function (req, res) {
 });
 
 app.post('/reviews', function (req, res) {
-  postReview(req.query.product_id, req.query.rating, req.query.summary, req.query.body, req.query.recommend, req.query.name, req.query.email, req.query.photos, req.query.characteristics)
+  var review = req.body;
+  // var review = req.query.review;
+  console.log('req.body inside app.post in server index.js: ', review);
+  postReview(review)
     .then((success) => {
-      // console.log('getting reviews meta success! data is: ', success.data);
+      console.log('posting reviews success! data is: ', success.data);
       res.status(201).send(success.data);
     })
     .catch((error) => {
-      console.log('error getting reviews!');
-      res.status(500).send(error);
+      console.log('error getting reviews!', error.response.data);
+      // res.status(500).send(error);
+      res.send(error);
+
     })
 });
 

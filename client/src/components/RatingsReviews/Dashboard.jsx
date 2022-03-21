@@ -22,7 +22,21 @@ class Dashboard extends React.Component {
 	render() {
 		return (
 			<div>
-				<Modal show={this.state.show} handleClose={this.hideModal} productName={this.props.productName}/>
+				<Modal show={this.state.show} handleClose={this.hideModal} productName={this.props.productName}
+					postReviewHandler={this.props.postReviewHandler}
+					writeRecommended={this.props.writeRecommended}
+					writeSize={this.props.writeSize}
+					writeWidth={this.props.writeWidth}
+					writeComfort={this.props.writeComfort}
+					writeQuality={this.props.writeQuality}
+					writeLength={this.props.writeLength}
+					writeFit={this.props.writeFit}
+					writeReviewSummary={this.props.writeReviewSummary}
+					writeReviewBody={this.props.writeReviewBody}
+					writeUploadPhotos={this.props.writeUploadPhotos}
+					writeNickname={this.props.writeNickname}
+					writeEmail={this.props.writeEmail}
+				/>
 				<button className="add-review" type="button" onClick={this.showModal} >
 					ADD A REVIEW +
 				</button>

@@ -28,6 +28,7 @@ class RatingsReviews extends React.Component {
       newestReviews: [],
       helpfulReviews: [],
       relevantReviews: [],
+      write_rating: 0,
       write_recommended: false,
       write_characteristic_size: 0,
       write_characteristic_width: 0,
@@ -37,7 +38,7 @@ class RatingsReviews extends React.Component {
       write_characteristic_quality: 0,
       write_review_summary: '',
       write_review_body: '',
-      write_review_photos: [],
+      write_review_photos: ['https://d23.com/app/uploads/2019/06/1180w-600h_061819_tarzan-20th-anniversary.jpg'],
       write_name: '',
       write_email: ''
     }
@@ -68,63 +69,75 @@ class RatingsReviews extends React.Component {
     this.setState({
       write_recommended: e.target.value
     });
+    console.log('button was clicked!');
   }
 
   writeSize(e) {
     this.setState({
       write_recomwrite_size: e.target.value
     });
+    console.log('button was clicked!');
   }
 
   writeWidth(e) {
     this.setState({
       write_characteristic_width: e.target.value
     });
+    console.log('button was clicked!');
   }
   writeComfort(e) {
     this.setState({
       write_characteristic_comfort: e.target.value
     });
+    console.log('button was clicked!');
   }
   writeQuality(e) {
     this.setState({
       write_characteristic_quality: e.target.value
     });
+    console.log('button was clicked!');
   }
   writeLength(e) {
     this.setState({
       write_characteristic_length: e.target.value
     });
+    console.log('button was clicked!');
   }
   writeFit(e) {
     this.setState({
       write_characteristic_fit: e.target.value
     });
+    console.log('button was clicked!');
   }
   writeReviewSummary(e) {
     this.setState({
       write_review_summary: e.target.value
     });
+    console.log('button was clicked!');
   }
   writeReviewBody(e) {
     this.setState({
       write_review_body: e.target.value
     });
+    console.log('button was clicked!');
   }
   writeUploadPhotos(e) {
     this.setState({
       write_review_photos: e.target.value
     });
+    console.log('button was clicked!');
   }
   writeNickname(e) {
     this.setState({
       write_name: e.target.value
     });
+    console.log('button was clicked!');
   }
   writeEmail(e) {
     this.setState({
       write_email: e.target.value
     });
+    console.log('button was clicked!');
   }
 
 
@@ -208,13 +221,13 @@ class RatingsReviews extends React.Component {
   }
 
   getReviewsMetaHandler(id) {
-    var id = this.props.id;
     var url = `/reviews/meta?product_id=${id}`;
     $.ajax({
       context: this,
       type: "GET",
       url: url,
       success: (data) => {
+        console.log('getReviewsMetaHandler ajax data is: ', data);
         this.setState({
           meta: data,
           meta_ratings: data.ratings,
@@ -232,26 +245,38 @@ class RatingsReviews extends React.Component {
       });
   }
 
-  postReviewHandler(product_id, rating, summary, body, recommend, name, email, photos, characteristics) {
+  postReviewHandler() {
     var id = this.state.id;
+    var product_id = this.props.id;
+    var characteristics = {
+      "14": 4,
+      "15": 4,
+      "16": 3,
+      "17": 2,
+      "18": 1
+    };
+
+    var review = {
+      product_id: product_id,
+      rating: this.state.write_rating,
+      summary: this.state.write_review_summary,
+      body: this.state.write_review_body,
+      recommend: this.state.write_recommended,
+      name: this.state.write_name,
+      email: this.state.write_email,
+      photos: this.state.write_review_photos,
+      characteristics: characteristics
+    };
+    console.log('review in postReviewHandler is: ', review );
     var url = '/reviews';
     $.ajax({
       context: this,
       type: "POST",
       url: url,
-      data: {
-        product_id: product_id,
-        rating: rating,
-        summary: summary,
-        body: body,
-        recommend: recommend,
-        name: name,
-        email: email,
-        photos: photos,
-        characteristics: characteristics
-      },
+      data: JSON.stringify(review),
+      contentType: 'application/json',
       success: (data) => {
-        // console.log('review POST ajax success!');
+        console.log('review POST ajax success!');
       },
       error: (error) => {
         console.log('error from POST review request: ', error);
@@ -383,7 +408,22 @@ class RatingsReviews extends React.Component {
                 <option value="relevant">relevant</option>
               </select>
             </div>
-            <ReviewList reviews={list} onMarkedHelpful={this.putHelpfulHandler} onMarkedReported={this.putReportedHandler} productName={this.props.productName} />
+            <ReviewList reviews={list} onMarkedHelpful={this.putHelpfulHandler}
+             onMarkedReported={this.putReportedHandler} productName={this.props.productName}
+             postReviewHandler={this.postReviewHandler}
+             writeRecommended={this.writeRecommended}
+             writeSize={this.writeSize}
+             writeWidth={this.writeWidth}
+             writeComfort={this.writeComfort}
+             writeQuality={this.writeQuality}
+             writeLength={this.writeLength}
+             writeFit={this.writeFit}
+             writeReviewSummary={this.writeReviewSummary}
+             writeReviewBody={this.writeReviewBody}
+             writeUploadPhotos={this.writeUploadPhotos}
+             writeNickname={this.writeNickname}
+             writeEmail={this.writeEmail}
+            />
             {/* <Dashboard /> */}
           </div>
         </div>

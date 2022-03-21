@@ -56,30 +56,53 @@ let getReviewsMeta = (id) => {
 	});
 }
 
-let postReview = (product_id, rating, summary, body, recommend, name, email, photos, characteristics) => {
+let postReview = (review) => {
+	console.log('review in axios postReview in review.js: ', review);
+	var dummyReview = {
+		product_id: 64620,
+		rating: 2,
+		summary: 'testing if this works',
+		body: 'Hate it it it',
+		recommend: true,
+		name: 'Goldlewis',
+		email: 'nocountryfornoel@gmail.com',
+		photos: [
+			'https://d23.com/app/uploads/2019/06/1180w-600h_061819_tarzan-20th-anniversary.jpg'
+		],
+		characteristics: { '14': 4, '15': 4, '16': 3, '17': 2, '18': 1 }
+	};
 	var url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews';
 	return axios ({
-		method: 'post',
+		method: 'POST',
 		url: url,
-		params: {
-			product_id: product_id,
-			rating: rating,
-			summary: summary,
-			body: body,
-			recommend: recommend,
-			name: name,
-			email: email,
-			photos: photos,
-			characteristics: characteristics
-		},
+		// contentType: 'application/json',
+		// responseType: 'json',
+		// params: {
+		// 	product_id: 64620,
+		// 	rating: 2,
+		// 	summary: 'testing if this works',
+		// 	body: 'Hate it it it',
+		// 	recommend: true,
+		// 	name: 'Goldlewis',
+		// 	email: 'nocountryfornoel@gmail.com',
+		// 	photos: [
+		// 		'https://d23.com/app/uploads/2019/06/1180w-600h_061819_tarzan-20th-anniversary.jpg'
+		// 	],
+		// 	characteristics: { '14': 4, '15': 4, '16': 3, '17': 2, '18': 1 }
+		// },
+
+		data: JSON.stringify(dummyReview),
+		// params: review,
 		headers: {
 			'User-Agent': 'request',
-			'Authorization': `${options.auth.Authorization}`
+			'Authorization': `${options.auth.Authorization}`,
+			'Content-Type': 'application/json;charset=UTF-8'
 		}
+		// headers: options.auth,
 	})
-	.catch(function(error) {
-		console.log('axios postReview error!: ', JSON.stringify(error).slice(0, 200));
-	});
+	// .catch(function(error) {
+	// 	console.log('axios postReview error!: ', JSON.stringify(error).slice(0, 1000));
+	// });
 }
 
 let putReview = (review_id) => {
