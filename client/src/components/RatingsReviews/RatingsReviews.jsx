@@ -50,6 +50,7 @@ class RatingsReviews extends React.Component {
     this.setReviews = this.setReviews.bind(this);
     this.recordInteraction = this.recordInteraction.bind(this);
 
+    this.writeRating = this.writeRating.bind(this);
     this.writeRecommended = this.writeRecommended.bind(this);
     this.writeSize = this.writeSize.bind(this);
     this.writeWidth = this.writeWidth.bind(this);
@@ -63,6 +64,13 @@ class RatingsReviews extends React.Component {
     this.writeNickname = this.writeNickname.bind(this);
     this.writeEmail = this.writeEmail.bind(this);
 
+  }
+
+  writeRating(e) {
+    this.setState({
+      write_rating: e.target.value
+    });
+    console.log('write rating was clicked!');
   }
 
   writeRecommended(e) {
@@ -246,14 +254,18 @@ class RatingsReviews extends React.Component {
   }
 
   postReviewHandler() {
+    // Comfort: 216800, Fit: 216798, Length: 216799, Quality: 216801, Size: 216819, Width: 216820
     var id = this.state.id;
     var product_id = this.props.id;
+    var meta_characteristics = this.state.meta_characteristics;
+    for (var key in meta_characteristics) {
+      console.log('key is: ', key);
+    }
     var characteristics = {
-      "14": 4,
-      "15": 4,
-      "16": 3,
-      "17": 2,
-      "18": 1
+      "216798": 4,
+      "216799": 4,
+      "216800": 3,
+      "216801": 2,
     };
 
     var review = {
@@ -411,6 +423,7 @@ class RatingsReviews extends React.Component {
             <ReviewList reviews={list} onMarkedHelpful={this.putHelpfulHandler}
              onMarkedReported={this.putReportedHandler} productName={this.props.productName}
              postReviewHandler={this.postReviewHandler}
+             writeRating={this.writeRating}
              writeRecommended={this.writeRecommended}
              writeSize={this.writeSize}
              writeWidth={this.writeWidth}

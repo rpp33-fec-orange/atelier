@@ -17,3 +17,40 @@
   left: 0px;
 	display: flex;
 }
+
+.star-wrapper {
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: flex-end;
+}
+
+a {
+	background: url('https://www.surecritic.com/assets/star2-0.svg');
+	background-size: 30px;
+	background-repeat: no-repeat;
+	text-decoration: none;
+	width: 50px;
+	height: 50px;
+	display: inline-block;
+	margin-right: 20px;
+}
+
+.five-stars:hover,
+.five-stars:hover ~ .four-stars,
+.five-stars:hover ~ .three-stars,
+.five-stars:hover ~ .two-stars,
+.five-stars:hover ~ .one-star,
+.four-stars:hover,
+.four-stars:hover ~ .three-stars,
+.four-stars:hover ~ .two-stars,
+.four-stars:hover ~ .one-star,
+.three-stars:hover,
+.three-stars:hover ~ .two-stars,
+.three-stars:hover ~ .one-star,
+.two-stars:hover,
+.two-stars:hover ~ .one-star,
+.one-star:hover {
+  background: url("https://www.surecritic.com/assets/star2-1.svg");
+	background-size: 30px;
+	background-repeat: no-repeat;
+}

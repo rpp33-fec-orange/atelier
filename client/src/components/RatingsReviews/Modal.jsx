@@ -32,8 +32,13 @@ class Modal extends React.Component {
 					<div className="modal-rr-container">
 						<h1>Write Your Review</h1>
 						<p>About the {this.props.productName}: </p>
-						<div className="modal-rr-overallrating">
-							&#9734;&#9734;&#9734;&#9734;&#9734;
+						<br></br>
+						<div class="star-wrapper">
+							<a href="#" class="five-stars" value="5" onChange={this.props.writeRating}>&nbsp;</a>
+							<a href="#" class="four-stars" value="4" onChange={this.props.writeRating}>&nbsp;</a>
+							<a href="#" class="three-stars" value="3" onChange={this.props.writeRating}>&nbsp;</a>
+							<a href="#" class="two-stars" value="2" onChange={this.props.writeRating}>&nbsp;</a>
+							<a href="#" class="one-star" value="1" onChange={this.props.writeRating}>&nbsp;</a>
 						</div>
 						<p>Do you recommend this product?</p>
 						<div className="modal-rr-recommended" >

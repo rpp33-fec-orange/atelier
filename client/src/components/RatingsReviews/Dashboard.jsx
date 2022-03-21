@@ -24,6 +24,7 @@ class Dashboard extends React.Component {
 			<div>
 				<Modal show={this.state.show} handleClose={this.hideModal} productName={this.props.productName}
 					postReviewHandler={this.props.postReviewHandler}
+					writeRating={this.props.writeRating}
 					writeRecommended={this.props.writeRecommended}
 					writeSize={this.props.writeSize}
 					writeWidth={this.props.writeWidth}
