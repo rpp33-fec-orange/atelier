@@ -69,7 +69,7 @@ let postReview = (review) => {
 		photos: [
 			'https://d23.com/app/uploads/2019/06/1180w-600h_061819_tarzan-20th-anniversary.jpg'
 		],
-		characteristics: { '14': 4, '15': 4, '16': 3, '17': 2, '18': 1 }
+		characteristics: { '216798': 4, '216799': 4, '216800': 3, '216801': 2}
 	};
 	var url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews';
 	return axios ({

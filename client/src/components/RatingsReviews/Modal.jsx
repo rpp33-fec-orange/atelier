@@ -34,11 +34,11 @@ class Modal extends React.Component {
 						<p>About the {this.props.productName}: </p>
 						<br></br>
 						<div class="star-wrapper">
-							<a href="#" class="five-stars" value="5" onChange={this.props.writeRating}>&nbsp;</a>
-							<a href="#" class="four-stars" value="4" onChange={this.props.writeRating}>&nbsp;</a>
-							<a href="#" class="three-stars" value="3" onChange={this.props.writeRating}>&nbsp;</a>
-							<a href="#" class="two-stars" value="2" onChange={this.props.writeRating}>&nbsp;</a>
-							<a href="#" class="one-star" value="1" onChange={this.props.writeRating}>&nbsp;</a>
+							<a href="#" className="five-stars star-rating-modal" data-value="5" onClick={this.props.writeRating}>&nbsp;</a>
+							<a href="#" className="four-stars star-rating-modal" data-value="4" onClick={this.props.writeRating}>&nbsp;</a>
+							<a href="#" className="three-stars star-rating-modal" data-value="3" onClick={this.props.writeRating}>&nbsp;</a>
+							<a href="#" className="two-stars star-rating-modal" data-value="2" onClick={this.props.writeRating}>&nbsp;</a>
+							<a href="#" className="one-star star-rating-modal" data-value="1" onClick={this.props.writeRating}>&nbsp;</a>
 						</div>
 						<p>Do you recommend this product?</p>
 						<div className="modal-rr-recommended" >
@@ -55,75 +55,75 @@ class Modal extends React.Component {
 						<div className="characteristics">
 							Characteristics:
 							<div>Size:
-								<input type="radio" id="size1" name="characteristics-size" value="size1" onChange={this.props.writeSize} />
+								<input type="radio" id="size1" name="characteristics-size" value="1" onChange={this.props.writeSize} />
 								<label htmlFor="size1">1</label>
-								<input type="radio" id="size2" name="characteristics-size" value="size2" onChange={this.props.writeSize} />
+								<input type="radio" id="size2" name="characteristics-size" value="2" onChange={this.props.writeSize} />
 								<label htmlFor="size2">2</label>
-								<input type="radio" id="size3" name="characteristics-size" value="size3" onChange={this.props.writeSize} />
+								<input type="radio" id="size3" name="characteristics-size" value="3" onChange={this.props.writeSize} />
 								<label htmlFor="size3">3</label>
-								<input type="radio" id="size4" name="characteristics-size" value="size4" onChange={this.props.writeSize} />
+								<input type="radio" id="size4" name="characteristics-size" value="4" onChange={this.props.writeSize} />
 								<label htmlFor="size4">4</label>
-								<input type="radio" id="size5" name="characteristics-size" value="size5" onChange={this.props.writeSize} />
+								<input type="radio" id="size5" name="characteristics-size" value="5" onChange={this.props.writeSize} />
 								<label htmlFor="size5">5</label>
 							</div>
 							<div>Width:
-								<input type="radio" id="width1" name="characteristics-width" value="width1" onChange={this.props.writeWidth} />
+								<input type="radio" id="width1" name="characteristics-width" value="1" onChange={this.props.writeWidth} />
 								<label htmlFor="width1">1</label>
-								<input type="radio" id="width2" name="characteristics-width" value="width2" onChange={this.props.writeWidth} />
+								<input type="radio" id="width2" name="characteristics-width" value="2" onChange={this.props.writeWidth} />
 								<label htmlFor="width2">2</label>
-								<input type="radio" id="width3" name="characteristics-width" value="width3" onChange={this.props.writeWidth} />
+								<input type="radio" id="width3" name="characteristics-width" value="3" onChange={this.props.writeWidth} />
 								<label htmlFor="width3">3</label>
-								<input type="radio" id="width4" name="characteristics-width" value="width4" onChange={this.props.writeWidth} />
+								<input type="radio" id="width4" name="characteristics-width" value="4" onChange={this.props.writeWidth} />
 								<label htmlFor="width4">4</label>
-								<input type="radio" id="width5" name="characteristics-width" value="width5" onChange={this.props.writeWidth} />
+								<input type="radio" id="width5" name="characteristics-width" value="5" onChange={this.props.writeWidth} />
 								<label htmlFor="width5">5</label>
 							</div>
 							<div>Comfort:
-								<input type="radio" id="comfort1" name="characteristics-comfort" value="comfort1" onChange={this.props.writeComfort} />
+								<input type="radio" id="comfort1" name="characteristics-comfort" value="1" onChange={this.props.writeComfort} />
 								<label htmlFor="comfort1">1</label>
-								<input type="radio" id="comfort2" name="characteristics-comfort" value="comfort2" onChange={this.props.writeComfort} />
+								<input type="radio" id="comfort2" name="characteristics-comfort" value="2" onChange={this.props.writeComfort} />
 								<label htmlFor="comfort2">2</label>
-								<input type="radio" id="comfort3" name="characteristics-comfort" value="comfort3" onChange={this.props.writeComfort} />
+								<input type="radio" id="comfort3" name="characteristics-comfort" value="3" onChange={this.props.writeComfort} />
 								<label htmlFor="comfort3">3</label>
-								<input type="radio" id="comfort4" name="characteristics-comfort" value="comfort4" onChange={this.props.writeComfort} />
+								<input type="radio" id="comfort4" name="characteristics-comfort" value="4" onChange={this.props.writeComfort} />
 								<label htmlFor="comfort4">4</label>
-								<input type="radio" id="comfort5" name="characteristics-comfort" value="comfort5" onChange={this.props.writeComfort} />
+								<input type="radio" id="comfort5" name="characteristics-comfort" value="5" onChange={this.props.writeComfort} />
 								<label htmlFor="comfort5">5</label>
 							</div>
 							<div>Quality:
-								<input type="radio" id="quality1" name="characteristics-quality" value="quality1" onChange={this.props.writeQuality} />
+								<input type="radio" id="quality1" name="characteristics-quality" value="1" onChange={this.props.writeQuality} />
 								<label htmlFor="comfort1">1</label>
-								<input type="radio" id="quality2" name="characteristics-quality" value="quality2" onChange={this.props.writeQuality} />
+								<input type="radio" id="quality2" name="characteristics-quality" value="2" onChange={this.props.writeQuality} />
 								<label htmlFor="comfort2">2</label>
-								<input type="radio" id="quality3" name="characteristics-quality" value="quality3" onChange={this.props.writeQuality} />
+								<input type="radio" id="quality3" name="characteristics-quality" value="3" onChange={this.props.writeQuality} />
 								<label htmlFor="comfort3">3</label>
-								<input type="radio" id="quality4" name="characteristics-quality" value="quality4" onChange={this.props.writeQuality} />
+								<input type="radio" id="quality4" name="characteristics-quality" value="4" onChange={this.props.writeQuality} />
 								<label htmlFor="comfort4">4</label>
-								<input type="radio" id="quality5" name="characteristics-quality" value="quality5" onChange={this.props.writeQuality} />
+								<input type="radio" id="quality5" name="characteristics-quality" value="5" onChange={this.props.writeQuality} />
 								<label htmlFor="comfort5">5</label>
 							</div>
 							<div>Length:
-								<input type="radio" id="length1" name="characteristics-length" value="length1" onChange={this.props.writeLength} />
+								<input type="radio" id="length1" name="characteristics-length" value="1" onChange={this.props.writeLength} />
 								<label htmlFor="length1">1</label>
-								<input type="radio" id="length2" name="characteristics-length" value="length2" onChange={this.props.writeLength} />
+								<input type="radio" id="length2" name="characteristics-length" value="2" onChange={this.props.writeLength} />
 								<label htmlFor="length2">2</label>
-								<input type="radio" id="length3" name="characteristics-length" value="length3" onChange={this.props.writeLength} />
+								<input type="radio" id="length3" name="characteristics-length" value="3" onChange={this.props.writeLength} />
 								<label htmlFor="length3">3</label>
-								<input type="radio" id="length4" name="characteristics-length" value="length4" onChange={this.props.writeLength} />
+								<input type="radio" id="length4" name="characteristics-length" value="4" onChange={this.props.writeLength} />
 								<label htmlFor="length4">4</label>
-								<input type="radio" id="length5" name="characteristics-length" value="length5" onChange={this.props.writeLength} />
+								<input type="radio" id="length5" name="characteristics-length" value="5" onChange={this.props.writeLength} />
 								<label htmlFor="length5">5</label>
 							</div>
 							<div>Fit:
-								<input type="radio" id="fit1" name="characteristics-fit" value="fit1" onChange={this.props.writeFit}/>
+								<input type="radio" id="fit1" name="characteristics-fit" value="1" onChange={this.props.writeFit}/>
 								<label htmlFor="fit1">1</label>
-								<input type="radio" id="fit2" name="characteristics-fit" value="fit2" onChange={this.props.writeFit}/>
+								<input type="radio" id="fit2" name="characteristics-fit" value="2" onChange={this.props.writeFit}/>
 								<label htmlFor="fit2">2</label>
-								<input type="radio" id="fit3" name="characteristics-fit" value="fit3" onChange={this.props.writeFit}/>
+								<input type="radio" id="fit3" name="characteristics-fit" value="3" onChange={this.props.writeFit}/>
 								<label htmlFor="fit3">3</label>
-								<input type="radio" id="fit4" name="characteristics-fit" value="fit4" onChange={this.props.writeFit}/>
+								<input type="radio" id="fit4" name="characteristics-fit" value="4" onChange={this.props.writeFit}/>
 								<label htmlFor="fit4">4</label>
-								<input type="radio" id="fit5" name="characteristics-fit" value="fit5" onChange={this.props.writeFit}/>
+								<input type="radio" id="fit5" name="characteristics-fit" value="5" onChange={this.props.writeFit}/>
 								<label htmlFor="fit5">5</label>
 							</div>
 						</div>

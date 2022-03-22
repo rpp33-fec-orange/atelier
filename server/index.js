@@ -246,7 +246,7 @@ app.post('/reviews', function (req, res) {
     .catch((error) => {
       console.log('error getting reviews!', error.response.data);
       // res.status(500).send(error);
-      res.send(error);
+      res.statusCode(500).send(error);
 
     })
 });

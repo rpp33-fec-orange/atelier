@@ -24,7 +24,7 @@
 	justify-content: flex-end;
 }
 
-a {
+.star-rating-modal {
 	background: url('https://www.surecritic.com/assets/star2-0.svg');
 	background-size: 30px;
 	background-repeat: no-repeat;

@@ -40,7 +40,13 @@ class RatingsReviews extends React.Component {
       write_review_body: '',
       write_review_photos: ['https://d23.com/app/uploads/2019/06/1180w-600h_061819_tarzan-20th-anniversary.jpg'],
       write_name: '',
-      write_email: ''
+      write_email: '',
+      size_key: 0,
+      width_key: 0,
+      comfort_key: 0,
+      quality_key: 0,
+      length_key: 0,
+      fit_key: 0
     }
     this.getReviewsByIDHandler = this.getReviewsByIDHandler.bind(this);
     this.getReviewsMetaHandler = this.getReviewsMetaHandler.bind(this);
@@ -67,10 +73,10 @@ class RatingsReviews extends React.Component {
   }
 
   writeRating(e) {
+    var write_rating = e.target.getAttribute('data-value');
     this.setState({
-      write_rating: e.target.value
-    });
-    console.log('write rating was clicked!');
+      write_rating: write_rating
+    })
   }
 
   writeRecommended(e) {
@@ -82,7 +88,7 @@ class RatingsReviews extends React.Component {
 
   writeSize(e) {
     this.setState({
-      write_recomwrite_size: e.target.value
+      write_recharacteristic_size: e.target.value
     });
     console.log('button was clicked!');
   }
@@ -255,18 +261,102 @@ class RatingsReviews extends React.Component {
 
   postReviewHandler() {
     // Comfort: 216800, Fit: 216798, Length: 216799, Quality: 216801, Size: 216819, Width: 216820
+    var characteristicsCodes = [];
+    var characteristicsList = [];
+    var characteristicsValues = [];
+    var characteristics = {};
     var id = this.state.id;
     var product_id = this.props.id;
     var meta_characteristics = this.state.meta_characteristics;
     for (var key in meta_characteristics) {
+
       console.log('key is: ', key);
+      console.log('key id is: ', key.id);
+      var characteristic = meta_characteristics[key];
+      console.log('characteristic id is: ', characteristic.id);
+      // if(key === 'Size') {
+      //   console.log('we got a match');
+      //   characteristics[JSON.stringify(216801)] = this.state.write_characteristic_size;
+
+      // }
+      // console.log('characteristics object is: ', characteristics);
+
+      characteristicsList.push(key);
+      characteristicsCodes.push(characteristic.id);
+
+
+
+
+      console.log('key is: ', key);
+      if (key === 'Size') {
+        characteristicsValues.push(this.state.write_characteristic_size);
+      }
+      else if (key === 'Width') {
+        characteristicsValues.push(this.state.write_characteristic_width);
+      }
+      else if (key === 'Comfort') {
+        characteristicsValues.push(this.state.write_characteristic_comfort);
+      }
+      else if (key === 'Quality') {
+        characteristicsValues.push(this.state.write_characteristic_quality);
+      }
+      else if (key === 'Length') {
+        characteristicsValues.push(this.state.write_characteristic_length);
+      }
+      else if (key === 'Fit') {
+        characteristicsValues.push(this.state.write_characteristic_fit);
+      }
+
     }
-    var characteristics = {
-      "216798": 4,
-      "216799": 4,
-      "216800": 3,
-      "216801": 2,
-    };
+
+    console.log('size_key is: ', this.state.size_key);
+    console.log('width_key is: ', this.state.width_key);
+    console.log('comfort_key is: ', this.state.comfort_key);
+    console.log('quality_key is: ', this.state.quality_key);
+    console.log('length_key is: ', this.state.length_key);
+    console.log('fit_key is: ', this.state.fit_key);
+    console.log('characteristicsList is: ', characteristicsList);
+    console.log('characteristicsCodes is: ', characteristicsCodes);
+    console.log('characteristicsValues is: ', characteristicsValues);
+
+    for (var i = 0; i < characteristicsCodes.length; i++) {
+      var currentKey = characteristicsCodes[i];
+      var currentValue = parseInt(characteristicsValues[i]);
+      characteristics[currentKey] = currentValue;
+    }
+
+    console.log('characteristics object becomes: ', characteristics);
+
+    // Object.keys(meta_characteristics).forEach(function(characteristic) {
+    //   console.log('characteristic is: ', characteristic);
+    //   console.log('characteristic id is: ', meta_characteristics.characteristic.id);
+    // });
+    // var characteristics = {
+    //   "216798": 4,
+    //   "216799": 4,
+    //   "216800": 3,
+    //   "216801": 2,
+    // };
+    // if (this.state.size_key !== 0) {
+    //   characteristics[this.state.size_key] = this.state.write_characteristic_size;
+    // }
+    // else if (this.state.width_key !== 0) {
+    //   characteristics[this.state.width_key] = this.state.write_characteristic_width;
+    // }
+    // else if (this.state.comfort_key !== 0) {
+    //   characteristics[this.state.comfort_key] = this.state.write_characteristic_comofrt;
+    // }
+    // else if (this.state.quality_key !== 0) {
+    //   characteristics[this.state.quality_key] = this.state.write_characteristic_quality;
+    // }
+    // else if (this.state.length_key !== 0) {
+    //   characteristics[this.state.length_key] = this.state.write_characteristic_length;
+    // }
+    // else if (this.state.fit_key !== 0) {
+    //   characteristics[this.state.fit_key] = this.state.write_characteristic_fit;
+    // }
+
+    console.log('characteristics in ajax call are: ', characteristics);
 
     var review = {
       product_id: product_id,
