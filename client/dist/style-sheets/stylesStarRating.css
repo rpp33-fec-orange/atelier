@@ -54,3 +54,23 @@
 	background-size: 30px;
 	background-repeat: no-repeat;
 }
+
+.five-stars:focus,
+.five-stars:focus ~ .four-stars,
+.five-stars:focus ~ .three-stars,
+.five-stars:focus ~ .two-stars,
+.five-stars:focus ~ .one-star,
+.four-stars:focus,
+.four-stars:focus ~ .three-stars,
+.four-stars:focus ~ .two-stars,
+.four-stars:focus ~ .one-star,
+.three-stars:focus,
+.three-stars:focus ~ .two-stars,
+.three-stars:focus ~ .one-star,
+.two-stars:focus,
+.two-stars:focus ~ .one-star,
+.one-star:focus {
+  background: url("https://www.surecritic.com/assets/star2-1.svg");
+	background-size: 30px;
+	background-repeat: no-repeat;
+}

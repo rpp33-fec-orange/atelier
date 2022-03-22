@@ -9,6 +9,7 @@ import SizeSlider from './SizeSlider.jsx';
 import ReviewList from './ReviewList.jsx';
 import Dashboard from './Dashboard.jsx';
 import StarRating from './StarRating.jsx';
+import axios from 'axios';
 
 class RatingsReviews extends React.Component {
   constructor(props) {
@@ -39,6 +40,9 @@ class RatingsReviews extends React.Component {
       write_review_summary: '',
       write_review_body: '',
       write_review_photos: ['https://d23.com/app/uploads/2019/06/1180w-600h_061819_tarzan-20th-anniversary.jpg'],
+      photoCount: 0,
+      selectedFile: null,
+      image: null,
       write_name: '',
       write_email: '',
       size_key: 0,
@@ -67,13 +71,15 @@ class RatingsReviews extends React.Component {
     this.writeReviewSummary = this.writeReviewSummary.bind(this);
     this.writeReviewBody = this.writeReviewBody.bind(this);
     this.writeUploadPhotos = this.writeUploadPhotos.bind(this);
+    this.writeSubmitPhotos = this.writeSubmitPhotos.bind(this);
+    this.showUploadedPhotos = this.showUploadedPhotos.bind(this);
     this.writeNickname = this.writeNickname.bind(this);
     this.writeEmail = this.writeEmail.bind(this);
 
   }
 
   writeRating(e) {
-    var write_rating = e.target.getAttribute('data-value');
+    var write_rating = parseInt(e.target.getAttribute('data-value'));
     this.setState({
       write_rating: write_rating
     })
@@ -135,12 +141,64 @@ class RatingsReviews extends React.Component {
     });
     console.log('button was clicked!');
   }
-  writeUploadPhotos(e) {
-    this.setState({
-      write_review_photos: e.target.value
-    });
-    console.log('button was clicked!');
+  writeUploadPhotos() {
+    // var currentPhotos = this.state.write_review_photos;
+    // var photoLink = e.target.value;
+    // currentPhotos.push(photoLink);
+    // console.log('photo link should be: ', photoLink);
+    // this.setState({
+    //   write_review_photos: currentPhotos
+    // });
+
+    // this.setState({
+    //   selectedFile: e.target.files[0]
+    // });
+    // const files = this.myFiles.files
+    // const accept = ["image/png"];
+    // if (accept.indexOf(files[0].mediaType) > -1) {
+    //   this.setState({
+    //     image: files[0].getAsDataURL()
+    //   });
+    // }
   }
+
+  writeSubmitPhotos() {
+    // submit photos logic here
+    // const formData = new FormData();
+    // formData.append(
+    //   "myFile",
+    //   this.state.selectedFile,
+    //   this.state.selectedFile.name
+    // );
+
+    // console.log('details of the uploaded file: ', this.state.selectedFile);
+    // axios.post("api/uploadfile", formData);
+    axios.post('');
+  }
+
+  showUploadedPhotos() {
+    // if (this.state.selectedFile) {
+    //   return (
+    //     <div>
+    //       <h2>File Details:</h2>
+    //       <p>File Name: {this.state.selectedFile.name}</p>
+    //       <p>File Type: {this.state.selectedFile.type}</p>
+    //       <p>
+    //         Last Modified:{" "}
+    //         {this.state.selectedFile.lastModifiedDate.toDateString()}
+    //       </p>
+    //     </div>
+    //   );
+    // } else {
+    //   return (
+    //     <div>
+    //       <br />
+    //       <h4>Choose before Pressing the Upload button</h4>
+    //     </div>
+    //   );
+    // }
+  }
+
   writeNickname(e) {
     this.setState({
       write_name: e.target.value
@@ -284,9 +342,6 @@ class RatingsReviews extends React.Component {
       characteristicsList.push(key);
       characteristicsCodes.push(characteristic.id);
 
-
-
-
       console.log('key is: ', key);
       if (key === 'Size') {
         characteristicsValues.push(this.state.write_characteristic_size);
@@ -309,15 +364,15 @@ class RatingsReviews extends React.Component {
 
     }
 
-    console.log('size_key is: ', this.state.size_key);
-    console.log('width_key is: ', this.state.width_key);
-    console.log('comfort_key is: ', this.state.comfort_key);
-    console.log('quality_key is: ', this.state.quality_key);
-    console.log('length_key is: ', this.state.length_key);
-    console.log('fit_key is: ', this.state.fit_key);
-    console.log('characteristicsList is: ', characteristicsList);
-    console.log('characteristicsCodes is: ', characteristicsCodes);
-    console.log('characteristicsValues is: ', characteristicsValues);
+    // console.log('size_key is: ', this.state.size_key);
+    // console.log('width_key is: ', this.state.width_key);
+    // console.log('comfort_key is: ', this.state.comfort_key);
+    // console.log('quality_key is: ', this.state.quality_key);
+    // console.log('length_key is: ', this.state.length_key);
+    // console.log('fit_key is: ', this.state.fit_key);
+    // console.log('characteristicsList is: ', characteristicsList);
+    // console.log('characteristicsCodes is: ', characteristicsCodes);
+    // console.log('characteristicsValues is: ', characteristicsValues);
 
     for (var i = 0; i < characteristicsCodes.length; i++) {
       var currentKey = characteristicsCodes[i];
@@ -325,38 +380,11 @@ class RatingsReviews extends React.Component {
       characteristics[currentKey] = currentValue;
     }
 
-    console.log('characteristics object becomes: ', characteristics);
-
-    // Object.keys(meta_characteristics).forEach(function(characteristic) {
-    //   console.log('characteristic is: ', characteristic);
-    //   console.log('characteristic id is: ', meta_characteristics.characteristic.id);
-    // });
-    // var characteristics = {
-    //   "216798": 4,
-    //   "216799": 4,
-    //   "216800": 3,
-    //   "216801": 2,
-    // };
-    // if (this.state.size_key !== 0) {
-    //   characteristics[this.state.size_key] = this.state.write_characteristic_size;
-    // }
-    // else if (this.state.width_key !== 0) {
-    //   characteristics[this.state.width_key] = this.state.write_characteristic_width;
-    // }
-    // else if (this.state.comfort_key !== 0) {
-    //   characteristics[this.state.comfort_key] = this.state.write_characteristic_comofrt;
-    // }
-    // else if (this.state.quality_key !== 0) {
-    //   characteristics[this.state.quality_key] = this.state.write_characteristic_quality;
-    // }
-    // else if (this.state.length_key !== 0) {
-    //   characteristics[this.state.length_key] = this.state.write_characteristic_length;
-    // }
-    // else if (this.state.fit_key !== 0) {
-    //   characteristics[this.state.fit_key] = this.state.write_characteristic_fit;
-    // }
-
-    console.log('characteristics in ajax call are: ', characteristics);
+    // console.log('characteristics object becomes: ', characteristics);
+    // console.log('characteristics in ajax call are: ', characteristics);
+    var uploadedPhotos = [];
+    var currentPhoto = this.state.selectedFile;
+    uploadedPhotos.push(currentPhoto);
 
     var review = {
       product_id: product_id,
@@ -367,9 +395,11 @@ class RatingsReviews extends React.Component {
       name: this.state.write_name,
       email: this.state.write_email,
       photos: this.state.write_review_photos,
+      // photos: this.state.selectedFile,
+      // photos: uploadedPhotos,
       characteristics: characteristics
     };
-    console.log('review in postReviewHandler is: ', review );
+    console.log('review in postReviewHandler is: ', review);
     var url = '/reviews';
     $.ajax({
       context: this,
@@ -511,21 +541,23 @@ class RatingsReviews extends React.Component {
               </select>
             </div>
             <ReviewList reviews={list} onMarkedHelpful={this.putHelpfulHandler}
-             onMarkedReported={this.putReportedHandler} productName={this.props.productName}
-             postReviewHandler={this.postReviewHandler}
-             writeRating={this.writeRating}
-             writeRecommended={this.writeRecommended}
-             writeSize={this.writeSize}
-             writeWidth={this.writeWidth}
-             writeComfort={this.writeComfort}
-             writeQuality={this.writeQuality}
-             writeLength={this.writeLength}
-             writeFit={this.writeFit}
-             writeReviewSummary={this.writeReviewSummary}
-             writeReviewBody={this.writeReviewBody}
-             writeUploadPhotos={this.writeUploadPhotos}
-             writeNickname={this.writeNickname}
-             writeEmail={this.writeEmail}
+              onMarkedReported={this.putReportedHandler} productName={this.props.productName}
+              postReviewHandler={this.postReviewHandler}
+              writeRating={this.writeRating}
+              writeRecommended={this.writeRecommended}
+              writeSize={this.writeSize}
+              writeWidth={this.writeWidth}
+              writeComfort={this.writeComfort}
+              writeQuality={this.writeQuality}
+              writeLength={this.writeLength}
+              writeFit={this.writeFit}
+              writeReviewSummary={this.writeReviewSummary}
+              writeReviewBody={this.writeReviewBody}
+              writeUploadPhotos={this.writeUploadPhotos}
+              writeSubmitPhotos={this.writeSubmitPhotos}
+              showUploadedPhotos={this.showUploadedPhotos}
+              writeNickname={this.writeNickname}
+              writeEmail={this.writeEmail}
             />
             {/* <Dashboard /> */}
           </div>

@@ -42,7 +42,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.0.0",
     "@fortawesome/react-fontawesome": "^0.1.17",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.6",
-    "axios": "^0.26.0",
+    "axios": "^0.26.1",
     "dotenv": "^16.0.0",
     "enzyme": "^3.11.0",
     "express": "^4.17.2",

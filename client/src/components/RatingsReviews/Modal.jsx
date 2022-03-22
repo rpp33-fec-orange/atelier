@@ -142,11 +142,14 @@ class Modal extends React.Component {
 						</div>
 						<br></br>
 						<div className="upload-photo">Upload your photos:
-							<button className="upload" type="button"
-							// onChange={this.props.writeUploadPhotos}
+							{/* <button className="upload" type="button"
 							>
 								Upload
-							</button>
+							</button> */}
+							<label>Choose the photo to upload: </label>
+							<input type="file" id="myFile	" ref={this.myFiles} onChange={this.props.writeUploadPhotos} /> <br></br>
+							<input type="submit" value="submit" onClick={this.props.writeSubmitPhotos} />
+							{/* {this.props.showUploadedPhotos} */}
 						</div>
 						<br></br>
 						<div className="nickname">

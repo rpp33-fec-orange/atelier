@@ -103,6 +103,8 @@ class ReviewList extends React.Component {
 					writeReviewSummary={this.props.writeReviewSummary}
 					writeReviewBody={this.props.writeReviewBody}
 					writeUploadPhotos={this.props.writeUploadPhotos}
+					writeSubmitPhotos={this.props.writeSubmitPhotos}
+					showUploadedPhotos={this.props.showUploadedPhotos}
 					writeNickname={this.props.writeNickname}
 					writeEmail={this.props.writeEmail}
 
