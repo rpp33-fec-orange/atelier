@@ -20,7 +20,7 @@ class ReviewList extends React.Component {
 	}
 
 	componentDidMount() {
-		// console.log('finally, this.props.reviews is: ', this.props.reviews);
+		console.log('finally, this.props.reviews is: ', this.props.reviews);
 		var reviewList = this.props.reviews;
 		this.setState({
 			reviewList: reviewList,

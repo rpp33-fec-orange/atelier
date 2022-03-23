@@ -84,7 +84,7 @@ class StarList extends React.Component {
 							<td>5 stars:</td>
 							<td>
 								<div className="progress-bar">
-									<div style={{ width: `${this.state.percentFive}%` }}>
+									<div style={{ width: `${this.state.percentFive}%` }} data-value='five_star_reviews' onClick={this.props.setStarReviews}>
 									</div>
 								</div>
 							</td>
@@ -93,7 +93,7 @@ class StarList extends React.Component {
 							<td>4 stars:</td>
 							<td>
 								<div className="progress-bar">
-									<div style={{ width: `${this.state.percentFour}%` }}>
+									<div style={{ width: `${this.state.percentFour}%` }} data-value='four_star_reviews' onClick={this.props.setStarReviews}>
 									</div>
 								</div>
 							</td>
@@ -102,7 +102,7 @@ class StarList extends React.Component {
 							<td>3 stars:</td>
 							<td>
 								<div className="progress-bar">
-									<div style={{ width: `${this.state.percentThree}%` }}>
+									<div style={{ width: `${this.state.percentThree}%` }} data-value='three_star_reviews' onClick={this.props.setStarReviews}>
 									</div>
 								</div>
 							</td>
@@ -111,7 +111,7 @@ class StarList extends React.Component {
 							<td>2 stars:</td>
 							<td>
 								<div className="progress-bar">
-									<div style={{ width: `${this.state.percentTwo}%` }}>
+									<div style={{ width: `${this.state.percentTwo}%` }} data-value='two_star_reviews' onClick={this.props.setStarReviews}>
 									</div>
 								</div>
 							</td>
@@ -120,7 +120,7 @@ class StarList extends React.Component {
 							<td>1 star:</td>
 							<td>
 								<div className="progress-bar">
-									<div style={{ width: `${this.state.percentOne}%` }}>
+									<div style={{ width: `${this.state.percentOne}%` }} data-value='one_star_reviews' onClick={this.props.setStarReviews}>
 									</div>
 								</div>
 							</td>

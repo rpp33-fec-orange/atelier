@@ -15,6 +15,11 @@ class RatingsReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      one_star_reviews: [],
+      two_star_reviews: [],
+      three_star_reviews: [],
+      four_star_reviews: [],
+      five_star_reviews: [],
       reviewReady: false,
       metaReady: false,
       reviews: [],
@@ -58,6 +63,8 @@ class RatingsReviews extends React.Component {
     this.putHelpfulHandler = this.putHelpfulHandler.bind(this);
     this.sortReviews = this.sortReviews.bind(this);
     this.setReviews = this.setReviews.bind(this);
+    this.sortStarReviews = this.sortStarReviews.bind(this);
+    this.setStarReviews = this.setStarReviews.bind(this);
     this.recordInteraction = this.recordInteraction.bind(this);
 
     this.writeRating = this.writeRating.bind(this);
@@ -221,7 +228,7 @@ class RatingsReviews extends React.Component {
     this.getReviewsByIDHandler(id);
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if (this.props.id !== prevProps.id) {
       var id = this.props.id;
       this.setState({
@@ -229,6 +236,12 @@ class RatingsReviews extends React.Component {
       });
       this.getReviewsByIDHandler(id);
     }
+    if (this.state.reviews !== prevState.reviews) {
+      this.setState({
+        reviews: this.state.reviews
+      });
+    }
+    console.log('reviews set by star number are: ', this.state.reviews);
   }
 
   setSort(sort) {
@@ -289,6 +302,7 @@ class RatingsReviews extends React.Component {
     })
       .done(function () {
         this.getReviewsMetaHandler(this.state.id);
+        this.sortStarReviews();
       });
   }
 
@@ -494,6 +508,80 @@ class RatingsReviews extends React.Component {
     }
   }
 
+  setStarReviews(e) {
+    // var newestReviews = this.state.newestReviews;
+    // var helpfulReviews = this.state.helpfulReviews;
+    // var relevantReviews = this.state.relevantReviews;
+    // if (this.state.sort === 'newest') {
+    //   this.setState({
+    //     reviews: newestReviews
+    //   });
+    // } else if (this.state.sort === 'helpful') {
+    //   this.setState({
+    //     reviews: helpfulReviews
+    //   });
+    // } else if (this.state.sort === 'relevant') {
+    //   this.setState({
+    //     reviews: relevantReviews
+    //   });
+    // }
+    var setStar = e.target.getAttribute('data-value');
+    console.log('setStar is: ', setStar);
+    var setStarState = this.state[setStar];
+    console.log('setStarState is: ', setStarState);
+
+    this.setState({
+      reviews: setStarState
+    })
+    console.log('reviews: setStarState becomes: ', this.state.reviews );
+  }
+
+  sortStarReviews() {
+    var newestReviews = this.state.newestReviews;
+    console.log('newestReviews are: ', newestReviews);
+    var oneStarReviews = [];
+    var twoStarReviews = [];
+    var threeStarReviews = [];
+    var fourStarReviews = [];
+    var fiveStarReviews = [];
+    for (var i = 0; i < newestReviews.length; i++) {
+      if(newestReviews[i].rating === 1) {
+        oneStarReviews.push(newestReviews[i]);
+      }
+      else if (newestReviews[i].rating === 2) {
+        twoStarReviews.push(newestReviews[i]);
+      }
+      else if (newestReviews[i].rating === 3) {
+        threeStarReviews.push(newestReviews[i]);
+      }
+      else if (newestReviews[i].rating === 4) {
+        fourStarReviews.push(newestReviews[i]);
+      }
+      else if (newestReviews[i].rating === 5) {
+        fiveStarReviews.push(newestReviews[i]);
+      }
+    }
+    this.setState({
+      one_star_reviews: oneStarReviews,
+      two_star_reviews: twoStarReviews,
+      three_star_reviews: threeStarReviews,
+      four_star_reviews: fourStarReviews,
+      five_star_reviews: fiveStarReviews
+    })
+    console.log('one star reviews array are: ', oneStarReviews);
+    console.log('two star reviews array are: ', twoStarReviews);
+    console.log('three star reviews array are: ', threeStarReviews);
+    console.log('four star reviews array are: ', fourStarReviews);
+    console.log('five star reviews array are: ', fiveStarReviews);
+
+    console.log('one star reviews are: ', this.state.one_star_reviews);
+    console.log('two star reviews are: ', this.state.two_star_reviews);
+    console.log('three star reviews are: ', this.state.three_star_reviews);
+    console.log('four star reviews are: ', this.state.four_star_reviews);
+    console.log('five star reviews are: ', this.state.five_star_reviews);
+  }
+
+
   recordInteraction(e) {
     this.props.interactions({
       element: e.target.nodeName,
@@ -528,7 +616,7 @@ class RatingsReviews extends React.Component {
           <div className="rating-breakdown">
             <h3 id='ratings-reviews' id="zero">RATINGS AND REVIEWS</h3>
             <StarNumber recommended={meta_recommended} ratings={meta_ratings} handleRating={this.props.handleRating} handleGetRating={this.props.handleGetRating} />
-            <StarList ratings={meta_ratings} />
+            <StarList ratings={meta_ratings} setStarReviews={this.setStarReviews} />
             <SizeSlider size={meta_characteristics} />
             <ComfortSlider comfort={meta_characteristics} />
           </div>
