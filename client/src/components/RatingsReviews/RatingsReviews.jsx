@@ -15,17 +15,23 @@ class RatingsReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      previousFilter: '',
       one_star_reviews: [],
       two_star_reviews: [],
       three_star_reviews: [],
       four_star_reviews: [],
       five_star_reviews: [],
+      filter_one: false,
+      filter_two: false,
+      filter_three: false,
+      filter_four: false,
+      filter_five: false,
       reviewReady: false,
       metaReady: false,
       reviews: [],
       meta: {},
       id: 0,
-      sort: '',
+      sort: 'relevance',
       count: 0,
       review_id: 0,
       meta_ratings: {},
@@ -66,6 +72,7 @@ class RatingsReviews extends React.Component {
     this.sortStarReviews = this.sortStarReviews.bind(this);
     this.setStarReviews = this.setStarReviews.bind(this);
     this.recordInteraction = this.recordInteraction.bind(this);
+    this.setFilter = this.setFilter.bind(this);
 
     this.writeRating = this.writeRating.bind(this);
     this.writeRecommended = this.writeRecommended.bind(this);
@@ -82,6 +89,128 @@ class RatingsReviews extends React.Component {
     this.showUploadedPhotos = this.showUploadedPhotos.bind(this);
     this.writeNickname = this.writeNickname.bind(this);
     this.writeEmail = this.writeEmail.bind(this);
+
+  }
+
+  setStarReviews() {
+    // var currentFilter = e.target.getAttribute('data-value');  // this is my current filter obtained from user click
+    // var previousFilter = this.state.previousFilter;  // this is my previous filter
+    // this.setState({
+    //   previousFilter: currentFilter   // store current filter to be previous filter of next click
+    // });
+    // // 3 situations: no filter ( or before any filtering ), same filter, different filter
+    // // if no filter, for example, currentFilter is same as previousFilter, reviews remain as reviews.
+    // // if there is filter, for example, 5 stars, reviews turn into 5 star
+    // console.log('currentFilter is: ', currentFilter);
+    // var currentFilterState = this.state[currentFilter];
+    // console.log('currentFilterState is: ', currentFilterState);
+
+    // this.setState({
+    //   reviews: currentFilterState
+    // })
+    // console.log('reviews: currentFilterState becomes: ', this.state.reviews );
+    // *********************************
+
+    var filteredReviews = [];   // check if any filter is on, which means we empty the reviews array
+    if (this.state.filter_one ||
+      this.state.filter_two ||
+      this.state.filter_three ||
+      this.state.filter_four ||
+      this.state.filter_five
+    ) {
+      console.log('Hello World!');
+      console.log('this.state.filter_one is: ', this.state.filter_one);
+      console.log('this.state.filter_two is: ', this.state.filter_two);
+      console.log('this.state.filter_three is: ', this.state.filter_three);
+      console.log('this.state.filter_four is: ', this.state.filter_four);
+      console.log('this.state.filter_five is: ', this.state.filter_five);
+      if (this.state.filter_one) {  // if filter one star is on, put all 1 star reviews in reviews array
+        for (var i = 0; i < this.state.one_star_reviews.length; i++) {
+          filteredReviews.push((this.state.one_star_reviews[i]));
+        }
+      }
+      if (this.state.filter_two) {  // if filter one star is on, put all 1 star reviews in reviews array
+        for (var j = 0; j < this.state.two_star_reviews.length; j++) {
+          filteredReviews.push((this.state.two_star_reviews[j]));
+        }
+      }
+      if (this.state.filter_three) {  // if filter one star is on, put all 1 star reviews in reviews array
+        for (var k = 0; k < this.state.three_star_reviews.length; k++) {
+          filteredReviews.push((this.state.three_star_reviews[k]));
+        }
+      }
+      if (this.state.filter_four) {  // if filter one star is on, put all 1 star reviews in reviews array
+        for (var i = 0; i < this.state.four_star_reviews.length; i++) {
+          filteredReviews.push((this.state.four_star_reviews[i]));
+        }
+      }
+      if (this.state.filter_five) {  // if filter one star is on, put all 1 star reviews in reviews array
+        for (var i = 0; i < this.state.five_star_reviews.length; i++) {
+          filteredReviews.push((this.state.five_star_reviews[i]));
+        }
+      }
+      this.setState({
+        reviews: filteredReviews
+      })
+
+
+      // console.log('this.state.reviews are: ', this.state.reviews);
+    }
+    if (this.state.filter_one === false &&
+      this.state.filter_two === false &&
+      this.state.filter_three ===false &&
+      this.state.filter_four ===false &&
+      this.state.filter_five === false
+    ) {
+      console.log('inside setStarReviews if statement');
+      console.log('now filter_five becomes: ', this.state.filter_five);
+      this.setReviews();
+    }
+    // console.log('this.state.reviews are: ', this.state.reviews);
+
+  }
+
+  setFilter(e) {
+    var currentFilter = e.target.getAttribute('data-value');  // this is my current filter obtained from user click, i.e. filter_one
+    console.log('currentFilter is: ', currentFilter);
+    if (currentFilter === 'filter_one') {
+      var updatedFilter = !this.state.filter_one;
+      this.setState({
+        filter_one: updatedFilter
+      }, this.setStarReviews)
+    }
+    else if (currentFilter === 'filter_two') {
+      var updatedFilter = !this.state.filter_two;
+      this.setState({
+        filter_two: updatedFilter
+      }, this.setStarReviews)
+    }
+    else if (currentFilter === 'filter_three') {
+      var updatedFilter = !this.state.filter_three;
+      this.setState({
+        filter_three: updatedFilter
+      }, this.setStarReviews)
+    }
+    else if (currentFilter === 'filter_four') {
+      var updatedFilter = !this.state.filter_four;
+      console.log('updated filter becomes: ', updatedFilter);
+      this.setState({
+        filter_four: updatedFilter
+      }, this.setStarReviews)
+    }
+    else if (currentFilter === 'filter_five') {
+      var updatedFilter = !this.state.filter_five;
+      this.setState({
+        filter_five: updatedFilter
+      }, this.setStarReviews)
+    }
+
+    console.log('this.state[currentFilter] is: ', this.state[currentFilter]);
+    // console.log('this.state.filter_one is: ', this.state.filter_one);
+    // console.log('this.state.filter_two is: ', this.state.filter_two);
+    // console.log('this.state.filter_three is: ', this.state.filter_three);
+    // console.log('this.state.filter_four is: ', this.state.filter_four);
+    // console.log('this.state.filter_five is: ', this.state.filter_five);
 
   }
 
@@ -241,7 +370,16 @@ class RatingsReviews extends React.Component {
         reviews: this.state.reviews
       });
     }
-    console.log('reviews set by star number are: ', this.state.reviews);
+    // if (this.state.filter_one != prevState.filter_one ||
+    //   this.state.filter_two != prevState.filter_two ||
+    //   this.state.filter_three != prevState.filter_three ||
+    //   this.state.filter_four != prevState.filter_four ||
+    //   this.state.filter_five != prevState.filter_five
+    // ) {
+    //   this.setStarReviews();
+    //   console.log('reviews set by star number are: ', this.state.reviews);
+
+    // }
   }
 
   setSort(sort) {
@@ -493,48 +631,33 @@ class RatingsReviews extends React.Component {
     var newestReviews = this.state.newestReviews;
     var helpfulReviews = this.state.helpfulReviews;
     var relevantReviews = this.state.relevantReviews;
+    console.log('relevantReviews is: ', this.state.relevantReviews);
+    console.log('this.state.sort is: ', this.state.sort);
     if (this.state.sort === 'newest') {
       this.setState({
         reviews: newestReviews
       });
+      console.log('setReviews is working!');
+      console.log('this.state.reviews are: ', this.state.reviews);
+
     } else if (this.state.sort === 'helpful') {
       this.setState({
         reviews: helpfulReviews
       });
-    } else if (this.state.sort === 'relevant') {
+      console.log('setReviews is working!');
+      console.log('this.state.reviews are: ', this.state.reviews);
+
+    } else if (this.state.sort === 'relevance') {
       this.setState({
         reviews: relevantReviews
       });
+      console.log('setReviews is working!');
+      console.log('this.state.reviews are: ', this.state.reviews);
+
     }
   }
 
-  setStarReviews(e) {
-    // var newestReviews = this.state.newestReviews;
-    // var helpfulReviews = this.state.helpfulReviews;
-    // var relevantReviews = this.state.relevantReviews;
-    // if (this.state.sort === 'newest') {
-    //   this.setState({
-    //     reviews: newestReviews
-    //   });
-    // } else if (this.state.sort === 'helpful') {
-    //   this.setState({
-    //     reviews: helpfulReviews
-    //   });
-    // } else if (this.state.sort === 'relevant') {
-    //   this.setState({
-    //     reviews: relevantReviews
-    //   });
-    // }
-    var setStar = e.target.getAttribute('data-value');
-    console.log('setStar is: ', setStar);
-    var setStarState = this.state[setStar];
-    console.log('setStarState is: ', setStarState);
 
-    this.setState({
-      reviews: setStarState
-    })
-    console.log('reviews: setStarState becomes: ', this.state.reviews );
-  }
 
   sortStarReviews() {
     var newestReviews = this.state.newestReviews;
@@ -545,7 +668,7 @@ class RatingsReviews extends React.Component {
     var fourStarReviews = [];
     var fiveStarReviews = [];
     for (var i = 0; i < newestReviews.length; i++) {
-      if(newestReviews[i].rating === 1) {
+      if (newestReviews[i].rating === 1) {
         oneStarReviews.push(newestReviews[i]);
       }
       else if (newestReviews[i].rating === 2) {
@@ -568,17 +691,17 @@ class RatingsReviews extends React.Component {
       four_star_reviews: fourStarReviews,
       five_star_reviews: fiveStarReviews
     })
-    console.log('one star reviews array are: ', oneStarReviews);
-    console.log('two star reviews array are: ', twoStarReviews);
-    console.log('three star reviews array are: ', threeStarReviews);
-    console.log('four star reviews array are: ', fourStarReviews);
-    console.log('five star reviews array are: ', fiveStarReviews);
+    // console.log('one star reviews array are: ', oneStarReviews);
+    // console.log('two star reviews array are: ', twoStarReviews);
+    // console.log('three star reviews array are: ', threeStarReviews);
+    // console.log('four star reviews array are: ', fourStarReviews);
+    // console.log('five star reviews array are: ', fiveStarReviews);
 
-    console.log('one star reviews are: ', this.state.one_star_reviews);
-    console.log('two star reviews are: ', this.state.two_star_reviews);
-    console.log('three star reviews are: ', this.state.three_star_reviews);
-    console.log('four star reviews are: ', this.state.four_star_reviews);
-    console.log('five star reviews are: ', this.state.five_star_reviews);
+    // console.log('one star reviews are: ', this.state.one_star_reviews);
+    // console.log('two star reviews are: ', this.state.two_star_reviews);
+    // console.log('three star reviews are: ', this.state.three_star_reviews);
+    // console.log('four star reviews are: ', this.state.four_star_reviews);
+    // console.log('five star reviews are: ', this.state.five_star_reviews);
   }
 
 
@@ -616,16 +739,16 @@ class RatingsReviews extends React.Component {
           <div className="rating-breakdown">
             <h3 id='ratings-reviews' id="zero">RATINGS AND REVIEWS</h3>
             <StarNumber recommended={meta_recommended} ratings={meta_ratings} handleRating={this.props.handleRating} handleGetRating={this.props.handleGetRating} />
-            <StarList ratings={meta_ratings} setStarReviews={this.setStarReviews} />
+            <StarList ratings={meta_ratings} setStarReviews={this.setStarReviews} setFilter={this.setFilter} />
             <SizeSlider size={meta_characteristics} />
             <ComfortSlider comfort={meta_characteristics} />
           </div>
           <div className="review-breakdown">
             <div className="review-header">{count} reviews, sorted by
-              <select className="dropdown-sort" id="dropdown-sort" defaultValue={'relevant'} onChange={this.sortReviews} >
+              <select className="dropdown-sort" id="dropdown-sort" defaultValue={'relevance'} onChange={this.sortReviews} >
                 <option value="newest">newest</option>
                 <option value="helpful">helpful</option>
-                <option value="relevant">relevant</option>
+                <option value="relevance">relevance</option>
               </select>
             </div>
             <ReviewList reviews={list} onMarkedHelpful={this.putHelpfulHandler}

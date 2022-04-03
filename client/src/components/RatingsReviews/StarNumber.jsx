@@ -78,7 +78,7 @@ class StarNumber extends React.Component {
 		var five = parseInt((this.props.ratings[5] === undefined) ? 0 : this.props.ratings[5]);
 		var sum = one + two + three + four + five;
 		var ratingSummary = (1 * one + 2 * two + 3 * three + 4 * four + 5 * five) / sum;
-		ratingSummary = Math.round(ratingSummary * 100) / 100;
+		ratingSummary = Math.round(ratingSummary * 10) / 10;
 		results.push(ratingSummary, one, two, three, four, five);
 		this.setState({
 			one: results[1],
