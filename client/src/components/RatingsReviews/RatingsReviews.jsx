@@ -61,7 +61,8 @@ class RatingsReviews extends React.Component {
       comfort_key: 0,
       quality_key: 0,
       length_key: 0,
-      fit_key: 0
+      fit_key: 0,
+      show_more_reviews: false
     }
     this.getReviewsByIDHandler = this.getReviewsByIDHandler.bind(this);
     this.getReviewsMetaHandler = this.getReviewsMetaHandler.bind(this);
@@ -76,6 +77,7 @@ class RatingsReviews extends React.Component {
     this.reviewCount = this.reviewCount.bind(this);
     this.showFilterInfo = this.showFilterInfo.bind(this);
     this.removeAllFilters = this.removeAllFilters.bind(this);
+    this.alterShowMore = this.alterShowMore.bind(this);
 
     this.writeRating = this.writeRating.bind(this);
     this.writeRecommended = this.writeRecommended.bind(this);
@@ -95,6 +97,14 @@ class RatingsReviews extends React.Component {
 
   }
 
+  alterShowMore() {
+    var showMore = !this.state.show_more_reviews;
+    this.setState({
+      show_more_reviews: showMore
+    })
+    console.log('show_more_reviews at home becomes: ', this.state.show_)
+  }
+
   removeAllFilters() {
     this.setState({
       filter_one: false,
@@ -102,7 +112,8 @@ class RatingsReviews extends React.Component {
       filter_three: false,
       filter_four: false,
       filter_five: false,
-    }, this.setStarReviews)
+    }, this.setStarReviews);
+    this.alterShowMore();
   }
 
   showFilterInfo() {
@@ -811,7 +822,10 @@ class RatingsReviews extends React.Component {
             <StarNumber recommended={meta_recommended} ratings={meta_ratings} handleRating={this.props.handleRating} handleGetRating={this.props.handleGetRating} />
             <div className="star-table-complete">
               {/* {this.showFilterInfo()} */}
-              <StarList ratings={meta_ratings} setStarReviews={this.setStarReviews} setFilter={this.setFilter} className="star-list-container" showFilterInfo={this.showFilterInfo} removeAllFilters={this.removeAllFilters} />
+              <StarList ratings={meta_ratings} setStarReviews={this.setStarReviews}
+               setFilter={this.setFilter} className="star-list-container" showFilterInfo={this.showFilterInfo}
+               removeAllFilters={this.removeAllFilters}
+                />
               <div className="star-count-container">
                 {this.reviewCount()}
               </div>
@@ -845,6 +859,8 @@ class RatingsReviews extends React.Component {
               showUploadedPhotos={this.showUploadedPhotos}
               writeNickname={this.writeNickname}
               writeEmail={this.writeEmail}
+              show_more_reviews={this.state.show_more_reviews}
+              alterShowMore={this.alterShowMore}
             />
             {/* <Dashboard /> */}
           </div>

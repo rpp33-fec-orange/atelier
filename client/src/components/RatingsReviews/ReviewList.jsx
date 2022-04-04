@@ -17,6 +17,16 @@ class ReviewList extends React.Component {
 		this.handleShowMoreReviews = this.handleShowMoreReviews.bind(this);
 		this.slicedReviewList = this.slicedReviewList.bind(this);
 		this.setShowMore = this.setShowMore.bind(this);
+		this.updateShowMore = this.updateShowMore.bind(this);
+	}
+
+  updateShowMore() {
+		if (this.props.show_more_reviews === true) {
+			// var showMore = this.props.show_more_reviews;
+			this.setState({
+				showMore: 'more-reviews-btn'
+			});
+		};
 	}
 
 	componentDidMount() {
@@ -26,14 +36,19 @@ class ReviewList extends React.Component {
 			reviewList: reviewList,
 		}, this.slicedReviewList);
 		// console.log('finally, this.state.reviewList is: ', this.state.reviewList);
+		console.log('initial show_more_reviews is: ', this.props.show_more_reviews);
 	}
 
 	componentDidUpdate(prevProps) {
+
 		if (this.props.reviews !== prevProps.reviews) {
 			var reviewList = this.props.reviews;
 			this.setState({
 				reviewList: reviewList,
 			}, this.slicedReviewList);
+		}
+		if (this.props.show_more_reviews != prevProps.show_more_reviews) {
+			this.updateShowMore();
 		}
 	}
 
