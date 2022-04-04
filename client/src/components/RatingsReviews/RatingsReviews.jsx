@@ -73,6 +73,7 @@ class RatingsReviews extends React.Component {
     this.setStarReviews = this.setStarReviews.bind(this);
     this.recordInteraction = this.recordInteraction.bind(this);
     this.setFilter = this.setFilter.bind(this);
+    this.reviewCount = this.reviewCount.bind(this);
 
     this.writeRating = this.writeRating.bind(this);
     this.writeRecommended = this.writeRecommended.bind(this);
@@ -89,6 +90,34 @@ class RatingsReviews extends React.Component {
     this.showUploadedPhotos = this.showUploadedPhotos.bind(this);
     this.writeNickname = this.writeNickname.bind(this);
     this.writeEmail = this.writeEmail.bind(this);
+
+  }
+
+  reviewCount() {
+    return (
+      <div className="star-list-count" id="star-list-count">
+        <table className="table-rr">
+          <tbody>
+            <tr>
+              <td class="count-rr" data-value='filter_five' onClick={this.setFilter}>{this.state.five_star_reviews.length} reviews</td>
+            </tr>
+            <tr>
+              <td class="count-rr" data-value='filter_four' onClick={this.setFilter}>{this.state.four_star_reviews.length} reviews</td>
+            </tr>
+            <tr>
+              <td class="count-rr" data-value='filter_three' onClick={this.setFilter}>{this.state.three_star_reviews.length} reviews</td>
+            </tr>
+            <tr>
+              <td class="count-rr" data-value='filter_two' onClick={this.setFilter}>{this.state.two_star_reviews.length} reviews</td>
+            </tr>
+            <tr>
+              <td class="count-rr" data-value='filter_one' onClick={this.setFilter}>{this.state.one_star_reviews.length} reviews</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    )
 
   }
 
@@ -158,8 +187,8 @@ class RatingsReviews extends React.Component {
     }
     if (this.state.filter_one === false &&
       this.state.filter_two === false &&
-      this.state.filter_three ===false &&
-      this.state.filter_four ===false &&
+      this.state.filter_three === false &&
+      this.state.filter_four === false &&
       this.state.filter_five === false
     ) {
       console.log('inside setStarReviews if statement');
@@ -739,7 +768,12 @@ class RatingsReviews extends React.Component {
           <div className="rating-breakdown">
             <h3 id='ratings-reviews' id="zero">RATINGS AND REVIEWS</h3>
             <StarNumber recommended={meta_recommended} ratings={meta_ratings} handleRating={this.props.handleRating} handleGetRating={this.props.handleGetRating} />
-            <StarList ratings={meta_ratings} setStarReviews={this.setStarReviews} setFilter={this.setFilter} />
+            <div className="star-table-complete">
+              <StarList ratings={meta_ratings} setStarReviews={this.setStarReviews} setFilter={this.setFilter} className="star-list-container" />
+              <div className="star-count-container">
+                {this.reviewCount()}
+              </div>
+            </div>
             <SizeSlider size={meta_characteristics} />
             <ComfortSlider comfort={meta_characteristics} />
           </div>

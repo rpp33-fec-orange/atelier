@@ -81,45 +81,45 @@ class StarList extends React.Component {
 				<table className="table-rr">
 					<tbody>
 						<tr>
-							<td data-value='filter_five' onClick={this.props.setFilter}>5 stars:</td>
+							<td className="count-rr" data-value='filter_five' onClick={this.props.setFilter}>5 stars:</td>
 							<td>
-								<div className="progress-bar">
-									<div style={{ width: `${this.state.percentFive}%` }} data-value='filter_five' onClick={this.props.setFilter}>
+								<div className="progress-bar" data-value='filter_five' onClick={this.props.setFilter}>
+									<div className="progress-bar-filled" style={{ width: `${this.state.percentFive}%` }} data-value='filter_five' onClick={this.props.setFilter}>
 									</div>
 								</div>
 							</td>
 						</tr>
 						<tr>
-							<td data-value='filter_four' onClick={this.props.setFilter}>4 stars:</td>
+							<td className="count-rr" data-value='filter_four' onClick={this.props.setFilter}>4 stars:</td>
 							<td>
-								<div className="progress-bar">
+								<div className="progress-bar" data-value='filter_four' onClick={this.props.setFilter}>
 									<div style={{ width: `${this.state.percentFour}%` }} data-value='filter_four' onClick={this.props.setFilter}>
 									</div>
 								</div>
 							</td>
 						</tr>
 						<tr>
-							<td data-value='filter_three' onClick={this.props.setFilter}>3 stars:</td>
+							<td className="count-rr" data-value='filter_three' onClick={this.props.setFilter}>3 stars:</td>
 							<td>
-								<div className="progress-bar">
+								<div className="progress-bar" data-value='filter_three' onClick={this.props.setFilter}>
 									<div style={{ width: `${this.state.percentThree}%` }} data-value='filter_three' onClick={this.props.setFilter}>
 									</div>
 								</div>
 							</td>
 						</tr>
 						<tr>
-							<td data-value='filter_two' onClick={this.props.setFilter}>2 stars:</td>
+							<td className="count-rr" data-value='filter_two' onClick={this.props.setFilter}>2 stars:</td>
 							<td>
-								<div className="progress-bar">
+								<div className="progress-bar" data-value='filter_two' onClick={this.props.setFilter}>
 									<div style={{ width: `${this.state.percentTwo}%` }} data-value='filter_two' onClick={this.props.setFilter}>
 									</div>
 								</div>
 							</td>
 						</tr>
 						<tr>
-							<td data-value='filter_one' onClick={this.props.setFilter}>1 star:</td>
+							<td className="count-rr" data-value='filter_one' onClick={this.props.setFilter}>1 star:</td>
 							<td>
-								<div className="progress-bar">
+								<div className="progress-bar" data-value='filter_one' onClick={this.props.setFilter}>
 									<div style={{ width: `${this.state.percentOne}%` }} data-value='filter_one' onClick={this.props.setFilter}>
 									</div>
 								</div>
@@ -127,6 +127,25 @@ class StarList extends React.Component {
 						</tr>
 					</tbody>
 				</table>
+				{/* <table>
+				<tbody>
+						<tr>
+							<rd>({this.state.five_star_reviews.length} reviews)</rd>
+						</tr>
+						<tr>
+							<rd>({this.state.four_star_reviews.length} reviews)</rd>
+						</tr>
+						<tr>
+							<rd>({this.state.three_star_reviews.length} reviews)</rd>
+						</tr>
+						<tr>
+							<rd>({this.state.two_star_reviews.length} reviews)</rd>
+						</tr>
+						<tr>
+							<rd>({this.state.one_star_reviews.length} reviews)</rd>
+						</tr>
+					</tbody>
+				</table> */}
 			</div>
 		);
 	}
