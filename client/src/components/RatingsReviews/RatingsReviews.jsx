@@ -74,6 +74,8 @@ class RatingsReviews extends React.Component {
     this.recordInteraction = this.recordInteraction.bind(this);
     this.setFilter = this.setFilter.bind(this);
     this.reviewCount = this.reviewCount.bind(this);
+    this.showFilterInfo = this.showFilterInfo.bind(this);
+    this.removeAllFilters = this.removeAllFilters.bind(this);
 
     this.writeRating = this.writeRating.bind(this);
     this.writeRecommended = this.writeRecommended.bind(this);
@@ -91,6 +93,45 @@ class RatingsReviews extends React.Component {
     this.writeNickname = this.writeNickname.bind(this);
     this.writeEmail = this.writeEmail.bind(this);
 
+  }
+
+  removeAllFilters() {
+    this.setState({
+      filter_one: false,
+      filter_two: false,
+      filter_three: false,
+      filter_four: false,
+      filter_five: false,
+    }, this.setStarReviews)
+  }
+
+  showFilterInfo() {
+    var filters = [];
+    if (this.state.filter_one) {
+      filters.push('one star ');
+    }
+    if (this.state.filter_two) {
+      filters.push('two stars ');
+    }
+    if (this.state.filter_three) {
+      filters.push('three stars ');
+    }
+    if (this.state.filter_four) {
+      filters.push('four stars ');
+    }
+    if (this.state.filter_five) {
+      filters.push('five stars ');
+    }
+
+    if (filters.length === 0) {
+      return (
+        <div>Filters: none</div>
+      )
+    } else {
+      return (
+        <div>Filters: {filters}</div>
+      )
+    }
   }
 
   reviewCount() {
@@ -769,7 +810,8 @@ class RatingsReviews extends React.Component {
             <h3 id='ratings-reviews' id="zero">RATINGS AND REVIEWS</h3>
             <StarNumber recommended={meta_recommended} ratings={meta_ratings} handleRating={this.props.handleRating} handleGetRating={this.props.handleGetRating} />
             <div className="star-table-complete">
-              <StarList ratings={meta_ratings} setStarReviews={this.setStarReviews} setFilter={this.setFilter} className="star-list-container" />
+              {/* {this.showFilterInfo()} */}
+              <StarList ratings={meta_ratings} setStarReviews={this.setStarReviews} setFilter={this.setFilter} className="star-list-container" showFilterInfo={this.showFilterInfo} removeAllFilters={this.removeAllFilters} />
               <div className="star-count-container">
                 {this.reviewCount()}
               </div>
