@@ -74,13 +74,23 @@ class ReviewItem extends React.Component {
 
 	render() {
 		// console.log('this is this.state.review: ', this.state.review);
+		var date = new Date(this.state.review.date);
+		var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+		var unformattedMonth = date.getMonth();
+		var month = months[unformattedMonth - 1];
+		var year = date.getFullYear();
+		var day = JSON.stringify(date.getDay());
+		if (day.length < 2) {
+			day = '0' + day;
+		}
+		console.log('date is: ', date);
 		return (
 			<div className="wrapper">
 				<div className="one" id="review-list">
 					<div className="star-review-container">
 						<StarRating num={this.props.review.rating} />
 						<div className="user-and-date">
-							{this.state.review.reviewer_name}, {this.state.review.date}
+							{this.state.review.reviewer_name}, {month} {day}, {year}
 						</div>
 					</div>
 					<h3 className="review-summary">{this.state.review.summary}</h3>
