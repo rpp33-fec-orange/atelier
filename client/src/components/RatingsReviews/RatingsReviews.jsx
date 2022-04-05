@@ -175,24 +175,6 @@ class RatingsReviews extends React.Component {
   }
 
   setStarReviews() {
-    // var currentFilter = e.target.getAttribute('data-value');  // this is my current filter obtained from user click
-    // var previousFilter = this.state.previousFilter;  // this is my previous filter
-    // this.setState({
-    //   previousFilter: currentFilter   // store current filter to be previous filter of next click
-    // });
-    // // 3 situations: no filter ( or before any filtering ), same filter, different filter
-    // // if no filter, for example, currentFilter is same as previousFilter, reviews remain as reviews.
-    // // if there is filter, for example, 5 stars, reviews turn into 5 star
-    // console.log('currentFilter is: ', currentFilter);
-    // var currentFilterState = this.state[currentFilter];
-    // console.log('currentFilterState is: ', currentFilterState);
-
-    // this.setState({
-    //   reviews: currentFilterState
-    // })
-    // console.log('reviews: currentFilterState becomes: ', this.state.reviews );
-    // *********************************
-
     var filteredReviews = [];   // check if any filter is on, which means we empty the reviews array
     if (this.state.filter_one ||
       this.state.filter_two ||
@@ -304,8 +286,14 @@ class RatingsReviews extends React.Component {
   }
 
   writeRecommended(e) {
+    var value = null;
+    if (e.target.value === 'yes') {
+      value = true;
+    } else {
+      value = false;
+    }
     this.setState({
-      write_recommended: e.target.value
+      write_recommended: value
     });
     console.log('button was clicked!');
   }
@@ -452,16 +440,6 @@ class RatingsReviews extends React.Component {
         reviews: this.state.reviews
       });
     }
-    // if (this.state.filter_one != prevState.filter_one ||
-    //   this.state.filter_two != prevState.filter_two ||
-    //   this.state.filter_three != prevState.filter_three ||
-    //   this.state.filter_four != prevState.filter_four ||
-    //   this.state.filter_five != prevState.filter_five
-    // ) {
-    //   this.setStarReviews();
-    //   console.log('reviews set by star number are: ', this.state.reviews);
-
-    // }
   }
 
   setSort(sort) {
@@ -598,24 +576,12 @@ class RatingsReviews extends React.Component {
 
     }
 
-    // console.log('size_key is: ', this.state.size_key);
-    // console.log('width_key is: ', this.state.width_key);
-    // console.log('comfort_key is: ', this.state.comfort_key);
-    // console.log('quality_key is: ', this.state.quality_key);
-    // console.log('length_key is: ', this.state.length_key);
-    // console.log('fit_key is: ', this.state.fit_key);
-    // console.log('characteristicsList is: ', characteristicsList);
-    // console.log('characteristicsCodes is: ', characteristicsCodes);
-    // console.log('characteristicsValues is: ', characteristicsValues);
-
     for (var i = 0; i < characteristicsCodes.length; i++) {
       var currentKey = characteristicsCodes[i];
       var currentValue = parseInt(characteristicsValues[i]);
       characteristics[currentKey] = currentValue;
     }
 
-    // console.log('characteristics object becomes: ', characteristics);
-    // console.log('characteristics in ajax call are: ', characteristics);
     var uploadedPhotos = [];
     var currentPhoto = this.state.selectedFile;
     uploadedPhotos.push(currentPhoto);
@@ -773,17 +739,6 @@ class RatingsReviews extends React.Component {
       four_star_reviews: fourStarReviews,
       five_star_reviews: fiveStarReviews
     })
-    // console.log('one star reviews array are: ', oneStarReviews);
-    // console.log('two star reviews array are: ', twoStarReviews);
-    // console.log('three star reviews array are: ', threeStarReviews);
-    // console.log('four star reviews array are: ', fourStarReviews);
-    // console.log('five star reviews array are: ', fiveStarReviews);
-
-    // console.log('one star reviews are: ', this.state.one_star_reviews);
-    // console.log('two star reviews are: ', this.state.two_star_reviews);
-    // console.log('three star reviews are: ', this.state.three_star_reviews);
-    // console.log('four star reviews are: ', this.state.four_star_reviews);
-    // console.log('five star reviews are: ', this.state.five_star_reviews);
   }
 
 
