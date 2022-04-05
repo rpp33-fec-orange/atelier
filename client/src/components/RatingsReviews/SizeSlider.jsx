@@ -39,21 +39,19 @@ class SizeSlider extends React.Component {
 			)
 		}
 		return (
-			<div className="size-slider" id="size-slider">
-				<p>Size</p>
-				<div className="size-container">
-					<div className="size-bar"></div>
-					<div className="size-bar"></div>
-					<div className="size-bar"></div>
-					<div className="size-marker" style={{ marginLeft: `${percentSize}%` }}>&#9660;</div>
-				</div>
-				<div className="size-explanation">
-					<div className="too-small">Too Small</div>
-					<div className="perfect">Perfect</div>
-					<div className="too-large">Too Large</div>
-				</div>
-			</div>
-
+			// <div className="size-slider" id="size-slider">
+			// 	<p>Size</p>
+			// 	<div className="size-container">
+			// 		<div className="size-bar"></div>
+			// 		<div className="size-marker" style={{ marginLeft: `${percentSize}%` }}>&#9660;</div>
+			// 	</div>
+			// 	<div className="size-explanation">
+			// 		<div className="too-small">Too Small</div>
+			// 		<div className="perfect">Perfect</div>
+			// 		<div className="too-large">Too Large</div>
+			// 	</div>
+			// </div>
+<div>Hola</div>
 		);
 	}
 

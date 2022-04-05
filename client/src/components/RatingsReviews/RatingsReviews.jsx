@@ -9,6 +9,7 @@ import SizeSlider from './SizeSlider.jsx';
 import ReviewList from './ReviewList.jsx';
 import Dashboard from './Dashboard.jsx';
 import StarRating from './StarRating.jsx';
+import ProductBreakdown from './ProductBreakdown.jsx';
 import axios from 'axios';
 
 class RatingsReviews extends React.Component {
@@ -830,8 +831,9 @@ class RatingsReviews extends React.Component {
                 {this.reviewCount()}
               </div>
             </div>
-            <SizeSlider size={meta_characteristics} />
-            <ComfortSlider comfort={meta_characteristics} />
+            {/* <SizeSlider size={meta_characteristics} />
+            <ComfortSlider comfort={meta_characteristics} /> */}
+            <ProductBreakdown meta_characteristics={meta_characteristics} />
           </div>
           <div className="review-breakdown">
             <div className="review-header">{count} reviews, sorted by

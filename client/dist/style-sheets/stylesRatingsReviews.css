@@ -308,24 +308,9 @@
     height: 20px;
   }
 
-  .size-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    position: relative;
-    gap: 5px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-  }
-
-  .comfort-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    position: relative;
-    gap: 10px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+  .comfort-slider {
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 
   .size-bar {
@@ -335,56 +320,14 @@
     flex-grow: 1;
   }
 
-  .comfort-side {
-    background-color: lightgray;
-    height: 20px;
-    flex-grow: 1;
-  }
 
-  .comfort-middle {
-    background-color: lightgray;
-    height: 20px;
-    flex-grow: 2;
-  }
-
-  .size-marker {
-    color: green;
-    width: 10px;
-    height: 20px;
-    position: absolute;
-    font-size: 25px;
-    /* margin-left: 50px; */
-  }
-
-  .size-explanation {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .comfort-marker {
-    color: green;
-    width: 10px;
-    height: 20px;
-    position: absolute;
-    font-size: 25px;
-  }
-
-  .comfort-explanation {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
 
   .size-slider {
     margin-top: 10px;
     margin-bottom: 10px;
   }
 
-  .comfort-slider {
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
+
 
   .submit-btn {
     display: block;
@@ -403,3 +346,41 @@
   .review-photo-container {
     padding: 5px;
   }
+
+  .size-container, .width-container, .comfort-container, .quality-container, .length-container, .fit-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+    gap: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  .size-side, .width-side, .comfort-side, .quality-side, .length-container, .fit-container {
+    background-color: lightgray;
+    height: 20px;
+    flex-grow: 1;
+  }
+
+  .size-marker, .width-marker, .comfort-marker, .quality-marker, .length-marker, .fit-marker {
+    color: green;
+    width: 10px;
+    height: 20px;
+    position: absolute;
+    font-size: 25px;
+  }
+
+  .size-explanation, .width-explanation, .comfort-explanation, .quality-explanation, .length-explanation, .fit-explanation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .size-middle, .width-middle, .comfort-middle, .quality-middle, .length-middle, .fit-middle {
+    background-color: lightgray;
+    height: 20px;
+    flex-grow: 2;
+  }
+
+  /* Quality */

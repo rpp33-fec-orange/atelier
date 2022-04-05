@@ -22,20 +22,19 @@ class ComfortSlider extends React.Component {
 			)
 		} else {
 			return (
-				<div className="comfort-slider" id="comfort-slider">
-					<p>Comfort</p>
-					<div className="comfort-container">
-						<div className="comfort-side"></div>
-						<div className="comfort-middle"></div>
-						<div className="comfort-side"></div>
-						<div className="comfort-marker" style={{ marginLeft: `${percentComfort}%` }}>&#9660;</div>
-					</div>
-					<div className="comfort-explanation">
-						<div className="side">Too Small</div>
-						<div className="middle"></div>
-						<div className="side">Perfect</div>
-					</div>
-				</div>
+				// <div className="comfort-slider" id="comfort-slider">
+				// 	<p>Comfort</p>
+				// 	<div className="comfort-container">
+				// 		<div className="comfort-side"></div>
+				// 		<div className="comfort-marker" style={{ marginLeft: `${percentComfort}%` }}>&#9660;</div>
+				// 	</div>
+				// 	<div className="comfort-explanation">
+				// 		<div className="side">Too Small</div>
+				// 		<div className="middle"></div>
+				// 		<div className="side">Perfect</div>
+				// 	</div>
+				// </div>
+				<div>Hello</div>
 			);
 		}
 	}
