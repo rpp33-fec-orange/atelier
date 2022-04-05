@@ -383,4 +383,6 @@
     flex-grow: 2;
   }
 
-  /* Quality */
+  .show-more-less {
+    font-style: italic ;
+  }
