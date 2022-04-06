@@ -86,14 +86,6 @@ class ProductBreakdown extends React.Component {
 			percentLength: percentLength,
 			percentFit: percentFit
 		})
-
-		console.log('Inside ProductBreakdown: ');
-		console.log('size is: ', size);
-		console.log('width is: ', width);
-		console.log('comfort is: ', comfort);
-		console.log('quality is: ', quality);
-		console.log('length is: ', length);
-		console.log('fit is: ', fit);
 	}
 
 	componentDidMount() {
@@ -104,7 +96,6 @@ class ProductBreakdown extends React.Component {
 		if (this.props.meta_characteristics != prevProps.meta_characteristics) {
 			this.breakDown();
 		}
-
 	}
 
 	render() {

@@ -115,15 +115,15 @@ class Modal extends React.Component {
 								<label htmlFor="length5">5</label>
 							</div>
 							<div>Fit:
-								<input type="radio" id="fit1" name="characteristics-fit" value="1" onChange={this.props.writeFit}/>
+								<input type="radio" id="fit1" name="characteristics-fit" value="1" onChange={this.props.writeFit} />
 								<label htmlFor="fit1">1</label>
-								<input type="radio" id="fit2" name="characteristics-fit" value="2" onChange={this.props.writeFit}/>
+								<input type="radio" id="fit2" name="characteristics-fit" value="2" onChange={this.props.writeFit} />
 								<label htmlFor="fit2">2</label>
-								<input type="radio" id="fit3" name="characteristics-fit" value="3" onChange={this.props.writeFit}/>
+								<input type="radio" id="fit3" name="characteristics-fit" value="3" onChange={this.props.writeFit} />
 								<label htmlFor="fit3">3</label>
-								<input type="radio" id="fit4" name="characteristics-fit" value="4" onChange={this.props.writeFit}/>
+								<input type="radio" id="fit4" name="characteristics-fit" value="4" onChange={this.props.writeFit} />
 								<label htmlFor="fit4">4</label>
-								<input type="radio" id="fit5" name="characteristics-fit" value="5" onChange={this.props.writeFit}/>
+								<input type="radio" id="fit5" name="characteristics-fit" value="5" onChange={this.props.writeFit} />
 								<label htmlFor="fit5">5</label>
 							</div>
 						</div>
@@ -131,7 +131,7 @@ class Modal extends React.Component {
 						<div className="review-summary">
 							<label htmlFor="summary">Review summary:    </label>
 							<input type="text" id="summary" name="summary" required
-								minLength="4" maxLength="60" size="70" onChange={this.props.writeReviewSummary}/>
+								minLength="4" maxLength="60" size="70" onChange={this.props.writeReviewSummary} />
 						</div>
 						<br></br>
 						<div className="review-body">
@@ -155,19 +155,23 @@ class Modal extends React.Component {
 						<div className="nickname">
 							<label htmlFor="nickname">What is your nickname?    </label>
 							<input type="text" id="nickname" name="nickname" placeholder="Example: jackson11!" required
-								minLength="1" maxLength="60" size="70" onChange={this.props.writeNickname}/>
+								minLength="1" maxLength="60" size="70" onChange={this.props.writeNickname} />
 							<sub>   For privacy reasons, do not use your full name or email address</sub>
 						</div>
 						<br></br>
 						<div className="email">
 							<label htmlFor="email">Your email:    </label>
 							<input type="text" id="email" name="email" placeholder="Example: jackson11@email.com" required
-								minLength="1" maxLength="60" size="70" onChange={this.props.writeEmail}/>
+								minLength="1" maxLength="60" size="70" onChange={this.props.writeEmail} />
 							<sub>    For authentication reasons, you will not be emailed</sub>
 						</div>
 						<br></br>
 						<div>
-							<button className="submit" type="button" onClick={this.props.postReviewHandler}>
+							<button className="submit" type="button" onClick={() => {
+								this.props.postReviewHandler();
+								this.props.handleClose();
+								}
+							}>
 								Submit
 							</button>
 						</div>
@@ -175,8 +179,8 @@ class Modal extends React.Component {
 							Close
 						</button>
 					</div>
-				</section>
-			</div>
+				</section >
+			</div >
 		);
 	}
 }

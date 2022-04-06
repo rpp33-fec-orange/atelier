@@ -18,13 +18,17 @@ class ReviewItem extends React.Component {
 			photos: [],
 			show_more: true,
 			short_review: '',
-			length: 0
+			length: 0,
+			zoom_photos: false
 		}
 		this.getRecommendation = this.getRecommendation.bind(this);
 		this.markReviewHelpful = this.markReviewHelpful.bind(this);
 		this.reportReview = this.reportReview.bind(this);
 		this.showMore = this.showMore.bind(this);
 		this.showLess = this.showLess.bind(this);
+		this.handleZoom = this.handleZoom.bind(this);
+		this.handleUnzoom = this.handleUnzoom.bind(this);
+
 	}
 
 	showMore() {
@@ -37,6 +41,18 @@ class ReviewItem extends React.Component {
 		this.setState({
 			show_more: false
 		});
+	}
+
+	handleZoom() {
+		this.setState({
+			zoom_photos: true
+		})
+	}
+
+	handleUnzoom() {
+		this.setState({
+			zoom_photos: false
+		})
 	}
 
 	getRecommendation(event) {
@@ -123,7 +139,6 @@ class ReviewItem extends React.Component {
 		// var reviewArr = this.state.review.body.split(' ');
 		var length = this.state.length;
 		let display;
-		console.log('length is: ', length);
 		if (this.state.length > 250) {
 
 			if (!this.state.show_more) {
@@ -143,67 +158,69 @@ class ReviewItem extends React.Component {
 			}
 		} else {
 			display = <div className="review-body">{this.state.review.body}</div>
-
 		}
 
+		const zoomPhotos = this.state.zoom_photos ? "zoom-photos" : "unzoom-photos";
 
-	return (
+		return (
 			<div className="wrapper" >
-			<div className="one" id="review-list">
-				<div className="star-review-container">
-					<StarRating num={this.props.review.rating} />
-					<div className="user-and-date">
-						{this.state.review.reviewer_name}, {month} {day}, {year}
-					</div>
-				</div>
-				<h3 className="review-summary">{this.state.review.summary}</h3>
-				<div>{display}</div>
-				<br></br>
-				<div className="helpful">Helpful?
-					{
-						!this.state.markedHelpful
-							?
-							<span className="helpful-unmarked" onClick={this.markReviewHelpful}>Yes</span>
-							:
-							<span className="helpful-marked">   Yes   </span>
-					}
-					{
-						`(${this.state.helpfulness})   |   `
-					}
-					{
-						!this.state.reported
-							?
-							<span className="report-unmarked" onClick={this.reportReview}>   Report   </span>
-							:
-							<span className="report-marked">Reported</span>
-					}
-				</div>
-				{this.state.review.recommend &&
-					<div>
-						✔ I recommend this product
-					</div>
-				}
-				<div className="productPhoto">
-					{this.state.photos.length > 0
-						? <div className="review-photo-container">
-							<sub>Review Photos: </sub>
-							<br></br><br></br>
-							{
-								this.state.review.photos.map((photo) =>
-									<img className="review-photo" src={photo.url} key={photo.id}></img>
-								)
-							}
+				<div className="one" id="review-list">
+					<div className="star-review-container">
+						<StarRating num={this.props.review.rating} />
+						<div className="user-and-date">
+							{this.state.review.reviewer_name}, {month} {day}, {year}
 						</div>
-						:
-						<div></div>
-						//  <div>
-						// 	<br />
-						// 	<button className="submit-btn">Submit Photos</button>
-						// </div>
+					</div>
+					<h3 className="review-summary">{this.state.review.summary}</h3>
+					<div>{display}</div>
+					<br></br>
+					<div className="helpful">Helpful?
+						{
+							!this.state.markedHelpful
+								?
+								<span className="helpful-unmarked" onClick={this.markReviewHelpful}>Yes</span>
+								:
+								<span className="helpful-marked">   Yes   </span>
+						}
+						{
+							`(${this.state.helpfulness})   |   `
+						}
+						{
+							!this.state.reported
+								?
+								<span className="report-unmarked" onClick={this.reportReview}>   Report   </span>
+								:
+								<span className="report-marked">Reported</span>
+						}
+					</div>
+					{this.state.review.recommend &&
+						<div>
+							✔ I recommend this product
+						</div>
 					}
+					<div className="productPhoto">
+						{this.state.photos.length > 0
+							? <div className="review-photo-container">
+								<sub>Review Photos: </sub>
+								<br></br><br></br>
+								{
+									this.state.review.photos.map((photo) =>
+										<div>
+											<img className="review-photo" src={photo.url} key={photo.id} onClick={this.handleZoom}></img>
+											<div className={zoomPhotos} > {console.log('photo.url is: ', photo.url)}
+												<img className="modal-photo" src={photo.url} key={photo.id} ></img>
+												<button onClick={this.handleUnzoom}>Close</button>
+											</div>
+										</div>
+									)
+								}
+							</div>
+							:
+							<div></div>
+						}
+					</div>
+					<hr></hr>
 				</div>
-				<hr></hr>
-			</div>
 			</div>
 		);
 	}
