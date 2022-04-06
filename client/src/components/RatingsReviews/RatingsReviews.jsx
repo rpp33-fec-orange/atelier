@@ -51,7 +51,8 @@ class RatingsReviews extends React.Component {
       write_characteristic_quality: 0,
       write_review_summary: '',
       write_review_body: '',
-      write_review_photos: ['https://d23.com/app/uploads/2019/06/1180w-600h_061819_tarzan-20th-anniversary.jpg'],
+      // write_review_photos: ['https://d23.com/app/uploads/2019/06/1180w-600h_061819_tarzan-20th-anniversary.jpg'],
+      write_review_photos: [],
       photoCount: 0,
       selectedFile: null,
       image: null,
@@ -540,10 +541,10 @@ class RatingsReviews extends React.Component {
     var meta_characteristics = this.state.meta_characteristics;
     for (var key in meta_characteristics) {
 
-      console.log('key is: ', key);
-      console.log('key id is: ', key.id);
+      // console.log('key is: ', key);
+      // console.log('key id is: ', key.id);
       var characteristic = meta_characteristics[key];
-      console.log('characteristic id is: ', characteristic.id);
+      // console.log('characteristic id is: ', characteristic.id);
       // if(key === 'Size') {
       //   console.log('we got a match');
       //   characteristics[JSON.stringify(216801)] = this.state.write_characteristic_size;
@@ -599,7 +600,7 @@ class RatingsReviews extends React.Component {
       // photos: uploadedPhotos,
       characteristics: characteristics
     };
-    console.log('review in postReviewHandler is: ', review);
+    // console.log('review in postReviewHandler is: ', review);
     var url = '/reviews';
     $.ajax({
       context: this,

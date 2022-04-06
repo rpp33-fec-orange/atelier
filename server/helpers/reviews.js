@@ -41,30 +41,30 @@ let getReviewsMeta = (id) => {
 }
 
 let postReview = (review) => {
-	console.log('review in axios postReview in review.js: ', review);
-	var dummyReview = {
-		product_id: 64620,
-		rating: 2,
-		summary: 'testing if this works',
-		body: 'Hate it it it',
-		recommend: true,
-		name: 'Goldlewis',
-		email: 'nocountryfornoel@gmail.com',
-		photos: [
-			'https://d23.com/app/uploads/2019/06/1180w-600h_061819_tarzan-20th-anniversary.jpg'
-		],
-		characteristics: { '216798': 4, '216799': 4, '216800': 3, '216801': 2}
-	};
+	// console.log('review in axios postReview in review.js: ', review);
+	// var dummyReview = {
+	// 	product_id: 64620,
+	// 	rating: 2,
+	// 	summary: 'testing if this works',
+	// 	body: 'Hate it it it',
+	// 	recommend: true,
+	// 	name: 'Goldlewis',
+	// 	email: 'nocountryfornoel@gmail.com',
+	// 	photos: [
+	// 		'https://d23.com/app/uploads/2019/06/1180w-600h_061819_tarzan-20th-anniversary.jpg'
+	// 	],
+	// 	characteristics: { '216798': 4, '216799': 4, '216800': 3, '216801': 2}
+	// };
 	var url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews';
 	return axios ({
 		method: 'POST',
 		url: url,
-		data: review,
+		data: JSON.stringify(review),
 		// params: review,
 		headers: {
 			'User-Agent': 'request',
 			'Authorization': `${options.auth.Authorization}`,
-			// 'Content-Type': 'application/json;charset=UTF-8'
+			'Content-Type': 'application/json;charset=UTF-8'
 		}
 		// headers: options.auth,
 	})
