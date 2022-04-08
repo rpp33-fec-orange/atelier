@@ -19,7 +19,9 @@ class ReviewItem extends React.Component {
 			show_more: true,
 			short_review: '',
 			length: 0,
-			zoom_photos: false
+			zoom_photos: false,
+			zoomPhotos: 'unzoom-photos',
+			zoom_list: {}
 		}
 		this.getRecommendation = this.getRecommendation.bind(this);
 		this.markReviewHelpful = this.markReviewHelpful.bind(this);
@@ -28,7 +30,36 @@ class ReviewItem extends React.Component {
 		this.showLess = this.showLess.bind(this);
 		this.handleZoom = this.handleZoom.bind(this);
 		this.handleUnzoom = this.handleUnzoom.bind(this);
+		this.displayPhotos = this.displayPhotos.bind(this);
 
+	}
+
+	displayPhotos() {
+		console.log('this.state.photos is: ', this.state.photos);
+		const photoList = this.state.photos.map((photo) =>
+			<li>
+				<img className="review-photo" src={photo.url} key={photo.id} data-value={photo.id} onClick={this.handleZoom}></img>
+				<div className={this.state.zoom_list[photo.id]} >
+					{console.log('className becomes: ', this.state.zoom_list[photo.id])}
+				{/* {console.log('photo.url is: ', photo.url)} {photo.url} */}
+					<img className="modal-photo" src={photo.url} key={photo.id} ></img>
+					<button data-value={photo.id} onClick={this.handleUnzoom}>Close</button>
+				</div>
+			</li>
+			// <img className="review-photo" src={photo.url} key={photo.id} ></img>
+
+		);
+		console.log('photoList is: ', photoList);
+		// return (
+		// 	{
+		// 		photoList
+		// 	}
+		// );
+		return (
+			<ul>
+				{photoList}
+			</ul>
+		)
 	}
 
 	showMore() {
@@ -43,15 +74,34 @@ class ReviewItem extends React.Component {
 		});
 	}
 
-	handleZoom() {
+	handleZoom(e) {
+		// var photoID = e.target.value;
+		var photoID = e.target.getAttribute('data-value');
+		console.log('photoID is: ', photoID);
+		var currentZoomList = this.state.zoom_list;
+		console.log('currentZoomList is: ', this.state.zoom_list);
+		console.log()
+		currentZoomList[photoID] = 'zoom-photos';
 		this.setState({
-			zoom_photos: true
+			zoom_photos: true,
+			zoom_list: currentZoomList
 		})
+		console.log('handleZoom got clicked once current zoom_list becomes:', this.state.zoom_list);
 	}
 
-	handleUnzoom() {
+	handleUnzoom(e) {
+		// this.setState({
+		// 	zoom_photos: false
+		// })
+		var photoID = e.target.getAttribute('data-value');
+		console.log('photoID is: ', photoID);
+		var currentZoomList = this.state.zoom_list;
+		console.log('currentZoomList is: ', this.state.zoom_list);
+		console.log()
+		currentZoomList[photoID] = 'unzoom-photos';
 		this.setState({
-			zoom_photos: false
+			zoom_photos: true,
+			zoom_list: currentZoomList
 		})
 	}
 
@@ -111,9 +161,21 @@ class ReviewItem extends React.Component {
 			short_review: short_review,
 			length: this.props.review.body.length
 		});
+
+		var zoomList = {};
+		for (var i = 0; i < this.props.review.photos.length; i++) {
+			var currentPhoto = this.props.review.photos[i];
+			console.log('currentPhoto is: ', currentPhoto);
+			zoomList[currentPhoto.id] = "unzoom-photos";
+		}
+		console.log('zoomList is: ', zoomList);
+		this.setState({
+			zoom_list: zoomList
+		})
+		console.log('zoom-list becomes: ', this.state.zoom_list);
 	}
 
-	componentDidUpdate(prevProps) {
+	componentDidUpdate(prevProps, prevState) {
 		if (this.props.review !== prevProps.review) {
 			this.setState({
 				review: this.props.review,
@@ -122,6 +184,12 @@ class ReviewItem extends React.Component {
 				reviewID: this.props.review.review_id,
 				photos: this.props.review.photos
 			});
+		}
+		if (this.state.zoom_photos != prevState.zoom_photos) {
+			var zoomPhotos = this.state.zoom_photos ? "zoom-photos" : "unzoom-photos";
+			this.setState({
+				zoomPhotos: zoomPhotos
+			})
 		}
 	}
 
@@ -160,7 +228,7 @@ class ReviewItem extends React.Component {
 			display = <div className="review-body">{this.state.review.body}</div>
 		}
 
-		const zoomPhotos = this.state.zoom_photos ? "zoom-photos" : "unzoom-photos";
+		// const zoomPhotos = this.state.zoom_photos ? "zoom-photos" : "unzoom-photos";
 
 		return (
 			<div className="wrapper" >
@@ -203,7 +271,7 @@ class ReviewItem extends React.Component {
 							? <div className="review-photo-container">
 								<sub>Review Photos: </sub>
 								<br></br><br></br>
-								{
+								{/* {
 									this.state.review.photos.map((photo) =>
 										<div>
 											<img className="review-photo" src={photo.url} key={photo.id} onClick={this.handleZoom}></img>
@@ -213,6 +281,9 @@ class ReviewItem extends React.Component {
 											</div>
 										</div>
 									)
+								} */}
+								{
+									this.displayPhotos()
 								}
 							</div>
 							:
