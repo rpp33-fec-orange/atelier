@@ -22,7 +22,6 @@ class ReviewList extends React.Component {
 
   updateShowMore() {
 		if (this.props.show_more_reviews === true) {
-			// var showMore = this.props.show_more_reviews;
 			this.setState({
 				showMore: 'more-reviews-btn'
 			});
@@ -30,13 +29,10 @@ class ReviewList extends React.Component {
 	}
 
 	componentDidMount() {
-		console.log('finally, this.props.reviews is: ', this.props.reviews);
 		var reviewList = this.props.reviews;
 		this.setState({
 			reviewList: reviewList,
 		}, this.slicedReviewList);
-		// console.log('finally, this.state.reviewList is: ', this.state.reviewList);
-		console.log('initial show_more_reviews is: ', this.props.show_more_reviews);
 	}
 
 	componentDidUpdate(prevProps) {
@@ -53,7 +49,6 @@ class ReviewList extends React.Component {
 	}
 
 	mappingReviews() {
-		// console.log('props.reviews in Reviewlist: ', this.props.reviews);
 		var reviews = this.state.holdingReviews;
 		var renderedReviews = reviews.map((review) =>
 			<ReviewItem key={review.review_id.toString()} review={review} onMarkedHelpful={this.props.onMarkedHelpful} onMarkedReported={this.props.onMarkedReported} />

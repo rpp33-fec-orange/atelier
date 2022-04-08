@@ -170,9 +170,7 @@ class RatingsReviews extends React.Component {
           </tbody>
         </table>
       </div>
-
     )
-
   }
 
   setStarReviews() {
@@ -183,12 +181,6 @@ class RatingsReviews extends React.Component {
       this.state.filter_four ||
       this.state.filter_five
     ) {
-      console.log('Hello World!');
-      console.log('this.state.filter_one is: ', this.state.filter_one);
-      console.log('this.state.filter_two is: ', this.state.filter_two);
-      console.log('this.state.filter_three is: ', this.state.filter_three);
-      console.log('this.state.filter_four is: ', this.state.filter_four);
-      console.log('this.state.filter_five is: ', this.state.filter_five);
       if (this.state.filter_one) {  // if filter one star is on, put all 1 star reviews in reviews array
         for (var i = 0; i < this.state.one_star_reviews.length; i++) {
           filteredReviews.push((this.state.one_star_reviews[i]));
@@ -218,8 +210,6 @@ class RatingsReviews extends React.Component {
         reviews: filteredReviews
       })
 
-
-      // console.log('this.state.reviews are: ', this.state.reviews);
     }
     if (this.state.filter_one === false &&
       this.state.filter_two === false &&
@@ -227,17 +217,12 @@ class RatingsReviews extends React.Component {
       this.state.filter_four === false &&
       this.state.filter_five === false
     ) {
-      console.log('inside setStarReviews if statement');
-      console.log('now filter_five becomes: ', this.state.filter_five);
       this.setReviews();
     }
-    // console.log('this.state.reviews are: ', this.state.reviews);
-
   }
 
   setFilter(e) {
     var currentFilter = e.target.getAttribute('data-value');  // this is my current filter obtained from user click, i.e. filter_one
-    console.log('currentFilter is: ', currentFilter);
     if (currentFilter === 'filter_one') {
       var updatedFilter = !this.state.filter_one;
       this.setState({
@@ -258,7 +243,6 @@ class RatingsReviews extends React.Component {
     }
     else if (currentFilter === 'filter_four') {
       var updatedFilter = !this.state.filter_four;
-      console.log('updated filter becomes: ', updatedFilter);
       this.setState({
         filter_four: updatedFilter
       }, this.setStarReviews)
@@ -269,14 +253,6 @@ class RatingsReviews extends React.Component {
         filter_five: updatedFilter
       }, this.setStarReviews)
     }
-
-    console.log('this.state[currentFilter] is: ', this.state[currentFilter]);
-    // console.log('this.state.filter_one is: ', this.state.filter_one);
-    // console.log('this.state.filter_two is: ', this.state.filter_two);
-    // console.log('this.state.filter_three is: ', this.state.filter_three);
-    // console.log('this.state.filter_four is: ', this.state.filter_four);
-    // console.log('this.state.filter_five is: ', this.state.filter_five);
-
   }
 
   writeRating(e) {
@@ -296,57 +272,48 @@ class RatingsReviews extends React.Component {
     this.setState({
       write_recommended: value
     });
-    console.log('button was clicked!');
   }
 
   writeSize(e) {
     this.setState({
       write_recharacteristic_size: e.target.value
     });
-    console.log('button was clicked!');
   }
 
   writeWidth(e) {
     this.setState({
       write_characteristic_width: e.target.value
     });
-    console.log('button was clicked!');
   }
   writeComfort(e) {
     this.setState({
       write_characteristic_comfort: e.target.value
     });
-    console.log('button was clicked!');
   }
   writeQuality(e) {
     this.setState({
       write_characteristic_quality: e.target.value
     });
-    console.log('button was clicked!');
   }
   writeLength(e) {
     this.setState({
       write_characteristic_length: e.target.value
     });
-    console.log('button was clicked!');
   }
   writeFit(e) {
     this.setState({
       write_characteristic_fit: e.target.value
     });
-    console.log('button was clicked!');
   }
   writeReviewSummary(e) {
     this.setState({
       write_review_summary: e.target.value
     });
-    console.log('button was clicked!');
   }
   writeReviewBody(e) {
     this.setState({
       write_review_body: e.target.value
     });
-    console.log('button was clicked!');
   }
   writeUploadPhotos() {
     // var currentPhotos = this.state.write_review_photos;
@@ -410,13 +377,11 @@ class RatingsReviews extends React.Component {
     this.setState({
       write_name: e.target.value
     });
-    console.log('button was clicked!');
   }
   writeEmail(e) {
     this.setState({
       write_email: e.target.value
     });
-    console.log('button was clicked!');
   }
 
 
@@ -512,7 +477,6 @@ class RatingsReviews extends React.Component {
       type: "GET",
       url: url,
       success: (data) => {
-        console.log('getReviewsMetaHandler ajax data is: ', data);
         this.setState({
           meta: data,
           meta_ratings: data.ratings,
@@ -540,22 +504,9 @@ class RatingsReviews extends React.Component {
     var product_id = this.props.id;
     var meta_characteristics = this.state.meta_characteristics;
     for (var key in meta_characteristics) {
-
-      // console.log('key is: ', key);
-      // console.log('key id is: ', key.id);
       var characteristic = meta_characteristics[key];
-      // console.log('characteristic id is: ', characteristic.id);
-      // if(key === 'Size') {
-      //   console.log('we got a match');
-      //   characteristics[JSON.stringify(216801)] = this.state.write_characteristic_size;
-
-      // }
-      // console.log('characteristics object is: ', characteristics);
-
       characteristicsList.push(key);
       characteristicsCodes.push(characteristic.id);
-
-      console.log('key is: ', key);
       if (key === 'Size') {
         characteristicsValues.push(this.state.write_characteristic_size);
       }
@@ -600,7 +551,6 @@ class RatingsReviews extends React.Component {
       // photos: uploadedPhotos,
       characteristics: characteristics
     };
-    // console.log('review in postReviewHandler is: ', review);
     var url = '/reviews';
     $.ajax({
       context: this,
@@ -646,7 +596,6 @@ class RatingsReviews extends React.Component {
 
   putReportedHandler(id) {
     var review_id = id;
-    console.log('review_id inside putReportedHandler: ', review_id);
     var url = `/reviews/${review_id}/report`;
     $.ajax({
       context: this,
@@ -680,29 +629,18 @@ class RatingsReviews extends React.Component {
     var newestReviews = this.state.newestReviews;
     var helpfulReviews = this.state.helpfulReviews;
     var relevantReviews = this.state.relevantReviews;
-    console.log('relevantReviews is: ', this.state.relevantReviews);
-    console.log('this.state.sort is: ', this.state.sort);
     if (this.state.sort === 'newest') {
       this.setState({
         reviews: newestReviews
       });
-      console.log('setReviews is working!');
-      console.log('this.state.reviews are: ', this.state.reviews);
-
     } else if (this.state.sort === 'helpful') {
       this.setState({
         reviews: helpfulReviews
       });
-      console.log('setReviews is working!');
-      console.log('this.state.reviews are: ', this.state.reviews);
-
     } else if (this.state.sort === 'relevance') {
       this.setState({
         reviews: relevantReviews
       });
-      console.log('setReviews is working!');
-      console.log('this.state.reviews are: ', this.state.reviews);
-
     }
   }
 
@@ -710,7 +648,6 @@ class RatingsReviews extends React.Component {
 
   sortStarReviews() {
     var newestReviews = this.state.newestReviews;
-    console.log('newestReviews are: ', newestReviews);
     var oneStarReviews = [];
     var twoStarReviews = [];
     var threeStarReviews = [];
@@ -756,13 +693,10 @@ class RatingsReviews extends React.Component {
     var metaReady = this.state.metaReady;
     var sort = this.state.sort;
     var list = this.state.reviews;
-    // console.log('list is: ', list);
-
     var count = list.length;
     var meta_characteristics = this.state.meta_characteristics;
     var meta_recommended = this.state.meta_recommended;
     var meta_ratings = this.state.meta_ratings;
-    // console.log('characteristics are: ', meta_characteristics);
 
     if (!(reviewReady && metaReady)) {
       return (
@@ -778,7 +712,6 @@ class RatingsReviews extends React.Component {
             <h3 id='ratings-reviews' id="zero">RATINGS AND REVIEWS</h3>
             <StarNumber recommended={meta_recommended} ratings={meta_ratings} handleRating={this.props.handleRating} handleGetRating={this.props.handleGetRating} />
             <div className="star-table-complete">
-              {/* {this.showFilterInfo()} */}
               <StarList ratings={meta_ratings} setStarReviews={this.setStarReviews}
                setFilter={this.setFilter} className="star-list-container" showFilterInfo={this.showFilterInfo}
                removeAllFilters={this.removeAllFilters}
@@ -787,8 +720,6 @@ class RatingsReviews extends React.Component {
                 {this.reviewCount()}
               </div>
             </div>
-            {/* <SizeSlider size={meta_characteristics} />
-            <ComfortSlider comfort={meta_characteristics} /> */}
             <ProductBreakdown meta_characteristics={meta_characteristics} />
           </div>
           <div className="review-breakdown">
