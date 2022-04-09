@@ -51,8 +51,8 @@ class RatingsReviews extends React.Component {
       write_characteristic_quality: 0,
       write_review_summary: '',
       write_review_body: '',
-      write_review_photos: ['https://d23.com/app/uploads/2019/06/1180w-600h_061819_tarzan-20th-anniversary.jpg', 'https://assets.mycast.io/characters/belle-1479930-normal.jpg?1613055129'],
-      // write_review_photos: [],
+      // write_review_photos: ['https://d23.com/app/uploads/2019/06/1180w-600h_061819_tarzan-20th-anniversary.jpg', 'https://assets.mycast.io/characters/belle-1479930-normal.jpg?1613055129'],
+      write_review_photos: [],
       photoCount: 0,
       selectedFile: null,
       image: null,
@@ -419,6 +419,7 @@ class RatingsReviews extends React.Component {
     var sort = 'newest'
     var id = this.props.id;
     var url = `/reviews/?sort=${sort}&count=${count}&product_id=${id}`;
+    // console.log('getReviewByIDHandler is getting called!');
     $.ajax({
       context: this,
       type: "GET",
@@ -567,6 +568,7 @@ class RatingsReviews extends React.Component {
     })
       .done(function () {
         // console.log('post reviews request is done');
+        this.getReviewsByIDHandler(id);
       });
   }
 
@@ -697,6 +699,8 @@ class RatingsReviews extends React.Component {
     var meta_characteristics = this.state.meta_characteristics;
     var meta_recommended = this.state.meta_recommended;
     var meta_ratings = this.state.meta_ratings;
+
+    // console.log('list is: ', list);
 
     if (!(reviewReady && metaReady)) {
       return (
