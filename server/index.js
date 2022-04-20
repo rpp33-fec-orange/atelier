@@ -28,7 +28,7 @@ app.get('/products/:product_id', function (req, res) {
   let id = req.params.product_id;
   getProductById(id)
     .then((data) => {
-      console.log('server getProductById success');
+      console.log('server getProductById success', data);
       res.status(200).send(data);
     })
     .catch((error) => {
