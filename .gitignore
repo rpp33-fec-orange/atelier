@@ -117,3 +117,7 @@ hr-rpp33-fec.pem
 
 # DS store
 .DS_Store
+
+# environment variables
+config.example.js
+example.env

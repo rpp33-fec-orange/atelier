@@ -10,6 +10,7 @@ const getProducts = function () {
     })
     .catch(error => {
       console.log('helpers getProducts GET error here ', error);
+      console.log('env auth: ', options.);
     })
 };
 
