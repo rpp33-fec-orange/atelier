@@ -32,13 +32,11 @@ class App extends React.Component {
       url: '/products',
       success: function (success) {
         console.log('app ajax GET success ', success);
-        if (success[0].name) {
           this.setState({
             id: success[0].id,
             productName: success[0].name,
             initialized: true
           });
-        }
       },
       error: function (error) {
         console.log('app ajax GET error: ', error);
