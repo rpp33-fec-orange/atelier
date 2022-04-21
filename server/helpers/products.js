@@ -5,7 +5,7 @@ const { options } = require('./options.js');
 const getProducts = function () {
   return axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products', { headers: options.auth })
     .then(success => {
-      console.log('helpers getProducts GET success: ');
+      console.log('helpers getProducts GET success: ', success);
       return success.data;
     })
     .catch(error => {
