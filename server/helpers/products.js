@@ -9,7 +9,7 @@ const getProducts = function () {
       return success.data;
     })
     .catch(error => {
-      console.log('helpers getProducts GET error ');
+      console.log('helpers getProducts GET error ', error);
     })
 };
 
