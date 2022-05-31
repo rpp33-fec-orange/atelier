@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "frontend-dev": "npx webpack watch --mode development",
+    "production": "npx webpack watch --mode production",
     "backend-dev": "npx nodemon server/index.js",
     "test": "jest --verbose",
     "coverage": "jest --coverage"
