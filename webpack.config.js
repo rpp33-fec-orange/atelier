@@ -17,8 +17,14 @@ module.exports = {
           options: {
             // presets: ['@babel/preset-env', '@babel/preset-react']      // For tree-shaking
             presets: [
-              [ '@babel/preset-env', '@babel/preset-react', 'es2015', { modules: false }]
-            ]
+              [
+                “@babel/preset-env”,
+                {
+                  "modules": false,
+                  “loose”: true
+                }
+              ]
+           ]
           }
         }
       }
