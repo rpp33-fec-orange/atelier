@@ -18,10 +18,10 @@ module.exports = {
             // presets: ['@babel/preset-env', '@babel/preset-react']      // For tree-shaking
             presets: [
               [
-                “@babel/preset-env”,
+                '@babel/preset-env',
                 {
-                  "modules": false,
-                  “loose”: true
+                  'modules': false,
+                  'loose': true
                 }
               ]
            ]
