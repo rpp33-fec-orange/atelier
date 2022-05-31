@@ -14,10 +14,11 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: 'babel-loader',
+          side-effects: false,
           options: {
             // presets: ['@babel/preset-env', '@babel/preset-react']      // For tree-shaking
             presets: [
-              [ 'es2015', { modules: false }]
+              [ '@babel/preset-env', '@babel/preset-react', 'es2015', { modules: false }]
             ]
           }
         }
