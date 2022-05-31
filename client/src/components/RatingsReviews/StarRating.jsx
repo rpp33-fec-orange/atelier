@@ -30,7 +30,7 @@ class StarRating extends React.Component {
 		if (this.props.num === 0 || this.props.num === undefined) {
 			var allGrey = [];    // store all 5 grey stars just in case
 			for (var j = 0; j < 5; j++) {
-				allGrey.push(<img className="star" src={this.state.greyStar} key={j} />);
+				allGrey.push(<img className="star" src={this.state.greyStar} alt='star-image' key={j} />);
 			}
 			return allGrey;
 		} else {
@@ -47,29 +47,29 @@ class StarRating extends React.Component {
 			var stars = [];    // store all the filled and grey stars
 			if (mainNum) {     // this loop will render all filled full stars
 				for (var i = 0; i < mainNum; i++) {
-					stars.push(<img className="star" src={this.state.fullStar} key={i} />);
+					stars.push(<img className="star" src={this.state.fullStar} alt='star-image' key={i} />);
 				}
 				// fractionNum can only be 0, 0.25, 0.5 and 0.75
 			}
 
 			if (fractionNum === 0.25) {
-				stars.push(<img className="star" src={this.state[0.25]} key={mainNum} />);
+				stars.push(<img className="star" src={this.state[0.25]} alt='star-image' key={mainNum} />);
 				for (var k = 0; k < leftoverNum - 1; k++) {
-					stars.push(<img className="star" src={this.state.greyStar} key={mainNum + 1 + k} />);
+					stars.push(<img className="star" src={this.state.greyStar} alt='star-image' key={mainNum + 1 + k} />);
 				}
 			} else if (fractionNum === 0.5) {
-				stars.push(<img className="star" src={this.state[0.5]} key={mainNum} />);
+				stars.push(<img className="star" src={this.state[0.5]} alt='star-image' key={mainNum} />);
 				for (var k = 0; k < leftoverNum - 1; k++) {
-					stars.push(<img className="star" src={this.state.greyStar} key={mainNum + 1 + k} />);
+					stars.push(<img className="star" src={this.state.greyStar} alt='star-image' key={mainNum + 1 + k} />);
 				}
 			} else if (fractionNum === 0.75) {
-				stars.push(<img className="star" src={this.state[0.75]} key={mainNum} />);
+				stars.push(<img className="star" src={this.state[0.75]} alt='star-image' key={mainNum} />);
 				for (var k = 0; k < leftoverNum - 1; k++) {
-					stars.push(<img className="star" src={this.state.greyStar} key={mainNum + 1 + k} />);
+					stars.push(<img className="star" src={this.state.greyStar} alt='star-image' key={mainNum + 1 + k} />);
 				}
 			} else {
 				for (var k = 0; k < leftoverNum; k++) {
-					stars.push(<img className="star" src={this.state.greyStar} key={mainNum + 1 + k} />);
+					stars.push(<img className="star" src={this.state.greyStar} alt='star-image' key={mainNum + 1 + k} />);
 				}
 			}
 			return stars;

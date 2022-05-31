@@ -37,9 +37,9 @@ class ReviewItem extends React.Component {
 	displayPhotos() {
 		const photoList = this.state.photos.map((photo) =>
 			<li>
-				<img className="review-photo" src={photo.url} key={photo.id} data-value={photo.id} onClick={this.handleZoom}></img>
+				<img className="review-photo" src={photo.url} alt='atelier product photo should be here!' key={photo.id} data-value={photo.id} onClick={this.handleZoom}></img>
 				<div className={this.state.zoom_list[photo.id]} >
-					<img className="modal-photo" src={photo.url} key={photo.id} ></img>
+					<img className="modal-photo" src={photo.url} alt='modal photo should be here!' key={photo.id} ></img>
 					<button data-value={photo.id} onClick={this.handleUnzoom}>Close</button>
 				</div>
 			</li>
