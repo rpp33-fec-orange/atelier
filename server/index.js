@@ -6,8 +6,23 @@ const { getQuestionsByProductId, submitQuestion, submitAnswer, markQuestionHelpf
 // const getReviewsByID = require('./helpers/reviews.js').getReviewsByID;
 const { getReviewsByID, getReviewsMeta, postReview, putReview, putReviewReported } = require('./helpers/reviews.js');
 const { recordInteractions } = require('./helpers/interactions.js');
+//for gzip:
+var compression = require('compression');
+
 
 let app = express();
+
+//for gzip:
+app.use(compression({ filter: shouldCompress }));
+function shouldCompress (req, res) {
+  if (req.headers['x-no-compression']) {
+    // don't compress responses with this request header
+    return false
+  }
+
+  // fallback to standard filter function
+  return compression.filter(req, res)
+};
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -286,7 +301,13 @@ app.post('/interactions', function (req, res) {
     .catch((error) => {
       res.status(500).end();
     })
-})
+});
+
+app.get('*.js', function (req, res, next) {
+  req.url = req.url + '.gz';
+  res.set('Content-Encoding', 'gzip');
+  next();
+});
 
 app.get('*', function (req, res) {
   res.end(`
