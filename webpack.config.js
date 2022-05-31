@@ -15,16 +15,16 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            // presets: ['@babel/preset-env', '@babel/preset-react']      // For tree-shaking
-            presets: [
-              [
-                '@babel/preset-env',
-                {
-                  'modules': false,
-                  'loose': true
-                }
-              ]
-           ]
+            presets: ['@babel/preset-env', {'modules': false, 'loose': true}, '@babel/preset-react']
+          //   presets: [
+          //     [
+          //       '@babel/preset-env',
+          //       {
+          //         'modules': false,
+          //         'loose': true
+          //       }
+          //     ]
+          //  ]
           }
         }
       }
