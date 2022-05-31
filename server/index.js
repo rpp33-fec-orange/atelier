@@ -16,11 +16,11 @@ app.use(express.static(__dirname + "/../client/dist"));
 app.get('/products', function (req, res) {
   getProducts()
     .then((data) => {
-      console.log('server getProducts success');
+      console.log('server getProducts success', data);
       res.status(200).send(data);
     })
     .catch((error) => {
-      console.log('server getProducts error');
+      console.log('server getProducts error', error);
     })
 });
 
@@ -288,37 +288,37 @@ app.post('/interactions', function (req, res) {
     })
 })
 
-app.get('*', function (req, res) {
-  res.end(`
-  <!DOCTYPE html>
-  <html>
+// app.get('*', function (req, res) {
+//   res.end(`
+//   <!DOCTYPE html>
+//   <html>
 
-  <head>
-    <title>Atelier</title>
-    <link rel="stylesheet" href="./style-sheets/stylesApp.css">
-    <link rel="stylesheet" href="./style-sheets/stylesRelatedProducts.css">
-    <link rel="stylesheet" href="./style-sheets/questionsAnswersMain.css">
-    <link rel="stylesheet" href="./style-sheets/stylesProductOverview.css">
-    <link rel="stylesheet" href="./style-sheets/stylesRatingsReviews.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./style-sheets/stylesStarRating.css">
-    <script src="https://kit.fontawesome.com/5290ec3ec6.js" crossorigin="anonymous"></script>
-  </head>
+//   <head>
+//     <title>Atelier</title>
+//     <link rel="stylesheet" href="./style-sheets/stylesApp.css">
+//     <link rel="stylesheet" href="./style-sheets/stylesRelatedProducts.css">
+//     <link rel="stylesheet" href="./style-sheets/questionsAnswersMain.css">
+//     <link rel="stylesheet" href="./style-sheets/stylesProductOverview.css">
+//     <link rel="stylesheet" href="./style-sheets/stylesRatingsReviews.css">
+//     <link rel="preconnect" href="https://fonts.googleapis.com">
+//     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+//     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&display=swap" rel="stylesheet">
+//     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+//     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+//     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+//     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+//     <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@700&display=swap" rel="stylesheet">
+//     <link rel="stylesheet" href="./style-sheets/stylesStarRating.css">
+//     <script src="https://kit.fontawesome.com/5290ec3ec6.js" crossorigin="anonymous"></script>
+//   </head>
 
-  <body>
-    <div id="app"></div>
-    <script type="text/javascript" src="bundle.js"></script>
-  </body>
+//   <body>
+//     <div id="app"></div>
+//     <script type="text/javascript" src="bundle.js"></script>
+//   </body>
 
-  </html>`);
-});
+//   </html>`);
+// });
 
 
 let port = 3000;
