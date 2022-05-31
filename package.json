@@ -1,5 +1,6 @@
 {
   "name": "atelier",
+  "side-effects": false,
   "version": "1.0.0",
   "description": "FEC",
   "main": "index.js",
